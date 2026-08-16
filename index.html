@@ -3,10 +3,7 @@
 <head>
 
 <meta charset="UTF-8">
-
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>NERÓS | Perfumes, Fragancias y Decants</title>
 
@@ -478,41 +475,6 @@ background:var(--dorado);
 transition:.3s;
 }
 
-/* ================= BENEFICIOS ================= */
-
-.beneficios{
-max-width:1600px;
-margin:auto;
-padding:24px;
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:1px;
-background:#252525;
-}
-
-.beneficio{
-background:#101010;
-padding:26px 20px;
-text-align:center;
-}
-
-.beneficio-icono{
-font-size:23px;
-margin-bottom:10px;
-}
-
-.beneficio strong{
-display:block;
-font-size:12px;
-margin-bottom:7px;
-}
-
-.beneficio span{
-font-size:10px;
-color:#888;
-line-height:1.5;
-}
-
 /* ================= PAGOS ================= */
 
 .medios-pago{
@@ -715,6 +677,7 @@ position:relative;
 aspect-ratio:1/1;
 background:#f4f4f4;
 overflow:hidden;
+cursor:pointer;
 }
 
 .imagen-producto img{
@@ -748,6 +711,7 @@ font-size:12px;
 font-weight:900;
 line-height:1.35;
 min-height:34px;
+cursor:pointer;
 }
 
 .stock-producto{
@@ -909,7 +873,7 @@ cursor:pointer;
 
 .pago-selector{
 display:none;
-grid-template-columns:1fr 1fr;
+grid-template-columns:repeat(3,1fr);
 gap:8px;
 margin-bottom:15px;
 }
@@ -931,6 +895,26 @@ cursor:pointer;
 border-color:var(--dorado);
 color:var(--dorado-claro);
 background:rgba(200,157,56,.1);
+}
+
+.pago-btn small{
+display:block;
+margin-top:4px;
+font-size:8px;
+font-weight:600;
+color:#777;
+}
+
+.pago-btn.activo small{
+color:#c8aa63;
+}
+
+.pago-ayuda{
+margin:5px 0 15px;
+font-size:9px;
+line-height:1.5;
+color:#707070;
+text-align:center;
 }
 
 .item-carrito{
@@ -1076,6 +1060,365 @@ font-size:10px;
 line-height:1.7;
 }
 
+/* ================= CÓMO COMPRAR 2026 ================= */
+
+.como-comprar-nuevo{
+max-width:1600px;
+margin:28px auto 0;
+padding:44px 24px;
+}
+
+.como-cabeza{
+text-align:center;
+margin-bottom:30px;
+}
+
+.como-cabeza small{
+color:var(--dorado);
+font-size:9px;
+font-weight:900;
+letter-spacing:3px;
+}
+
+.como-cabeza h2{
+font-family:Georgia,serif;
+font-size:clamp(30px,4vw,46px);
+font-weight:400;
+margin-top:8px;
+}
+
+.como-cabeza p{
+font-size:12px;
+color:#888;
+margin-top:8px;
+}
+
+.pasos-compra{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+position:relative;
+}
+
+.paso-compra{
+position:relative;
+background:linear-gradient(145deg,#111,#0d0d0d);
+border:1px solid #252525;
+border-radius:18px;
+padding:27px 24px 25px;
+min-height:190px;
+overflow:hidden;
+transition:.25s;
+}
+
+.paso-compra:hover{
+transform:translateY(-4px);
+border-color:rgba(200,157,56,.55);
+box-shadow:0 18px 40px rgba(0,0,0,.28);
+}
+
+.paso-numero{
+position:absolute;
+right:18px;
+top:10px;
+font-family:Georgia,serif;
+font-size:55px;
+line-height:1;
+color:rgba(200,157,56,.11);
+}
+
+.paso-icono{
+width:45px;
+height:45px;
+border-radius:14px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(200,157,56,.11);
+border:1px solid rgba(200,157,56,.22);
+font-size:20px;
+margin-bottom:16px;
+}
+
+.paso-compra strong{
+display:block;
+font-size:14px;
+margin-bottom:8px;
+}
+
+.paso-compra p{
+font-size:11px;
+line-height:1.65;
+color:#8d8d8d;
+max-width:360px;
+}
+
+.paso-compra b{
+color:var(--dorado-claro);
+}
+
+/* ================= FICHA DE PRODUCTO ================= */
+
+.producto-modal{
+position:fixed;
+inset:0;
+z-index:5000;
+display:none;
+align-items:center;
+justify-content:center;
+padding:22px;
+background:rgba(0,0,0,.88);
+backdrop-filter:blur(10px);
+}
+
+.producto-modal.activo{
+display:flex;
+}
+
+.producto-modal-contenido{
+width:min(1180px,96vw);
+max-height:92vh;
+overflow-y:auto;
+background:#090909;
+border:1px solid #292929;
+border-radius:22px;
+position:relative;
+box-shadow:0 30px 90px rgba(0,0,0,.65);
+animation:productoEntrada .32s ease forwards;
+}
+
+@keyframes productoEntrada{
+from{opacity:0;transform:translateY(14px) scale(.985);}
+to{opacity:1;transform:translateY(0) scale(1);}
+}
+
+.producto-cerrar{
+position:absolute;
+right:16px;
+top:16px;
+z-index:4;
+width:40px;
+height:40px;
+border-radius:50%;
+border:1px solid #333;
+background:rgba(10,10,10,.88);
+color:#fff;
+font-size:23px;
+cursor:pointer;
+}
+
+.producto-ficha{
+display:grid;
+grid-template-columns:minmax(0,1.05fr) minmax(360px,.95fr);
+min-height:650px;
+}
+
+.producto-foto-grande{
+display:flex;
+align-items:center;
+justify-content:center;
+min-height:650px;
+padding:45px;
+background:radial-gradient(circle at center,#202020 0,#121212 46%,#0b0b0b 75%);
+border-right:1px solid #202020;
+}
+
+.producto-foto-grande img{
+width:100%;
+height:100%;
+max-height:560px;
+object-fit:contain;
+filter:drop-shadow(0 25px 25px rgba(0,0,0,.42));
+}
+
+.producto-detalle{
+padding:58px 44px 38px;
+display:flex;
+flex-direction:column;
+}
+
+.producto-miga{
+font-size:9px;
+letter-spacing:1.2px;
+color:#666;
+text-transform:uppercase;
+margin-bottom:13px;
+}
+
+.producto-detalle h2{
+font-family:Georgia,serif;
+font-size:clamp(30px,3.2vw,46px);
+line-height:1.04;
+font-weight:400;
+margin-right:30px;
+}
+
+.producto-stock-detalle{
+display:inline-flex;
+align-items:center;
+width:max-content;
+margin-top:14px;
+padding:7px 11px;
+border-radius:999px;
+font-size:9px;
+font-weight:900;
+border:1px solid #2d2d2d;
+background:#121212;
+color:#cfcfcf;
+}
+
+.producto-precios{
+margin-top:24px;
+padding:19px 0;
+border-top:1px solid #242424;
+border-bottom:1px solid #242424;
+}
+
+.producto-precio-lista{
+font-size:13px;
+color:#696969;
+text-decoration:line-through;
+}
+
+.producto-precio-principal{
+font-size:31px;
+font-weight:900;
+color:var(--dorado-claro);
+margin-top:4px;
+}
+
+.producto-ahorro{
+color:#4bd487;
+font-size:10px;
+font-weight:800;
+margin-top:6px;
+}
+
+.producto-mayorista-niveles{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:7px;
+margin-top:12px;
+}
+
+.producto-nivel{
+padding:10px 8px;
+background:#101010;
+border:1px solid #292929;
+border-radius:10px;
+text-align:center;
+}
+
+.producto-nivel small{
+display:block;
+font-size:8px;
+color:#777;
+margin-bottom:4px;
+}
+
+.producto-nivel strong{
+font-size:12px;
+color:var(--dorado-claro);
+}
+
+.producto-info-mini{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-top:18px;
+}
+
+.producto-info-mini div{
+padding:12px;
+background:#101010;
+border:1px solid #242424;
+border-radius:11px;
+}
+
+.producto-info-mini small{
+display:block;
+font-size:8px;
+color:#666;
+letter-spacing:.6px;
+margin-bottom:5px;
+}
+
+.producto-info-mini strong{
+font-size:10px;
+font-weight:800;
+}
+
+.producto-compra{
+margin-top:22px;
+display:grid;
+grid-template-columns:130px 1fr;
+gap:10px;
+}
+
+.producto-cantidad{
+display:grid;
+grid-template-columns:38px 1fr 38px;
+align-items:center;
+border:1px solid #333;
+border-radius:11px;
+overflow:hidden;
+height:48px;
+}
+
+.producto-cantidad button{
+height:100%;
+border:0;
+background:#151515;
+color:#fff;
+font-size:18px;
+cursor:pointer;
+}
+
+.producto-cantidad span{
+text-align:center;
+font-weight:800;
+font-size:13px;
+}
+
+.producto-agregar{
+height:48px;
+border:0;
+border-radius:11px;
+background:var(--dorado);
+color:#111;
+font-size:10px;
+font-weight:900;
+letter-spacing:.5px;
+cursor:pointer;
+transition:.2s;
+}
+
+.producto-agregar:hover{
+background:var(--dorado-claro);
+transform:translateY(-1px);
+}
+
+.producto-agregar:disabled{
+background:#252525;
+color:#666;
+cursor:not-allowed;
+transform:none;
+}
+
+.producto-ayuda{
+margin-top:18px;
+padding-top:17px;
+border-top:1px solid #222;
+font-size:10px;
+line-height:1.6;
+color:#777;
+}
+
+.producto-ayuda a{
+color:var(--dorado-claro);
+text-decoration:none;
+}
+
 /* ================= RESPONSIVE ================= */
 
 @media(min-width:701px){
@@ -1155,11 +1498,6 @@ letter-spacing:-1.4px;
 
 .hero p{font-size:13px;}
 
-.beneficios{
-grid-template-columns:1fr;
-padding:1px;
-}
-
 .medios-pago{
 margin:20px auto;
 padding:30px 15px;
@@ -1186,6 +1524,79 @@ gap:8px;
 
 .precio-producto{font-size:16px;}
 
+.como-comprar-nuevo{
+padding:34px 10px 20px;
+}
+
+.pasos-compra{
+grid-template-columns:1fr;
+}
+
+.paso-compra{
+min-height:155px;
+padding:22px 20px;
+}
+
+.producto-modal{
+padding:0;
+align-items:flex-end;
+}
+
+.producto-modal-contenido{
+width:100%;
+max-height:96vh;
+border-radius:20px 20px 0 0;
+border-left:0;
+border-right:0;
+border-bottom:0;
+}
+
+.producto-ficha{
+grid-template-columns:1fr;
+min-height:0;
+}
+
+.producto-foto-grande{
+min-height:360px;
+height:42vh;
+max-height:430px;
+padding:32px;
+border-right:0;
+border-bottom:1px solid #202020;
+}
+
+.producto-foto-grande img{
+max-height:350px;
+}
+
+.producto-detalle{
+padding:27px 18px 28px;
+}
+
+.producto-detalle h2{
+font-size:31px;
+}
+
+.producto-precio-principal{
+font-size:27px;
+}
+
+.producto-compra{
+grid-template-columns:115px 1fr;
+}
+
+.producto-info-mini{
+grid-template-columns:1fr 1fr;
+}
+
+.producto-mayorista-niveles{
+grid-template-columns:1fr 1fr 1fr;
+}
+
+.pago-selector{
+grid-template-columns:1fr;
+}
+
 .floating-wa{
 bottom:82px;
 right:13px;
@@ -1201,59 +1612,124 @@ height:48px;
 <body>
 
 <div class="promo-strip">
+
 <div class="promo-track">
+
 <span>✦ <b>10% OFF</b> EFECTIVO / TRANSFERENCIA</span>
 <span>✦ ENVÍOS A TODO EL PAÍS</span>
 <span>✦ PERFUMES ÁRABES · DISEÑADOR · NICHO · DECANTS</span>
 <span>✦ PEDIDOS ESPECIALES A COTIZACIÓN</span>
+
 <span>✦ <b>10% OFF</b> EFECTIVO / TRANSFERENCIA</span>
 <span>✦ ENVÍOS A TODO EL PAÍS</span>
 <span>✦ PERFUMES ÁRABES · DISEÑADOR · NICHO · DECANTS</span>
 <span>✦ PEDIDOS ESPECIALES A COTIZACIÓN</span>
-</div>
+
 </div>
 
-<div id="sideOverlay" class="side-overlay" onclick="cerrarMenu()"></div>
+</div>
 
-<aside id="sideMenu" class="side-menu">
+<div
+id="sideOverlay"
+class="side-overlay"
+onclick="cerrarMenu()">
+</div>
+
+<aside
+id="sideMenu"
+class="side-menu">
 
 <div class="side-head">
-<img src="logo%20neros.png" alt="NERÓS">
-<button class="side-close" onclick="cerrarMenu()">×</button>
+
+<img
+src="logo%20neros.png"
+alt="NERÓS">
+
+<button
+class="side-close"
+onclick="cerrarMenu()">
+
+×
+
+</button>
+
 </div>
 
-<div class="side-label">EXPLORAR</div>
+<div class="side-label">
+EXPLORAR
+</div>
 
-<a class="side-link" href="#" onclick="cerrarMenu()">
-Inicio <small>→</small>
+<a
+class="side-link"
+href="#"
+onclick="cerrarMenu()">
+
+Inicio
+<small>→</small>
+
 </a>
 
-<a class="side-link" href="#catalogo" onclick="cerrarMenu();filtrarChip('todos')">
-Todos los perfumes <small>→</small>
+<a
+class="side-link"
+href="#catalogo"
+onclick="cerrarMenu();filtrarChip('todos')">
+
+Todos los perfumes
+<small>→</small>
+
 </a>
 
-<a class="side-link" href="#catalogo" onclick="cerrarMenu();filtrarChip('disponible')">
-Disponibles <small>→</small>
+<a
+class="side-link"
+href="#catalogo"
+onclick="cerrarMenu();filtrarChip('disponible')">
+
+Disponibles
+<small>→</small>
+
 </a>
 
-<a class="side-link" href="#catalogo" onclick="cerrarMenu();filtrarChip('pedido')">
-A pedido <small>→</small>
+<a
+class="side-link"
+href="#catalogo"
+onclick="cerrarMenu();filtrarChip('pedido')">
+
+A pedido
+<small>→</small>
+
 </a>
 
-<a class="side-link" href="#catalogo" onclick="cerrarMenu();filtrarChip('mayorista')">
-Mayorista <small>→</small>
+<a
+class="side-link"
+href="#catalogo"
+onclick="cerrarMenu();filtrarChip('mayorista')">
+
+Mayorista
+<small>→</small>
+
 </a>
 
-<a class="side-link" href="https://wa.me/5493417830300" target="_blank">
-Contacto / WhatsApp <small>↗</small>
+<a
+class="side-link"
+href="https://wa.me/5493417830300"
+target="_blank">
+
+Contacto / WhatsApp
+<small>↗</small>
+
 </a>
 
 <div class="side-card">
-<strong>¿Buscás algo especial?</strong>
+
+<strong>
+¿Buscás algo especial?
+</strong>
+
 <p>
 Si no encontrás tu perfume o producto,
 escribinos. Lo buscamos y te lo cotizamos.
 </p>
+
 </div>
 
 </aside>
@@ -1263,33 +1739,67 @@ escribinos. Lo buscamos y te lo cotizamos.
 <div class="navbar-contenido">
 
 <div class="nav-left">
-<button class="nav-icon menu-trigger" onclick="abrirMenu()">☰</button>
+
+<button
+class="nav-icon menu-trigger"
+onclick="abrirMenu()">
+
+☰
+
+</button>
+
 </div>
 
-<a href="#" class="logo-nav">
-<img src="logo%20neros.png" alt="NERÓS">
+<a
+href="#"
+class="logo-nav">
+
+<img
+src="logo%20neros.png"
+alt="NERÓS">
+
 </a>
 
 <nav class="menu">
 
-<a href="#">INICIO</a>
-<a href="#catalogo">PERFUMES</a>
+<a href="#">
+INICIO
+</a>
 
-<a href="#catalogo" onclick="setTimeout(()=>{cambiarModo('mayorista');},300);">
+<a href="#catalogo">
+PERFUMES
+</a>
+
+<a
+href="#catalogo"
+onclick="setTimeout(()=>{cambiarModo('mayorista');},300);">
+
 MAYORISTA
+
 </a>
 
-<a href="https://wa.me/5493417830300" target="_blank">
+<a
+href="https://wa.me/5493417830300"
+target="_blank">
+
 CONTACTO
+
 </a>
 
-<button class="nav-icon" onclick="abrirCarrito()">🛍</button>
+<button
+class="nav-icon"
+onclick="abrirCarrito()">
+
+🛍
+
+</button>
 
 </nav>
 
 </div>
 
 <div class="header-search">
+
 <div class="header-search-inner">
 
 <input
@@ -1298,33 +1808,64 @@ type="search"
 placeholder="¿Qué perfume estás buscando?"
 oninput="buscarDesdeHeader(this.value)">
 
-<button onclick="irABusqueda()">⌕</button>
+<button
+onclick="irABusqueda()">
+
+⌕
+
+</button>
 
 </div>
+
 </div>
 
 </header>
 
 <div class="category-rail">
 
-<button class="cat-chip activo" data-chip="todos" onclick="filtrarChip('todos')">
+<button
+class="cat-chip activo"
+data-chip="todos"
+onclick="filtrarChip('todos')">
+
 TODOS
+
 </button>
 
-<button class="cat-chip" data-chip="disponible" onclick="filtrarChip('disponible')">
+<button
+class="cat-chip"
+data-chip="disponible"
+onclick="filtrarChip('disponible')">
+
 DISPONIBLES
+
 </button>
 
-<button class="cat-chip" data-chip="pedido" onclick="filtrarChip('pedido')">
+<button
+class="cat-chip"
+data-chip="pedido"
+onclick="filtrarChip('pedido')">
+
 A PEDIDO
+
 </button>
 
-<button class="cat-chip" data-chip="ofertas" onclick="filtrarChip('ofertas')">
+<button
+class="cat-chip"
+data-chip="ofertas"
+onclick="filtrarChip('ofertas')">
+
 10% OFF
+
 </button>
 
-<button class="cat-chip" data-chip="mayorista" onclick="filtrarChip('mayorista')">
+<button
+class="cat-chip"
+data-chip="mayorista"
+onclick="filtrarChip('mayorista')">
+
 MAYORISTA
+
 </button>
 
 </div>
@@ -1332,9 +1873,12 @@ MAYORISTA
 <section class="hero hero-slider">
 
 <div class="hero-slide activo">
+
 <div class="hero-contenido">
 
-<div class="hero-mini">NERÓS · PERFUMERÍA</div>
+<div class="hero-mini">
+NERÓS · PERFUMERÍA
+</div>
 
 <h1>
 Hacé de tu aroma<br>
@@ -1348,26 +1892,36 @@ Encontrá esa fragancia que habla por vos.
 
 <div class="hero-botones">
 
-<a href="#catalogo" class="hero-btn principal">
+<a
+href="#catalogo"
+class="hero-btn principal">
+
 COMPRAR AHORA
+
 </a>
 
 <a
 href="https://wa.me/5493417830300"
 target="_blank"
 class="hero-btn secundario">
+
 PEDIR ASESORAMIENTO
+
 </a>
 
 </div>
 
 </div>
+
 </div>
 
 <div class="hero-slide">
+
 <div class="hero-contenido">
 
-<div class="hero-mini">BENEFICIO NERÓS</div>
+<div class="hero-mini">
+BENEFICIO NERÓS
+</div>
 
 <h1>
 10% OFF pagando<br>
@@ -1380,18 +1934,28 @@ y aprovechá el precio especial.
 </p>
 
 <div class="hero-botones">
-<a href="#catalogo" class="hero-btn principal">
+
+<a
+href="#catalogo"
+class="hero-btn principal">
+
 VER PERFUMES
+
 </a>
+
 </div>
 
 </div>
+
 </div>
 
 <div class="hero-slide">
+
 <div class="hero-contenido">
 
-<div class="hero-mini">PEDIDOS ESPECIALES</div>
+<div class="hero-mini">
+PEDIDOS ESPECIALES
+</div>
 
 <h1>
 ¿No está en la tienda?<br>
@@ -1409,107 +1973,262 @@ celulares, tablets y productos a pedido.
 href="https://wa.me/5493417830300"
 target="_blank"
 class="hero-btn principal">
+
 COTIZAR POR WHATSAPP
+
 </a>
 
 </div>
 
 </div>
+
 </div>
 
 <div class="hero-dots">
-<button class="hero-dot activo" onclick="mostrarSlide(0)"></button>
-<button class="hero-dot" onclick="mostrarSlide(1)"></button>
-<button class="hero-dot" onclick="mostrarSlide(2)"></button>
+
+<button
+class="hero-dot activo"
+onclick="mostrarSlide(0)">
+</button>
+
+<button
+class="hero-dot"
+onclick="mostrarSlide(1)">
+</button>
+
+<button
+class="hero-dot"
+onclick="mostrarSlide(2)">
+</button>
+
 </div>
 
 </section>
 
-<section class="beneficios" id="como-comprar">
+<!-- =====================================================
+CÓMO COMPRAR
+===================================================== -->
 
-<div class="beneficio">
-<div class="beneficio-icono">🛍️</div>
-<strong>Armá tu pedido</strong>
-<span>Elegí todos los productos que quieras.</span>
+<section
+class="como-comprar-nuevo"
+id="como-comprar">
+
+<div class="como-cabeza">
+
+<small>
+COMPRAR EN NERÓS ES SIMPLE
+</small>
+
+<h2>
+Elegí. Seleccioná cómo pagar. Confirmá.
+</h2>
+
+<p>
+Armá todo desde la tienda y terminá la compra con nosotros por WhatsApp.
+</p>
+
 </div>
 
-<div class="beneficio">
-<div class="beneficio-icono">💵</div>
-<strong>10% OFF</strong>
-<span>Abonando en efectivo o transferencia.</span>
+<div class="pasos-compra">
+
+<div class="paso-compra">
+
+<div class="paso-numero">
+01
 </div>
 
-<div class="beneficio">
-<div class="beneficio-icono">💬</div>
-<strong>Finalizá por WhatsApp</strong>
-<span>Enviá tu carrito completo en segundos.</span>
+<div class="paso-icono">
+🛍️
+</div>
+
+<strong>
+Elegí tus productos
+</strong>
+
+<p>
+Explorá el catálogo, entrá a cada perfume para ver su ficha y
+<b>agregá al carrito</b> todo lo que quieras.
+</p>
+
+</div>
+
+<div class="paso-compra">
+
+<div class="paso-numero">
+02
+</div>
+
+<div class="paso-icono">
+💳
+</div>
+
+<strong>
+Seleccioná el medio de pago
+</strong>
+
+<p>
+En el carrito elegí
+<b>transferencia / efectivo con 10% OFF</b>,
+débito o crédito / Mercado Pago.
+</p>
+
+</div>
+
+<div class="paso-compra">
+
+<div class="paso-numero">
+03
+</div>
+
+<div class="paso-icono">
+💬
+</div>
+
+<strong>
+Finalizá por WhatsApp
+</strong>
+
+<p>
+Te llevamos a WhatsApp con
+<b>el pedido, cantidades, forma de pago y total</b>
+ya preparados para confirmar disponibilidad y entrega.
+</p>
+
+</div>
+
 </div>
 
 </section>
+
+<!-- =====================================================
+MEDIOS DE PAGO
+===================================================== -->
 
 <section class="medios-pago">
 
 <div class="medios-pago-titulo">
 
-<small>FÁCIL · RÁPIDO · SEGURO</small>
+<small>
+FÁCIL · RÁPIDO · SEGURO
+</small>
 
-<h3>Pagá como quieras</h3>
+<h3>
+Pagá como quieras
+</h3>
 
-<p>Aceptamos todos los medios de pago</p>
+<p>
+Aceptamos todos los medios de pago
+</p>
 
 </div>
 
 <div class="medios-pago-opciones">
 
 <div class="medio-pago">
-<span>💵</span>
-<strong>Efectivo</strong>
-<small>10% OFF</small>
+
+<span>
+💵
+</span>
+
+<strong>
+Efectivo
+</strong>
+
+<small>
+10% OFF
+</small>
+
 </div>
 
 <div class="medio-pago">
-<span>🏦</span>
-<strong>Transferencia</strong>
-<small>10% OFF</small>
+
+<span>
+🏦
+</span>
+
+<strong>
+Transferencia
+</strong>
+
+<small>
+10% OFF
+</small>
+
 </div>
 
 <div class="medio-pago">
-<span>💳</span>
-<strong>Débito</strong>
-<small>Tarjetas</small>
+
+<span>
+💳
+</span>
+
+<strong>
+Débito
+</strong>
+
+<small>
+Precio de lista
+</small>
+
 </div>
 
 <div class="medio-pago">
-<span>💳</span>
-<strong>Crédito</strong>
-<small>Tarjetas</small>
+
+<span>
+💳
+</span>
+
+<strong>
+Crédito
+</strong>
+
+<small>
+Precio de lista
+</small>
+
 </div>
 
 <div class="medio-pago">
-<span>📱</span>
-<strong>Mercado Pago</strong>
-<small>Point</small>
+
+<span>
+📱
+</span>
+
+<strong>
+Mercado Pago
+</strong>
+
+<small>
+Precio de lista
+</small>
+
 </div>
 
 </div>
 
 <div class="mercadopago-point">
-💳 Pagos con tarjeta procesados mediante Mercado Pago Point
+💳 Elegí el medio de pago desde el carrito y finalizá tu compra por WhatsApp
 </div>
 
 </section>
 
-<section class="catalogo" id="catalogo">
+<section
+class="catalogo"
+id="catalogo">
 
 <div class="catalogo-cabeza">
 
-<small>CATÁLOGO NERÓS</small>
+<small>
+CATÁLOGO NERÓS
+</small>
 
-<h2>Encontrá tu perfume</h2>
+<h2>
+Encontrá tu perfume
+</h2>
 
 <p>
-Buscá, agregá al carrito y armá
-tu pedido directamente desde nuestra tienda.
+Tocá un producto para ver su ficha,
+elegí la cantidad y agregalo al carrito.
 </p>
 
 </div>
@@ -1522,21 +2241,27 @@ tu pedido directamente desde nuestra tienda.
 id="modoParticular"
 class="modo activo"
 onclick="cambiarModo('particular')">
+
 🛍️ PARTICULAR
+
 </button>
 
 <button
 id="modoMayorista"
 class="modo"
 onclick="cambiarModo('mayorista')">
+
 📦 MAYORISTA
+
 </button>
 
 </div>
 
 <div class="buscar-wrap">
 
-<span class="buscar-icono">🔍</span>
+<span class="buscar-icono">
+🔍
+</span>
 
 <input
 id="buscar"
@@ -1546,89 +2271,297 @@ placeholder="Buscar perfume, marca o producto...">
 
 </div>
 
-<div id="productos"></div>
+<div id="productos">
+</div>
 
-<div id="paginacion"></div>
+<div id="paginacion">
+</div>
 
 </section>
 
-<div id="carritoBarra" class="carrito-barra">
+<!-- ================= FICHA DINÁMICA ================= -->
 
-<div class="carrito-contenido">
+<div
+id="modalProducto"
+class="producto-modal"
+onclick="cerrarProductoPorFondo(event)">
 
-<div id="carritoInfo" class="carrito-info">
-🛒 <strong>0</strong> unidades
+<div class="producto-modal-contenido">
+
+<button
+class="producto-cerrar"
+onclick="cerrarProducto()">
+
+×
+
+</button>
+
+<div class="producto-ficha">
+
+<div class="producto-foto-grande">
+
+<img
+id="detalleFoto"
+src=""
+alt="Producto NERÓS">
+
 </div>
 
-<button class="carrito-boton" onclick="abrirCarrito()">
-VER PEDIDO
+<div class="producto-detalle">
+
+<div
+id="detalleMiga"
+class="producto-miga">
+
+NERÓS · PERFUMERÍA
+
+</div>
+
+<h2 id="detalleNombre">
+Producto
+</h2>
+
+<div
+id="detalleStock"
+class="producto-stock-detalle">
+
+Consultar stock
+
+</div>
+
+<div
+id="detallePrecios"
+class="producto-precios">
+</div>
+
+<div class="producto-info-mini">
+
+<div>
+
+<small>
+FORMA DE COMPRA
+</small>
+
+<strong>
+Agregá al carrito y elegí cómo pagar
+</strong>
+
+</div>
+
+<div>
+
+<small>
+FINALIZACIÓN
+</small>
+
+<strong>
+Confirmamos todo por WhatsApp
+</strong>
+
+</div>
+
+</div>
+
+<div class="producto-compra">
+
+<div class="producto-cantidad">
+
+<button
+onclick="cambiarCantidadDetalle(-1)">
+
+−
+
+</button>
+
+<span id="detalleCantidad">
+1
+</span>
+
+<button
+onclick="cambiarCantidadDetalle(1)">
+
++
+
 </button>
 
 </div>
+
+<button
+id="detalleAgregar"
+class="producto-agregar"
+onclick="agregarDesdeDetalle()">
+
+AGREGAR AL CARRITO
+
+</button>
+
 </div>
 
-<div id="modalCarrito" class="modal">
+<div class="producto-ayuda">
+
+¿Querés saber notas olfativas, duración o si este perfume va con lo que buscás?
+
+<a
+href="https://wa.me/5493417830300"
+target="_blank">
+
+Consultanos por WhatsApp.
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================= BARRA CARRITO ================= -->
+
+<div
+id="carritoBarra"
+class="carrito-barra">
+
+<div class="carrito-contenido">
+
+<div
+id="carritoInfo"
+class="carrito-info">
+
+🛒
+<strong>0</strong>
+unidades
+
+</div>
+
+<button
+class="carrito-boton"
+onclick="abrirCarrito()">
+
+VER PEDIDO
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ================= CARRITO ================= -->
+
+<div
+id="modalCarrito"
+class="modal">
 
 <div class="modal-contenido">
 
 <div class="modal-header">
 
-<h2 id="tituloCarrito">🛒 Tu pedido</h2>
+<h2 id="tituloCarrito">
+🛒 Tu pedido
+</h2>
 
-<button class="cerrar" onclick="cerrarCarrito()">×</button>
+<button
+class="cerrar"
+onclick="cerrarCarrito()">
+
+×
+
+</button>
 
 </div>
 
-<div id="pagoSelector" class="pago-selector">
+<div
+id="pagoSelector"
+class="pago-selector">
 
 <button
-id="pagoEfectivo"
+id="pagoTransferencia"
 class="pago-btn activo"
-onclick="cambiarPago('efectivo')">
+onclick="cambiarPago('transferencia')">
 
-💵 Efectivo / Transferencia
-<br>
+🏦 Transferencia / Efectivo
+
+<small>
 10% OFF
+</small>
 
 </button>
 
 <button
-id="pagoLista"
+id="pagoDebito"
 class="pago-btn"
-onclick="cambiarPago('lista')">
+onclick="cambiarPago('debito')">
 
-💳 Precio de lista
+💳 Débito
+
+<small>
+Precio de lista
+</small>
+
+</button>
+
+<button
+id="pagoCredito"
+class="pago-btn"
+onclick="cambiarPago('credito')">
+
+📱 Crédito / Mercado Pago
+
+<small>
+Precio de lista
+</small>
 
 </button>
 
 </div>
 
-<div id="listaCarrito"></div>
+<div
+id="pagoAyuda"
+class="pago-ayuda">
 
-<div id="resumenCarrito" class="carrito-resumen"></div>
+Elegí cómo querés abonar.
+La opción seleccionada se enviará junto con tu pedido.
+
+</div>
+
+<div id="listaCarrito">
+</div>
+
+<div
+id="resumenCarrito"
+class="carrito-resumen">
+</div>
 
 <button
 id="btnWhatsApp"
 class="enviar-whatsapp"
 onclick="enviarPedidoWhatsApp()">
 
-💬 ENVIAR PEDIDO POR WHATSAPP
+💬 FINALIZAR COMPRA POR WHATSAPP
 
 </button>
 
 </div>
+
 </div>
 
 <a
 class="floating-wa"
 href="https://wa.me/5493417830300"
 target="_blank">
+
 ✆
+
 </a>
 
 <footer class="footer">
 
-<img src="logo%20neros.png" alt="NERÓS">
+<img
+src="logo%20neros.png"
+alt="NERÓS">
 
 <p>
 NERÓS · Perfumes, fragancias y decants
@@ -1647,17 +2580,28 @@ CONFIG
 const API=
 "https://script.google.com/macros/s/AKfycbzJOT5LsONysvKxWyMOA85lRiziPHke1b7dV0hDUe3xfS0isamBl_BDXJKw8iEjqtInMQ/exec";
 
-const WHATSAPP="5493417830300";
+const WHATSAPP=
+"5493417830300";
 
-const MINIMO_MAYORISTA=10;
+const MINIMO_MAYORISTA=
+10;
 
-const PRODUCTOS_POR_PAGINA=30;
+const PRODUCTOS_POR_PAGINA=
+30;
 
 let perfumes=[];
+
 let carrito=[];
-let modoActual="particular";
-let formaPago="efectivo";
-let paginaActual=1;
+
+let modoActual=
+"particular";
+
+let formaPago=
+"transferencia";
+
+let paginaActual=
+1;
+
 let productosFiltrados=[];
 
 /* =========================================================
@@ -1669,7 +2613,12 @@ fetch(API)
 .then(respuesta=>{
 
 if(!respuesta.ok){
-throw new Error("HTTP "+respuesta.status);
+
+throw new Error(
+"HTTP "+
+respuesta.status
+);
+
 }
 
 return respuesta.json();
@@ -1679,10 +2628,15 @@ return respuesta.json();
 .then(data=>{
 
 if(!Array.isArray(data)){
-throw new Error("Respuesta inválida de la API");
+
+throw new Error(
+"Respuesta inválida de la API"
+);
+
 }
 
 perfumes=data;
+
 productosFiltrados=data;
 
 mostrarPagina();
@@ -1693,7 +2647,9 @@ mostrarPagina();
 
 console.error(error);
 
-document.getElementById("productos").innerHTML=`
+document
+.getElementById("productos")
+.innerHTML=`
 
 <div style="
 grid-column:1/-1;
@@ -1716,7 +2672,10 @@ MODO
 
 function cambiarModo(modo){
 
-if(modoActual!==modo && carrito.length>0){
+if(
+modoActual!==modo &&
+carrito.length>0
+){
 
 carrito=[];
 
@@ -1729,16 +2688,24 @@ modoActual=modo;
 document
 .getElementById("modoParticular")
 .classList
-.toggle("activo",modo==="particular");
+.toggle(
+"activo",
+modo==="particular"
+);
 
 document
 .getElementById("modoMayorista")
 .classList
-.toggle("activo",modo==="mayorista");
+.toggle(
+"activo",
+modo==="mayorista"
+);
 
 paginaActual=1;
 
-productosFiltrados=[...perfumes];
+productosFiltrados=[
+...perfumes
+];
 
 mostrarPagina();
 
@@ -1752,15 +2719,35 @@ function cambiarPago(tipo){
 
 formaPago=tipo;
 
-document
-.getElementById("pagoEfectivo")
-.classList
-.toggle("activo",tipo==="efectivo");
+const ids={
 
-document
-.getElementById("pagoLista")
-.classList
-.toggle("activo",tipo==="lista");
+transferencia:
+"pagoTransferencia",
+
+debito:
+"pagoDebito",
+
+credito:
+"pagoCredito"
+
+};
+
+Object.entries(ids)
+.forEach(([clave,id])=>{
+
+const boton=
+document.getElementById(id);
+
+if(boton){
+
+boton.classList.toggle(
+"activo",
+tipo===clave
+);
+
+}
+
+});
 
 renderCarrito();
 
@@ -1782,9 +2769,13 @@ document
 .trim();
 
 productosFiltrados=
+
 perfumes.filter(producto=>
 
-String(producto.perfume||"")
+String(
+producto.perfume ||
+""
+)
 .toLowerCase()
 .includes(texto)
 
@@ -1798,7 +2789,10 @@ mostrarPagina();
 
 document
 .getElementById("buscar")
-.addEventListener("input",filtrarProductos);
+.addEventListener(
+"input",
+filtrarProductos
+);
 
 /* =========================================================
 CONVERTIR NÚMEROS
@@ -1811,21 +2805,35 @@ valor===null ||
 valor===undefined ||
 valor===""
 ){
+
 return 0;
+
 }
 
-if(typeof valor==="number"){
-return Number.isFinite(valor) ? valor : 0;
+if(
+typeof valor==="number"
+){
+
+return Number.isFinite(valor)
+?
+valor
+:
+0;
+
 }
 
 let texto=
+
 String(valor)
 .trim()
 .replace(/ARS/gi,"")
 .replace(/\$/g,"")
 .replace(/\s/g,"");
 
-if(texto.includes(".") && texto.includes(",")){
+if(
+texto.includes(".") &&
+texto.includes(",")
+){
 
 texto=
 texto
@@ -1834,23 +2842,33 @@ texto
 
 }
 
-else if(texto.includes(",")){
+else if(
+texto.includes(",")
+){
 
-texto=texto.replace(",",".");
-
-}
-
-else if(/^\d{1,3}(\.\d{3})+$/.test(texto)){
-
-texto=texto.replace(/\./g,"");
+texto=
+texto.replace(",", ".");
 
 }
 
-const numero=Number(texto);
+else if(
+/^\d{1,3}(\.\d{3})+$/
+.test(texto)
+){
+
+texto=
+texto.replace(/\./g,"");
+
+}
+
+const numero=
+Number(texto);
 
 return Number.isFinite(numero)
-? numero
-: 0;
+?
+numero
+:
+0;
 
 }
 
@@ -1868,22 +2886,18 @@ producto.precio
 
 /* =========================================================
 PRECIO MAYORISTA
-CORREGIDO PARA TU CODE.GS
 ========================================================= */
 
-function precioMayorista(producto,cantidadTotal){
+function precioMayorista(
+producto,
+cantidadTotal
+){
 
 let precio=0;
 
-/*
-TU API DEVUELVE:
-
-precioMayorista10
-precioMayorista20
-precioMayorista30
-*/
-
-if(cantidadTotal>=30){
+if(
+cantidadTotal>=30
+){
 
 precio=
 numeroSeguro(
@@ -1892,7 +2906,9 @@ producto.precioMayorista30
 
 }
 
-else if(cantidadTotal>=20){
+else if(
+cantidadTotal>=20
+){
 
 precio=
 numeroSeguro(
@@ -1901,7 +2917,9 @@ producto.precioMayorista20
 
 }
 
-else if(cantidadTotal>=10){
+else if(
+cantidadTotal>=10
+){
 
 precio=
 numeroSeguro(
@@ -1918,9 +2936,14 @@ return precio;
 PRECIO FINAL
 ========================================================= */
 
-function obtenerPrecioItem(item,cantidadTotal){
+function obtenerPrecioItem(
+item,
+cantidadTotal
+){
 
-if(modoActual==="mayorista"){
+if(
+modoActual==="mayorista"
+){
 
 return precioMayorista(
 item,
@@ -1932,7 +2955,9 @@ cantidadTotal
 let precio=
 precioParticular(item);
 
-if(formaPago==="efectivo"){
+if(
+formaPago==="transferencia"
+){
 
 precio*=0.90;
 
@@ -1949,12 +2974,25 @@ STOCK
 function stockDisponible(producto){
 
 const stock=
-String(producto.stock||"")
+
+String(
+producto.stock ||
+""
+)
 .toLowerCase();
 
 return !(
-stock.includes("sin stock") ||
-stock.includes("agotado")
+
+stock.includes(
+"sin stock"
+)
+
+||
+
+stock.includes(
+"agotado"
+)
+
 );
 
 }
@@ -1966,9 +3004,13 @@ MOSTRAR PRODUCTOS
 function mostrarPagina(){
 
 const contenedor=
-document.getElementById("productos");
+document.getElementById(
+"productos"
+);
 
-if(!productosFiltrados.length){
+if(
+!productosFiltrados.length
+){
 
 contenedor.innerHTML=`
 
@@ -1985,44 +3027,56 @@ No encontramos productos con esa búsqueda.
 
 `;
 
-document.getElementById("paginacion").innerHTML="";
+document
+.getElementById(
+"paginacion"
+)
+.innerHTML="";
 
 return;
 
 }
 
 const inicio=
-(paginaActual-1)
+(
+paginaActual-1
+)
 *
 PRODUCTOS_POR_PAGINA;
 
 const fin=
-inicio+
+inicio +
 PRODUCTOS_POR_PAGINA;
 
 const pagina=
-productosFiltrados.slice(inicio,fin);
+
+productosFiltrados.slice(
+inicio,
+fin
+);
 
 contenedor.innerHTML="";
 
 pagina.forEach(producto=>{
 
 const nombre=
-producto.perfume||
+producto.perfume ||
 "Producto";
 
 const imagen=
-producto.foto||
-producto.imagen||
+producto.foto ||
+producto.imagen ||
 "";
 
 const stock=
-producto.stock||
+producto.stock ||
 "Consultar";
 
 let precio=0;
 
-if(modoActual==="particular"){
+if(
+modoActual==="particular"
+){
 
 precio=
 precioParticular(producto);
@@ -2030,11 +3084,6 @@ precioParticular(producto);
 }
 
 else{
-
-/*
-En catálogo mayorista mostramos
-el precio inicial 10+
-*/
 
 precio=
 precioMayorista(
@@ -2048,13 +3097,18 @@ const disponible=
 stockDisponible(producto);
 
 const card=
-document.createElement("div");
+document.createElement(
+"div"
+);
 
-card.className="card reveal";
+card.className=
+"card reveal";
 
 card.innerHTML=`
 
-<div class="imagen-producto">
+<div
+class="imagen-producto"
+onclick="abrirProducto('${escapeAttr(nombre)}')">
 
 ${
 
@@ -2088,15 +3142,21 @@ SIN IMAGEN
 }
 
 <div class="badge-stock">
+
 ${escapeHTML(stock)}
+
 </div>
 
 </div>
 
 <div class="card-info">
 
-<div class="nombre-producto">
+<div
+class="nombre-producto"
+onclick="abrirProducto('${escapeAttr(nombre)}')">
+
 ${escapeHTML(nombre)}
+
 </div>
 
 <div class="stock-producto">
@@ -2111,7 +3171,7 @@ modoActual==="mayorista"
 
 :
 
-formaPago==="efectivo"
+formaPago==="transferencia"
 
 ?
 
@@ -2147,9 +3207,24 @@ Math.round(precio)
 
 <button
 ${!disponible ? "disabled" : ""}
-onclick="agregarAlCarrito('${escapeAttr(nombre)}')">
+onclick="
+event.stopPropagation();
+agregarAlCarrito('${escapeAttr(nombre)}')
+">
 
-${disponible ? "AGREGAR AL CARRITO" : "SIN STOCK"}
+${
+
+disponible
+
+?
+
+"AGREGAR AL CARRITO"
+
+:
+
+"SIN STOCK"
+
+}
 
 </button>
 
@@ -2157,7 +3232,9 @@ ${disponible ? "AGREGAR AL CARRITO" : "SIN STOCK"}
 
 `;
 
-contenedor.appendChild(card);
+contenedor.appendChild(
+card
+);
 
 });
 
@@ -2174,29 +3251,51 @@ PAGINACIÓN
 function renderPaginacion(){
 
 const contenedor=
-document.getElementById("paginacion");
+document.getElementById(
+"paginacion"
+);
 
 const totalPaginas=
+
 Math.ceil(
-productosFiltrados.length/
+
+productosFiltrados.length /
+
 PRODUCTOS_POR_PAGINA
+
 );
 
 contenedor.innerHTML="";
 
-if(totalPaginas<=1){
+if(
+totalPaginas<=1
+){
+
 return;
+
 }
 
-for(let i=1;i<=totalPaginas;i++){
+for(
+let i=1;
+i<=totalPaginas;
+i++
+){
 
 const boton=
-document.createElement("button");
+document.createElement(
+"button"
+);
 
 boton.textContent=i;
 
-if(i===paginaActual){
-boton.classList.add("activo");
+if(
+i===paginaActual
+){
+
+boton.classList.add(
+"activo"
+);
+
 }
 
 boton.onclick=()=>{
@@ -2206,34 +3305,45 @@ paginaActual=i;
 mostrarPagina();
 
 document
-.getElementById("catalogo")
+.getElementById(
+"catalogo"
+)
 .scrollIntoView({
-behavior:"smooth"
+
+behavior:
+"smooth"
+
 });
 
 };
 
-contenedor.appendChild(boton);
+contenedor.appendChild(
+boton
+);
 
 }
 
 }
 
 /* =========================================================
-PRODUCTO
+BUSCAR PRODUCTO
 ========================================================= */
 
 function buscarProducto(nombre){
 
 return perfumes.find(
+
 producto=>
-producto.perfume===nombre
+
+producto.perfume===
+nombre
+
 );
 
 }
 
 /* =========================================================
-AGREGAR
+AGREGAR AL CARRITO
 ========================================================= */
 
 function agregarAlCarrito(nombre){
@@ -2241,17 +3351,28 @@ function agregarAlCarrito(nombre){
 const producto=
 buscarProducto(nombre);
 
-if(!producto){
+if(
+!producto
+){
+
 return;
+
 }
 
 const existente=
+
 carrito.find(
+
 item=>
-item.perfume===nombre
+
+item.perfume===
+nombre
+
 );
 
-if(existente){
+if(
+existente
+){
 
 existente.cantidad++;
 
@@ -2260,8 +3381,11 @@ existente.cantidad++;
 else{
 
 carrito.push({
+
 ...producto,
+
 cantidad:1
+
 });
 
 }
@@ -2271,29 +3395,49 @@ actualizarCarrito();
 }
 
 /* =========================================================
-CANTIDAD
+CAMBIAR CANTIDAD
 ========================================================= */
 
-function cambiarCantidad(nombre,cambio){
+function cambiarCantidad(
+nombre,
+cambio
+){
 
 const item=
+
 carrito.find(
+
 producto=>
-producto.perfume===nombre
+
+producto.perfume===
+nombre
+
 );
 
-if(!item){
+if(
+!item
+){
+
 return;
+
 }
 
-item.cantidad+=cambio;
+item.cantidad+=
+cambio;
 
-if(item.cantidad<=0){
+if(
+item.cantidad<=0
+){
 
 carrito=
+
 carrito.filter(
+
 producto=>
-producto.perfume!==nombre
+
+producto.perfume!==
+nombre
+
 );
 
 }
@@ -2311,9 +3455,14 @@ TOTAL UNIDADES
 function totalUnidades(){
 
 return carrito.reduce(
+
 (total,item)=>
-total+item.cantidad,
+
+total +
+item.cantidad,
+
 0
+
 );
 
 }
@@ -2328,10 +3477,14 @@ const total=
 totalUnidades();
 
 const barra=
-document.getElementById("carritoBarra");
+document.getElementById(
+"carritoBarra"
+);
 
 const info=
-document.getElementById("carritoInfo");
+document.getElementById(
+"carritoInfo"
+);
 
 barra.classList.toggle(
 "activo",
@@ -2341,9 +3494,23 @@ total>0
 info.innerHTML=`
 
 🛒
-<strong>${total}</strong>
+<strong>
+${total}
+</strong>
 
-${total===1 ? "unidad" : "unidades"}
+${
+
+total===1
+
+?
+
+"unidad"
+
+:
+
+"unidades"
+
+}
 
 `;
 
@@ -2356,14 +3523,21 @@ ABRIR CARRITO
 function abrirCarrito(){
 
 document
-.getElementById("modalCarrito")
+.getElementById(
+"modalCarrito"
+)
 .classList
-.add("activo");
+.add(
+"activo"
+);
 
-document.body.style.overflow="hidden";
+document.body.style.overflow=
+"hidden";
 
 document
-.getElementById("pagoSelector")
+.getElementById(
+"pagoSelector"
+)
 .classList
 .toggle(
 "activo",
@@ -2371,7 +3545,25 @@ modoActual==="particular"
 );
 
 document
-.getElementById("tituloCarrito")
+.getElementById(
+"pagoAyuda"
+)
+.style.display=
+
+modoActual==="particular"
+
+?
+
+"block"
+
+:
+
+"none";
+
+document
+.getElementById(
+"tituloCarrito"
+)
 .innerHTML=
 
 modoActual==="mayorista"
@@ -2389,15 +3581,19 @@ renderCarrito();
 }
 
 /* =========================================================
-CERRAR
+CERRAR CARRITO
 ========================================================= */
 
 function cerrarCarrito(){
 
 document
-.getElementById("modalCarrito")
+.getElementById(
+"modalCarrito"
+)
 .classList
-.remove("activo");
+.remove(
+"activo"
+);
 
 document.body.style.overflow="";
 
@@ -2410,15 +3606,23 @@ RENDER CARRITO
 function renderCarrito(){
 
 const lista=
-document.getElementById("listaCarrito");
+document.getElementById(
+"listaCarrito"
+);
 
 const resumen=
-document.getElementById("resumenCarrito");
+document.getElementById(
+"resumenCarrito"
+);
 
 const boton=
-document.getElementById("btnWhatsApp");
+document.getElementById(
+"btnWhatsApp"
+);
 
-if(carrito.length===0){
+if(
+carrito.length===0
+){
 
 lista.innerHTML=`
 
@@ -2427,7 +3631,9 @@ padding:30px;
 text-align:center;
 color:#888;
 ">
+
 Tu pedido está vacío.
+
 </div>
 
 `;
@@ -2456,9 +3662,11 @@ total
 );
 
 const subtotal=
-precio*item.cantidad;
+precio *
+item.cantidad;
 
-totalPedido+=subtotal;
+totalPedido+=
+subtotal;
 
 lista.innerHTML+=`
 
@@ -2467,12 +3675,17 @@ lista.innerHTML+=`
 <div>
 
 <div class="item-nombre">
-${escapeHTML(item.perfume)}
+
+${escapeHTML(
+item.perfume
+)}
+
 </div>
 
 <div class="item-precio">
 
-$${Math.round(precio).toLocaleString("es-AR")}
+$${Math.round(precio)
+.toLocaleString("es-AR")}
 por unidad
 
 </div>
@@ -2480,7 +3693,8 @@ por unidad
 <div class="item-subtotal">
 
 Subtotal:
-$${Math.round(subtotal).toLocaleString("es-AR")}
+$${Math.round(subtotal)
+.toLocaleString("es-AR")}
 
 </div>
 
@@ -2489,15 +3703,31 @@ $${Math.round(subtotal).toLocaleString("es-AR")}
 <div class="item-controles">
 
 <button
-onclick="cambiarCantidad('${escapeAttr(item.perfume)}',-1)">
+onclick="
+cambiarCantidad(
+'${escapeAttr(item.perfume)}',
+-1
+)
+">
+
 −
+
 </button>
 
-<span>${item.cantidad}</span>
+<span>
+${item.cantidad}
+</span>
 
 <button
-onclick="cambiarCantidad('${escapeAttr(item.perfume)}',1)">
+onclick="
+cambiarCantidad(
+'${escapeAttr(item.perfume)}',
+1
+)
+">
+
 +
+
 </button>
 
 </div>
@@ -2510,9 +3740,13 @@ onclick="cambiarCantidad('${escapeAttr(item.perfume)}',1)">
 
 let mensajeExtra="";
 
-if(modoActual==="mayorista"){
+if(
+modoActual==="mayorista"
+){
 
-if(total<10){
+if(
+total<10
+){
 
 mensajeExtra=`
 
@@ -2520,7 +3754,9 @@ mensajeExtra=`
 
 ⚠️ Te faltan
 
-<strong>${10-total}</strong>
+<strong>
+${10-total}
+</strong>
 
 unidades para alcanzar
 el mínimo mayorista.
@@ -2531,20 +3767,30 @@ el mínimo mayorista.
 
 }
 
-else if(total<20){
+else if(
+total<20
+){
 
 mensajeExtra=`
 
 <div class="proximo-nivel">
 
 📦 Precio mayorista
-<strong>10+</strong>
+
+<strong>
+10+
+</strong>
+
 activado.
 
 <br>
 
 Te faltan
-<strong>${20-total}</strong>
+
+<strong>
+${20-total}
+</strong>
+
 unidades para precio 20+.
 
 </div>
@@ -2553,20 +3799,30 @@ unidades para precio 20+.
 
 }
 
-else if(total<30){
+else if(
+total<30
+){
 
 mensajeExtra=`
 
 <div class="proximo-nivel">
 
 🔥 Precio mayorista
-<strong>20+</strong>
+
+<strong>
+20+
+</strong>
+
 activado.
 
 <br>
 
 Te faltan
-<strong>${30-total}</strong>
+
+<strong>
+${30-total}
+</strong>
+
 unidades para precio 30+.
 
 </div>
@@ -2581,7 +3837,9 @@ mensajeExtra=`
 
 <div class="proximo-nivel">
 
-🔥 <strong>
+🔥
+
+<strong>
 Mejor precio mayorista desbloqueado.
 </strong>
 
@@ -2605,15 +3863,23 @@ mensajeExtra=`
 
 ${
 
-formaPago==="efectivo"
+formaPago==="transferencia"
 
 ?
 
-"💵 10% OFF aplicado por efectivo / transferencia."
+"🏦 10% OFF aplicado por transferencia / efectivo."
 
 :
 
-"💳 Pedido calculado a precio de lista."
+formaPago==="debito"
+
+?
+
+"💳 Débito seleccionado · pedido calculado a precio de lista."
+
+:
+
+"📱 Crédito / Mercado Pago seleccionado · pedido calculado a precio de lista."
 
 }
 
@@ -2627,18 +3893,27 @@ resumen.innerHTML=`
 
 <div class="resumen-linea">
 
-<span>Unidades</span>
+<span>
+Unidades
+</span>
 
-<strong>${total}</strong>
+<strong>
+${total}
+</strong>
 
 </div>
 
 <div class="resumen-total">
 
-<span>TOTAL</span>
+<span>
+TOTAL
+</span>
 
 <span>
-$${Math.round(totalPedido).toLocaleString("es-AR")}
+
+$${Math.round(totalPedido)
+.toLocaleString("es-AR")}
+
 </span>
 
 </div>
@@ -2648,9 +3923,13 @@ ${mensajeExtra}
 `;
 
 boton.disabled=
+
 modoActual==="mayorista"
+
 &&
-total<MINIMO_MAYORISTA;
+
+total<
+MINIMO_MAYORISTA;
 
 }
 
@@ -2663,18 +3942,29 @@ function enviarPedidoWhatsApp(){
 const total=
 totalUnidades();
 
-if(total===0){
+if(
+total===0
+){
+
 return;
+
 }
 
 if(
+
 modoActual==="mayorista"
+
 &&
-total<MINIMO_MAYORISTA
+
+total<
+MINIMO_MAYORISTA
+
 ){
 
 alert(
+
 `El pedido mayorista mínimo es de ${MINIMO_MAYORISTA} unidades.`
+
 );
 
 return;
@@ -2682,11 +3972,15 @@ return;
 }
 
 let totalPedido=0;
+
 let mensaje="";
 
-if(modoActual==="mayorista"){
+if(
+modoActual==="mayorista"
+){
 
 mensaje=
+
 `Hola NERÓS 👋✨
 
 Quiero realizar un pedido MAYORISTA:
@@ -2702,27 +3996,43 @@ DETALLE DEL PEDIDO
 
 else{
 
+let medioPago="";
+
+if(
+formaPago==="transferencia"
+){
+
+medioPago=
+"Transferencia / Efectivo (10% OFF)";
+
+}
+
+else if(
+formaPago==="debito"
+){
+
+medioPago=
+"Débito (precio de lista)";
+
+}
+
+else{
+
+medioPago=
+"Crédito / Mercado Pago (precio de lista)";
+
+}
+
 mensaje=
+
 `Hola NERÓS 👋✨
 
-Quiero realizar este pedido:
+Quiero finalizar esta compra:
 
 📦 Cantidad total: ${total} unidades
 
-💳 Forma de pago:
-${
-
-formaPago==="efectivo"
-
-?
-
-"Efectivo / Transferencia (10% OFF)"
-
-:
-
-"Precio de lista / Tarjeta"
-
-}
+💳 Medio de pago:
+${medioPago}
 
 ━━━━━━━━━━━━━━━
 DETALLE DEL PEDIDO
@@ -2734,40 +4044,61 @@ DETALLE DEL PEDIDO
 carrito.forEach(item=>{
 
 const precio=
+
 obtenerPrecioItem(
 item,
 total
 );
 
 const subtotal=
-precio*item.cantidad;
 
-totalPedido+=subtotal;
+precio *
+item.cantidad;
+
+totalPedido+=
+subtotal;
 
 mensaje+=`
 
 🧴 ${item.perfume}
 
-Cantidad: ${item.cantidad}
+Cantidad:
+${item.cantidad}
 
 Precio unitario:
-$${Math.round(precio).toLocaleString("es-AR")}
+$${Math.round(precio)
+.toLocaleString("es-AR")}
 
 Subtotal:
-$${Math.round(subtotal).toLocaleString("es-AR")}
+$${Math.round(subtotal)
+.toLocaleString("es-AR")}
 `;
 
 });
 
-if(modoActual==="mayorista"){
+if(
+modoActual==="mayorista"
+){
 
-let nivel="10+";
+let nivel=
+"10+";
 
-if(total>=30){
-nivel="30+";
+if(
+total>=30
+){
+
+nivel=
+"30+";
+
 }
-else if(total>=20){
-nivel="20+";
+
+else if(
+total>=20
+){
+
+nivel=
+"20+";
+
 }
 
 mensaje+=`
@@ -2785,7 +4116,7 @@ $${Math.round(totalPedido).toLocaleString("es-AR")}
 
 ━━━━━━━━━━━━━━━
 
-Quedo atento para confirmar disponibilidad y coordinar el pedido.
+Quiero confirmar disponibilidad y coordinar el pedido.
 
 Gracias 🙌
 `;
@@ -2801,12 +4132,12 @@ mensaje+=`
 📦 Total de unidades:
 ${total}
 
-💰 TOTAL DEL PEDIDO:
+💰 TOTAL:
 $${Math.round(totalPedido).toLocaleString("es-AR")}
 
 ━━━━━━━━━━━━━━━
 
-Quedo atento para confirmar disponibilidad y coordinar entrega o envío.
+Quiero confirmar disponibilidad y coordinar entrega o envío.
 
 Gracias 🙌
 `;
@@ -2814,9 +4145,409 @@ Gracias 🙌
 }
 
 const url=
+
 `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(mensaje)}`;
 
-window.open(url,"_blank");
+window.open(
+url,
+"_blank"
+);
+
+}
+
+/* =========================================================
+FICHA DINÁMICA
+========================================================= */
+
+let productoDetalleActual=null;
+
+let cantidadDetalle=1;
+
+function abrirProducto(nombre){
+
+const producto=
+buscarProducto(nombre);
+
+if(
+!producto
+){
+
+return;
+
+}
+
+productoDetalleActual=
+producto;
+
+cantidadDetalle=
+1;
+
+const foto=
+
+producto.foto ||
+producto.imagen ||
+"";
+
+const precioLista=
+precioParticular(producto);
+
+const precioTransferencia=
+precioLista *
+0.90;
+
+const stock=
+producto.stock ||
+"Consultar";
+
+document
+.getElementById(
+"detalleNombre"
+)
+.textContent=
+
+producto.perfume ||
+"Producto NERÓS";
+
+document
+.getElementById(
+"detalleStock"
+)
+.textContent=
+stock;
+
+document
+.getElementById(
+"detalleCantidad"
+)
+.textContent=
+cantidadDetalle;
+
+const imagen=
+document.getElementById(
+"detalleFoto"
+);
+
+imagen.src=
+foto;
+
+imagen.alt=
+
+producto.perfume ||
+"Producto NERÓS";
+
+imagen.onerror=function(){
+
+this.onerror=null;
+
+this.src=
+
+"https://placehold.co/700x700/151515/c89d38?text=NERÓS";
+
+};
+
+const precios=
+document.getElementById(
+"detallePrecios"
+);
+
+if(
+modoActual==="mayorista"
+){
+
+const p10=
+precioMayorista(
+producto,
+10
+);
+
+const p20=
+precioMayorista(
+producto,
+20
+);
+
+const p30=
+precioMayorista(
+producto,
+30
+);
+
+precios.innerHTML=`
+
+<div class="producto-precio-principal">
+
+${
+
+p10>0
+
+?
+
+"$"+
+Math.round(p10)
+.toLocaleString("es-AR")
+
+:
+
+"Consultar"
+
+}
+
+</div>
+
+<div class="producto-ahorro">
+
+Precio mayorista desde 10 unidades
+
+</div>
+
+<div class="producto-mayorista-niveles">
+
+<div class="producto-nivel">
+
+<small>
+10+ UNIDADES
+</small>
+
+<strong>
+
+${
+
+p10>0
+
+?
+
+"$"+
+Math.round(p10)
+.toLocaleString("es-AR")
+
+:
+
+"—"
+
+}
+
+</strong>
+
+</div>
+
+<div class="producto-nivel">
+
+<small>
+20+ UNIDADES
+</small>
+
+<strong>
+
+${
+
+p20>0
+
+?
+
+"$"+
+Math.round(p20)
+.toLocaleString("es-AR")
+
+:
+
+"—"
+
+}
+
+</strong>
+
+</div>
+
+<div class="producto-nivel">
+
+<small>
+30+ UNIDADES
+</small>
+
+<strong>
+
+${
+
+p30>0
+
+?
+
+"$"+
+Math.round(p30)
+.toLocaleString("es-AR")
+
+:
+
+"—"
+
+}
+
+</strong>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+else{
+
+precios.innerHTML=`
+
+<div class="producto-precio-lista">
+
+Precio de lista:
+$${Math.round(precioLista)
+.toLocaleString("es-AR")}
+
+</div>
+
+<div class="producto-precio-principal">
+
+$${Math.round(precioTransferencia)
+.toLocaleString("es-AR")}
+
+</div>
+
+<div class="producto-ahorro">
+
+10% OFF pagando por transferencia / efectivo
+
+</div>
+
+`;
+
+}
+
+const boton=
+document.getElementById(
+"detalleAgregar"
+);
+
+const disponible=
+stockDisponible(producto);
+
+boton.disabled=
+!disponible;
+
+boton.textContent=
+
+disponible
+
+?
+
+"AGREGAR AL CARRITO"
+
+:
+
+"SIN STOCK";
+
+document
+.getElementById(
+"modalProducto"
+)
+.classList
+.add(
+"activo"
+);
+
+document.body.style.overflow=
+"hidden";
+
+}
+
+function cerrarProducto(){
+
+document
+.getElementById(
+"modalProducto"
+)
+.classList
+.remove(
+"activo"
+);
+
+document.body.style.overflow=
+"";
+
+productoDetalleActual=
+null;
+
+cantidadDetalle=
+1;
+
+}
+
+function cerrarProductoPorFondo(event){
+
+if(
+event.target.id===
+"modalProducto"
+){
+
+cerrarProducto();
+
+}
+
+}
+
+function cambiarCantidadDetalle(cambio){
+
+cantidadDetalle=
+
+Math.max(
+1,
+cantidadDetalle+
+cambio
+);
+
+document
+.getElementById(
+"detalleCantidad"
+)
+.textContent=
+cantidadDetalle;
+
+}
+
+function agregarDesdeDetalle(){
+
+if(
+
+!productoDetalleActual
+
+||
+
+!stockDisponible(
+productoDetalleActual
+)
+
+){
+
+return;
+
+}
+
+const nombre=
+productoDetalleActual.perfume;
+
+for(
+let i=0;
+i<cantidadDetalle;
+i++
+){
+
+agregarAlCarrito(
+nombre
+);
+
+}
+
+cerrarProducto();
+
+abrirCarrito();
 
 }
 
@@ -2853,32 +4584,50 @@ MENÚ
 function abrirMenu(){
 
 document
-.getElementById("sideMenu")
+.getElementById(
+"sideMenu"
+)
 .classList
-.add("activo");
+.add(
+"activo"
+);
 
 document
-.getElementById("sideOverlay")
+.getElementById(
+"sideOverlay"
+)
 .classList
-.add("activo");
+.add(
+"activo"
+);
 
-document.body.style.overflow="hidden";
+document.body.style.overflow=
+"hidden";
 
 }
 
 function cerrarMenu(){
 
 document
-.getElementById("sideMenu")
+.getElementById(
+"sideMenu"
+)
 .classList
-.remove("activo");
+.remove(
+"activo"
+);
 
 document
-.getElementById("sideOverlay")
+.getElementById(
+"sideOverlay"
+)
 .classList
-.remove("activo");
+.remove(
+"activo"
+);
 
-document.body.style.overflow="";
+document.body.style.overflow=
+"";
 
 }
 
@@ -2889,13 +4638,20 @@ BUSCADOR HEADER
 function buscarDesdeHeader(valor){
 
 const input=
-document.getElementById("buscar");
+document.getElementById(
+"buscar"
+);
 
-if(!input){
+if(
+!input
+){
+
 return;
+
 }
 
-input.value=valor;
+input.value=
+valor;
 
 filtrarProductos();
 
@@ -2904,9 +4660,14 @@ filtrarProductos();
 function irABusqueda(){
 
 document
-.getElementById("catalogo")
+.getElementById(
+"catalogo"
+)
 .scrollIntoView({
-behavior:"smooth"
+
+behavior:
+"smooth"
+
 });
 
 }
@@ -2918,28 +4679,55 @@ CHIPS
 function filtrarChip(tipo){
 
 document
-.querySelectorAll(".cat-chip")
+.querySelectorAll(
+".cat-chip"
+)
 .forEach(x=>
 
 x.classList.toggle(
+
 "activo",
-x.dataset.chip===tipo
+
+x.dataset.chip===
+tipo
+
 )
 
 );
 
 const input=
-document.getElementById("buscar");
+document.getElementById(
+"buscar"
+);
 
 const inputHeader=
-document.getElementById("buscarHeader");
+document.getElementById(
+"buscarHeader"
+);
 
-if(input) input.value="";
-if(inputHeader) inputHeader.value="";
+if(
+input
+){
 
-if(tipo==="mayorista"){
+input.value="";
 
-cambiarModo("mayorista");
+}
+
+if(
+inputHeader
+){
+
+inputHeader.value="";
+
+}
+
+if(
+tipo==="mayorista"
+){
+
+cambiarModo(
+"mayorista"
+);
 
 productosFiltrados=[
 ...perfumes
@@ -2949,37 +4737,66 @@ productosFiltrados=[
 
 else{
 
-if(modoActual!=="particular"){
-cambiarModo("particular");
+if(
+modoActual!=="particular"
+){
+
+cambiarModo(
+"particular"
+);
+
 }
 
-if(tipo==="disponible"){
+if(
+tipo==="disponible"
+){
 
 productosFiltrados=
+
 perfumes.filter(p=>{
 
 const stock=
-String(p.stock||"")
+
+String(
+p.stock ||
+""
+)
 .toLowerCase();
 
 return (
-stock.includes("disponible")
+
+stock.includes(
+"disponible"
+)
+
 &&
-!stock.includes("pedido")
+
+!stock.includes(
+"pedido"
+)
+
 );
 
 });
 
 }
 
-else if(tipo==="pedido"){
+else if(
+tipo==="pedido"
+){
 
 productosFiltrados=
+
 perfumes.filter(p=>
 
-String(p.stock||"")
+String(
+p.stock ||
+""
+)
 .toLowerCase()
-.includes("pedido")
+.includes(
+"pedido"
+)
 
 );
 
@@ -3000,9 +4817,14 @@ paginaActual=1;
 mostrarPagina();
 
 document
-.getElementById("catalogo")
+.getElementById(
+"catalogo"
+)
 .scrollIntoView({
-behavior:"smooth"
+
+behavior:
+"smooth"
+
 });
 
 }
@@ -3012,45 +4834,82 @@ SLIDER
 ========================================================= */
 
 let slideActual=0;
+
 let slideTimer=null;
 
 function mostrarSlide(indice){
 
 const slides=
-document.querySelectorAll(".hero-slide");
+
+document.querySelectorAll(
+".hero-slide"
+);
 
 const dots=
-document.querySelectorAll(".hero-dot");
 
-if(!slides.length){
+document.querySelectorAll(
+".hero-dot"
+);
+
+if(
+!slides.length
+){
+
 return;
+
 }
 
 slideActual=
-(indice+slides.length)
+
+(
+indice+
+slides.length
+)
+
 %
+
 slides.length;
 
-slides.forEach((s,i)=>
+slides.forEach(
+(s,i)=>
+
 s.classList.toggle(
+
 "activo",
+
 i===slideActual
+
 )
+
 );
 
-dots.forEach((d,i)=>
+dots.forEach(
+(d,i)=>
+
 d.classList.toggle(
+
 "activo",
+
 i===slideActual
+
 )
+
 );
 
-clearInterval(slideTimer);
+clearInterval(
+slideTimer
+);
 
 slideTimer=
+
 setInterval(
-()=>mostrarSlideSinReset(slideActual+1),
+
+()=>mostrarSlideSinReset(
+slideActual+1
+),
+
 5200
+
 );
 
 }
@@ -3058,36 +4917,74 @@ setInterval(
 function mostrarSlideSinReset(indice){
 
 const slides=
-document.querySelectorAll(".hero-slide");
 
-const dots=
-document.querySelectorAll(".hero-dot");
-
-slideActual=
-(indice+slides.length)
-%
-slides.length;
-
-slides.forEach((s,i)=>
-s.classList.toggle(
-"activo",
-i===slideActual
-)
+document.querySelectorAll(
+".hero-slide"
 );
 
-dots.forEach((d,i)=>
-d.classList.toggle(
-"activo",
-i===slideActual
+const dots=
+
+document.querySelectorAll(
+".hero-dot"
+);
+
+if(
+!slides.length
+){
+
+return;
+
+}
+
+slideActual=
+
+(
+indice+
+slides.length
 )
+
+%
+
+slides.length;
+
+slides.forEach(
+(s,i)=>
+
+s.classList.toggle(
+
+"activo",
+
+i===slideActual
+
+)
+
+);
+
+dots.forEach(
+(d,i)=>
+
+d.classList.toggle(
+
+"activo",
+
+i===slideActual
+
+)
+
 );
 
 }
 
 slideTimer=
+
 setInterval(
-()=>mostrarSlideSinReset(slideActual+1),
+
+()=>mostrarSlideSinReset(
+slideActual+1
+),
+
 5200
+
 );
 
 /* =========================================================
@@ -3097,31 +4994,54 @@ ANIMACIONES
 function activarAnimacionesCards(){
 
 const cards=
-document.querySelectorAll(".card.reveal");
 
-cards.forEach((card,index)=>{
+document.querySelectorAll(
+".card.reveal"
+);
 
-setTimeout(()=>{
+cards.forEach(
+(card,index)=>{
 
-card.classList.add("visible");
+setTimeout(
+()=>{
+
+card.classList.add(
+"visible"
+);
 
 },
-Math.min(index*35,400));
+Math.min(
+index*35,
+400
+)
+);
 
 });
 
 }
 
-document.addEventListener("keydown",e=>{
+/* =========================================================
+ESC
+========================================================= */
 
-if(e.key==="Escape"){
+document.addEventListener(
+"keydown",
+e=>{
+
+if(
+e.key==="Escape"
+){
 
 cerrarMenu();
+
 cerrarCarrito();
+
+cerrarProducto();
 
 }
 
-});
+}
+);
 
 </script>
 
