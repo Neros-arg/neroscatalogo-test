@@ -4822,20 +4822,11 @@ String(
 p.stock ||
 ""
 )
-.toLowerCase();
+.toLowerCase()
+.trim();
 
-return (
-
-stock.includes(
-"disponible"
-)
-
-&&
-
-!stock.includes(
-"pedido"
-)
-
+return stock.includes(
+"stock inmediato"
 );
 
 });
@@ -4848,18 +4839,22 @@ tipo==="pedido"
 
 productosFiltrados=
 
-perfumes.filter(p=>
+perfumes.filter(p=>{
+
+const stock=
 
 String(
 p.stock ||
 ""
 )
 .toLowerCase()
-.includes(
-"pedido"
-)
+.trim();
 
+return stock.includes(
+"disponible por pedido"
 );
+
+});
 
 }
 
