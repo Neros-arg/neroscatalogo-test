@@ -1020,6 +1020,20 @@ opacity:.35;
 cursor:not-allowed;
 }
 
+.enviar-whatsapp.mercadopago{
+background:#009ee3;
+color:#fff;
+}
+
+.enviar-whatsapp.mercadopago:hover{
+background:#20aff0;
+}
+
+.enviar-whatsapp.cargando{
+opacity:.7;
+cursor:wait;
+}
+
 /* ================= WHATSAPP ================= */
 
 .floating-wa{
@@ -2024,7 +2038,7 @@ Elegí. Seleccioná cómo pagar. Confirmá.
 </h2>
 
 <p>
-Armá todo desde la tienda y terminá la compra con nosotros por WhatsApp.
+Armá todo desde la tienda y elegí si querés finalizar por WhatsApp o pagar online con Mercado Pago.
 </p>
 
 </div>
@@ -2085,13 +2099,12 @@ débito o crédito / Mercado Pago.
 </div>
 
 <strong>
-Finalizá por WhatsApp
+Finalizá tu compra
 </strong>
 
 <p>
-Te llevamos a WhatsApp con
-<b>el pedido, cantidades, forma de pago y total</b>
-ya preparados para confirmar disponibilidad y entrega.
+Con transferencia o débito te llevamos a WhatsApp.
+Si elegís <b>Crédito / Mercado Pago</b>, podés pagar online directamente.
 </p>
 
 </div>
@@ -2207,7 +2220,7 @@ Precio de lista
 </div>
 
 <div class="mercadopago-point">
-💳 Elegí el medio de pago desde el carrito y finalizá tu compra por WhatsApp
+💳 Elegí el medio de pago desde el carrito: WhatsApp para coordinar o Mercado Pago para pagar online
 </div>
 
 </section>
@@ -2355,7 +2368,7 @@ FINALIZACIÓN
 </small>
 
 <strong>
-Confirmamos todo por WhatsApp
+WhatsApp o pago online con Mercado Pago
 </strong>
 
 </div>
@@ -2536,9 +2549,9 @@ class="carrito-resumen">
 </div>
 
 <button
-id="btnWhatsApp"
+id="btnFinalizar"
 class="enviar-whatsapp"
-onclick="enviarPedidoWhatsApp()">
+onclick="finalizarCompra()">
 
 💬 FINALIZAR COMPRA POR WHATSAPP
 
@@ -2578,7 +2591,7 @@ CONFIG
 ========================================================= */
 
 const API=
-"https://script.google.com/macros/s/AKfycbzJOT5LsONysvKxWyMOA85lRiziPHke1b7dV0hDUe3xfS0isamBl_BDXJKw8iEjqtInMQ/exec";
+"https://script.google.com/macros/s/AKfycbwnmhyywNdM1WxuQPcHHDjtte7Hgjzwwq1Rl3afwB5z2XfeI_VyevkSuNL-cXq8ud7Qcg/exec";
 
 const WHATSAPP=
 "5493417830300";
@@ -3617,7 +3630,7 @@ document.getElementById(
 
 const boton=
 document.getElementById(
-"btnWhatsApp"
+"btnFinalizar"
 );
 
 if(
@@ -3922,6 +3935,48 @@ ${mensajeExtra}
 
 `;
 
+if(
+modoActual==="particular"
+){
+
+boton.classList.remove(
+"mercadopago",
+"cargando"
+);
+
+if(
+formaPago==="credito"
+){
+
+boton.classList.add(
+"mercadopago"
+);
+
+boton.innerHTML=
+"💳 PAGAR AHORA CON MERCADO PAGO";
+
+}
+else{
+
+boton.innerHTML=
+"💬 FINALIZAR COMPRA POR WHATSAPP";
+
+}
+
+}
+
+else{
+
+boton.classList.remove(
+"mercadopago",
+"cargando"
+);
+
+boton.innerHTML=
+"💬 ENVIAR PEDIDO MAYORISTA POR WHATSAPP";
+
+}
+
 boton.disabled=
 
 modoActual==="mayorista"
@@ -3932,6 +3987,185 @@ total<
 MINIMO_MAYORISTA;
 
 }
+
+/* =========================================================
+FINALIZAR COMPRA
+========================================================= */
+
+function finalizarCompra(){
+
+if(
+carrito.length===0
+){
+
+return;
+
+}
+
+if(
+modoActual==="particular" &&
+formaPago==="credito"
+){
+
+pagarMercadoPago();
+
+return;
+
+}
+
+enviarPedidoWhatsApp();
+
+}
+
+
+/* =========================================================
+PAGAR CON MERCADO PAGO
+========================================================= */
+
+async function pagarMercadoPago(){
+
+if(
+modoActual!=="particular"
+){
+
+alert(
+"El pago online está disponible para compras particulares."
+);
+
+return;
+
+}
+
+if(
+carrito.length===0
+){
+
+return;
+
+}
+
+const boton=
+document.getElementById(
+"btnFinalizar"
+);
+
+const textoOriginal=
+boton.innerHTML;
+
+try{
+
+boton.disabled=true;
+
+boton.classList.add(
+"cargando"
+);
+
+boton.innerHTML=
+"⏳ GENERANDO CHECKOUT...";
+
+const items=
+carrito.map(item=>({
+
+perfume:
+item.perfume,
+
+cantidad:
+item.cantidad
+
+}));
+
+const respuesta=
+await fetch(
+API,
+{
+
+method:
+"POST",
+
+headers:{
+"Content-Type":
+"text/plain;charset=utf-8"
+},
+
+body:
+JSON.stringify({
+
+accion:
+"crearPago",
+
+items:
+items
+
+})
+
+}
+);
+
+if(
+!respuesta.ok
+){
+
+throw new Error(
+"Error HTTP "+
+respuesta.status
+);
+
+}
+
+const datos=
+await respuesta.json();
+
+if(
+datos.error
+){
+
+throw new Error(
+datos.mensaje ||
+"No se pudo crear el pago."
+);
+
+}
+
+if(
+!datos.checkoutUrl
+){
+
+throw new Error(
+"Mercado Pago no devolvió una URL de pago."
+);
+
+}
+
+window.location.href=
+datos.checkoutUrl;
+
+}
+catch(error){
+
+console.error(
+"Error Mercado Pago:",
+error
+);
+
+alert(
+"No pudimos abrir Mercado Pago.\n\n"+
+error.message+
+"\n\nPodés intentar nuevamente o finalizar por WhatsApp."
+);
+
+boton.disabled=false;
+
+boton.classList.remove(
+"cargando"
+);
+
+boton.innerHTML=
+textoOriginal;
+
+}
+
+}
+
 
 /* =========================================================
 WHATSAPP
@@ -5019,6 +5253,72 @@ index*35,
 });
 
 }
+
+/* =========================================================
+RESULTADO DE PAGO AL VOLVER DE MERCADO PAGO
+========================================================= */
+
+function mostrarResultadoPago(){
+
+const parametros=
+new URLSearchParams(
+window.location.search
+);
+
+const estado=
+parametros.get(
+"pago"
+);
+
+if(
+!estado
+){
+
+return;
+
+}
+
+let mensaje="";
+
+if(
+estado==="aprobado"
+){
+
+mensaje=
+"✅ Pago aprobado. ¡Gracias por tu compra en NERÓS!";
+
+}
+else if(
+estado==="pendiente"
+){
+
+mensaje=
+"⏳ Tu pago quedó pendiente. Mercado Pago te informará cuando se acredite.";
+
+}
+else if(
+estado==="rechazado"
+){
+
+mensaje=
+"❌ El pago no pudo completarse. Podés volver a intentarlo o finalizar por WhatsApp.";
+
+}
+
+if(
+mensaje
+){
+
+setTimeout(
+()=>alert(mensaje),
+350
+);
+
+}
+
+}
+
+mostrarResultadoPago();
 
 /* =========================================================
 ESC
