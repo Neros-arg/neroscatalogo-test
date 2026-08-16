@@ -1,39 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NERÓS | Perfumes & Fragancias</title>
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<link rel="icon" type="image/png" href="favicon.png">
+<title>
+NERÓS | Perfumes, Fragancias y Decants
+</title>
+
+<link
+rel="icon"
+type="image/png"
+href="favicon.png">
 
 <style>
 
-/* =========================================================
-GENERAL
-========================================================= */
-
 *{
+box-sizing:border-box;
 margin:0;
 padding:0;
-box-sizing:border-box;
 }
 
 :root{
---negro:#070707;
+--negro:#080808;
 --negro2:#111111;
---negro3:#181818;
 --dorado:#c89d38;
---dorado-claro:#f0c866;
---texto:#ffffff;
---gris:#a0a0a0;
---verde:#3ddc84;
---amarillo:#f5c542;
---rojo:#ff5a5a;
---whatsapp:#25D366;
+--dorado-claro:#e3bd63;
+--gris:#999;
+--whatsapp:#25d366;
 }
 
 html{
@@ -41,149 +39,462 @@ scroll-behavior:smooth;
 }
 
 body{
-background:#080808;
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-color:white;
-padding-bottom:110px;
+background:var(--negro);
+color:#fff;
+font-family:Arial,Helvetica,sans-serif;
+overflow-x:hidden;
 }
 
+button,
+input{
+font-family:inherit;
+}
 
 /* =========================================================
-NAVBAR
+BARRA PROMOCIONAL ANIMADA
+========================================================= */
+
+.promo-strip{
+height:34px;
+background:#030303;
+border-bottom:1px solid #1d1d1d;
+display:flex;
+align-items:center;
+overflow:hidden;
+position:relative;
+z-index:130;
+}
+
+.promo-track{
+display:flex;
+gap:70px;
+min-width:max-content;
+white-space:nowrap;
+animation:promoMove 24s linear infinite;
+color:#eee;
+font-size:10px;
+font-weight:800;
+letter-spacing:1.6px;
+text-transform:uppercase;
+}
+
+.promo-track span{
+display:inline-flex;
+align-items:center;
+gap:12px;
+}
+
+.promo-track b{
+color:var(--dorado-claro);
+}
+
+@keyframes promoMove{
+
+from{
+transform:translateX(0);
+}
+
+to{
+transform:translateX(-50%);
+}
+
+}
+
+/* =========================================================
+HEADER
 ========================================================= */
 
 .navbar{
-height:125px;
+position:sticky;
+top:0;
+z-index:120;
+background:rgba(5,5,5,.94);
+backdrop-filter:blur(18px);
+border-bottom:1px solid #1d1d1d;
+}
+
+.navbar-contenido{
+max-width:1600px;
+margin:auto;
+height:74px;
+padding:0 24px;
+
 display:grid;
 grid-template-columns:1fr auto 1fr;
 align-items:center;
-padding:0 55px;
-background:#050505;
-border-bottom:1px solid #171717;
-position:relative;
-z-index:100;
-overflow:hidden;
 }
 
 .nav-left{
 display:flex;
 align-items:center;
-gap:18px;
+gap:12px;
 }
 
 .nav-icon{
-font-size:25px;
-color:#ddd;
-cursor:pointer;
-background:none;
-border:none;
-}
+width:42px;
+height:42px;
 
-.nav-center{
-height:100%;
+border:1px solid #292929;
+background:#111;
+
+color:#fff;
+border-radius:50%;
+
 display:flex;
 align-items:center;
 justify-content:center;
-overflow:hidden;
+
+cursor:pointer;
+font-size:19px;
+
+transition:.25s;
 }
 
-.logo-nav{
-width:210px;
-max-width:90%;
-height:auto;
+.nav-icon:hover{
+border-color:var(--dorado);
+color:var(--dorado-claro);
+transform:translateY(-2px);
+}
+
+.menu-trigger{
+font-size:22px;
+}
+
+.logo-nav img{
 display:block;
-transition:transform .35s ease,filter .35s ease;
+width:145px;
+max-height:55px;
+object-fit:contain;
 }
 
-.logo-nav:hover{
-transform:scale(1.04);
-filter:drop-shadow(0 0 15px rgba(200,157,56,.25));
-}
-
-.nav-right{
+.menu{
 display:flex;
 justify-content:flex-end;
 align-items:center;
-gap:18px;
-}
-
-.carrito-nav{
-position:relative;
-cursor:pointer;
-font-size:25px;
-transition:transform .2s ease;
-}
-
-.carrito-nav:hover{
-transform:scale(1.12);
-}
-
-.carrito-numero{
-position:absolute;
-top:-9px;
-right:-10px;
-min-width:19px;
-height:19px;
-padding:0 4px;
-border-radius:50px;
-background:var(--dorado);
-color:#111;
-font-size:10px;
-font-weight:bold;
-display:flex;
-align-items:center;
-justify-content:center;
-}
-
-
-/* =========================================================
-MENU
-========================================================= */
-
-.menu{
-height:58px;
-display:flex;
-align-items:center;
-justify-content:center;
-gap:42px;
-background:#080808;
-border-bottom:1px solid #141414;
-position:relative;
-z-index:90;
+gap:23px;
 }
 
 .menu a{
-color:white;
+color:#aaa;
 text-decoration:none;
-font-size:13px;
-font-weight:600;
+font-size:11px;
+font-weight:800;
+letter-spacing:.6px;
 transition:.2s;
 }
 
 .menu a:hover{
-color:var(--dorado);
+color:var(--dorado-claro);
 }
 
+/* =========================================================
+BUSCADOR SUPERIOR
+========================================================= */
+
+.header-search{
+max-width:760px;
+margin:14px auto 0;
+padding:0 20px;
+display:none;
+}
+
+.header-search-inner{
+position:relative;
+}
+
+.header-search input{
+width:100%;
+
+background:#111;
+border:1px solid #2c2c2c;
+
+color:#fff;
+
+border-radius:999px;
+
+padding:
+13px
+45px
+13px
+18px;
+
+outline:none;
+
+font-size:13px;
+
+transition:.2s;
+}
+
+.header-search input:focus{
+border-color:var(--dorado);
+box-shadow:0 0 0 3px rgba(200,157,56,.08);
+}
+
+.header-search button{
+position:absolute;
+
+right:5px;
+top:5px;
+
+width:34px;
+height:34px;
+
+border-radius:50%;
+
+border:0;
+
+background:var(--dorado);
+
+cursor:pointer;
+
+color:#111;
+
+font-size:16px;
+}
 
 /* =========================================================
-HERO
+CATEGORÍAS HORIZONTALES
+========================================================= */
+
+.category-rail{
+position:sticky;
+top:125px;
+
+z-index:110;
+
+background:rgba(8,8,8,.95);
+backdrop-filter:blur(15px);
+
+border-bottom:1px solid #1b1b1b;
+
+display:flex;
+
+justify-content:center;
+
+gap:9px;
+
+padding:10px 14px;
+
+overflow-x:auto;
+
+scrollbar-width:none;
+}
+
+.category-rail::-webkit-scrollbar{
+display:none;
+}
+
+.cat-chip{
+flex:0 0 auto;
+
+border:1px solid #303030;
+
+background:#121212;
+
+color:#aaa;
+
+padding:9px 14px;
+
+border-radius:999px;
+
+font-size:10px;
+
+font-weight:800;
+
+cursor:pointer;
+
+transition:.2s;
+}
+
+.cat-chip:hover,
+.cat-chip.activo{
+background:var(--dorado);
+border-color:var(--dorado);
+color:#111;
+}
+
+/* =========================================================
+MENÚ LATERAL
+========================================================= */
+
+.side-overlay{
+position:fixed;
+inset:0;
+
+background:rgba(0,0,0,.68);
+
+backdrop-filter:blur(4px);
+
+z-index:3990;
+
+opacity:0;
+visibility:hidden;
+
+transition:.3s;
+}
+
+.side-overlay.activo{
+opacity:1;
+visibility:visible;
+}
+
+.side-menu{
+position:fixed;
+
+left:0;
+top:0;
+bottom:0;
+
+width:min(88vw,390px);
+
+background:#0b0b0b;
+
+z-index:4000;
+
+transform:translateX(-105%);
+
+transition:
+transform
+.35s
+cubic-bezier(.2,.8,.2,1);
+
+border-right:1px solid #292929;
+
+padding:22px;
+
+overflow-y:auto;
+}
+
+.side-menu.activo{
+transform:translateX(0);
+}
+
+.side-head{
+display:flex;
+align-items:center;
+justify-content:space-between;
+
+padding-bottom:18px;
+
+border-bottom:1px solid #222;
+}
+
+.side-head img{
+width:130px;
+}
+
+.side-close{
+border:0;
+
+background:#191919;
+
+color:#fff;
+
+width:36px;
+height:36px;
+
+border-radius:50%;
+
+font-size:20px;
+
+cursor:pointer;
+}
+
+.side-label{
+font-size:9px;
+
+color:var(--dorado);
+
+font-weight:900;
+
+letter-spacing:3px;
+
+margin:24px 0 10px;
+}
+
+.side-link{
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:15px 2px;
+
+border-bottom:1px solid #1e1e1e;
+
+color:#eee;
+
+text-decoration:none;
+
+font-size:14px;
+
+font-weight:650;
+
+transition:.2s;
+}
+
+.side-link:hover{
+color:var(--dorado-claro);
+padding-left:6px;
+}
+
+.side-link small{
+color:#666;
+}
+
+.side-card{
+margin-top:24px;
+
+padding:18px;
+
+border:1px solid rgba(200,157,56,.28);
+
+background:
+linear-gradient(
+135deg,
+rgba(200,157,56,.12),
+#111
+);
+
+border-radius:16px;
+}
+
+.side-card strong{
+font-family:Georgia,serif;
+
+font-size:19px;
+}
+
+.side-card p{
+font-size:11px;
+
+color:#aaa;
+
+line-height:1.55;
+
+margin-top:7px;
+}
+
+/* =========================================================
+HERO / CARRUSEL
 ========================================================= */
 
 .hero{
-min-height:680px;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
+min-height:600px;
+
 position:relative;
+
 overflow:hidden;
 
 background:
 linear-gradient(
-rgba(0,0,0,.28),
-rgba(0,0,0,.68)
+90deg,
+rgba(0,0,0,.93),
+rgba(0,0,0,.62),
+rgba(0,0,0,.35)
 ),
-url("fondo.png");
+url("fondo.jpg");
 
 background-size:cover;
 background-position:center;
@@ -191,771 +502,829 @@ background-position:center;
 
 .hero::after{
 content:"";
+
 position:absolute;
+
 inset:0;
 
 background:
-linear-gradient(
-90deg,
-rgba(0,0,0,.55),
-transparent 30%,
-transparent 70%,
-rgba(0,0,0,.55)
+radial-gradient(
+circle at 75% 50%,
+rgba(200,157,56,.12),
+transparent 42%
 );
 
 pointer-events:none;
 }
 
+.hero-slider{
+position:relative;
+}
+
+.hero-slide{
+position:absolute;
+
+inset:0;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+opacity:0;
+
+transform:scale(1.02);
+
+transition:
+opacity .8s ease,
+transform 1.1s ease;
+
+pointer-events:none;
+}
+
+.hero-slide.activo{
+opacity:1;
+
+transform:scale(1);
+
+pointer-events:auto;
+}
+
 .hero-contenido{
 position:relative;
+
 z-index:2;
-max-width:850px;
-padding:30px;
+
+width:100%;
+
+max-width:1600px;
+
+padding:60px 7%;
 }
 
 .hero-mini{
+font-size:10px;
+
+font-weight:900;
+
+letter-spacing:4px;
+
 color:var(--dorado-claro);
-letter-spacing:5px;
-font-size:12px;
-font-weight:800;
+
 margin-bottom:18px;
 }
 
 .hero h1{
-font-family:Georgia,"Times New Roman",serif;
-font-size:56px;
-line-height:1.08;
-font-weight:500;
-text-shadow:0 4px 30px rgba(0,0,0,.8);
+max-width:750px;
+
+font-family:Georgia,serif;
+
+font-weight:400;
+
+font-size:clamp(
+42px,
+6vw,
+82px
+);
+
+line-height:.98;
+
+letter-spacing:-2px;
+
+margin-bottom:25px;
 }
 
 .hero p{
-margin:18px auto 27px;
-max-width:650px;
-font-size:16px;
-line-height:1.6;
-color:#e5e5e5;
+max-width:580px;
+
+color:#bbb;
+
+font-size:15px;
+
+line-height:1.7;
+
+margin-bottom:32px;
 }
 
 .hero-botones{
 display:flex;
-justify-content:center;
+
 gap:12px;
+
 flex-wrap:wrap;
 }
 
 .hero-btn{
-padding:14px 25px;
-border-radius:6px;
+display:inline-flex;
+
+align-items:center;
+
+justify-content:center;
+
+min-height:48px;
+
+padding:0 23px;
+
+border-radius:999px;
+
+font-size:10px;
+
+font-weight:900;
+
+letter-spacing:.8px;
+
 text-decoration:none;
-font-size:13px;
-font-weight:800;
-transition:.2s;
-position:relative;
-overflow:hidden;
+
+transition:.25s;
 }
 
 .hero-btn.principal{
 background:var(--dorado);
+
 color:#111;
+
+border:1px solid var(--dorado);
 }
 
 .hero-btn.principal:hover{
 background:var(--dorado-claro);
+
+transform:translateY(-2px);
 }
 
 .hero-btn.secundario{
-background:rgba(0,0,0,.5);
-border:1px solid rgba(255,255,255,.55);
-color:white;
+border:1px solid #555;
+
+color:#fff;
+
+background:rgba(0,0,0,.3);
 }
 
 .hero-btn.secundario:hover{
 border-color:var(--dorado);
+
 color:var(--dorado-claro);
 }
 
-.hero-btn::before{
-content:"";
+.hero-dots{
 position:absolute;
-top:0;
-left:-120%;
-width:70%;
-height:100%;
 
-background:
-linear-gradient(
-90deg,
-transparent,
-rgba(255,255,255,.22),
-transparent
-);
+bottom:25px;
 
-transform:skewX(-20deg);
-transition:.7s;
+left:50%;
+
+transform:translateX(-50%);
+
+z-index:5;
+
+display:flex;
+
+gap:7px;
 }
 
-.hero-btn:hover::before{
-left:150%;
+.hero-dot{
+width:7px;
+height:7px;
+
+border:0;
+
+border-radius:50%;
+
+background:#777;
+
+cursor:pointer;
+
+padding:0;
 }
 
+.hero-dot.activo{
+width:25px;
 
-/* =========================================================
-ANIMACIONES
-========================================================= */
+border-radius:10px;
 
-@media(prefers-reduced-motion:no-preference){
+background:var(--dorado);
 
-.hero{
-animation:heroBackgroundMove 18s ease-in-out infinite alternate;
+transition:.3s;
 }
-
-@keyframes heroBackgroundMove{
-
-0%{
-background-size:100% auto;
-background-position:center 48%;
-}
-
-100%{
-background-size:108% auto;
-background-position:center 52%;
-}
-
-}
-
-.hero-mini{
-opacity:0;
-animation:fadeDown .8s ease forwards;
-animation-delay:.15s;
-}
-
-.hero h1{
-opacity:0;
-transform:translateY(25px);
-animation:heroTitle 1s cubic-bezier(.2,.8,.2,1) forwards;
-animation-delay:.35s;
-}
-
-.hero p{
-opacity:0;
-transform:translateY(20px);
-animation:fadeUp .9s ease forwards;
-animation-delay:.65s;
-}
-
-.hero-botones{
-opacity:0;
-transform:translateY(15px);
-animation:fadeUp .8s ease forwards;
-animation-delay:.9s;
-}
-
-@keyframes heroTitle{
-
-0%{
-opacity:0;
-transform:translateY(28px) scale(.97);
-}
-
-100%{
-opacity:1;
-transform:translateY(0) scale(1);
-}
-
-}
-
-@keyframes fadeUp{
-
-0%{
-opacity:0;
-transform:translateY(20px);
-}
-
-100%{
-opacity:1;
-transform:translateY(0);
-}
-
-}
-
-@keyframes fadeDown{
-
-0%{
-opacity:0;
-transform:translateY(-12px);
-}
-
-100%{
-opacity:1;
-transform:translateY(0);
-}
-
-}
-
-}
-
 
 /* =========================================================
 BENEFICIOS
 ========================================================= */
 
 .beneficios{
+max-width:1600px;
+
+margin:auto;
+
+padding:24px;
+
 display:grid;
-grid-template-columns:repeat(3,1fr);
-max-width:1200px;
-margin:0 auto;
-border-left:1px solid #222;
-border-right:1px solid #222;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:1px;
+
+background:#252525;
 }
 
 .beneficio{
-padding:28px 20px;
+background:#101010;
+
+padding:26px 20px;
+
 text-align:center;
-background:#0d0d0d;
-border-right:1px solid #222;
-transition:transform .3s ease,background .3s ease;
-}
-
-.beneficio:hover{
-transform:translateY(-4px);
-background:#111;
-}
-
-.beneficio:last-child{
-border-right:none;
 }
 
 .beneficio-icono{
-font-size:25px;
-margin-bottom:8px;
+font-size:23px;
+
+margin-bottom:10px;
 }
 
 .beneficio strong{
 display:block;
-font-size:13px;
-margin-bottom:5px;
-color:#eee;
+
+font-size:12px;
+
+margin-bottom:7px;
 }
 
 .beneficio span{
-font-size:11px;
-color:#777;
-}
+font-size:10px;
 
+color:#888;
+
+line-height:1.5;
+}
 
 /* =========================================================
 MEDIOS DE PAGO
 ========================================================= */
 
 .medios-pago{
-padding:55px 20px;
-background:#0b0b0b;
-border-top:1px solid #1d1d1d;
-border-bottom:1px solid #1d1d1d;
+max-width:1600px;
+
+margin:35px auto;
+
+padding:35px 24px;
+
+border-top:1px solid #222;
+
+border-bottom:1px solid #222;
+}
+
+.medios-pago-titulo{
 text-align:center;
+
+margin-bottom:25px;
 }
 
 .medios-pago-titulo small{
 color:var(--dorado);
-font-size:10px;
-font-weight:800;
-letter-spacing:4px;
+
+font-size:9px;
+
+font-weight:900;
+
+letter-spacing:3px;
 }
 
 .medios-pago-titulo h3{
-font-family:Georgia,"Times New Roman",serif;
+font-family:Georgia,serif;
+
 font-size:32px;
-font-weight:500;
-margin-top:8px;
+
+font-weight:400;
+
+margin:8px 0;
 }
 
 .medios-pago-titulo p{
+font-size:11px;
+
 color:#888;
-font-size:13px;
-margin-top:7px;
 }
 
 .medios-pago-opciones{
-max-width:950px;
-margin:30px auto 0;
 display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:10px;
+
+grid-template-columns:
+repeat(5,1fr);
+
+gap:8px;
 }
 
 .medio-pago{
-min-height:120px;
 padding:20px 10px;
-background:#111;
+
 border:1px solid #252525;
-border-radius:16px;
 
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
+background:#101010;
 
-transition:.25s ease;
+border-radius:13px;
+
+text-align:center;
+
+transition:.25s;
 }
 
 .medio-pago:hover{
-transform:translateY(-4px);
-border-color:rgba(200,157,56,.65);
-background:#151515;
+border-color:rgba(200,157,56,.55);
+
+transform:translateY(-3px);
 }
 
 .medio-pago span{
-font-size:25px;
-margin-bottom:9px;
+display:block;
+
+font-size:22px;
+
+margin-bottom:8px;
 }
 
 .medio-pago strong{
-font-size:12px;
-color:#eee;
+display:block;
+
+font-size:11px;
+
+margin-bottom:4px;
 }
 
 .medio-pago small{
-font-size:10px;
-color:var(--dorado-claro);
-margin-top:5px;
+color:#777;
+
+font-size:9px;
 }
 
 .mercadopago-point{
-margin:22px auto 0;
-font-size:11px;
+text-align:center;
+
+margin-top:18px;
+
+font-size:9px;
+
 color:#777;
 }
 
-
 /* =========================================================
-CATALOGO
+CATÁLOGO
 ========================================================= */
 
 .catalogo{
-padding:70px 25px 30px;
+max-width:1600px;
 
-background:
-radial-gradient(
-circle at top,
-rgba(200,157,56,.06),
-transparent 25%
-),
-#090909;
+margin:auto;
+
+padding:60px 24px 100px;
 }
 
 .catalogo-cabeza{
 text-align:center;
-max-width:800px;
-margin:0 auto 35px;
+
+margin-bottom:30px;
 }
 
 .catalogo-cabeza small{
+font-size:9px;
+
+letter-spacing:3px;
+
 color:var(--dorado);
-font-size:11px;
-letter-spacing:4px;
-font-weight:bold;
+
+font-weight:900;
 }
 
 .catalogo-cabeza h2{
-font-family:Georgia,"Times New Roman",serif;
-font-size:40px;
-font-weight:500;
-margin-top:10px;
+font-family:Georgia,serif;
+
+font-size:clamp(
+32px,
+4vw,
+50px
+);
+
+font-weight:400;
+
+margin:8px 0;
 }
 
 .catalogo-cabeza p{
+font-size:12px;
+
 color:#888;
-font-size:13px;
-margin-top:10px;
 }
 
-
-/* =========================================================
-CONTROLES
-========================================================= */
-
 .controles{
-max-width:950px;
-margin:0 auto 38px;
-padding:11px;
-background:rgba(18,18,18,.95);
-border:1px solid #292929;
-border-radius:15px;
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+gap:15px;
+
+margin-bottom:25px;
 }
 
 .modos{
 display:flex;
-gap:8px;
-margin-bottom:9px;
+
+gap:7px;
 }
 
 .modo{
-flex:1;
-padding:13px;
-border-radius:9px;
-border:1px solid #333;
-background:#171717;
-color:#999;
-font-size:13px;
-font-weight:800;
-cursor:pointer;
-transition:.2s;
-}
+padding:11px 15px;
 
-.modo:hover{
-border-color:var(--dorado);
-color:white;
+border:1px solid #333;
+
+border-radius:999px;
+
+background:#111;
+
+color:#888;
+
+font-size:10px;
+
+font-weight:900;
+
+cursor:pointer;
 }
 
 .modo.activo{
 background:var(--dorado);
+
 border-color:var(--dorado);
+
 color:#111;
 }
 
 .buscar-wrap{
 position:relative;
+
+width:min(
+100%,
+450px
+);
+}
+
+.buscar-wrap input{
+width:100%;
+
+padding:
+13px
+15px
+13px
+40px;
+
+background:#111;
+
+border:1px solid #2c2c2c;
+
+border-radius:999px;
+
+color:white;
+
+outline:none;
+}
+
+.buscar-wrap input:focus{
+border-color:var(--dorado);
 }
 
 .buscar-icono{
 position:absolute;
+
 left:15px;
+
 top:50%;
+
 transform:translateY(-50%);
-opacity:.6;
+
+color:#777;
 }
-
-#buscar{
-width:100%;
-padding:14px 15px 14px 43px;
-background:#111;
-color:white;
-border:1px solid #2e2e2e;
-border-radius:9px;
-font-size:14px;
-outline:none;
-}
-
-#buscar:focus{
-border-color:var(--dorado);
-}
-
-
-/* =========================================================
-PRODUCTOS
-========================================================= */
 
 #productos{
 display:grid;
-grid-template-columns:repeat(5,minmax(0,1fr));
-gap:18px;
-max-width:1600px;
-margin:auto;
+
+grid-template-columns:
+repeat(5,1fr);
+
+gap:14px;
 }
 
+/* =========================================================
+CARDS PRODUCTOS
+========================================================= */
+
 .card{
-background:#141414;
-border:1px solid #242424;
-border-radius:20px;
-transition:.25s;
+background:#111;
+
+border:1px solid #222;
+
+border-radius:15px;
+
 overflow:hidden;
+
 position:relative;
+
+transition:
+transform .25s,
+border-color .25s,
+box-shadow .25s;
+
+will-change:transform;
 }
 
 .card:hover{
-border-color:rgba(200,157,56,.75);
-transform:translateY(-4px);
-box-shadow:0 18px 45px rgba(0,0,0,.45);
+transform:translateY(-5px);
+
+border-color:rgba(200,157,56,.45);
+
+box-shadow:
+0 20px 45px
+rgba(0,0,0,.35);
+}
+
+.card.reveal{
+opacity:0;
+
+transform:translateY(20px);
+}
+
+.card.reveal.visible{
+opacity:1;
+
+transform:translateY(0);
+
+transition:
+opacity .5s ease,
+transform .5s ease,
+border-color .25s,
+box-shadow .25s;
 }
 
 .imagen-producto{
 position:relative;
-aspect-ratio:1 / 1.12;
+
+aspect-ratio:1/1;
+
+background:#f4f4f4;
+
 overflow:hidden;
-background:#191919;
 }
 
-.card img{
+.imagen-producto img{
 width:100%;
+
 height:100%;
-object-fit:cover;
-display:block;
-transition:transform .6s cubic-bezier(.2,.8,.2,1);
+
+object-fit:contain;
+
+transition:transform .5s ease;
 }
 
-.card:hover img{
-transform:scale(1.07);
+.card:hover .imagen-producto img{
+transform:scale(1.055);
 }
 
-.stock-badge{
-position:absolute;
-top:10px;
-left:10px;
-max-width:calc(100% - 20px);
-padding:7px 9px;
-border-radius:20px;
-font-size:10px;
-font-weight:bold;
-background:rgba(0,0,0,.80);
-backdrop-filter:blur(8px);
-border:1px solid #333;
-}
-
-.stock-badge.disponible{
-color:var(--verde);
-}
-
-.stock-badge.apedido{
-color:var(--amarillo);
-}
-
-.stock-badge.sinstock{
-color:var(--rojo);
-}
-
-.info{
-padding:15px;
-}
-
-.nombre{
-font-size:14px;
-font-weight:700;
-line-height:1.35;
-min-height:58px;
-}
-
-.precio-anterior{
-font-size:14px;
-color:#777;
-text-decoration:line-through;
-margin-top:10px;
-}
-
-.precio{
-font-size:24px;
-font-weight:900;
-color:var(--dorado-claro);
-margin-top:3px;
-}
-
-.descuento{
-margin-top:8px;
-padding:7px;
-text-align:center;
-font-size:10px;
-font-weight:bold;
-border:1px solid rgba(61,220,132,.25);
-background:rgba(61,220,132,.08);
-color:var(--verde);
-border-radius:8px;
-}
-
-.mayorista-titulo{
-font-size:11px;
-color:var(--dorado);
-font-weight:bold;
-margin-top:12px;
-}
-
-.mayorista-precio{
-font-size:23px;
-font-weight:900;
-color:var(--dorado-claro);
-margin-top:4px;
-}
-
-.mayorista-info{
-font-size:11px;
-line-height:1.6;
-color:#888;
-margin-top:8px;
-padding:8px;
-background:#0d0d0d;
-border:1px solid #222;
-border-radius:8px;
-}
-
-.agregar{
-width:100%;
-border:none;
-border-radius:10px;
-padding:12px;
-margin-top:13px;
-background:var(--dorado);
-color:#111;
-font-size:11px;
-font-weight:900;
-cursor:pointer;
-transition:.2s;
-position:relative;
-overflow:hidden;
-}
-
-.agregar:hover{
-background:var(--dorado-claro);
-}
-
-.agregar:disabled{
-background:#292929;
-color:#777;
-cursor:not-allowed;
-}
-
-.agregar::after{
+.imagen-producto::after{
 content:"";
+
 position:absolute;
+
 inset:0;
 
 background:
 linear-gradient(
-110deg,
-transparent 20%,
-rgba(255,255,255,.22) 45%,
-transparent 70%
+180deg,
+transparent 68%,
+rgba(0,0,0,.32)
 );
 
-transform:translateX(-150%);
-transition:.65s;
+pointer-events:none;
 }
 
-.agregar:hover::after{
-transform:translateX(150%);
+.badge-stock{
+position:absolute;
+
+left:10px;
+top:10px;
+
+z-index:2;
+
+padding:6px 8px;
+
+border-radius:999px;
+
+font-size:8px;
+
+font-weight:900;
+
+letter-spacing:.5px;
+
+background:rgba(0,0,0,.8);
+
+color:#fff;
 }
 
-.cantidad{
-display:flex;
-align-items:center;
-justify-content:center;
-gap:9px;
-margin-top:13px;
+.card-info{
+padding:14px;
 }
 
-.cantidad button{
-width:35px;
-height:35px;
-border-radius:8px;
-background:#202020;
-border:1px solid #3a3a3a;
-color:white;
+.nombre-producto{
+font-size:12px;
+
+font-weight:900;
+
+line-height:1.35;
+
+min-height:34px;
+}
+
+.stock-producto{
+margin-top:6px;
+
+font-size:9px;
+
+color:#777;
+}
+
+.precio-producto{
+margin-top:12px;
+
 font-size:18px;
+
+font-weight:900;
+
+color:var(--dorado-claro);
+}
+
+.card button{
+width:100%;
+
+margin-top:12px;
+
+padding:11px;
+
+border:0;
+
+border-radius:9px;
+
+background:var(--dorado);
+
+color:#111;
+
+font-size:10px;
+
+font-weight:900;
+
 cursor:pointer;
+
+transition:.2s;
 }
 
-.cantidad span{
-width:32px;
-text-align:center;
-font-weight:bold;
+.card button:hover{
+background:var(--dorado-claro);
 }
-
 
 /* =========================================================
-PAGINACION
+PAGINACIÓN
 ========================================================= */
 
-.paginacion{
+#paginacion{
 display:flex;
+
 justify-content:center;
-align-items:center;
+
+gap:7px;
+
+margin-top:35px;
+
 flex-wrap:wrap;
-gap:6px;
-margin:40px auto 15px;
 }
 
-.pagina-btn{
-min-width:40px;
-height:40px;
-padding:0 11px;
+#paginacion button{
+min-width:35px;
+
+height:35px;
+
+padding:0 10px;
+
 border-radius:8px;
+
 border:1px solid #333;
-background:#151515;
-color:#999;
+
+background:#111;
+
+color:#aaa;
+
 cursor:pointer;
 }
 
-.pagina-btn.activa{
+#paginacion button.activo{
 background:var(--dorado);
+
 color:#111;
+
 border-color:var(--dorado);
 }
-
-.pagina-btn:hover{
-border-color:var(--dorado);
-color:white;
-}
-
-.pagina-btn:disabled{
-opacity:.3;
-cursor:not-allowed;
-}
-
-.paginacion-info{
-text-align:center;
-font-size:11px;
-color:#666;
-}
-
 
 /* =========================================================
-CARRITO FLOTANTE
+BARRA CARRITO
 ========================================================= */
 
 .carrito-barra{
 position:fixed;
-bottom:0;
+
 left:0;
 right:0;
+bottom:0;
+
 z-index:1000;
-display:none;
-background:rgba(8,8,8,.96);
-border-top:1px solid #333;
+
+background:rgba(10,10,10,.95);
+
 backdrop-filter:blur(15px);
-padding:12px 20px;
+
+border-top:1px solid #333;
+
+transform:translateY(110%);
+
+transition:.3s;
+}
+
+.carrito-barra.activo{
+transform:translateY(0);
 }
 
 .carrito-contenido{
-max-width:1000px;
+max-width:1600px;
+
 margin:auto;
+
+padding:12px 20px;
+
 display:flex;
-justify-content:space-between;
+
 align-items:center;
-gap:20px;
+
+justify-content:space-between;
 }
 
 .carrito-info{
-font-size:13px;
-color:#ccc;
+font-size:12px;
+
+color:#aaa;
 }
 
 .carrito-info strong{
-color:var(--dorado-claro);
+color:#fff;
+
+font-size:15px;
 }
 
 .carrito-boton{
-padding:13px 20px;
-border-radius:10px;
-background:var(--whatsapp);
-border:none;
-color:white;
-font-size:12px;
+padding:11px 18px;
+
+border-radius:999px;
+
+border:0;
+
+background:var(--dorado);
+
+color:#111;
+
+font-size:10px;
+
 font-weight:900;
+
 cursor:pointer;
 }
 
-
 /* =========================================================
-MODAL
+MODAL / CARRITO LATERAL
 ========================================================= */
 
 .modal{
 position:fixed;
+
 inset:0;
+
 z-index:3000;
+
 display:none;
+
 align-items:center;
-justify-content:center;
-padding:15px;
-background:rgba(0,0,0,.82);
+
+justify-content:flex-end;
+
+padding:0;
+
+background:rgba(0,0,0,.65);
+
+backdrop-filter:blur(5px);
 }
 
 .modal.activo{
@@ -963,41 +1332,84 @@ display:flex;
 }
 
 .modal-contenido{
-width:100%;
-max-width:650px;
-max-height:90vh;
+width:min(
+94vw,
+480px
+);
+
+max-width:none;
+
+height:100vh;
+
+max-height:none;
+
 overflow-y:auto;
+
 padding:22px;
-background:#141414;
-border:1px solid #333;
-border-radius:18px;
+
+background:#101010;
+
+border:0;
+
+border-left:1px solid #333;
+
+border-radius:0;
+
+transform:translateX(100%);
+
+animation:
+cartIn
+.35s
+cubic-bezier(.2,.8,.2,1)
+forwards;
+}
+
+@keyframes cartIn{
+
+to{
+transform:translateX(0);
+}
+
 }
 
 .modal-header{
 display:flex;
+
 justify-content:space-between;
+
 align-items:center;
+
 margin-bottom:18px;
 }
 
 .modal-header h2{
 font-family:Georgia,serif;
+
 font-size:24px;
+
 font-weight:500;
 }
 
 .cerrar{
 border:none;
+
 background:none;
+
 color:#999;
+
 font-size:28px;
+
 cursor:pointer;
 }
 
 .pago-selector{
 display:none;
-grid-template-columns:1fr 1fr;
+
+grid-template-columns:
+1fr 1fr;
+
 gap:8px;
+
 margin-bottom:15px;
 }
 
@@ -1007,352 +1419,443 @@ display:grid;
 
 .pago-btn{
 padding:11px;
+
 border-radius:9px;
+
 background:#1c1c1c;
+
 border:1px solid #333;
+
 color:#aaa;
+
 font-size:11px;
+
 font-weight:bold;
+
 cursor:pointer;
 }
 
 .pago-btn.activo{
 border-color:var(--dorado);
+
 color:var(--dorado-claro);
+
 background:rgba(200,157,56,.1);
 }
 
 .item-carrito{
 display:flex;
+
 align-items:center;
+
 justify-content:space-between;
+
 gap:12px;
+
 padding:14px 0;
+
 border-bottom:1px solid #292929;
 }
 
 .item-nombre{
 font-size:13px;
+
 font-weight:bold;
 }
 
 .item-precio{
 font-size:11px;
+
 color:#999;
+
 margin-top:4px;
 }
 
 .item-subtotal{
 font-size:11px;
+
 color:var(--dorado);
+
 margin-top:4px;
 }
 
 .item-controles{
 display:flex;
+
 align-items:center;
+
 gap:7px;
 }
 
 .item-controles button{
 width:30px;
+
 height:30px;
+
 border-radius:7px;
+
 background:#222;
+
 border:1px solid #444;
+
 color:white;
+
 cursor:pointer;
 }
 
 .item-controles span{
 min-width:25px;
+
 text-align:center;
 }
 
 .carrito-resumen{
 margin-top:18px;
+
 padding-top:15px;
+
 border-top:1px solid #444;
 }
 
 .resumen-linea{
 display:flex;
+
 justify-content:space-between;
+
 font-size:13px;
+
 margin-bottom:8px;
 }
 
 .resumen-total{
 display:flex;
+
 justify-content:space-between;
+
 margin-top:12px;
+
 padding-top:12px;
+
 border-top:1px solid #333;
+
 font-size:21px;
+
 font-weight:900;
+
 color:var(--dorado-claro);
 }
 
 .proximo-nivel{
 margin-top:14px;
+
 padding:10px;
+
 border-radius:9px;
+
 font-size:11px;
+
 line-height:1.5;
+
 text-align:center;
+
 color:#ccc;
+
 border:1px solid rgba(200,157,56,.22);
+
 background:rgba(200,157,56,.07);
 }
 
 .enviar-whatsapp{
 width:100%;
-padding:15px;
+
 margin-top:18px;
+
+padding:14px;
+
+border:0;
+
 border-radius:10px;
-border:none;
+
 background:var(--whatsapp);
+
 color:white;
-font-size:13px;
+
+font-size:12px;
+
 font-weight:900;
+
 cursor:pointer;
+
+position:sticky;
+
+bottom:0;
+
+box-shadow:
+0 -15px 30px
+#101010;
 }
 
 .enviar-whatsapp:disabled{
-background:#333;
-color:#777;
+opacity:.35;
+
 cursor:not-allowed;
 }
 
+/* =========================================================
+WHATSAPP FLOTANTE
+========================================================= */
+
+.floating-wa{
+position:fixed;
+
+right:18px;
+
+bottom:92px;
+
+z-index:900;
+
+width:52px;
+height:52px;
+
+border-radius:50%;
+
+background:var(--whatsapp);
+
+color:white;
+
+text-decoration:none;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:23px;
+
+box-shadow:
+0 10px 30px
+rgba(0,0,0,.45);
+
+transition:.2s;
+}
+
+.floating-wa:hover{
+transform:scale(1.08);
+}
 
 /* =========================================================
 FOOTER
 ========================================================= */
 
 .footer{
-padding:55px 20px 35px;
-background:#050505;
-border-top:1px solid #191919;
+padding:50px 20px 100px;
+
 text-align:center;
+
+border-top:1px solid #222;
+
+background:#050505;
 }
 
 .footer img{
-width:150px;
-margin-bottom:17px;
+width:130px;
+
+margin-bottom:15px;
 }
 
 .footer p{
-font-size:11px;
-color:#666;
+color:#777;
+
+font-size:10px;
+
 line-height:1.7;
 }
-
 
 /* =========================================================
 RESPONSIVE
 ========================================================= */
 
-@media(max-width:1300px){
+@media(min-width:701px){
+
+.header-search{
+display:block;
+}
+
+}
+
+@media(max-width:1200px){
 
 #productos{
-grid-template-columns:repeat(4,minmax(0,1fr));
+grid-template-columns:
+repeat(4,1fr);
 }
 
 }
-
 
 @media(max-width:950px){
 
 #productos{
-grid-template-columns:repeat(3,minmax(0,1fr));
+grid-template-columns:
+repeat(3,1fr);
 }
 
-.navbar{
-padding:0 25px;
+.medios-pago-opciones{
+grid-template-columns:
+repeat(3,1fr);
 }
 
 }
-
 
 @media(max-width:700px){
 
-body{
-padding-bottom:95px;
+.promo-strip{
+height:30px;
 }
 
-.navbar{
-height:95px;
-padding:0 15px;
-grid-template-columns:1fr auto 1fr;
+.promo-track{
+font-size:9px;
+
+gap:45px;
 }
 
-.logo-nav{
-width:160px;
-height:auto;
+.navbar-contenido{
+height:57px;
+
+padding:0 12px;
 }
 
-.nav-icon{
-font-size:22px;
-}
-
-.carrito-nav{
-font-size:22px;
+.logo-nav img{
+width:105px;
 }
 
 .menu{
-gap:22px;
-height:48px;
-overflow-x:auto;
-justify-content:flex-start;
-padding:0 18px;
+display:none;
 }
 
-.menu a{
-white-space:nowrap;
-font-size:11px;
+.nav-left{
+justify-content:flex-start;
+}
+
+.nav-icon{
+width:36px;
+
+height:36px;
+}
+
+.header-search{
+display:block;
+
+margin:0;
+
+background:#080808;
+
+padding:8px 12px;
+}
+
+.header-search input{
+padding:
+11px
+42px
+11px
+15px;
+}
+
+.header-search button{
+width:32px;
+
+height:32px;
+
+top:4px;
+}
+
+.category-rail{
+top:95px;
+
+justify-content:flex-start;
+
+padding:8px 10px;
 }
 
 .hero{
-min-height:540px;
-background-position:center;
+min-height:480px;
 }
 
 .hero-contenido{
-padding:22px;
-}
-
-.hero-mini{
-font-size:9px;
-letter-spacing:3px;
+padding:55px 23px;
 }
 
 .hero h1{
-font-size:39px;
+font-size:43px;
+
+letter-spacing:-1.4px;
 }
 
 .hero p{
 font-size:13px;
 }
 
-.hero-btn{
-padding:12px 16px;
-font-size:11px;
+.hero-dots{
+bottom:18px;
 }
 
 .beneficios{
 grid-template-columns:1fr;
-}
 
-.beneficio{
-border-bottom:1px solid #222;
-border-right:none;
-padding:20px 15px;
+padding:1px;
+
+gap:1px;
 }
 
 .medios-pago{
-padding:40px 12px;
-}
+margin:20px auto;
 
-.medios-pago-titulo h3{
-font-size:27px;
+padding:30px 15px;
 }
 
 .medios-pago-opciones{
-grid-template-columns:repeat(2,1fr);
-gap:8px;
-margin-top:24px;
-}
-
-.medio-pago{
-min-height:105px;
-border-radius:14px;
-padding:15px 8px;
-}
-
-.medio-pago:last-child{
-grid-column:1 / -1;
+grid-template-columns:
+repeat(2,1fr);
 }
 
 .catalogo{
-padding:50px 10px 20px;
+padding:
+40px
+10px
+100px;
 }
 
-.catalogo-cabeza h2{
-font-size:32px;
+.controles{
+display:none;
 }
 
 #productos{
-grid-template-columns:repeat(2,minmax(0,1fr));
-gap:9px;
+grid-template-columns:
+repeat(2,1fr);
+
+gap:8px;
 }
 
-.card{
-border-radius:16px;
-}
-
-.info{
-padding:10px;
-}
-
-.nombre{
-font-size:12px;
-min-height:51px;
-}
-
-.precio{
-font-size:19px;
-}
-
-.precio-anterior{
-font-size:12px;
-}
-
-.mayorista-precio{
-font-size:18px;
-}
-
-.mayorista-info{
-font-size:9px;
-}
-
-.agregar{
-font-size:9px;
-padding:10px 4px;
-}
-
-.stock-badge{
-font-size:8px;
-padding:6px;
-}
-
-.carrito-barra{
-padding:9px;
-}
-
-.carrito-info{
-font-size:10px;
-}
-
-.carrito-boton{
-font-size:10px;
+.card-info{
 padding:11px;
 }
 
-.modal-contenido{
-padding:14px;
+.nombre-producto{
+font-size:11px;
 }
 
+.precio-producto{
+font-size:16px;
 }
 
+.floating-wa{
+bottom:82px;
 
-@media(max-width:380px){
+right:13px;
 
-.logo-nav{
-width:145px;
-}
+width:48px;
 
-.hero h1{
-font-size:34px;
+height:48px;
 }
 
 }
@@ -1361,89 +1864,217 @@ font-size:34px;
 
 </head>
 
-
 <body>
 
-
 <!-- =====================================================
-NAVBAR
+BARRA SUPERIOR
 ===================================================== -->
 
-<header class="navbar">
+<div class="promo-strip">
 
-<div class="nav-left">
+<div class="promo-track">
 
-<button
-class="nav-icon"
-onclick="
-document.getElementById('catalogo').scrollIntoView({behavior:'smooth'});
-setTimeout(()=>{document.getElementById('buscar').focus();},500);
-">
+<span>
+✦ <b>10% OFF</b> EFECTIVO / TRANSFERENCIA
+</span>
 
-⌕
+<span>
+✦ ENVÍOS A TODO EL PAÍS
+</span>
 
-</button>
+<span>
+✦ PERFUMES ÁRABES · DISEÑADOR · NICHO · DECANTS
+</span>
 
-</div>
+<span>
+✦ PEDIDOS ESPECIALES A COTIZACIÓN
+</span>
 
+<span>
+✦ <b>10% OFF</b> EFECTIVO / TRANSFERENCIA
+</span>
 
-<div class="nav-center">
+<span>
+✦ ENVÍOS A TODO EL PAÍS
+</span>
 
-<img
-src="logo%20neros.png"
-class="logo-nav"
-alt="NERÓS">
+<span>
+✦ PERFUMES ÁRABES · DISEÑADOR · NICHO · DECANTS
+</span>
 
-</div>
-
-
-<div class="nav-right">
-
-<div
-class="carrito-nav"
-onclick="abrirCarrito()">
-
-🛍
-
-<span
-id="carritoNumero"
-class="carrito-numero">
-
-0
-
+<span>
+✦ PEDIDOS ESPECIALES A COTIZACIÓN
 </span>
 
 </div>
 
 </div>
 
-</header>
+<!-- =====================================================
+MENÚ LATERAL
+===================================================== -->
 
+<div
+id="sideOverlay"
+class="side-overlay"
+onclick="cerrarMenu()">
+</div>
+
+<aside
+id="sideMenu"
+class="side-menu">
+
+<div class="side-head">
+
+<img
+src="logo%20neros.png"
+alt="NERÓS">
+
+<button
+class="side-close"
+onclick="cerrarMenu()">
+
+×
+
+</button>
+
+</div>
+
+<div class="side-label">
+EXPLORAR
+</div>
+
+<a
+class="side-link"
+href="#"
+onclick="cerrarMenu()">
+
+Inicio
+
+<small>→</small>
+
+</a>
+
+<a
+class="side-link"
+href="#catalogo"
+onclick="
+cerrarMenu();
+filtrarChip('todos');
+">
+
+Todos los perfumes
+
+<small>→</small>
+
+</a>
+
+<a
+class="side-link"
+href="#catalogo"
+onclick="
+cerrarMenu();
+filtrarChip('disponible');
+">
+
+Disponibles
+
+<small>→</small>
+
+</a>
+
+<a
+class="side-link"
+href="#catalogo"
+onclick="
+cerrarMenu();
+filtrarChip('pedido');
+">
+
+A pedido
+
+<small>→</small>
+
+</a>
+
+<a
+class="side-link"
+href="#catalogo"
+onclick="
+cerrarMenu();
+cambiarModo('mayorista');
+">
+
+Mayorista
+
+<small>→</small>
+
+</a>
+
+<a
+class="side-link"
+href="https://wa.me/5493417830300"
+target="_blank">
+
+Contacto / WhatsApp
+
+<small>↗</small>
+
+</a>
+
+<div class="side-card">
+
+<strong>
+¿Buscás algo especial?
+</strong>
+
+<p>
+Si no encontrás tu perfume o producto,
+escribinos. Lo buscamos y te lo cotizamos.
+</p>
+
+</div>
+
+</aside>
 
 <!-- =====================================================
-MENU
+HEADER
 ===================================================== -->
+
+<header class="navbar">
+
+<div class="navbar-contenido">
+
+<div class="nav-left">
+
+<button
+class="nav-icon menu-trigger"
+onclick="abrirMenu()">
+
+☰
+
+</button>
+
+</div>
+
+<a
+href="#"
+class="logo-nav">
+
+<img
+src="logo%20neros.png"
+alt="NERÓS">
+
+</a>
 
 <nav class="menu">
 
 <a href="#">
-Inicio
+INICIO
 </a>
 
 <a href="#catalogo">
-Productos
-</a>
-
-<a
-href="https://wa.me/5493417830300"
-target="_blank">
-
-Contacto
-
-</a>
-
-<a href="#como-comprar">
-¿Cómo comprar?
+PERFUMES
 </a>
 
 <a
@@ -1454,34 +2085,130 @@ cambiarModo('mayorista');
 },300);
 ">
 
-Mayorista
+MAYORISTA
 
 </a>
 
+<a
+href="https://wa.me/5493417830300"
+target="_blank">
+
+CONTACTO
+
+</a>
+
+<button
+class="nav-icon"
+onclick="abrirCarrito()">
+
+🛍
+
+</button>
+
 </nav>
 
+</div>
+
+<div class="header-search">
+
+<div class="header-search-inner">
+
+<input
+id="buscarHeader"
+type="search"
+placeholder="¿Qué perfume estás buscando?"
+oninput="buscarDesdeHeader(this.value)">
+
+<button
+onclick="irABusqueda()"
+aria-label="Buscar">
+
+⌕
+
+</button>
+
+</div>
+
+</div>
+
+</header>
+
+<!-- =====================================================
+CATEGORÍAS
+===================================================== -->
+
+<div class="category-rail">
+
+<button
+class="cat-chip activo"
+data-chip="todos"
+onclick="filtrarChip('todos')">
+
+TODOS
+
+</button>
+
+<button
+class="cat-chip"
+data-chip="disponible"
+onclick="filtrarChip('disponible')">
+
+DISPONIBLES
+
+</button>
+
+<button
+class="cat-chip"
+data-chip="pedido"
+onclick="filtrarChip('pedido')">
+
+A PEDIDO
+
+</button>
+
+<button
+class="cat-chip"
+data-chip="ofertas"
+onclick="filtrarChip('ofertas')">
+
+10% OFF
+
+</button>
+
+<button
+class="cat-chip"
+data-chip="mayorista"
+onclick="filtrarChip('mayorista')">
+
+MAYORISTA
+
+</button>
+
+</div>
 
 <!-- =====================================================
 HERO
 ===================================================== -->
 
-<section class="hero">
+<section class="hero hero-slider">
+
+<div class="hero-slide activo">
 
 <div class="hero-contenido">
 
 <div class="hero-mini">
-PERFUMES · FRAGANCIAS · DECANTS
+NERÓS · PERFUMERÍA
 </div>
 
 <h1>
-Descubrí tu próxima fragancia
+Hacé de tu aroma
+<br>
+tu sello personal.
 </h1>
 
 <p>
-
-Perfumes árabes, diseñador, nicho y decants.
-Encontrá el aroma que va a convertirse en tu sello personal.
-
+Árabes, diseñador, nicho y decants.
+Encontrá esa fragancia que habla por vos.
 </p>
 
 <div class="hero-botones">
@@ -1490,7 +2217,7 @@ Encontrá el aroma que va a convertirse en tu sello personal.
 href="#catalogo"
 class="hero-btn principal">
 
-EXPLORAR CATÁLOGO
+COMPRAR AHORA
 
 </a>
 
@@ -1499,7 +2226,7 @@ href="https://wa.me/5493417830300"
 target="_blank"
 class="hero-btn secundario">
 
-HABLAR POR WHATSAPP
+PEDIR ASESORAMIENTO
 
 </a>
 
@@ -1507,8 +2234,99 @@ HABLAR POR WHATSAPP
 
 </div>
 
-</section>
+</div>
 
+<div class="hero-slide">
+
+<div class="hero-contenido">
+
+<div class="hero-mini">
+BENEFICIO NERÓS
+</div>
+
+<h1>
+10% OFF pagando
+<br>
+por transferencia.
+</h1>
+
+<p>
+Elegí tus favoritos, armá el carrito
+y aprovechá el precio especial.
+</p>
+
+<div class="hero-botones">
+
+<a
+href="#catalogo"
+class="hero-btn principal">
+
+VER PERFUMES
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="hero-slide">
+
+<div class="hero-contenido">
+
+<div class="hero-mini">
+PEDIDOS ESPECIALES
+</div>
+
+<h1>
+¿No está en la tienda?
+<br>
+Lo buscamos por vos.
+</h1>
+
+<p>
+Consultanos por perfumes, electrónica,
+celulares, tablets y productos a pedido.
+</p>
+
+<div class="hero-botones">
+
+<a
+href="https://wa.me/5493417830300"
+target="_blank"
+class="hero-btn principal">
+
+COTIZAR POR WHATSAPP
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="hero-dots">
+
+<button
+class="hero-dot activo"
+onclick="mostrarSlide(0)">
+</button>
+
+<button
+class="hero-dot"
+onclick="mostrarSlide(1)">
+</button>
+
+<button
+class="hero-dot"
+onclick="mostrarSlide(2)">
+</button>
+
+</div>
+
+</section>
 
 <!-- =====================================================
 BENEFICIOS
@@ -1534,7 +2352,6 @@ Elegí todos los productos que quieras.
 
 </div>
 
-
 <div class="beneficio">
 
 <div class="beneficio-icono">
@@ -1550,7 +2367,6 @@ Abonando en efectivo o transferencia.
 </span>
 
 </div>
-
 
 <div class="beneficio">
 
@@ -1569,7 +2385,6 @@ Enviá tu carrito completo en segundos.
 </div>
 
 </section>
-
 
 <!-- =====================================================
 MEDIOS DE PAGO
@@ -1593,15 +2408,11 @@ Aceptamos todos los medios de pago
 
 </div>
 
-
 <div class="medios-pago-opciones">
-
 
 <div class="medio-pago">
 
-<span>
-💵
-</span>
+<span>💵</span>
 
 <strong>
 Efectivo
@@ -1613,12 +2424,9 @@ Efectivo
 
 </div>
 
-
 <div class="medio-pago">
 
-<span>
-🏦
-</span>
+<span>🏦</span>
 
 <strong>
 Transferencia
@@ -1630,12 +2438,9 @@ Transferencia
 
 </div>
 
-
 <div class="medio-pago">
 
-<span>
-💳
-</span>
+<span>💳</span>
 
 <strong>
 Débito
@@ -1647,12 +2452,9 @@ Tarjetas
 
 </div>
 
-
 <div class="medio-pago">
 
-<span>
-💳
-</span>
+<span>💳</span>
 
 <strong>
 Crédito
@@ -1664,12 +2466,9 @@ Tarjetas
 
 </div>
 
-
 <div class="medio-pago">
 
-<span>
-📱
-</span>
+<span>📱</span>
 
 <strong>
 Mercado Pago
@@ -1681,21 +2480,16 @@ Point
 
 </div>
 
-
 </div>
 
-
 <div class="mercadopago-point">
-
 💳 Pagos con tarjeta procesados mediante Mercado Pago Point
-
 </div>
 
 </section>
 
-
 <!-- =====================================================
-CATALOGO
+CATÁLOGO
 ===================================================== -->
 
 <section
@@ -1713,14 +2507,11 @@ Encontrá tu perfume
 </h2>
 
 <p>
-
 Buscá, agregá al carrito y armá
 tu pedido directamente desde nuestra tienda.
-
 </p>
 
 </div>
-
 
 <div class="controles">
 
@@ -1735,7 +2526,6 @@ onclick="cambiarModo('particular')">
 
 </button>
 
-
 <button
 id="modoMayorista"
 class="modo"
@@ -1746,7 +2536,6 @@ onclick="cambiarModo('mayorista')">
 </button>
 
 </div>
-
 
 <div class="buscar-wrap">
 
@@ -1762,13 +2551,13 @@ placeholder="Buscar perfume, marca o producto...">
 
 </div>
 
+<div id="productos">
+</div>
 
-<div id="productos"></div>
-
-<div id="paginacion"></div>
+<div id="paginacion">
+</div>
 
 </section>
-
 
 <!-- =====================================================
 CARRITO INFERIOR
@@ -1802,9 +2591,8 @@ VER PEDIDO
 
 </div>
 
-
 <!-- =====================================================
-MODAL CARRITO
+CARRITO LATERAL
 ===================================================== -->
 
 <div
@@ -1829,7 +2617,6 @@ onclick="cerrarCarrito()">
 
 </div>
 
-
 <div
 id="pagoSelector"
 class="pago-selector">
@@ -1845,7 +2632,6 @@ onclick="cambiarPago('efectivo')">
 
 </button>
 
-
 <button
 id="pagoLista"
 class="pago-btn"
@@ -1857,16 +2643,13 @@ onclick="cambiarPago('lista')">
 
 </div>
 
-
-<div id="listaCarrito"></div>
-
+<div id="listaCarrito">
+</div>
 
 <div
 id="resumenCarrito"
 class="carrito-resumen">
-
 </div>
-
 
 <button
 id="btnWhatsApp"
@@ -1881,10 +2664,15 @@ onclick="enviarPedidoWhatsApp()">
 
 </div>
 
+<a
+class="floating-wa"
+href="https://wa.me/5493417830300"
+target="_blank"
+aria-label="WhatsApp">
 
-<!-- =====================================================
-FOOTER
-===================================================== -->
+✆
+
+</a>
 
 <footer class="footer">
 
@@ -1893,22 +2681,17 @@ src="logo%20neros.png"
 alt="NERÓS">
 
 <p>
-
 NERÓS · Perfumes, fragancias y decants
-
 <br>
-
 Rosario, Santa Fe · Argentina
-
 </p>
 
 </footer>
 
-
 <script>
 
 /* =========================================================
-CONFIGURACION
+CONFIGURACIÓN
 ========================================================= */
 
 const API=
@@ -1922,7 +2705,6 @@ const MINIMO_MAYORISTA=
 
 const PRODUCTOS_POR_PAGINA=
 30;
-
 
 /* =========================================================
 VARIABLES
@@ -1939,7 +2721,6 @@ let formaPago="efectivo";
 let paginaActual=1;
 
 let productosFiltrados=[];
-
 
 /* =========================================================
 CARGAR API
@@ -2006,7 +2787,6 @@ No se pudieron cargar los productos.
 
 });
 
-
 /* =========================================================
 CAMBIAR MODO
 ========================================================= */
@@ -2044,10 +2824,11 @@ modo==="mayorista"
 
 paginaActual=1;
 
+productosFiltrados=[...perfumes];
+
 mostrarPagina();
 
 }
-
 
 /* =========================================================
 FORMA DE PAGO
@@ -2079,7 +2860,6 @@ actualizarCarrito();
 
 }
 
-
 /* =========================================================
 BUSCADOR
 ========================================================= */
@@ -2087,7 +2867,6 @@ BUSCADOR
 function filtrarProductos(){
 
 const texto=
-
 document
 .getElementById("buscar")
 .value
@@ -2110,7 +2889,6 @@ mostrarPagina();
 
 }
 
-
 document
 .getElementById("buscar")
 .addEventListener(
@@ -2118,544 +2896,464 @@ document
 filtrarProductos
 );
 
-
 /* =========================================================
-MOSTRAR PAGINA
+PRECIOS
 ========================================================= */
 
-function mostrarPagina(){
+function numeroSeguro(valor){
 
-const inicio=
+if(
+valor===null ||
+valor===undefined ||
+valor===""
+){
 
-(paginaActual-1) *
-PRODUCTOS_POR_PAGINA;
-
-const fin=
-
-inicio +
-PRODUCTOS_POR_PAGINA;
-
-mostrar(
-
-productosFiltrados.slice(
-inicio,
-fin
-)
-
-);
-
-mostrarPaginacion();
+return 0;
 
 }
 
+if(
+typeof valor==="number"
+){
+
+return Number.isFinite(valor)
+? valor
+: 0;
+
+}
+
+let texto=
+String(valor)
+.trim()
+.replace(/\$/g,"")
+.replace(/\s/g,"");
+
+if(
+texto.includes(",") &&
+texto.includes(".")
+){
+
+if(
+texto.lastIndexOf(",") >
+texto.lastIndexOf(".")
+){
+
+texto=
+texto
+.replace(/\./g,"")
+.replace(",", ".");
+
+}
+
+else{
+
+texto=
+texto
+.replace(/,/g,"");
+
+}
+
+}
+
+else if(
+texto.includes(",")
+){
+
+texto=
+texto.replace(",", ".");
+
+}
+
+const numero=
+Number(texto);
+
+return Number.isFinite(numero)
+? numero
+: 0;
+
+}
+
+function precioParticular(producto){
+
+return numeroSeguro(
+producto.precio
+);
+
+}
+
+function precioMayorista(
+producto,
+cantidadTotal
+){
+
+let precio=0;
+
+if(
+cantidadTotal>=30
+){
+
+precio=
+numeroSeguro(
+producto.precio30 ||
+producto["30"] ||
+producto.mayorista30
+);
+
+}
+
+if(
+!precio &&
+cantidadTotal>=20
+){
+
+precio=
+numeroSeguro(
+producto.precio20 ||
+producto["20"] ||
+producto.mayorista20
+);
+
+}
+
+if(
+!precio &&
+cantidadTotal>=10
+){
+
+precio=
+numeroSeguro(
+producto.precio10 ||
+producto["10"] ||
+producto.mayorista10 ||
+producto.mayorista
+);
+
+}
+
+return precio;
+
+}
+
+function obtenerPrecioItem(
+item,
+cantidadTotal
+){
+
+if(
+modoActual==="mayorista"
+){
+
+return precioMayorista(
+item,
+cantidadTotal
+);
+
+}
+
+let precio=
+precioParticular(item);
+
+if(
+formaPago==="efectivo"
+){
+
+precio=
+precio * 0.90;
+
+}
+
+return precio;
+
+}
 
 /* =========================================================
 STOCK
 ========================================================= */
 
-function clasificarStock(stock){
+function stockDisponible(producto){
 
-const texto=
-
-(stock || "")
+const stock=
+String(
+producto.stock || ""
+)
 .toLowerCase();
 
-if(
-texto.includes("sin stock")
-){
-
-return "sinstock";
-
-}
-
-if(
-texto.includes("disponible") &&
-!texto.includes("pedido")
-){
-
-return "disponible";
-
-}
-
-return "apedido";
-
-}
-
-
-function productoNoVendible(producto){
-
-return (
-
-producto.stock || ""
-
-)
-.toLowerCase()
-.includes(
-"sin stock"
+return !(
+stock.includes("sin stock") ||
+stock.includes("agotado")
 );
 
 }
 
-
 /* =========================================================
-MOSTRAR PRODUCTOS
+MOSTRAR PÁGINA
 ========================================================= */
 
-function mostrar(lista){
+function mostrarPagina(){
 
-const cont=
-
-document
-.getElementById(
+const contenedor=
+document.getElementById(
 "productos"
 );
 
-cont.innerHTML="";
-
 if(
-lista.length===0
+!productosFiltrados.length
 ){
 
-cont.innerHTML=`
+contenedor.innerHTML=`
 
 <div style="
 grid-column:1/-1;
 text-align:center;
-padding:50px;
-color:#888;
+padding:70px 15px;
+color:#777;
 ">
 
-No encontramos productos
-con esa búsqueda.
+No encontramos productos con esa búsqueda.
 
 </div>
 
 `;
 
+document
+.getElementById("paginacion")
+.innerHTML="";
+
 return;
 
 }
 
+const inicio=
+(
+paginaActual-1
+) *
+PRODUCTOS_POR_PAGINA;
 
-lista.forEach(producto=>{
+const fin=
+inicio +
+PRODUCTOS_POR_PAGINA;
 
-const claseStock=
-
-clasificarStock(
-producto.stock
+const pagina=
+productosFiltrados
+.slice(
+inicio,
+fin
 );
 
-const precioLista=
+contenedor.innerHTML="";
 
-Number(
-producto.precio
-) || 0;
+pagina.forEach(producto=>{
 
-const precioEfectivo=
+const nombre=
+producto.perfume ||
+"Producto";
 
-precioLista *
-0.90;
+const imagen=
+producto.imagen ||
+producto.foto ||
+"";
 
-const precio10=
+const stock=
+producto.stock ||
+"Consultar";
 
-Number(
-producto.precioMayorista10
-) || 0;
-
-const precio20=
-
-Number(
-producto.precioMayorista20
-) || 0;
-
-const precio30=
-
-Number(
-producto.precioMayorista30
-) || 0;
-
-const formato={
-
-minimumFractionDigits:0,
-maximumFractionDigits:0
-
-};
-
-let precioHTML="";
-
-
-/* =====================================================
-PARTICULAR
-===================================================== */
+let precio=0;
 
 if(
 modoActual==="particular"
 ){
 
-precioHTML=`
-
-<div class="precio-anterior">
-
-$ ${
-precioLista.toLocaleString(
-"es-AR",
-formato
-)
-}
-
-</div>
-
-
-<div class="precio">
-
-💸 $
-${
-precioEfectivo.toLocaleString(
-"es-AR",
-formato
-)
-}
-
-</div>
-
-
-<div class="descuento">
-
-10% OFF · Efectivo o transferencia
-
-</div>
-
-`;
+precio=
+precioParticular(producto);
 
 }
-
-
-/* =====================================================
-MAYORISTA
-===================================================== */
 
 else{
 
-const total=
-totalUnidades();
-
-let precioMostrar=
-precio10;
-
-let titulo=
-"Precio mayorista 10+";
-
-if(
-total>=30
-){
-
-precioMostrar=
-precio30;
-
-titulo=
-"Precio mayorista 30+";
-
-}
-
-else if(
-total>=20
-){
-
-precioMostrar=
-precio20;
-
-titulo=
-"Precio mayorista 20+";
-
-}
-
-precioHTML=`
-
-<div class="mayorista-titulo">
-
-📦 ${titulo}
-
-</div>
-
-
-<div class="mayorista-precio">
-
-$
-${
-precioMostrar.toLocaleString(
-"es-AR",
-formato
-)
-}
-
-</div>
-
-
-<div class="mayorista-info">
-
-10+ →
-$
-${precio10.toLocaleString("es-AR")}
-
-<br>
-
-20+ →
-$
-${precio20.toLocaleString("es-AR")}
-
-<br>
-
-30+ →
-$
-${precio30.toLocaleString("es-AR")}
-
-</div>
-
-`;
-
-}
-
-
-/* =====================================================
-BOTON
-===================================================== */
-
-const cantidadActual=
-
-obtenerCantidad(
-producto.perfume
+precio=
+precioMayorista(
+producto,
+MINIMO_MAYORISTA
 );
 
-let botonHTML="";
-
-if(
-productoNoVendible(
-producto
-)
-){
-
-botonHTML=`
-
-<button
-class="agregar"
-disabled>
-
-❌ SIN STOCK
-
-</button>
-
-`;
-
 }
 
-else if(
-cantidadActual>0
-){
+const disponible=
+stockDisponible(producto);
 
-botonHTML=`
+const card=
+document.createElement(
+"div"
+);
 
-<div class="cantidad">
+card.className=
+"card reveal";
 
-<button
-onclick="
-cambiarCantidad(
-'${escapeAttr(producto.perfume)}',
--1
-)
-">
-
-−
-
-</button>
-
-<span>
-${cantidadActual}
-</span>
-
-<button
-onclick="
-cambiarCantidad(
-'${escapeAttr(producto.perfume)}',
-1
-)
-">
-
-+
-
-</button>
-
-</div>
-
-`;
-
-}
-
-else{
-
-botonHTML=`
-
-<button
-class="agregar"
-onclick="
-agregarProducto(
-'${escapeAttr(producto.perfume)}'
-)
-">
-
-➕ AGREGAR AL PEDIDO
-
-</button>
-
-`;
-
-}
-
-
-/* =====================================================
-CARD
-===================================================== */
-
-cont.innerHTML+=`
-
-<div class="card">
-
+card.innerHTML=`
 
 <div class="imagen-producto">
 
+${
+
+imagen
+
+?
+
+`
 <img
-
-src="${
-escapeHTML(
-
-producto.foto ||
-
-'https://placehold.co/600x800/222222/888888?text=NERÓS'
-
-)
-}"
-
-alt="${
-escapeHTML(
-producto.perfume ||
-'Producto NERÓS'
-)
-}"
-
+src="${escapeAttr(imagen)}"
+alt="${escapeAttr(nombre)}"
 loading="lazy"
-
 onerror="
-this.onerror=null;
-this.src=
-'https://placehold.co/600x800/222222/888888?text=NERÓS';
+this.style.display='none';
 ">
+`
 
+:
 
-<div
-class="
-stock-badge
-${claseStock}
+`
+<div style="
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+color:#777;
+font-size:11px;
 ">
+SIN IMAGEN
+</div>
+`
+
+}
+
+<div class="badge-stock">
+
+${escapeHTML(stock)}
+
+</div>
+
+</div>
+
+<div class="card-info">
+
+<div class="nombre-producto">
+
+${escapeHTML(nombre)}
+
+</div>
+
+<div class="stock-producto">
 
 ${
-escapeHTML(
-producto.stock || ""
-)
+
+modoActual==="mayorista"
+
+?
+
+"Precio mayorista desde 10 unidades"
+
+:
+
+formaPago==="efectivo"
+
+?
+
+"10% OFF efectivo / transferencia"
+
+:
+
+"Precio de lista"
+
 }
 
 </div>
 
-</div>
-
-
-<div class="info">
-
-<div class="nombre">
+<div class="precio-producto">
 
 ${
-escapeHTML(
-producto.perfume
-)
+
+precio>0
+
+?
+
+"$" +
+Math.round(precio)
+.toLocaleString("es-AR")
+
+:
+
+"Consultar"
+
 }
 
 </div>
 
-${precioHTML}
+<button
+${!disponible ? "disabled" : ""}
+onclick="
+agregarAlCarrito(
+'${escapeAttr(nombre)}'
+)
+">
 
-${botonHTML}
+${
 
-</div>
+disponible
+
+?
+
+"AGREGAR AL CARRITO"
+
+:
+
+"SIN STOCK"
+
+}
+
+</button>
 
 </div>
 
 `;
 
+contenedor.appendChild(
+card
+);
+
 });
+
+renderPaginacion();
+
+activarAnimacionesCards();
 
 }
 
-
 /* =========================================================
-PAGINACION
+PAGINACIÓN
 ========================================================= */
 
-function mostrarPaginacion(){
+function renderPaginacion(){
 
-const cont=
-
-document
-.getElementById(
+const contenedor=
+document.getElementById(
 "paginacion"
 );
 
 const totalPaginas=
-
 Math.ceil(
-
 productosFiltrados.length /
-
 PRODUCTOS_POR_PAGINA
-
 );
+
+contenedor.innerHTML="";
 
 if(
 totalPaginas<=1
 ){
 
-cont.innerHTML="";
-
 return;
 
 }
-
-let html=
-
-`<div class="paginacion">`;
-
-html+=`
-
-<button
-
-class="pagina-btn"
-
-onclick="
-cambiarPagina(
-${paginaActual-1}
-)
-"
-
-${
-paginaActual===1
-?
-"disabled"
-:
-""
-}>
-
-‹
-
-</button>
-
-`;
 
 for(
 let i=1;
@@ -2663,241 +3361,69 @@ i<=totalPaginas;
 i++
 ){
 
-if(
+const boton=
+document.createElement(
+"button"
+);
 
-totalPaginas>8 &&
-
-i!==1 &&
-
-i!==totalPaginas &&
-
-Math.abs(
-i-paginaActual
-)>2
-
-){
+boton.textContent=i;
 
 if(
-
-i===2 ||
-
-i===totalPaginas-1
-
-){
-
-html+=`
-
-<span style="
-color:#666;
-padding:0 3px;
-">
-
-...
-
-</span>
-
-`;
-
-}
-
-continue;
-
-}
-
-html+=`
-
-<button
-
-class="
-pagina-btn
-${
 i===paginaActual
-?
-"activa"
-:
-""
-}
-"
-
-onclick="
-cambiarPagina(${i})
-">
-
-${i}
-
-</button>
-
-`;
-
-}
-
-html+=`
-
-<button
-
-class="pagina-btn"
-
-onclick="
-cambiarPagina(
-${paginaActual+1}
-)
-"
-
-${
-paginaActual===totalPaginas
-?
-"disabled"
-:
-""
-}>
-
-›
-
-</button>
-
-`;
-
-html+=
-`</div>`;
-
-
-const inicio=
-
-((paginaActual-1) *
-PRODUCTOS_POR_PAGINA)
-+1;
-
-
-const fin=
-
-Math.min(
-
-paginaActual *
-PRODUCTOS_POR_PAGINA,
-
-productosFiltrados.length
-
-);
-
-
-html+=`
-
-<div class="paginacion-info">
-
-Mostrando
-${inicio}–${fin}
-de
-${productosFiltrados.length}
-productos
-
-</div>
-
-`;
-
-
-cont.innerHTML=
-html;
-
-}
-
-
-/* =========================================================
-CAMBIAR PAGINA
-========================================================= */
-
-function cambiarPagina(pagina){
-
-const totalPaginas=
-
-Math.ceil(
-
-productosFiltrados.length /
-
-PRODUCTOS_POR_PAGINA
-
-);
-
-if(
-
-pagina<1 ||
-
-pagina>totalPaginas
-
 ){
 
-return;
+boton.classList.add(
+"activo"
+);
 
 }
 
-paginaActual=
-pagina;
+boton.onclick=()=>{
+
+paginaActual=i;
 
 mostrarPagina();
 
 document
-.getElementById(
-"catalogo"
-)
+.getElementById("catalogo")
 .scrollIntoView({
-
 behavior:"smooth"
-
 });
 
-}
+};
 
-
-/* =========================================================
-CANTIDAD
-========================================================= */
-
-function obtenerCantidad(perfume){
-
-const item=
-
-carrito.find(
-
-producto=>
-
-producto.perfume===
-perfume
-
+contenedor.appendChild(
+boton
 );
 
-return item
-?
-item.cantidad
-:
-0;
+}
 
 }
 
-
 /* =========================================================
-AGREGAR
+BUSCAR PRODUCTO
 ========================================================= */
 
-function agregarProducto(perfume){
+function buscarProducto(nombre){
+
+return perfumes.find(
+producto=>
+producto.perfume===nombre
+);
+
+}
+
+/* =========================================================
+AGREGAR CARRITO
+========================================================= */
+
+function agregarAlCarrito(nombre){
 
 const producto=
-
-perfumes.find(
-
-item=>
-
-item.perfume===
-perfume
-
-);
+buscarProducto(nombre);
 
 if(
-
-!producto ||
-
-productoNoVendible(
-producto
-)
-
+!producto
 ){
 
 return;
@@ -2905,17 +3431,14 @@ return;
 }
 
 const existente=
-
 carrito.find(
-
 item=>
-
-item.perfume===
-perfume
-
+item.perfume===nombre
 );
 
-if(existente){
+if(
+existente
+){
 
 existente.cantidad++;
 
@@ -2925,31 +3448,9 @@ else{
 
 carrito.push({
 
-perfume:
-producto.perfume,
+...producto,
 
-cantidad:
-1,
-
-precio:
-Number(
-producto.precio
-) || 0,
-
-precioMayorista10:
-Number(
-producto.precioMayorista10
-) || 0,
-
-precioMayorista20:
-Number(
-producto.precioMayorista20
-) || 0,
-
-precioMayorista30:
-Number(
-producto.precioMayorista30
-) || 0
+cantidad:1
 
 });
 
@@ -2957,71 +3458,50 @@ producto.precioMayorista30
 
 actualizarCarrito();
 
-mostrarPagina();
-
 }
-
 
 /* =========================================================
 CAMBIAR CANTIDAD
 ========================================================= */
 
 function cambiarCantidad(
-perfume,
+nombre,
 cambio
 ){
 
 const item=
-
 carrito.find(
-
 producto=>
-
-producto.perfume===
-perfume
-
+producto.perfume===nombre
 );
 
-if(!item){
-
-if(cambio>0){
-
-agregarProducto(
-perfume
-);
-
-}
+if(
+!item
+){
 
 return;
 
 }
 
-item.cantidad+=
-cambio;
+item.cantidad+=cambio;
 
 if(
 item.cantidad<=0
 ){
 
 carrito=
-
 carrito.filter(
-
 producto=>
-
-producto.perfume!==
-perfume
-
+producto.perfume!==nombre
 );
 
 }
 
 actualizarCarrito();
 
-mostrarPagina();
+renderCarrito();
 
 }
-
 
 /* =========================================================
 TOTAL UNIDADES
@@ -3030,110 +3510,13 @@ TOTAL UNIDADES
 function totalUnidades(){
 
 return carrito.reduce(
-
 (total,item)=>
-
 total +
 item.cantidad,
-
 0
-
 );
 
 }
-
-
-/* =========================================================
-PRECIO ITEM
-========================================================= */
-
-function obtenerPrecioItem(
-item,
-total
-){
-
-if(
-modoActual==="mayorista"
-){
-
-if(total>=30){
-
-return (
-Number(
-item.precioMayorista30
-) || 0
-);
-
-}
-
-if(total>=20){
-
-return (
-Number(
-item.precioMayorista20
-) || 0
-);
-
-}
-
-return (
-Number(
-item.precioMayorista10
-) || 0
-);
-
-}
-
-const precioLista=
-
-Number(
-item.precio
-) || 0;
-
-return formaPago==="efectivo"
-?
-precioLista * 0.90
-:
-precioLista;
-
-}
-
-
-/* =========================================================
-TOTAL CARRITO
-========================================================= */
-
-function obtenerTotalCarrito(){
-
-const unidades=
-
-totalUnidades();
-
-return carrito.reduce(
-
-(suma,item)=>{
-
-const precio=
-
-obtenerPrecioItem(
-item,
-unidades
-);
-
-return suma +
-(
-precio *
-item.cantidad
-);
-
-},
-
-0
-
-);
-
-}
-
 
 /* =========================================================
 ACTUALIZAR CARRITO
@@ -3141,140 +3524,67 @@ ACTUALIZAR CARRITO
 
 function actualizarCarrito(){
 
-const unidades=
-
+const total=
 totalUnidades();
 
 const barra=
-
-document
-.getElementById(
+document.getElementById(
 "carritoBarra"
 );
 
 const info=
-
-document
-.getElementById(
+document.getElementById(
 "carritoInfo"
 );
 
-const numero=
-
-document
-.getElementById(
-"carritoNumero"
-);
-
-numero.textContent=
-unidades;
-
 if(
-unidades>0
+total>0
 ){
 
-barra.style.display=
-"block";
-
-const total=
-
-obtenerTotalCarrito();
-
-info.innerHTML=`
-
-🛒
-
-<strong>
-${unidades}
-</strong>
-
-unidades ·
-
-<strong>
-
-$
-${
-Math.round(total)
-.toLocaleString("es-AR")
-}
-
-</strong>
-
-`;
+barra.classList.add(
+"activo"
+);
 
 }
 
 else{
 
-barra.style.display=
-"none";
-
-}
-
-if(
-
-document
-.getElementById(
-"modalCarrito"
-)
-.classList
-.contains(
+barra.classList.remove(
 "activo"
-)
-
-){
-
-renderCarrito();
+);
 
 }
 
+info.innerHTML=`
+
+🛒
+<strong>
+${total}
+</strong>
+
+${
+
+total===1
+
+?
+
+"unidad"
+
+:
+
+"unidades"
+
 }
 
+`;
+
+}
 
 /* =========================================================
 ABRIR CARRITO
 ========================================================= */
 
 function abrirCarrito(){
-
-if(
-carrito.length===0
-){
-
-return;
-
-}
-
-document
-.getElementById(
-"tituloCarrito"
-)
-.textContent=
-
-modoActual==="mayorista"
-
-?
-
-"🛒 Pedido mayorista"
-
-:
-
-"🛒 Tu pedido";
-
-
-document
-.getElementById(
-"pagoSelector"
-)
-.classList
-.toggle(
-
-"activo",
-
-modoActual==="particular"
-
-);
-
 
 document
 .getElementById(
@@ -3285,14 +3595,41 @@ document
 "activo"
 );
 
+document.body.style.overflow=
+"hidden";
+
+const selector=
+document.getElementById(
+"pagoSelector"
+);
+
+selector.classList.toggle(
+"activo",
+modoActual==="particular"
+);
+
+document
+.getElementById(
+"tituloCarrito"
+)
+.innerHTML=
+
+modoActual==="mayorista"
+
+?
+
+"📦 Pedido mayorista"
+
+:
+
+"🛒 Tu pedido";
 
 renderCarrito();
 
 }
 
-
 /* =========================================================
-CERRAR
+CERRAR CARRITO
 ========================================================= */
 
 function cerrarCarrito(){
@@ -3306,8 +3643,10 @@ document
 "activo"
 );
 
-}
+document.body.style.overflow=
+"";
 
+}
 
 /* =========================================================
 RENDER CARRITO
@@ -3316,23 +3655,17 @@ RENDER CARRITO
 function renderCarrito(){
 
 const lista=
-
-document
-.getElementById(
+document.getElementById(
 "listaCarrito"
 );
 
 const resumen=
-
-document
-.getElementById(
+document.getElementById(
 "resumenCarrito"
 );
 
 const boton=
-
-document
-.getElementById(
+document.getElementById(
 "btnWhatsApp"
 );
 
@@ -3362,94 +3695,78 @@ return;
 
 }
 
-
 const total=
-
 totalUnidades();
 
+let totalPedido=0;
 
-let totalPedido=
-0;
-
-
-lista.innerHTML=
-"";
-
+lista.innerHTML="";
 
 carrito.forEach(item=>{
 
 const precio=
-
 obtenerPrecioItem(
 item,
 total
 );
 
-
 const subtotal=
-
 precio *
 item.cantidad;
 
-
-totalPedido+=
-subtotal;
-
+totalPedido+=subtotal;
 
 lista.innerHTML+=`
 
 <div class="item-carrito">
 
-
 <div>
-
 
 <div class="item-nombre">
 
-${
-escapeHTML(
+${escapeHTML(
 item.perfume
-)
-}
+)}
 
 </div>
-
 
 <div class="item-precio">
 
 $
+
 ${
+
 Math.round(precio)
 .toLocaleString(
 "es-AR"
 )
+
 }
 
 por unidad
 
 </div>
 
-
 <div class="item-subtotal">
 
 Subtotal:
 
 $
+
 ${
+
 Math.round(subtotal)
 .toLocaleString(
 "es-AR"
 )
+
 }
 
 </div>
 
-
 </div>
 
-
 <div class="item-controles">
-
 
 <button
 onclick="
@@ -3463,11 +3780,9 @@ cambiarCantidad(
 
 </button>
 
-
 <span>
 ${item.cantidad}
 </span>
-
 
 <button
 onclick="
@@ -3481,9 +3796,7 @@ cambiarCantidad(
 
 </button>
 
-
 </div>
-
 
 </div>
 
@@ -3491,10 +3804,7 @@ cambiarCantidad(
 
 });
 
-
-let mensajeExtra=
-"";
-
+let mensajeExtra="";
 
 if(
 modoActual==="mayorista"
@@ -3532,15 +3842,21 @@ mensajeExtra=`
 <div class="proximo-nivel">
 
 📦 Precio mayorista
-<strong>10+</strong>
+
+<strong>
+10+
+</strong>
+
 activado.
 
 <br>
 
 Te faltan
+
 <strong>
 ${20-total}
 </strong>
+
 unidades para precio 20+.
 
 </div>
@@ -3558,15 +3874,21 @@ mensajeExtra=`
 <div class="proximo-nivel">
 
 🔥 Precio mayorista
-<strong>20+</strong>
+
+<strong>
+20+
+</strong>
+
 activado.
 
 <br>
 
 Te faltan
+
 <strong>
 ${30-total}
 </strong>
+
 unidades para precio 30+.
 
 </div>
@@ -3582,6 +3904,7 @@ mensajeExtra=`
 <div class="proximo-nivel">
 
 🔥
+
 <strong>
 Mejor precio mayorista desbloqueado.
 </strong>
@@ -3605,6 +3928,7 @@ mensajeExtra=`
 <div class="proximo-nivel">
 
 ${
+
 formaPago==="efectivo"
 
 ?
@@ -3614,6 +3938,7 @@ formaPago==="efectivo"
 :
 
 "💳 Pedido calculado a precio de lista."
+
 }
 
 </div>
@@ -3621,7 +3946,6 @@ formaPago==="efectivo"
 `;
 
 }
-
 
 resumen.innerHTML=`
 
@@ -3637,7 +3961,6 @@ ${total}
 
 </div>
 
-
 <div class="resumen-total">
 
 <span>
@@ -3647,22 +3970,23 @@ TOTAL
 <span>
 
 $
+
 ${
+
 Math.round(totalPedido)
 .toLocaleString(
 "es-AR"
 )
+
 }
 
 </span>
 
 </div>
 
-
 ${mensajeExtra}
 
 `;
-
 
 boton.disabled=
 
@@ -3670,11 +3994,10 @@ modoActual==="mayorista"
 
 &&
 
-total<
+total <
 MINIMO_MAYORISTA;
 
 }
-
 
 /* =========================================================
 WHATSAPP
@@ -3683,9 +4006,7 @@ WHATSAPP
 function enviarPedidoWhatsApp(){
 
 const total=
-
 totalUnidades();
-
 
 if(
 total===0
@@ -3695,14 +4016,13 @@ return;
 
 }
 
-
 if(
 
 modoActual==="mayorista"
 
 &&
 
-total<
+total <
 MINIMO_MAYORISTA
 
 ){
@@ -3717,12 +4037,9 @@ return;
 
 }
 
-
-let totalPedido=
-0;
+let totalPedido=0;
 
 let mensaje="";
-
 
 if(
 modoActual==="mayorista"
@@ -3755,6 +4072,7 @@ Quiero realizar este pedido:
 
 💳 Forma de pago:
 ${
+
 formaPago==="efectivo"
 
 ?
@@ -3764,6 +4082,7 @@ formaPago==="efectivo"
 :
 
 "Precio de lista / Tarjeta"
+
 }
 
 ━━━━━━━━━━━━━━━
@@ -3773,23 +4092,19 @@ DETALLE DEL PEDIDO
 
 }
 
-
 carrito.forEach(item=>{
 
 const precio=
-
 obtenerPrecioItem(
 item,
 total
 );
 
 const subtotal=
-
 precio *
 item.cantidad;
 
-totalPedido+=
-subtotal;
+totalPedido+=subtotal;
 
 mensaje+=`
 
@@ -3802,11 +4117,9 @@ $${Math.round(precio).toLocaleString("es-AR")}
 
 Subtotal:
 $${Math.round(subtotal).toLocaleString("es-AR")}
-
 `;
 
 });
-
 
 if(
 modoActual==="mayorista"
@@ -3876,11 +4189,8 @@ Gracias 🙌
 
 }
 
-
 const url=
-
 `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(mensaje)}`;
-
 
 window.open(
 url,
@@ -3888,7 +4198,6 @@ url,
 );
 
 }
-
 
 /* =========================================================
 ESCAPE HTML
@@ -3899,13 +4208,16 @@ function escapeHTML(text){
 return String(text)
 
 .replace(/&/g,"&amp;")
+
 .replace(/</g,"&lt;")
+
 .replace(/>/g,"&gt;")
+
 .replace(/"/g,"&quot;")
+
 .replace(/'/g,"&#039;");
 
 }
-
 
 /* =========================================================
 ESCAPE ATRIBUTO
@@ -3916,48 +4228,439 @@ function escapeAttr(text){
 return String(text)
 
 .replace(/\\/g,"\\\\")
+
 .replace(/'/g,"\\'")
-.replace(/\r?\n/g," ");
+
+.replace(/"/g,"&quot;");
 
 }
 
+/* =========================================================
+MENÚ NUEVO
+========================================================= */
+
+function abrirMenu(){
+
+document
+.getElementById("sideMenu")
+.classList
+.add("activo");
+
+document
+.getElementById("sideOverlay")
+.classList
+.add("activo");
+
+document.body.style.overflow=
+"hidden";
+
+}
+
+function cerrarMenu(){
+
+document
+.getElementById("sideMenu")
+.classList
+.remove("activo");
+
+document
+.getElementById("sideOverlay")
+.classList
+.remove("activo");
+
+document.body.style.overflow=
+"";
+
+}
 
 /* =========================================================
-CERRAR MODAL AFUERA
+BUSCADOR SUPERIOR
 ========================================================= */
+
+function buscarDesdeHeader(valor){
+
+const input=
+document.getElementById(
+"buscar"
+);
+
+if(
+!input
+){
+
+return;
+
+}
+
+input.value=
+valor;
+
+filtrarProductos();
+
+document
+.querySelectorAll(".cat-chip")
+.forEach(
+x=>
+x.classList.remove("activo")
+);
+
+const todos=
+document.querySelector(
+'[data-chip="todos"]'
+);
+
+if(
+todos
+){
+
+todos.classList.add(
+"activo"
+);
+
+}
+
+}
+
+function irABusqueda(){
+
+document
+.getElementById("catalogo")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+setTimeout(
+()=>{
 
 document
 .getElementById(
-"modalCarrito"
+"buscarHeader"
 )
-.addEventListener(
-"click",
-function(evento){
+.focus();
 
-if(
-evento.target===this
-){
-
-cerrarCarrito();
-
-}
-
-}
+},
+450
 );
 
+}
 
 /* =========================================================
-ESC
+FILTROS RÁPIDOS
 ========================================================= */
 
+function filtrarChip(tipo){
+
 document
-.addEventListener(
-"keydown",
-function(evento){
+.querySelectorAll(".cat-chip")
+.forEach(
+x=>
+x.classList.toggle(
+"activo",
+x.dataset.chip===tipo
+)
+);
+
+const input=
+document.getElementById(
+"buscar"
+);
+
+const inputHeader=
+document.getElementById(
+"buscarHeader"
+);
 
 if(
-evento.key==="Escape"
+input
 ){
+
+input.value="";
+
+}
+
+if(
+inputHeader
+){
+
+inputHeader.value="";
+
+}
+
+if(
+tipo==="mayorista"
+){
+
+cambiarModo(
+"mayorista"
+);
+
+productosFiltrados=[
+...perfumes
+];
+
+}
+
+else{
+
+if(
+modoActual!=="particular"
+){
+
+cambiarModo(
+"particular"
+);
+
+}
+
+if(
+tipo==="disponible"
+){
+
+productosFiltrados=
+
+perfumes.filter(p=>{
+
+const stock=
+String(
+p.stock || ""
+)
+.toLowerCase();
+
+return (
+
+stock.includes(
+"disponible"
+)
+
+&&
+
+!stock.includes(
+"pedido"
+)
+
+);
+
+});
+
+}
+
+else if(
+tipo==="pedido"
+){
+
+productosFiltrados=
+
+perfumes.filter(p=>
+
+String(
+p.stock || ""
+)
+.toLowerCase()
+.includes(
+"pedido"
+)
+
+);
+
+}
+
+else{
+
+productosFiltrados=[
+...perfumes
+];
+
+}
+
+}
+
+paginaActual=1;
+
+mostrarPagina();
+
+document
+.getElementById("catalogo")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+/* =========================================================
+CARRUSEL
+========================================================= */
+
+let slideActual=0;
+
+let slideTimer=null;
+
+function mostrarSlide(indice){
+
+const slides=
+document.querySelectorAll(
+".hero-slide"
+);
+
+const dots=
+document.querySelectorAll(
+".hero-dot"
+);
+
+if(
+!slides.length
+){
+
+return;
+
+}
+
+slideActual=
+(
+indice +
+slides.length
+)
+%
+slides.length;
+
+slides.forEach(
+(s,i)=>
+s.classList.toggle(
+"activo",
+i===slideActual
+)
+);
+
+dots.forEach(
+(d,i)=>
+d.classList.toggle(
+"activo",
+i===slideActual
+)
+);
+
+clearInterval(
+slideTimer
+);
+
+slideTimer=
+setInterval(
+()=>{
+
+mostrarSlideSinReset(
+slideActual+1
+);
+
+},
+5200
+);
+
+}
+
+function mostrarSlideSinReset(
+indice
+){
+
+const slides=
+document.querySelectorAll(
+".hero-slide"
+);
+
+const dots=
+document.querySelectorAll(
+".hero-dot"
+);
+
+if(
+!slides.length
+){
+
+return;
+
+}
+
+slideActual=
+(
+indice +
+slides.length
+)
+%
+slides.length;
+
+slides.forEach(
+(s,i)=>
+s.classList.toggle(
+"activo",
+i===slideActual
+)
+);
+
+dots.forEach(
+(d,i)=>
+d.classList.toggle(
+"activo",
+i===slideActual
+)
+);
+
+}
+
+slideTimer=
+setInterval(
+()=>{
+
+mostrarSlideSinReset(
+slideActual+1
+);
+
+},
+5200
+);
+
+/* =========================================================
+ANIMACIONES PRODUCTOS
+========================================================= */
+
+function activarAnimacionesCards(){
+
+const cards=
+document.querySelectorAll(
+".card.reveal"
+);
+
+cards.forEach(
+(card,index)=>{
+
+setTimeout(
+()=>{
+
+card.classList.add(
+"visible"
+);
+
+},
+Math.min(
+index * 35,
+400
+)
+);
+
+});
+
+}
+
+/* =========================================================
+ESCAPE
+========================================================= */
+
+document.addEventListener(
+"keydown",
+e=>{
+
+if(
+e.key==="Escape"
+){
+
+cerrarMenu();
 
 cerrarCarrito();
 
@@ -3969,5 +4672,4 @@ cerrarCarrito();
 </script>
 
 </body>
-
 </html>
