@@ -1,0 +1,5243 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Catálogo NERÓS | Perfumes, Fragancias y Decants</title>
+
+<link rel="icon" type="image/png" href="favicon.png">
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+:root{
+--negro:#080808;
+--negro2:#111111;
+--dorado:#c89d38;
+--dorado-claro:#e3bd63;
+--gris:#999;
+--whatsapp:#25d366;
+}
+
+html{scroll-behavior:smooth;}
+
+body{
+background:var(--negro);
+color:#fff;
+font-family:Arial,Helvetica,sans-serif;
+overflow-x:hidden;
+}
+
+button,input{font-family:inherit;}
+
+/* ================= PROMO ================= */
+
+.promo-strip{
+height:34px;
+background:#030303;
+border-bottom:1px solid #1d1d1d;
+display:flex;
+align-items:center;
+overflow:hidden;
+position:relative;
+z-index:130;
+}
+
+.promo-track{
+display:flex;
+gap:70px;
+min-width:max-content;
+white-space:nowrap;
+animation:promoMove 24s linear infinite;
+color:#eee;
+font-size:10px;
+font-weight:800;
+letter-spacing:1.6px;
+text-transform:uppercase;
+}
+
+.promo-track span{
+display:inline-flex;
+align-items:center;
+gap:12px;
+}
+
+.promo-track b{color:var(--dorado-claro);}
+
+@keyframes promoMove{
+from{transform:translateX(0);}
+to{transform:translateX(-50%);}
+}
+
+/* ================= HEADER ================= */
+
+.navbar{
+position:sticky;
+top:0;
+z-index:120;
+background:rgba(5,5,5,.94);
+backdrop-filter:blur(18px);
+border-bottom:1px solid #1d1d1d;
+}
+
+.navbar-contenido{
+max-width:1600px;
+margin:auto;
+height:74px;
+padding:0 24px;
+display:grid;
+grid-template-columns:1fr auto 1fr;
+align-items:center;
+}
+
+.nav-left{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.nav-icon{
+width:42px;
+height:42px;
+border:1px solid #292929;
+background:#111;
+color:#fff;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+font-size:19px;
+transition:.25s;
+}
+
+.nav-icon:hover{
+border-color:var(--dorado);
+color:var(--dorado-claro);
+transform:translateY(-2px);
+}
+
+.menu-trigger{font-size:22px;}
+
+.logo-nav img{
+display:block;
+width:145px;
+max-height:55px;
+object-fit:contain;
+}
+
+.menu{
+display:flex;
+justify-content:flex-end;
+align-items:center;
+gap:23px;
+}
+
+.menu a{
+color:#aaa;
+text-decoration:none;
+font-size:11px;
+font-weight:800;
+letter-spacing:.6px;
+transition:.2s;
+}
+
+.menu a:hover{color:var(--dorado-claro);}
+
+/* ================= SEARCH ================= */
+
+.header-search{
+max-width:760px;
+margin:14px auto 0;
+padding:0 20px;
+display:none;
+}
+
+.header-search-inner{position:relative;}
+
+.header-search input{
+width:100%;
+background:#111;
+border:1px solid #2c2c2c;
+color:#fff;
+border-radius:999px;
+padding:13px 45px 13px 18px;
+outline:none;
+font-size:13px;
+transition:.2s;
+}
+
+.header-search input:focus{
+border-color:var(--dorado);
+box-shadow:0 0 0 3px rgba(200,157,56,.08);
+}
+
+.header-search button{
+position:absolute;
+right:5px;
+top:5px;
+width:34px;
+height:34px;
+border-radius:50%;
+border:0;
+background:var(--dorado);
+cursor:pointer;
+color:#111;
+font-size:16px;
+}
+
+/* ================= CATEGORÍAS ================= */
+
+.category-rail{
+position:sticky;
+top:125px;
+z-index:110;
+background:rgba(8,8,8,.95);
+backdrop-filter:blur(15px);
+border-bottom:1px solid #1b1b1b;
+display:flex;
+justify-content:center;
+gap:9px;
+padding:10px 14px;
+overflow-x:auto;
+scrollbar-width:none;
+}
+
+.category-rail::-webkit-scrollbar{display:none;}
+
+.cat-chip{
+flex:0 0 auto;
+border:1px solid #303030;
+background:#121212;
+color:#aaa;
+padding:9px 14px;
+border-radius:999px;
+font-size:10px;
+font-weight:800;
+cursor:pointer;
+transition:.2s;
+}
+
+.cat-chip:hover,
+.cat-chip.activo{
+background:var(--dorado);
+border-color:var(--dorado);
+color:#111;
+}
+
+/* ================= MENÚ LATERAL ================= */
+
+.side-overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.68);
+backdrop-filter:blur(4px);
+z-index:3990;
+opacity:0;
+visibility:hidden;
+transition:.3s;
+}
+
+.side-overlay.activo{
+opacity:1;
+visibility:visible;
+}
+
+.side-menu{
+position:fixed;
+left:0;
+top:0;
+bottom:0;
+width:min(88vw,390px);
+background:#0b0b0b;
+z-index:4000;
+transform:translateX(-105%);
+transition:transform .35s cubic-bezier(.2,.8,.2,1);
+border-right:1px solid #292929;
+padding:22px;
+overflow-y:auto;
+}
+
+.side-menu.activo{transform:translateX(0);}
+
+.side-head{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding-bottom:18px;
+border-bottom:1px solid #222;
+}
+
+.side-head img{width:130px;}
+
+.side-close{
+border:0;
+background:#191919;
+color:#fff;
+width:36px;
+height:36px;
+border-radius:50%;
+font-size:20px;
+cursor:pointer;
+}
+
+.side-label{
+font-size:9px;
+color:var(--dorado);
+font-weight:900;
+letter-spacing:3px;
+margin:24px 0 10px;
+}
+
+.side-link{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 2px;
+border-bottom:1px solid #1e1e1e;
+color:#eee;
+text-decoration:none;
+font-size:14px;
+font-weight:650;
+transition:.2s;
+}
+
+.side-link:hover{
+color:var(--dorado-claro);
+padding-left:6px;
+}
+
+.side-link small{color:#666;}
+
+.side-card{
+margin-top:24px;
+padding:18px;
+border:1px solid rgba(200,157,56,.28);
+background:linear-gradient(135deg,rgba(200,157,56,.12),#111);
+border-radius:16px;
+}
+
+.side-card strong{
+font-family:Georgia,serif;
+font-size:19px;
+}
+
+.side-card p{
+font-size:11px;
+color:#aaa;
+line-height:1.55;
+margin-top:7px;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+min-height:600px;
+position:relative;
+overflow:hidden;
+background:
+linear-gradient(90deg,rgba(0,0,0,.93),rgba(0,0,0,.62),rgba(0,0,0,.35)),
+url("fondo.jpg");
+background-size:cover;
+background-position:center;
+}
+
+.hero::after{
+content:"";
+position:absolute;
+inset:0;
+background:radial-gradient(circle at 75% 50%,rgba(200,157,56,.12),transparent 42%);
+pointer-events:none;
+}
+
+.hero-slider{position:relative;}
+
+.hero-slide{
+position:absolute;
+inset:0;
+display:flex;
+align-items:center;
+justify-content:center;
+opacity:0;
+transform:scale(1.02);
+transition:opacity .8s ease,transform 1.1s ease;
+pointer-events:none;
+}
+
+.hero-slide.activo{
+opacity:1;
+transform:scale(1);
+pointer-events:auto;
+}
+
+.hero-contenido{
+position:relative;
+z-index:2;
+width:100%;
+max-width:1600px;
+padding:60px 7%;
+}
+
+.hero-mini{
+font-size:10px;
+font-weight:900;
+letter-spacing:4px;
+color:var(--dorado-claro);
+margin-bottom:18px;
+}
+
+.hero h1{
+max-width:750px;
+font-family:Georgia,serif;
+font-weight:400;
+font-size:clamp(42px,6vw,82px);
+line-height:.98;
+letter-spacing:-2px;
+margin-bottom:25px;
+}
+
+.hero p{
+max-width:580px;
+color:#bbb;
+font-size:15px;
+line-height:1.7;
+margin-bottom:32px;
+}
+
+.hero-botones{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+}
+
+.hero-btn{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+min-height:48px;
+padding:0 23px;
+border-radius:999px;
+font-size:10px;
+font-weight:900;
+letter-spacing:.8px;
+text-decoration:none;
+transition:.25s;
+}
+
+.hero-btn.principal{
+background:var(--dorado);
+color:#111;
+border:1px solid var(--dorado);
+}
+
+.hero-btn.principal:hover{
+background:var(--dorado-claro);
+transform:translateY(-2px);
+}
+
+.hero-btn.secundario{
+border:1px solid #555;
+color:#fff;
+background:rgba(0,0,0,.3);
+}
+
+.hero-dots{
+position:absolute;
+bottom:25px;
+left:50%;
+transform:translateX(-50%);
+z-index:5;
+display:flex;
+gap:7px;
+}
+
+.hero-dot{
+width:7px;
+height:7px;
+border:0;
+border-radius:50%;
+background:#777;
+cursor:pointer;
+padding:0;
+}
+
+.hero-dot.activo{
+width:25px;
+border-radius:10px;
+background:var(--dorado);
+transition:.3s;
+}
+
+/* ================= PAGOS ================= */
+
+.medios-pago{
+max-width:1600px;
+margin:35px auto;
+padding:35px 24px;
+border-top:1px solid #222;
+border-bottom:1px solid #222;
+}
+
+.medios-pago-titulo{
+text-align:center;
+margin-bottom:25px;
+}
+
+.medios-pago-titulo small{
+color:var(--dorado);
+font-size:9px;
+font-weight:900;
+letter-spacing:3px;
+}
+
+.medios-pago-titulo h3{
+font-family:Georgia,serif;
+font-size:32px;
+font-weight:400;
+margin:8px 0;
+}
+
+.medios-pago-titulo p{
+font-size:11px;
+color:#888;
+}
+
+.medios-pago-opciones{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:8px;
+}
+
+.medio-pago{
+padding:20px 10px;
+border:1px solid #252525;
+background:#101010;
+border-radius:13px;
+text-align:center;
+transition:.25s;
+}
+
+.medio-pago:hover{
+border-color:rgba(200,157,56,.55);
+transform:translateY(-3px);
+}
+
+.medio-pago span{
+display:block;
+font-size:22px;
+margin-bottom:8px;
+}
+
+.medio-pago strong{
+display:block;
+font-size:11px;
+margin-bottom:4px;
+}
+
+.medio-pago small{
+color:#777;
+font-size:9px;
+}
+
+.mercadopago-point{
+text-align:center;
+margin-top:18px;
+font-size:9px;
+color:#777;
+}
+
+/* ================= CATÁLOGO ================= */
+
+.catalogo{
+max-width:1600px;
+margin:auto;
+padding:60px 24px 100px;
+}
+
+.catalogo-cabeza{
+text-align:center;
+margin-bottom:30px;
+}
+
+.catalogo-cabeza small{
+font-size:9px;
+letter-spacing:3px;
+color:var(--dorado);
+font-weight:900;
+}
+
+.catalogo-cabeza h2{
+font-family:Georgia,serif;
+font-size:clamp(32px,4vw,50px);
+font-weight:400;
+margin:8px 0;
+}
+
+.catalogo-cabeza p{
+font-size:12px;
+color:#888;
+}
+
+.controles{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+margin-bottom:25px;
+}
+
+.modos{
+display:flex;
+gap:7px;
+}
+
+.modo{
+padding:11px 15px;
+border:1px solid #333;
+border-radius:999px;
+background:#111;
+color:#888;
+font-size:10px;
+font-weight:900;
+cursor:pointer;
+}
+
+.modo.activo{
+background:var(--dorado);
+border-color:var(--dorado);
+color:#111;
+}
+
+.buscar-wrap{
+position:relative;
+width:min(100%,450px);
+}
+
+.buscar-wrap input{
+width:100%;
+padding:13px 15px 13px 40px;
+background:#111;
+border:1px solid #2c2c2c;
+border-radius:999px;
+color:white;
+outline:none;
+}
+
+.buscar-icono{
+position:absolute;
+left:15px;
+top:50%;
+transform:translateY(-50%);
+color:#777;
+}
+
+#productos{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:14px;
+}
+
+/* ================= PRODUCTOS ================= */
+
+.card{
+background:#111;
+border:1px solid #222;
+border-radius:15px;
+overflow:hidden;
+position:relative;
+transition:transform .25s,border-color .25s,box-shadow .25s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+border-color:rgba(200,157,56,.45);
+box-shadow:0 20px 45px rgba(0,0,0,.35);
+}
+
+.card.reveal{
+opacity:0;
+transform:translateY(20px);
+}
+
+.card.reveal.visible{
+opacity:1;
+transform:translateY(0);
+transition:opacity .5s ease,transform .5s ease,border-color .25s;
+}
+
+.imagen-producto{
+position:relative;
+aspect-ratio:1/1;
+background:#f4f4f4;
+overflow:hidden;
+cursor:pointer;
+}
+
+.imagen-producto img{
+width:100%;
+height:100%;
+object-fit:contain;
+transition:transform .5s ease;
+}
+
+.card:hover .imagen-producto img{
+transform:scale(1.055);
+}
+
+.badge-stock{
+position:absolute;
+left:10px;
+top:10px;
+z-index:2;
+padding:6px 8px;
+border-radius:999px;
+font-size:8px;
+font-weight:900;
+background:rgba(0,0,0,.8);
+color:#fff;
+}
+
+.card-info{padding:14px;}
+
+.nombre-producto{
+font-size:12px;
+font-weight:900;
+line-height:1.35;
+min-height:34px;
+cursor:pointer;
+}
+
+.stock-producto{
+margin-top:6px;
+font-size:9px;
+color:#777;
+}
+
+.precio-producto{
+margin-top:12px;
+font-size:18px;
+font-weight:900;
+color:var(--dorado-claro);
+}
+
+.card button{
+width:100%;
+margin-top:12px;
+padding:11px;
+border:0;
+border-radius:9px;
+background:var(--dorado);
+color:#111;
+font-size:10px;
+font-weight:900;
+cursor:pointer;
+}
+
+.card button:disabled{
+opacity:.35;
+cursor:not-allowed;
+}
+
+/* ================= PAGINACIÓN ================= */
+
+#paginacion{
+display:flex;
+justify-content:center;
+gap:7px;
+margin-top:35px;
+flex-wrap:wrap;
+}
+
+#paginacion button{
+min-width:35px;
+height:35px;
+padding:0 10px;
+border-radius:8px;
+border:1px solid #333;
+background:#111;
+color:#aaa;
+cursor:pointer;
+}
+
+#paginacion button.activo{
+background:var(--dorado);
+color:#111;
+border-color:var(--dorado);
+}
+
+/* ================= CARRITO ================= */
+
+.carrito-barra{
+position:fixed;
+left:0;
+right:0;
+bottom:0;
+z-index:1000;
+background:rgba(10,10,10,.95);
+backdrop-filter:blur(15px);
+border-top:1px solid #333;
+transform:translateY(110%);
+transition:.3s;
+}
+
+.carrito-barra.activo{
+transform:translateY(0);
+}
+
+.carrito-contenido{
+max-width:1600px;
+margin:auto;
+padding:12px 20px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.carrito-info{
+font-size:12px;
+color:#aaa;
+}
+
+.carrito-info strong{
+color:#fff;
+font-size:15px;
+}
+
+.carrito-boton{
+padding:11px 18px;
+border-radius:999px;
+border:0;
+background:var(--dorado);
+color:#111;
+font-size:10px;
+font-weight:900;
+cursor:pointer;
+}
+
+.modal{
+position:fixed;
+inset:0;
+z-index:3000;
+display:none;
+align-items:center;
+justify-content:flex-end;
+padding:0;
+background:rgba(0,0,0,.65);
+backdrop-filter:blur(5px);
+}
+
+.modal.activo{display:flex;}
+
+.modal-contenido{
+width:min(94vw,480px);
+height:100vh;
+overflow-y:auto;
+padding:22px;
+background:#101010;
+border-left:1px solid #333;
+transform:translateX(100%);
+animation:cartIn .35s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+@keyframes cartIn{
+to{transform:translateX(0);}
+}
+
+.modal-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:18px;
+}
+
+.modal-header h2{
+font-family:Georgia,serif;
+font-size:24px;
+font-weight:500;
+}
+
+.cerrar{
+border:none;
+background:none;
+color:#999;
+font-size:28px;
+cursor:pointer;
+}
+
+.pago-selector{
+display:none;
+grid-template-columns:repeat(3,1fr);
+gap:8px;
+margin-bottom:15px;
+}
+
+.pago-selector.activo{display:grid;}
+
+.pago-btn{
+padding:11px;
+border-radius:9px;
+background:#1c1c1c;
+border:1px solid #333;
+color:#aaa;
+font-size:11px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.pago-btn.activo{
+border-color:var(--dorado);
+color:var(--dorado-claro);
+background:rgba(200,157,56,.1);
+}
+
+.pago-btn small{
+display:block;
+margin-top:4px;
+font-size:8px;
+font-weight:600;
+color:#777;
+}
+
+.pago-btn.activo small{
+color:#c8aa63;
+}
+
+.pago-ayuda{
+margin:5px 0 15px;
+font-size:9px;
+line-height:1.5;
+color:#707070;
+text-align:center;
+}
+
+.item-carrito{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+padding:14px 0;
+border-bottom:1px solid #292929;
+}
+
+.item-nombre{
+font-size:13px;
+font-weight:bold;
+}
+
+.item-precio{
+font-size:11px;
+color:#999;
+margin-top:4px;
+}
+
+.item-subtotal{
+font-size:11px;
+color:var(--dorado);
+margin-top:4px;
+}
+
+.item-controles{
+display:flex;
+align-items:center;
+gap:7px;
+}
+
+.item-controles button{
+width:30px;
+height:30px;
+border-radius:7px;
+background:#222;
+border:1px solid #444;
+color:white;
+cursor:pointer;
+}
+
+.item-controles span{
+min-width:25px;
+text-align:center;
+}
+
+.carrito-resumen{
+margin-top:18px;
+padding-top:15px;
+border-top:1px solid #444;
+}
+
+.resumen-linea{
+display:flex;
+justify-content:space-between;
+font-size:13px;
+margin-bottom:8px;
+}
+
+.resumen-total{
+display:flex;
+justify-content:space-between;
+margin-top:12px;
+padding-top:12px;
+border-top:1px solid #333;
+font-size:21px;
+font-weight:900;
+color:var(--dorado-claro);
+}
+
+.proximo-nivel{
+margin-top:14px;
+padding:10px;
+border-radius:9px;
+font-size:11px;
+line-height:1.5;
+text-align:center;
+color:#ccc;
+border:1px solid rgba(200,157,56,.22);
+background:rgba(200,157,56,.07);
+}
+
+.enviar-whatsapp{
+width:100%;
+margin-top:18px;
+padding:14px;
+border:0;
+border-radius:10px;
+background:var(--whatsapp);
+color:white;
+font-size:12px;
+font-weight:900;
+cursor:pointer;
+position:sticky;
+bottom:0;
+}
+
+.enviar-whatsapp:disabled{
+opacity:.35;
+cursor:not-allowed;
+}
+
+.enviar-whatsapp.mercadopago{
+background:#009ee3;
+color:#fff;
+}
+
+.enviar-whatsapp.mercadopago:hover{
+background:#20aff0;
+}
+
+.enviar-whatsapp.cargando{
+opacity:.7;
+cursor:wait;
+}
+
+/* ================= WHATSAPP ================= */
+
+.floating-wa{
+position:fixed;
+right:18px;
+bottom:92px;
+z-index:900;
+width:52px;
+height:52px;
+border-radius:50%;
+background:var(--whatsapp);
+color:white;
+text-decoration:none;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:23px;
+box-shadow:0 10px 30px rgba(0,0,0,.45);
+}
+
+/* ================= FOOTER ================= */
+
+.footer{
+padding:50px 20px 100px;
+text-align:center;
+border-top:1px solid #222;
+background:#050505;
+}
+
+.footer img{
+width:130px;
+margin-bottom:15px;
+}
+
+.footer p{
+color:#777;
+font-size:10px;
+line-height:1.7;
+}
+
+/* ================= CÓMO COMPRAR 2026 ================= */
+
+.como-comprar-nuevo{
+max-width:1600px;
+margin:28px auto 0;
+padding:44px 24px;
+}
+
+.como-cabeza{
+text-align:center;
+margin-bottom:30px;
+}
+
+.como-cabeza small{
+color:var(--dorado);
+font-size:9px;
+font-weight:900;
+letter-spacing:3px;
+}
+
+.como-cabeza h2{
+font-family:Georgia,serif;
+font-size:clamp(30px,4vw,46px);
+font-weight:400;
+margin-top:8px;
+}
+
+.como-cabeza p{
+font-size:12px;
+color:#888;
+margin-top:8px;
+}
+
+.pasos-compra{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+position:relative;
+}
+
+.paso-compra{
+position:relative;
+background:linear-gradient(145deg,#111,#0d0d0d);
+border:1px solid #252525;
+border-radius:18px;
+padding:27px 24px 25px;
+min-height:190px;
+overflow:hidden;
+transition:.25s;
+}
+
+.paso-compra:hover{
+transform:translateY(-4px);
+border-color:rgba(200,157,56,.55);
+box-shadow:0 18px 40px rgba(0,0,0,.28);
+}
+
+.paso-numero{
+position:absolute;
+right:18px;
+top:10px;
+font-family:Georgia,serif;
+font-size:55px;
+line-height:1;
+color:rgba(200,157,56,.11);
+}
+
+.paso-icono{
+width:45px;
+height:45px;
+border-radius:14px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(200,157,56,.11);
+border:1px solid rgba(200,157,56,.22);
+font-size:20px;
+margin-bottom:16px;
+}
+
+.paso-compra strong{
+display:block;
+font-size:14px;
+margin-bottom:8px;
+}
+
+.paso-compra p{
+font-size:11px;
+line-height:1.65;
+color:#8d8d8d;
+max-width:360px;
+}
+
+.paso-compra b{
+color:var(--dorado-claro);
+}
+
+/* ================= FICHA DE PRODUCTO ================= */
+
+.producto-modal{
+position:fixed;
+inset:0;
+z-index:5000;
+display:none;
+align-items:center;
+justify-content:center;
+padding:22px;
+background:rgba(0,0,0,.88);
+backdrop-filter:blur(10px);
+}
+
+.producto-modal.activo{
+display:flex;
+}
+
+.producto-modal-contenido{
+width:min(1180px,96vw);
+max-height:92vh;
+overflow-y:auto;
+background:#090909;
+border:1px solid #292929;
+border-radius:22px;
+position:relative;
+box-shadow:0 30px 90px rgba(0,0,0,.65);
+animation:productoEntrada .32s ease forwards;
+}
+
+@keyframes productoEntrada{
+from{opacity:0;transform:translateY(14px) scale(.985);}
+to{opacity:1;transform:translateY(0) scale(1);}
+}
+
+.producto-cerrar{
+position:absolute;
+right:16px;
+top:16px;
+z-index:4;
+width:40px;
+height:40px;
+border-radius:50%;
+border:1px solid #333;
+background:rgba(10,10,10,.88);
+color:#fff;
+font-size:23px;
+cursor:pointer;
+}
+
+.producto-ficha{
+display:grid;
+grid-template-columns:minmax(0,1.05fr) minmax(360px,.95fr);
+min-height:650px;
+}
+
+.producto-foto-grande{
+display:flex;
+align-items:center;
+justify-content:center;
+min-height:650px;
+padding:45px;
+background:radial-gradient(circle at center,#202020 0,#121212 46%,#0b0b0b 75%);
+border-right:1px solid #202020;
+}
+
+.producto-foto-grande img{
+width:100%;
+height:100%;
+max-height:560px;
+object-fit:contain;
+filter:drop-shadow(0 25px 25px rgba(0,0,0,.42));
+}
+
+.producto-detalle{
+padding:58px 44px 38px;
+display:flex;
+flex-direction:column;
+}
+
+.producto-miga{
+font-size:9px;
+letter-spacing:1.2px;
+color:#666;
+text-transform:uppercase;
+margin-bottom:13px;
+}
+
+.producto-detalle h2{
+font-family:Georgia,serif;
+font-size:clamp(30px,3.2vw,46px);
+line-height:1.04;
+font-weight:400;
+margin-right:30px;
+}
+
+.producto-stock-detalle{
+display:inline-flex;
+align-items:center;
+width:max-content;
+margin-top:14px;
+padding:7px 11px;
+border-radius:999px;
+font-size:9px;
+font-weight:900;
+border:1px solid #2d2d2d;
+background:#121212;
+color:#cfcfcf;
+}
+
+.producto-precios{
+margin-top:24px;
+padding:19px 0;
+border-top:1px solid #242424;
+border-bottom:1px solid #242424;
+}
+
+.producto-precio-lista{
+font-size:13px;
+color:#696969;
+text-decoration:line-through;
+}
+
+.producto-precio-principal{
+font-size:31px;
+font-weight:900;
+color:var(--dorado-claro);
+margin-top:4px;
+}
+
+.producto-ahorro{
+color:#4bd487;
+font-size:10px;
+font-weight:800;
+margin-top:6px;
+}
+
+.producto-mayorista-niveles{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:7px;
+margin-top:12px;
+}
+
+.producto-nivel{
+padding:10px 8px;
+background:#101010;
+border:1px solid #292929;
+border-radius:10px;
+text-align:center;
+}
+
+.producto-nivel small{
+display:block;
+font-size:8px;
+color:#777;
+margin-bottom:4px;
+}
+
+.producto-nivel strong{
+font-size:12px;
+color:var(--dorado-claro);
+}
+
+.producto-info-mini{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-top:18px;
+}
+
+.producto-info-mini div{
+padding:12px;
+background:#101010;
+border:1px solid #242424;
+border-radius:11px;
+}
+
+.producto-info-mini small{
+display:block;
+font-size:8px;
+color:#666;
+letter-spacing:.6px;
+margin-bottom:5px;
+}
+
+.producto-info-mini strong{
+font-size:10px;
+font-weight:800;
+}
+
+.producto-compra{
+margin-top:22px;
+display:grid;
+grid-template-columns:130px 1fr;
+gap:10px;
+}
+
+.producto-cantidad{
+display:grid;
+grid-template-columns:38px 1fr 38px;
+align-items:center;
+border:1px solid #333;
+border-radius:11px;
+overflow:hidden;
+height:48px;
+}
+
+.producto-cantidad button{
+height:100%;
+border:0;
+background:#151515;
+color:#fff;
+font-size:18px;
+cursor:pointer;
+}
+
+.producto-cantidad span{
+text-align:center;
+font-weight:800;
+font-size:13px;
+}
+
+.producto-agregar{
+height:48px;
+border:0;
+border-radius:11px;
+background:var(--dorado);
+color:#111;
+font-size:10px;
+font-weight:900;
+letter-spacing:.5px;
+cursor:pointer;
+transition:.2s;
+}
+
+.producto-agregar:hover{
+background:var(--dorado-claro);
+transform:translateY(-1px);
+}
+
+.producto-agregar:disabled{
+background:#252525;
+color:#666;
+cursor:not-allowed;
+transform:none;
+}
+
+.producto-ayuda{
+margin-top:18px;
+padding-top:17px;
+border-top:1px solid #222;
+font-size:10px;
+line-height:1.6;
+color:#777;
+}
+
+.producto-ayuda a{
+color:var(--dorado-claro);
+text-decoration:none;
+}
+
+
+/* ================= PÁGINA CATÁLOGO ================= */
+
+.catalogo-page{
+min-height:70vh;
+}
+
+.pedido-card-aviso{
+margin-top:8px;
+padding:8px 9px;
+border:1px solid rgba(200,157,56,.28);
+background:rgba(200,157,56,.07);
+border-radius:9px;
+font-size:9px;
+line-height:1.45;
+color:#d6c08b;
+}
+
+.pedido-detalle-aviso{
+margin-top:16px;
+padding:15px;
+border-radius:12px;
+border:1px solid rgba(200,157,56,.32);
+background:rgba(200,157,56,.07);
+color:#ccc;
+font-size:10px;
+line-height:1.6;
+}
+
+.pedido-detalle-aviso strong{
+color:var(--dorado-claro);
+}
+
+.pedido-carrito-aviso{
+margin-top:14px;
+padding:12px;
+border-radius:10px;
+border:1px solid rgba(200,157,56,.32);
+background:rgba(200,157,56,.08);
+color:#ccc;
+font-size:10px;
+line-height:1.55;
+}
+
+.pedido-carrito-aviso strong{
+color:var(--dorado-claro);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(min-width:701px){
+.header-search{display:block;}
+}
+
+@media(max-width:1200px){
+#productos{grid-template-columns:repeat(4,1fr);}
+}
+
+@media(max-width:950px){
+
+#productos{grid-template-columns:repeat(3,1fr);}
+
+.medios-pago-opciones{
+grid-template-columns:repeat(3,1fr);
+}
+
+}
+
+@media(max-width:700px){
+
+.promo-strip{height:30px;}
+
+.promo-track{
+font-size:9px;
+gap:45px;
+}
+
+.navbar-contenido{
+height:57px;
+padding:0 12px;
+}
+
+.logo-nav img{width:105px;}
+
+.menu{display:none;}
+
+.nav-icon{
+width:36px;
+height:36px;
+}
+
+.header-search{
+display:block;
+margin:0;
+background:#080808;
+padding:8px 12px;
+}
+
+.header-search input{
+padding:11px 42px 11px 15px;
+}
+
+.header-search button{
+width:32px;
+height:32px;
+top:4px;
+}
+
+.category-rail{
+top:95px;
+justify-content:flex-start;
+padding:8px 10px;
+}
+
+.hero{min-height:480px;}
+
+.hero-contenido{
+padding:55px 23px;
+}
+
+.hero h1{
+font-size:43px;
+letter-spacing:-1.4px;
+}
+
+.hero p{font-size:13px;}
+
+.medios-pago{
+margin:20px auto;
+padding:30px 15px;
+}
+
+.medios-pago-opciones{
+grid-template-columns:repeat(2,1fr);
+}
+
+.catalogo{
+padding:40px 10px 100px;
+}
+
+.controles{display:none;}
+
+#productos{
+grid-template-columns:repeat(2,1fr);
+gap:8px;
+}
+
+.card-info{padding:11px;}
+
+.nombre-producto{font-size:11px;}
+
+.precio-producto{font-size:16px;}
+
+.como-comprar-nuevo{
+padding:34px 10px 20px;
+}
+
+.pasos-compra{
+grid-template-columns:1fr;
+}
+
+.paso-compra{
+min-height:155px;
+padding:22px 20px;
+}
+
+.producto-modal{
+padding:0;
+align-items:flex-end;
+}
+
+.producto-modal-contenido{
+width:100%;
+max-height:96vh;
+border-radius:20px 20px 0 0;
+border-left:0;
+border-right:0;
+border-bottom:0;
+}
+
+.producto-ficha{
+grid-template-columns:1fr;
+min-height:0;
+}
+
+.producto-foto-grande{
+min-height:360px;
+height:42vh;
+max-height:430px;
+padding:32px;
+border-right:0;
+border-bottom:1px solid #202020;
+}
+
+.producto-foto-grande img{
+max-height:350px;
+}
+
+.producto-detalle{
+padding:27px 18px 28px;
+}
+
+.producto-detalle h2{
+font-size:31px;
+}
+
+.producto-precio-principal{
+font-size:27px;
+}
+
+.producto-compra{
+grid-template-columns:115px 1fr;
+}
+
+.producto-info-mini{
+grid-template-columns:1fr 1fr;
+}
+
+.producto-mayorista-niveles{
+grid-template-columns:1fr 1fr 1fr;
+}
+
+.pago-selector{
+grid-template-columns:1fr;
+}
+
+.floating-wa{
+bottom:82px;
+right:13px;
+width:48px;
+height:48px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="promo-strip">
+
+<div class="promo-track">
+
+<span>✦ <b>10% OFF</b> EFECTIVO / TRANSFERENCIA</span>
+<span>✦ ENVÍOS A TODO EL PAÍS</span>
+<span>✦ PERFUMES ÁRABES · DISEÑADOR · NICHO · DECANTS</span>
+<span>✦ PEDIDOS ESPECIALES A COTIZACIÓN</span>
+
+<span>✦ <b>10% OFF</b> EFECTIVO / TRANSFERENCIA</span>
+<span>✦ ENVÍOS A TODO EL PAÍS</span>
+<span>✦ PERFUMES ÁRABES · DISEÑADOR · NICHO · DECANTS</span>
+<span>✦ PEDIDOS ESPECIALES A COTIZACIÓN</span>
+
+</div>
+
+</div>
+
+<div
+id="sideOverlay"
+class="side-overlay"
+onclick="cerrarMenu()">
+</div>
+
+<aside
+id="sideMenu"
+class="side-menu">
+
+<div class="side-head">
+
+<img
+src="logo%20neros.png"
+alt="NERÓS">
+
+<button
+class="side-close"
+onclick="cerrarMenu()">
+
+×
+
+</button>
+
+</div>
+
+<div class="side-label">
+EXPLORAR
+</div>
+
+<a
+class="side-link"
+href="index.html"
+onclick="cerrarMenu()">
+
+Inicio
+<small>→</small>
+
+</a>
+
+<a
+class="side-link"
+href="catalogo.html"
+onclick="cerrarMenu();filtrarChip('todos')">
+
+Todos los perfumes
+<small>→</small>
+
+</a>
+
+<a
+class="side-link"
+href="catalogo.html?filtro=disponible"
+onclick="cerrarMenu();filtrarChip('disponible')">
+
+Disponibles
+<small>→</small>
+
+</a>
+
+<a
+class="side-link"
+href="catalogo.html?filtro=pedido"
+onclick="cerrarMenu();filtrarChip('pedido')">
+
+A pedido
+<small>→</small>
+
+</a>
+
+<a
+class="side-link"
+href="catalogo.html?modo=mayorista"
+onclick="cerrarMenu();filtrarChip('mayorista')">
+
+Mayorista
+<small>→</small>
+
+</a>
+
+<a
+class="side-link"
+href="https://wa.me/5493417830300"
+target="_blank">
+
+Contacto / WhatsApp
+<small>↗</small>
+
+</a>
+
+<div class="side-card">
+
+<strong>
+¿Buscás algo especial?
+</strong>
+
+<p>
+Si no encontrás tu perfume o producto,
+escribinos. Lo buscamos y te lo cotizamos.
+</p>
+
+</div>
+
+</aside>
+
+<header class="navbar">
+
+<div class="navbar-contenido">
+
+<div class="nav-left">
+
+<button
+class="nav-icon menu-trigger"
+onclick="abrirMenu()">
+
+☰
+
+</button>
+
+</div>
+
+<a
+href="index.html"
+class="logo-nav">
+
+<img
+src="logo%20neros.png"
+alt="NERÓS">
+
+</a>
+
+<nav class="menu">
+
+<a href="index.html">
+INICIO
+</a>
+
+<a href="catalogo.html">
+PERFUMES
+</a>
+
+<a
+href="catalogo.html?modo=mayorista"
+onclick="setTimeout(()=>{cambiarModo('mayorista');},300);">
+
+MAYORISTA
+
+</a>
+
+<a
+href="https://wa.me/5493417830300"
+target="_blank">
+
+CONTACTO
+
+</a>
+
+<button
+class="nav-icon"
+onclick="abrirCarrito()">
+
+🛍
+
+</button>
+
+</nav>
+
+</div>
+
+<div class="header-search">
+
+<div class="header-search-inner">
+
+<input
+id="buscarHeader"
+type="search"
+placeholder="¿Qué perfume estás buscando?"
+oninput="buscarDesdeHeader(this.value)">
+
+<button
+onclick="irABusqueda()">
+
+⌕
+
+</button>
+
+</div>
+
+</div>
+
+</header>
+
+<div class="category-rail">
+
+<button
+class="cat-chip activo"
+data-chip="todos"
+onclick="filtrarChip('todos')">
+
+TODOS
+
+</button>
+
+<button
+class="cat-chip"
+data-chip="disponible"
+onclick="filtrarChip('disponible')">
+
+DISPONIBLES
+
+</button>
+
+<button
+class="cat-chip"
+data-chip="pedido"
+onclick="filtrarChip('pedido')">
+
+A PEDIDO
+
+</button>
+
+<button
+class="cat-chip"
+data-chip="ofertas"
+onclick="filtrarChip('ofertas')">
+
+10% OFF
+
+</button>
+
+<button
+class="cat-chip"
+data-chip="mayorista"
+onclick="filtrarChip('mayorista')">
+
+MAYORISTA
+
+</button>
+
+</div>
+
+<main class="catalogo-page">
+
+<section
+class="catalogo"
+id="catalogo">
+
+<div class="catalogo-cabeza">
+
+<small>
+CATÁLOGO NERÓS
+</small>
+
+<h2>
+Encontrá tu perfume
+</h2>
+
+<p>
+Tocá un producto para ver su ficha,
+elegí la cantidad y agregalo al carrito.
+</p>
+
+</div>
+
+<div class="controles">
+
+<div class="modos">
+
+<button
+id="modoParticular"
+class="modo activo"
+onclick="cambiarModo('particular')">
+
+🛍️ PARTICULAR
+
+</button>
+
+<button
+id="modoMayorista"
+class="modo"
+onclick="cambiarModo('mayorista')">
+
+📦 MAYORISTA
+
+</button>
+
+</div>
+
+<div class="buscar-wrap">
+
+<span class="buscar-icono">
+🔍
+</span>
+
+<input
+id="buscar"
+placeholder="Buscar perfume, marca o producto...">
+
+</div>
+
+</div>
+
+<div id="productos">
+</div>
+
+<div id="paginacion">
+</div>
+
+</section>
+
+</main>
+
+<!-- ================= FICHA DINÁMICA ================= -->
+
+<div
+id="modalProducto"
+class="producto-modal"
+onclick="cerrarProductoPorFondo(event)">
+
+<div class="producto-modal-contenido">
+
+<button
+class="producto-cerrar"
+onclick="cerrarProducto()">
+
+×
+
+</button>
+
+<div class="producto-ficha">
+
+<div class="producto-foto-grande">
+
+<img
+id="detalleFoto"
+src=""
+alt="Producto NERÓS">
+
+</div>
+
+<div class="producto-detalle">
+
+<div
+id="detalleMiga"
+class="producto-miga">
+
+NERÓS · PERFUMERÍA
+
+</div>
+
+<h2 id="detalleNombre">
+Producto
+</h2>
+
+<div
+id="detalleStock"
+class="producto-stock-detalle">
+
+Consultar stock
+
+</div>
+
+<div
+id="detallePrecios"
+class="producto-precios">
+</div>
+
+<div
+id="detallePedidoAviso"
+class="pedido-detalle-aviso"
+style="display:none;">
+</div>
+
+<div class="producto-info-mini">
+
+<div>
+
+<small>
+FORMA DE COMPRA
+</small>
+
+<strong>
+Agregá al carrito y elegí cómo pagar
+</strong>
+
+</div>
+
+<div>
+
+<small>
+FINALIZACIÓN
+</small>
+
+<strong>
+WhatsApp o pago online con Mercado Pago
+</strong>
+
+</div>
+
+</div>
+
+<div class="producto-compra">
+
+<div class="producto-cantidad">
+
+<button
+onclick="cambiarCantidadDetalle(-1)">
+
+−
+
+</button>
+
+<span id="detalleCantidad">
+1
+</span>
+
+<button
+onclick="cambiarCantidadDetalle(1)">
+
+
+
+</button>
+
+</div>
+
+<button
+id="detalleAgregar"
+class="producto-agregar"
+onclick="agregarDesdeDetalle()">
+
+AGREGAR AL CARRITO
+
+</button>
+
+</div>
+
+<div class="producto-ayuda">
+
+¿Querés saber notas olfativas, duración o si este perfume va con lo que buscás?
+
+<a
+href="https://wa.me/5493417830300"
+target="_blank">
+
+Consultanos por WhatsApp.
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================= BARRA CARRITO ================= -->
+
+<div
+id="carritoBarra"
+class="carrito-barra">
+
+<div class="carrito-contenido">
+
+<div
+id="carritoInfo"
+class="carrito-info">
+
+🛒
+<strong>0</strong>
+unidades
+
+</div>
+
+<button
+class="carrito-boton"
+onclick="abrirCarrito()">
+
+VER PEDIDO
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ================= CARRITO ================= -->
+
+<div
+id="modalCarrito"
+class="modal">
+
+<div class="modal-contenido">
+
+<div class="modal-header">
+
+<h2 id="tituloCarrito">
+🛒 Tu pedido
+</h2>
+
+<button
+class="cerrar"
+onclick="cerrarCarrito()">
+
+×
+
+</button>
+
+</div>
+
+<div
+id="pagoSelector"
+class="pago-selector">
+
+<button
+id="pagoTransferencia"
+class="pago-btn activo"
+onclick="cambiarPago('transferencia')">
+
+🏦 Transferencia / Efectivo
+
+<small>
+10% OFF
+</small>
+
+</button>
+
+<button
+id="pagoDebito"
+class="pago-btn"
+onclick="cambiarPago('debito')">
+
+💳 Débito
+
+<small>
+Precio de lista
+</small>
+
+</button>
+
+<button
+id="pagoCredito"
+class="pago-btn"
+onclick="cambiarPago('credito')">
+
+📱 Crédito / Mercado Pago
+
+<small>
+Precio de lista
+</small>
+
+</button>
+
+</div>
+
+<div
+id="pagoAyuda"
+class="pago-ayuda">
+
+Elegí cómo querés abonar.
+La opción seleccionada se enviará junto con tu pedido.
+
+</div>
+
+<div id="listaCarrito">
+</div>
+
+<div
+id="resumenCarrito"
+class="carrito-resumen">
+</div>
+
+<button
+id="btnFinalizar"
+class="enviar-whatsapp"
+onclick="finalizarCompra()">
+
+💬 FINALIZAR COMPRA POR WHATSAPP
+
+</button>
+
+</div>
+
+</div>
+
+<a
+class="floating-wa"
+href="https://wa.me/5493417830300"
+target="_blank">
+
+✆
+
+</a>
+
+<footer class="footer">
+
+<img
+src="logo%20neros.png"
+alt="NERÓS">
+
+<p>
+NERÓS · Perfumes, fragancias y decants
+<br>
+Rosario, Santa Fe · Argentina
+</p>
+
+</footer>
+
+<script>
+
+/* =========================================================
+CONFIG
+========================================================= */
+
+const API=
+"https://script.google.com/macros/s/AKfycbwnmhyywNdM1WxuQPcHHDjtte7Hgjzwwq1Rl3afwB5z2XfeI_VyevkSuNL-cXq8ud7Qcg/exec";
+
+const WHATSAPP=
+"5493417830300";
+
+const MINIMO_MAYORISTA=
+10;
+
+const PRODUCTOS_POR_PAGINA=
+30;
+
+let perfumes=[];
+
+let carrito=[];
+
+let modoActual=
+"particular";
+
+let formaPago=
+"transferencia";
+
+let paginaActual=
+1;
+
+let productosFiltrados=[];
+
+/* =========================================================
+API
+========================================================= */
+
+fetch(API)
+
+.then(respuesta=>{
+
+if(!respuesta.ok){
+
+throw new Error(
+"HTTP "+
+respuesta.status
+);
+
+}
+
+return respuesta.json();
+
+})
+
+.then(data=>{
+
+if(!Array.isArray(data)){
+
+throw new Error(
+"Respuesta inválida de la API"
+);
+
+}
+
+perfumes=data;
+
+productosFiltrados=data;
+
+mostrarPagina();
+
+})
+
+.catch(error=>{
+
+console.error(error);
+
+document
+.getElementById("productos")
+.innerHTML=`
+
+<div style="
+grid-column:1/-1;
+text-align:center;
+padding:50px;
+color:#ff5a5a;
+">
+
+No se pudieron cargar los productos.
+
+</div>
+
+`;
+
+});
+
+/* =========================================================
+MODO
+========================================================= */
+
+function cambiarModo(modo){
+
+if(
+modoActual!==modo &&
+carrito.length>0
+){
+
+carrito=[];
+
+actualizarCarrito();
+
+}
+
+modoActual=modo;
+
+document
+.getElementById("modoParticular")
+.classList
+.toggle(
+"activo",
+modo==="particular"
+);
+
+document
+.getElementById("modoMayorista")
+.classList
+.toggle(
+"activo",
+modo==="mayorista"
+);
+
+paginaActual=1;
+
+productosFiltrados=[
+...perfumes
+];
+
+mostrarPagina();
+
+}
+
+/* =========================================================
+PAGO
+========================================================= */
+
+function cambiarPago(tipo){
+
+formaPago=tipo;
+
+const ids={
+
+transferencia:
+"pagoTransferencia",
+
+debito:
+"pagoDebito",
+
+credito:
+"pagoCredito"
+
+};
+
+Object.entries(ids)
+.forEach(([clave,id])=>{
+
+const boton=
+document.getElementById(id);
+
+if(boton){
+
+boton.classList.toggle(
+"activo",
+tipo===clave
+);
+
+}
+
+});
+
+renderCarrito();
+
+actualizarCarrito();
+
+}
+
+/* =========================================================
+BUSCADOR
+========================================================= */
+
+function filtrarProductos(){
+
+const texto=
+document
+.getElementById("buscar")
+.value
+.toLowerCase()
+.trim();
+
+productosFiltrados=
+
+perfumes.filter(producto=>
+
+String(
+producto.perfume ||
+""
+)
+.toLowerCase()
+.includes(texto)
+
+);
+
+paginaActual=1;
+
+mostrarPagina();
+
+}
+
+document
+.getElementById("buscar")
+.addEventListener(
+"input",
+filtrarProductos
+);
+
+/* =========================================================
+CONVERTIR NÚMEROS
+========================================================= */
+
+function numeroSeguro(valor){
+
+if(
+valor===null ||
+valor===undefined ||
+valor===""
+){
+
+return 0;
+
+}
+
+if(
+typeof valor==="number"
+){
+
+return Number.isFinite(valor)
+?
+valor
+:
+0;
+
+}
+
+let texto=
+
+String(valor)
+.trim()
+.replace(/ARS/gi,"")
+.replace(/\$/g,"")
+.replace(/\s/g,"");
+
+if(
+texto.includes(".") &&
+texto.includes(",")
+){
+
+texto=
+texto
+.replace(/\./g,"")
+.replace(",",".");
+
+}
+
+else if(
+texto.includes(",")
+){
+
+texto=
+texto.replace(",", ".");
+
+}
+
+else if(
+/^\d{1,3}(\.\d{3})+$/
+.test(texto)
+){
+
+texto=
+texto.replace(/\./g,"");
+
+}
+
+const numero=
+Number(texto);
+
+return Number.isFinite(numero)
+?
+numero
+:
+0;
+
+}
+
+/* =========================================================
+PRECIO PARTICULAR
+========================================================= */
+
+function precioParticular(producto){
+
+return numeroSeguro(
+producto.precio
+);
+
+}
+
+/* =========================================================
+PRECIO MAYORISTA
+========================================================= */
+
+function precioMayorista(
+producto,
+cantidadTotal
+){
+
+let precio=0;
+
+if(
+cantidadTotal>=30
+){
+
+precio=
+numeroSeguro(
+producto.precioMayorista30
+);
+
+}
+
+else if(
+cantidadTotal>=20
+){
+
+precio=
+numeroSeguro(
+producto.precioMayorista20
+);
+
+}
+
+else if(
+cantidadTotal>=10
+){
+
+precio=
+numeroSeguro(
+producto.precioMayorista10
+);
+
+}
+
+return precio;
+
+}
+
+/* =========================================================
+PRECIO FINAL
+========================================================= */
+
+function obtenerPrecioItem(
+item,
+cantidadTotal
+){
+
+if(
+modoActual==="mayorista"
+){
+
+return precioMayorista(
+item,
+cantidadTotal
+);
+
+}
+
+let precio=
+precioParticular(item);
+
+if(
+formaPago==="transferencia"
+){
+
+precio*=0.90;
+
+}
+
+return precio;
+
+}
+
+/* =========================================================
+STOCK
+========================================================= */
+
+function stockDisponible(producto){
+
+const stock=
+
+String(
+producto.stock ||
+""
+)
+.toLowerCase();
+
+return !(
+
+stock.includes(
+"sin stock"
+)
+
+||
+
+stock.includes(
+"agotado"
+)
+
+);
+
+}
+
+function productoPorPedido(producto){
+
+return String(
+producto.stock ||
+""
+)
+.toLowerCase()
+.includes(
+"pedido"
+);
+
+}
+
+/* =========================================================
+MOSTRAR PRODUCTOS
+========================================================= */
+
+function mostrarPagina(){
+
+const contenedor=
+document.getElementById(
+"productos"
+);
+
+if(
+!productosFiltrados.length
+){
+
+contenedor.innerHTML=`
+
+<div style="
+grid-column:1/-1;
+text-align:center;
+padding:70px 15px;
+color:#777;
+">
+
+No encontramos productos con esa búsqueda.
+
+</div>
+
+`;
+
+document
+.getElementById(
+"paginacion"
+)
+.innerHTML="";
+
+return;
+
+}
+
+const inicio=
+(
+paginaActual-1
+)
+*
+PRODUCTOS_POR_PAGINA;
+
+const fin=
+inicio +
+PRODUCTOS_POR_PAGINA;
+
+const pagina=
+
+productosFiltrados.slice(
+inicio,
+fin
+);
+
+contenedor.innerHTML="";
+
+pagina.forEach(producto=>{
+
+const nombre=
+producto.perfume ||
+"Producto";
+
+const imagen=
+producto.foto ||
+producto.imagen ||
+"";
+
+const stock=
+producto.stock ||
+"Consultar";
+
+let precio=0;
+
+if(
+modoActual==="particular"
+){
+
+precio=
+precioParticular(producto);
+
+}
+
+else{
+
+precio=
+precioMayorista(
+producto,
+10
+);
+
+}
+
+const disponible=
+stockDisponible(producto);
+
+const card=
+document.createElement(
+"div"
+);
+
+card.className=
+"card reveal";
+
+card.innerHTML=`
+
+<div
+class="imagen-producto"
+onclick="abrirProducto('${escapeAttr(nombre)}')">
+
+${
+
+imagen
+
+?
+
+`
+<img
+src="${escapeAttr(imagen)}"
+alt="${escapeAttr(nombre)}"
+loading="lazy"
+onerror="this.style.display='none';">
+`
+
+:
+
+`
+<div style="
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+color:#777;
+font-size:11px;
+">
+SIN IMAGEN
+</div>
+`
+
+}
+
+<div class="badge-stock">
+
+${escapeHTML(stock)}
+
+</div>
+
+</div>
+
+<div class="card-info">
+
+<div
+class="nombre-producto"
+onclick="abrirProducto('${escapeAttr(nombre)}')">
+
+${escapeHTML(nombre)}
+
+</div>
+
+<div class="stock-producto">
+
+${
+
+modoActual==="mayorista"
+
+?
+
+"Precio mayorista 10+ unidades"
+
+:
+
+formaPago==="transferencia"
+
+?
+
+"10% OFF efectivo / transferencia"
+
+:
+
+"Precio de lista"
+
+}
+
+</div>
+
+${
+productoPorPedido(producto)
+?
+`<div class="pedido-card-aviso">📦 Disponible por pedido · Entrega estimada: 10 días hábiles</div>`
+:
+""
+}
+
+<div class="precio-producto">
+
+${
+
+precio>0
+
+?
+
+"$"+
+Math.round(precio)
+.toLocaleString("es-AR")
+
+:
+
+"Consultar"
+
+}
+
+</div>
+
+<button
+${!disponible ? "disabled" : ""}
+onclick="
+event.stopPropagation();
+agregarAlCarrito('${escapeAttr(nombre)}')
+">
+
+${
+
+disponible
+
+?
+
+"AGREGAR AL CARRITO"
+
+:
+
+"SIN STOCK"
+
+}
+
+</button>
+
+</div>
+
+`;
+
+contenedor.appendChild(
+card
+);
+
+});
+
+renderPaginacion();
+
+activarAnimacionesCards();
+
+}
+
+/* =========================================================
+PAGINACIÓN
+========================================================= */
+
+function renderPaginacion(){
+
+const contenedor=
+document.getElementById(
+"paginacion"
+);
+
+const totalPaginas=
+
+Math.ceil(
+
+productosFiltrados.length /
+
+PRODUCTOS_POR_PAGINA
+
+);
+
+contenedor.innerHTML="";
+
+if(
+totalPaginas<=1
+){
+
+return;
+
+}
+
+for(
+let i=1;
+i<=totalPaginas;
+i++
+){
+
+const boton=
+document.createElement(
+"button"
+);
+
+boton.textContent=i;
+
+if(
+i===paginaActual
+){
+
+boton.classList.add(
+"activo"
+);
+
+}
+
+boton.onclick=()=>{
+
+paginaActual=i;
+
+mostrarPagina();
+
+document
+.getElementById(
+"catalogo"
+)
+.scrollIntoView({
+
+behavior:
+"smooth"
+
+});
+
+};
+
+contenedor.appendChild(
+boton
+);
+
+}
+
+}
+
+/* =========================================================
+BUSCAR PRODUCTO
+========================================================= */
+
+function buscarProducto(nombre){
+
+return perfumes.find(
+
+producto=>
+
+producto.perfume===
+nombre
+
+);
+
+}
+
+/* =========================================================
+AGREGAR AL CARRITO
+========================================================= */
+
+function agregarAlCarrito(nombre){
+
+const producto=
+buscarProducto(nombre);
+
+if(
+!producto
+){
+
+return;
+
+}
+
+const existente=
+
+carrito.find(
+
+item=>
+
+item.perfume===
+nombre
+
+);
+
+if(
+existente
+){
+
+existente.cantidad++;
+
+}
+
+else{
+
+carrito.push({
+
+...producto,
+
+cantidad:1
+
+});
+
+}
+
+actualizarCarrito();
+
+}
+
+/* =========================================================
+CAMBIAR CANTIDAD
+========================================================= */
+
+function cambiarCantidad(
+nombre,
+cambio
+){
+
+const item=
+
+carrito.find(
+
+producto=>
+
+producto.perfume===
+nombre
+
+);
+
+if(
+!item
+){
+
+return;
+
+}
+
+item.cantidad+=
+cambio;
+
+if(
+item.cantidad<=0
+){
+
+carrito=
+
+carrito.filter(
+
+producto=>
+
+producto.perfume!==
+nombre
+
+);
+
+}
+
+actualizarCarrito();
+
+renderCarrito();
+
+}
+
+/* =========================================================
+TOTAL UNIDADES
+========================================================= */
+
+function totalUnidades(){
+
+return carrito.reduce(
+
+(total,item)=>
+
+total +
+item.cantidad,
+
+0
+
+);
+
+}
+
+/* =========================================================
+ACTUALIZAR CARRITO
+========================================================= */
+
+function actualizarCarrito(){
+
+const total=
+totalUnidades();
+
+const barra=
+document.getElementById(
+"carritoBarra"
+);
+
+const info=
+document.getElementById(
+"carritoInfo"
+);
+
+barra.classList.toggle(
+"activo",
+total>0
+);
+
+info.innerHTML=`
+
+🛒
+<strong>
+${total}
+</strong>
+
+${
+
+total===1
+
+?
+
+"unidad"
+
+:
+
+"unidades"
+
+}
+
+`;
+
+}
+
+/* =========================================================
+ABRIR CARRITO
+========================================================= */
+
+function abrirCarrito(){
+
+document
+.getElementById(
+"modalCarrito"
+)
+.classList
+.add(
+"activo"
+);
+
+document.body.style.overflow=
+"hidden";
+
+document
+.getElementById(
+"pagoSelector"
+)
+.classList
+.toggle(
+"activo",
+modoActual==="particular"
+);
+
+document
+.getElementById(
+"pagoAyuda"
+)
+.style.display=
+
+modoActual==="particular"
+
+?
+
+"block"
+
+:
+
+"none";
+
+document
+.getElementById(
+"tituloCarrito"
+)
+.innerHTML=
+
+modoActual==="mayorista"
+
+?
+
+"📦 Pedido mayorista"
+
+:
+
+"🛒 Tu pedido";
+
+renderCarrito();
+
+}
+
+/* =========================================================
+CERRAR CARRITO
+========================================================= */
+
+function cerrarCarrito(){
+
+document
+.getElementById(
+"modalCarrito"
+)
+.classList
+.remove(
+"activo"
+);
+
+document.body.style.overflow="";
+
+}
+
+/* =========================================================
+RENDER CARRITO
+========================================================= */
+
+function renderCarrito(){
+
+const lista=
+document.getElementById(
+"listaCarrito"
+);
+
+const resumen=
+document.getElementById(
+"resumenCarrito"
+);
+
+const boton=
+document.getElementById(
+"btnFinalizar"
+);
+
+if(
+carrito.length===0
+){
+
+lista.innerHTML=`
+
+<div style="
+padding:30px;
+text-align:center;
+color:#888;
+">
+
+Tu pedido está vacío.
+
+</div>
+
+`;
+
+resumen.innerHTML="";
+
+boton.disabled=true;
+
+return;
+
+}
+
+const total=
+totalUnidades();
+
+let totalPedido=0;
+
+lista.innerHTML="";
+
+carrito.forEach(item=>{
+
+const precio=
+obtenerPrecioItem(
+item,
+total
+);
+
+const subtotal=
+precio *
+item.cantidad;
+
+totalPedido+=
+subtotal;
+
+lista.innerHTML+=`
+
+<div class="item-carrito">
+
+<div>
+
+<div class="item-nombre">
+
+${escapeHTML(
+item.perfume
+)}
+
+</div>
+
+<div class="item-precio">
+
+$${Math.round(precio)
+.toLocaleString("es-AR")}
+por unidad
+
+</div>
+
+<div class="item-subtotal">
+
+Subtotal:
+$${Math.round(subtotal)
+.toLocaleString("es-AR")}
+
+</div>
+
+</div>
+
+<div class="item-controles">
+
+<button
+onclick="
+cambiarCantidad(
+'${escapeAttr(item.perfume)}',
+-1
+)
+">
+
+−
+
+</button>
+
+<span>
+${item.cantidad}
+</span>
+
+<button
+onclick="
+cambiarCantidad(
+'${escapeAttr(item.perfume)}',
+1
+)
+">
+
++
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+let mensajeExtra="";
+
+if(
+modoActual==="mayorista"
+){
+
+if(
+total<10
+){
+
+mensajeExtra=`
+
+<div class="proximo-nivel">
+
+⚠️ Te faltan
+
+<strong>
+${10-total}
+</strong>
+
+unidades para alcanzar
+el mínimo mayorista.
+
+</div>
+
+`;
+
+}
+
+else if(
+total<20
+){
+
+mensajeExtra=`
+
+<div class="proximo-nivel">
+
+📦 Precio mayorista
+
+<strong>
+10+
+</strong>
+
+activado.
+
+<br>
+
+Te faltan
+
+<strong>
+${20-total}
+</strong>
+
+unidades para precio 20+.
+
+</div>
+
+`;
+
+}
+
+else if(
+total<30
+){
+
+mensajeExtra=`
+
+<div class="proximo-nivel">
+
+🔥 Precio mayorista
+
+<strong>
+20+
+</strong>
+
+activado.
+
+<br>
+
+Te faltan
+
+<strong>
+${30-total}
+</strong>
+
+unidades para precio 30+.
+
+</div>
+
+`;
+
+}
+
+else{
+
+mensajeExtra=`
+
+<div class="proximo-nivel">
+
+🔥
+
+<strong>
+Mejor precio mayorista desbloqueado.
+</strong>
+
+<br>
+
+Nivel 30+ unidades.
+
+</div>
+
+`;
+
+}
+
+}
+
+else{
+
+mensajeExtra=`
+
+<div class="proximo-nivel">
+
+${
+
+formaPago==="transferencia"
+
+?
+
+"🏦 10% OFF aplicado por transferencia / efectivo."
+
+:
+
+formaPago==="debito"
+
+?
+
+"💳 Débito seleccionado · pedido calculado a precio de lista."
+
+:
+
+"📱 Crédito / Mercado Pago seleccionado · pedido calculado a precio de lista."
+
+}
+
+</div>
+
+`;
+
+}
+
+const contienePedido=
+carrito.some(
+item=>productoPorPedido(item)
+);
+
+if(
+modoActual!=="mayorista"
+&&
+contienePedido
+){
+
+mensajeExtra+=`
+<div class="pedido-carrito-aviso">
+<strong>📦 Tu carrito incluye productos por pedido.</strong>
+<br>Entrega estimada: 10 días hábiles.
+<br><br>
+${
+formaPago==="credito"
+?
+"💳 Tarjeta / Mercado Pago: abonás el total al realizar la compra."
+:
+"🏦 Transferencia / efectivo: abonás 50% para confirmar el pedido y 50% cuando llega."
+}
+</div>
+`;
+
+}
+
+resumen.innerHTML=`
+
+<div class="resumen-linea">
+
+<span>
+Unidades
+</span>
+
+<strong>
+${total}
+</strong>
+
+</div>
+
+<div class="resumen-total">
+
+<span>
+TOTAL
+</span>
+
+<span>
+
+$${Math.round(totalPedido)
+.toLocaleString("es-AR")}
+
+</span>
+
+</div>
+
+${mensajeExtra}
+
+`;
+
+if(
+modoActual==="particular"
+){
+
+boton.classList.remove(
+"mercadopago",
+"cargando"
+);
+
+if(
+formaPago==="credito"
+){
+
+boton.classList.add(
+"mercadopago"
+);
+
+boton.innerHTML=
+"💳 PAGAR AHORA CON MERCADO PAGO";
+
+}
+else{
+
+boton.innerHTML=
+"💬 FINALIZAR COMPRA POR WHATSAPP";
+
+}
+
+}
+
+else{
+
+boton.classList.remove(
+"mercadopago",
+"cargando"
+);
+
+boton.innerHTML=
+"💬 ENVIAR PEDIDO MAYORISTA POR WHATSAPP";
+
+}
+
+boton.disabled=
+
+modoActual==="mayorista"
+
+&&
+
+total<
+MINIMO_MAYORISTA;
+
+}
+
+/* =========================================================
+FINALIZAR COMPRA
+========================================================= */
+
+function finalizarCompra(){
+
+if(
+carrito.length===0
+){
+
+return;
+
+}
+
+if(
+modoActual==="particular" &&
+formaPago==="credito"
+){
+
+pagarMercadoPago();
+
+return;
+
+}
+
+enviarPedidoWhatsApp();
+
+}
+
+
+/* =========================================================
+PAGAR CON MERCADO PAGO
+========================================================= */
+
+async function pagarMercadoPago(){
+
+if(
+modoActual!=="particular"
+){
+
+alert(
+"El pago online está disponible para compras particulares."
+);
+
+return;
+
+}
+
+if(
+carrito.length===0
+){
+
+return;
+
+}
+
+const boton=
+document.getElementById(
+"btnFinalizar"
+);
+
+const textoOriginal=
+boton.innerHTML;
+
+try{
+
+boton.disabled=true;
+
+boton.classList.add(
+"cargando"
+);
+
+boton.innerHTML=
+"⏳ GENERANDO CHECKOUT...";
+
+const items=
+carrito.map(item=>({
+
+perfume:
+item.perfume,
+
+cantidad:
+item.cantidad
+
+}));
+
+const respuesta=
+await fetch(
+API,
+{
+
+method:
+"POST",
+
+headers:{
+"Content-Type":
+"text/plain;charset=utf-8"
+},
+
+body:
+JSON.stringify({
+
+accion:
+"crearPago",
+
+items:
+items
+
+})
+
+}
+);
+
+if(
+!respuesta.ok
+){
+
+throw new Error(
+"Error HTTP "+
+respuesta.status
+);
+
+}
+
+const datos=
+await respuesta.json();
+
+if(
+datos.error
+){
+
+throw new Error(
+datos.mensaje ||
+"No se pudo crear el pago."
+);
+
+}
+
+if(
+!datos.checkoutUrl
+){
+
+throw new Error(
+"Mercado Pago no devolvió una URL de pago."
+);
+
+}
+
+window.location.href=
+datos.checkoutUrl;
+
+}
+catch(error){
+
+console.error(
+"Error Mercado Pago:",
+error
+);
+
+alert(
+"No pudimos abrir Mercado Pago.\n\n"+
+error.message+
+"\n\nPodés intentar nuevamente o finalizar por WhatsApp."
+);
+
+boton.disabled=false;
+
+boton.classList.remove(
+"cargando"
+);
+
+boton.innerHTML=
+textoOriginal;
+
+}
+
+}
+
+
+/* =========================================================
+WHATSAPP
+========================================================= */
+
+function enviarPedidoWhatsApp(){
+
+const total=
+totalUnidades();
+
+if(
+total===0
+){
+
+return;
+
+}
+
+if(
+
+modoActual==="mayorista"
+
+&&
+
+total<
+MINIMO_MAYORISTA
+
+){
+
+alert(
+
+`El pedido mayorista mínimo es de ${MINIMO_MAYORISTA} unidades.`
+
+);
+
+return;
+
+}
+
+let totalPedido=0;
+
+let mensaje="";
+
+const contienePedido=
+carrito.some(
+item=>productoPorPedido(item)
+);
+
+if(
+modoActual==="mayorista"
+){
+
+mensaje=
+
+`Hola NERÓS 👋✨
+
+Quiero realizar un pedido MAYORISTA:
+
+📦 Cantidad total: ${total} unidades
+
+━━━━━━━━━━━━━━━
+DETALLE DEL PEDIDO
+━━━━━━━━━━━━━━━
+`;
+
+}
+
+else{
+
+let medioPago="";
+
+if(
+formaPago==="transferencia"
+){
+
+medioPago=
+"Transferencia / Efectivo (10% OFF)";
+
+}
+
+else if(
+formaPago==="debito"
+){
+
+medioPago=
+"Débito (precio de lista)";
+
+}
+
+else{
+
+medioPago=
+"Crédito / Mercado Pago (precio de lista)";
+
+}
+
+mensaje=
+
+`Hola NERÓS 👋✨
+
+Quiero finalizar esta compra:
+
+📦 Cantidad total: ${total} unidades
+
+💳 Medio de pago:
+${medioPago}
+
+━━━━━━━━━━━━━━━
+DETALLE DEL PEDIDO
+━━━━━━━━━━━━━━━
+`;
+
+}
+
+if(
+modoActual!=="mayorista"
+&&
+contienePedido
+){
+
+mensaje+=`
+
+📦 ESTE PEDIDO INCLUYE PRODUCTOS POR PEDIDO
+Entrega estimada: 10 días hábiles.
+
+${
+formaPago==="credito"
+?
+"💳 Tarjeta / Mercado Pago: se abona el total al realizar la compra."
+:
+"🏦 Transferencia / Efectivo: 50% al confirmar el pedido + 50% cuando llega."
+}
+
+`;
+
+}
+
+carrito.forEach(item=>{
+
+const precio=
+
+obtenerPrecioItem(
+item,
+total
+);
+
+const subtotal=
+
+precio *
+item.cantidad;
+
+totalPedido+=
+subtotal;
+
+mensaje+=`
+
+🧴 ${item.perfume}
+
+Cantidad:
+${item.cantidad}
+
+Precio unitario:
+$${Math.round(precio)
+.toLocaleString("es-AR")}
+
+Subtotal:
+$${Math.round(subtotal)
+.toLocaleString("es-AR")}
+`;
+
+});
+
+if(
+modoActual==="mayorista"
+){
+
+let nivel=
+"10+";
+
+if(
+total>=30
+){
+
+nivel=
+"30+";
+
+}
+
+else if(
+total>=20
+){
+
+nivel=
+"20+";
+
+}
+
+mensaje+=`
+
+━━━━━━━━━━━━━━━
+
+📊 Nivel mayorista:
+${nivel}
+
+📦 Total de unidades:
+${total}
+
+💰 TOTAL DEL PEDIDO:
+$${Math.round(totalPedido).toLocaleString("es-AR")}
+
+━━━━━━━━━━━━━━━
+
+Quiero confirmar disponibilidad y coordinar el pedido.
+
+Gracias 🙌
+`;
+
+}
+
+else{
+
+mensaje+=`
+
+━━━━━━━━━━━━━━━
+
+📦 Total de unidades:
+${total}
+
+💰 TOTAL:
+$${Math.round(totalPedido).toLocaleString("es-AR")}
+
+━━━━━━━━━━━━━━━
+
+Quiero confirmar disponibilidad y coordinar entrega o envío.
+
+Gracias 🙌
+`;
+
+}
+
+const url=
+
+`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(mensaje)}`;
+
+window.open(
+url,
+"_blank"
+);
+
+}
+
+/* =========================================================
+FICHA DINÁMICA
+========================================================= */
+
+let productoDetalleActual=null;
+
+let cantidadDetalle=1;
+
+function abrirProducto(nombre){
+
+const producto=
+buscarProducto(nombre);
+
+if(
+!producto
+){
+
+return;
+
+}
+
+productoDetalleActual=
+producto;
+
+cantidadDetalle=
+1;
+
+const foto=
+
+producto.foto ||
+producto.imagen ||
+"";
+
+const precioLista=
+precioParticular(producto);
+
+const precioTransferencia=
+precioLista *
+0.90;
+
+const stock=
+producto.stock ||
+"Consultar";
+
+document
+.getElementById(
+"detalleNombre"
+)
+.textContent=
+
+producto.perfume ||
+"Producto NERÓS";
+
+document
+.getElementById(
+"detalleStock"
+)
+.textContent=
+stock;
+
+document
+.getElementById(
+"detalleCantidad"
+)
+.textContent=
+cantidadDetalle;
+
+const imagen=
+document.getElementById(
+"detalleFoto"
+);
+
+imagen.src=
+foto;
+
+imagen.alt=
+
+producto.perfume ||
+"Producto NERÓS";
+
+imagen.onerror=function(){
+
+this.onerror=null;
+
+this.src=
+
+"https://placehold.co/700x700/151515/c89d38?text=NERÓS";
+
+};
+
+const precios=
+document.getElementById(
+"detallePrecios"
+);
+
+if(
+modoActual==="mayorista"
+){
+
+const p10=
+precioMayorista(
+producto,
+10
+);
+
+const p20=
+precioMayorista(
+producto,
+20
+);
+
+const p30=
+precioMayorista(
+producto,
+30
+);
+
+precios.innerHTML=`
+
+<div class="producto-precio-principal">
+
+${
+
+p10>0
+
+?
+
+"$"+
+Math.round(p10)
+.toLocaleString("es-AR")
+
+:
+
+"Consultar"
+
+}
+
+</div>
+
+<div class="producto-ahorro">
+
+Precio mayorista desde 10 unidades
+
+</div>
+
+<div class="producto-mayorista-niveles">
+
+<div class="producto-nivel">
+
+<small>
+10+ UNIDADES
+</small>
+
+<strong>
+
+${
+
+p10>0
+
+?
+
+"$"+
+Math.round(p10)
+.toLocaleString("es-AR")
+
+:
+
+"—"
+
+}
+
+</strong>
+
+</div>
+
+<div class="producto-nivel">
+
+<small>
+20+ UNIDADES
+</small>
+
+<strong>
+
+${
+
+p20>0
+
+?
+
+"$"+
+Math.round(p20)
+.toLocaleString("es-AR")
+
+:
+
+"—"
+
+}
+
+</strong>
+
+</div>
+
+<div class="producto-nivel">
+
+<small>
+30+ UNIDADES
+</small>
+
+<strong>
+
+${
+
+p30>0
+
+?
+
+"$"+
+Math.round(p30)
+.toLocaleString("es-AR")
+
+:
+
+"—"
+
+}
+
+</strong>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+else{
+
+precios.innerHTML=`
+
+<div class="producto-precio-lista">
+
+Precio de lista:
+$${Math.round(precioLista)
+.toLocaleString("es-AR")}
+
+</div>
+
+<div class="producto-precio-principal">
+
+$${Math.round(precioTransferencia)
+.toLocaleString("es-AR")}
+
+</div>
+
+<div class="producto-ahorro">
+
+10% OFF pagando por transferencia / efectivo
+
+</div>
+
+`;
+
+}
+
+const avisoPedido=
+document.getElementById(
+"detallePedidoAviso"
+);
+
+if(
+productoPorPedido(producto)
+){
+
+avisoPedido.style.display=
+"block";
+
+avisoPedido.innerHTML=`
+<strong>📦 Disponible por pedido · Entrega estimada: 10 días hábiles</strong>
+<br><br>
+💳 <strong>Tarjeta / Mercado Pago:</strong> se abona el total al realizar la compra.
+<br>
+🏦 <strong>Transferencia / efectivo:</strong> abonás 50% para confirmar el pedido y 50% cuando llega tu producto.
+`;
+
+}
+else{
+
+avisoPedido.style.display=
+"none";
+
+avisoPedido.innerHTML=
+"";
+
+}
+
+const boton=
+document.getElementById(
+"detalleAgregar"
+);
+
+const disponible=
+stockDisponible(producto);
+
+boton.disabled=
+!disponible;
+
+boton.textContent=
+
+disponible
+
+?
+
+"AGREGAR AL CARRITO"
+
+:
+
+"SIN STOCK";
+
+document
+.getElementById(
+"modalProducto"
+)
+.classList
+.add(
+"activo"
+);
+
+document.body.style.overflow=
+"hidden";
+
+}
+
+function cerrarProducto(){
+
+document
+.getElementById(
+"modalProducto"
+)
+.classList
+.remove(
+"activo"
+);
+
+document.body.style.overflow=
+"";
+
+productoDetalleActual=
+null;
+
+cantidadDetalle=
+1;
+
+}
+
+function cerrarProductoPorFondo(event){
+
+if(
+event.target.id===
+"modalProducto"
+){
+
+cerrarProducto();
+
+}
+
+}
+
+function cambiarCantidadDetalle(cambio){
+
+cantidadDetalle=
+
+Math.max(
+1,
+cantidadDetalle+
+cambio
+);
+
+document
+.getElementById(
+"detalleCantidad"
+)
+.textContent=
+cantidadDetalle;
+
+}
+
+function agregarDesdeDetalle(){
+
+if(
+
+!productoDetalleActual
+
+||
+
+!stockDisponible(
+productoDetalleActual
+)
+
+){
+
+return;
+
+}
+
+const nombre=
+productoDetalleActual.perfume;
+
+for(
+let i=0;
+i<cantidadDetalle;
+i++
+){
+
+agregarAlCarrito(
+nombre
+);
+
+}
+
+cerrarProducto();
+
+abrirCarrito();
+
+}
+
+/* =========================================================
+ESCAPES
+========================================================= */
+
+function escapeHTML(text){
+
+return String(text)
+
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+function escapeAttr(text){
+
+return String(text)
+
+.replace(/\\/g,"\\\\")
+.replace(/'/g,"\\'")
+.replace(/"/g,"&quot;");
+
+}
+
+/* =========================================================
+MENÚ
+========================================================= */
+
+function abrirMenu(){
+
+document
+.getElementById(
+"sideMenu"
+)
+.classList
+.add(
+"activo"
+);
+
+document
+.getElementById(
+"sideOverlay"
+)
+.classList
+.add(
+"activo"
+);
+
+document.body.style.overflow=
+"hidden";
+
+}
+
+function cerrarMenu(){
+
+document
+.getElementById(
+"sideMenu"
+)
+.classList
+.remove(
+"activo"
+);
+
+document
+.getElementById(
+"sideOverlay"
+)
+.classList
+.remove(
+"activo"
+);
+
+document.body.style.overflow=
+"";
+
+}
+
+/* =========================================================
+BUSCADOR HEADER
+========================================================= */
+
+function buscarDesdeHeader(valor){
+
+const input=
+document.getElementById(
+"buscar"
+);
+
+if(
+!input
+){
+
+return;
+
+}
+
+input.value=
+valor;
+
+filtrarProductos();
+
+}
+
+function irABusqueda(){
+
+document
+.getElementById(
+"catalogo"
+)
+.scrollIntoView({
+
+behavior:
+"smooth"
+
+});
+
+}
+
+/* =========================================================
+CHIPS
+========================================================= */
+
+function filtrarChip(tipo){
+
+document
+.querySelectorAll(
+".cat-chip"
+)
+.forEach(x=>
+
+x.classList.toggle(
+
+"activo",
+
+x.dataset.chip===
+tipo
+
+)
+
+);
+
+const input=
+document.getElementById(
+"buscar"
+);
+
+const inputHeader=
+document.getElementById(
+"buscarHeader"
+);
+
+if(
+input
+){
+
+input.value="";
+
+}
+
+if(
+inputHeader
+){
+
+inputHeader.value="";
+
+}
+
+if(
+tipo==="mayorista"
+){
+
+cambiarModo(
+"mayorista"
+);
+
+productosFiltrados=[
+...perfumes
+];
+
+}
+
+else{
+
+if(
+modoActual!=="particular"
+){
+
+cambiarModo(
+"particular"
+);
+
+}
+
+if(
+tipo==="disponible"
+){
+
+productosFiltrados=
+
+perfumes.filter(p=>{
+
+const stock=
+
+String(
+p.stock ||
+""
+)
+.toLowerCase();
+
+return (
+
+stock.includes(
+"disponible"
+)
+
+&&
+
+!stock.includes(
+"pedido"
+)
+
+);
+
+});
+
+}
+
+else if(
+tipo==="pedido"
+){
+
+productosFiltrados=
+
+perfumes.filter(p=>
+
+String(
+p.stock ||
+""
+)
+.toLowerCase()
+.includes(
+"pedido"
+)
+
+);
+
+}
+
+else{
+
+productosFiltrados=[
+...perfumes
+];
+
+}
+
+}
+
+paginaActual=1;
+
+mostrarPagina();
+
+document
+.getElementById(
+"catalogo"
+)
+.scrollIntoView({
+
+behavior:
+"smooth"
+
+});
+
+}
+
+/* =========================================================
+SLIDER
+========================================================= */
+
+let slideActual=0;
+
+let slideTimer=null;
+
+function mostrarSlide(indice){
+
+const slides=
+
+document.querySelectorAll(
+".hero-slide"
+);
+
+const dots=
+
+document.querySelectorAll(
+".hero-dot"
+);
+
+if(
+!slides.length
+){
+
+return;
+
+}
+
+slideActual=
+
+(
+indice+
+slides.length
+)
+
+%
+
+slides.length;
+
+slides.forEach(
+(s,i)=>
+
+s.classList.toggle(
+
+"activo",
+
+i===slideActual
+
+)
+
+);
+
+dots.forEach(
+(d,i)=>
+
+d.classList.toggle(
+
+"activo",
+
+i===slideActual
+
+)
+
+);
+
+clearInterval(
+slideTimer
+);
+
+slideTimer=
+
+setInterval(
+
+()=>mostrarSlideSinReset(
+slideActual+1
+),
+
+5200
+
+);
+
+}
+
+function mostrarSlideSinReset(indice){
+
+const slides=
+
+document.querySelectorAll(
+".hero-slide"
+);
+
+const dots=
+
+document.querySelectorAll(
+".hero-dot"
+);
+
+if(
+!slides.length
+){
+
+return;
+
+}
+
+slideActual=
+
+(
+indice+
+slides.length
+)
+
+%
+
+slides.length;
+
+slides.forEach(
+(s,i)=>
+
+s.classList.toggle(
+
+"activo",
+
+i===slideActual
+
+)
+
+);
+
+dots.forEach(
+(d,i)=>
+
+d.classList.toggle(
+
+"activo",
+
+i===slideActual
+
+)
+
+);
+
+}
+
+slideTimer=
+
+setInterval(
+
+()=>mostrarSlideSinReset(
+slideActual+1
+),
+
+5200
+
+);
+
+/* =========================================================
+ANIMACIONES
+========================================================= */
+
+function activarAnimacionesCards(){
+
+const cards=
+
+document.querySelectorAll(
+".card.reveal"
+);
+
+cards.forEach(
+(card,index)=>{
+
+setTimeout(
+()=>{
+
+card.classList.add(
+"visible"
+);
+
+},
+Math.min(
+index*35,
+400
+)
+);
+
+});
+
+}
+
+/* =========================================================
+RESULTADO DE PAGO AL VOLVER DE MERCADO PAGO
+========================================================= */
+
+function mostrarResultadoPago(){
+
+const parametros=
+new URLSearchParams(
+window.location.search
+);
+
+const estado=
+parametros.get(
+"pago"
+);
+
+if(
+!estado
+){
+
+return;
+
+}
+
+let mensaje="";
+
+if(
+estado==="aprobado"
+){
+
+mensaje=
+"✅ Pago aprobado. ¡Gracias por tu compra en NERÓS!";
+
+}
+else if(
+estado==="pendiente"
+){
+
+mensaje=
+"⏳ Tu pago quedó pendiente. Mercado Pago te informará cuando se acredite.";
+
+}
+else if(
+estado==="rechazado"
+){
+
+mensaje=
+"❌ El pago no pudo completarse. Podés volver a intentarlo o finalizar por WhatsApp.";
+
+}
+
+if(
+mensaje
+){
+
+setTimeout(
+()=>alert(mensaje),
+350
+);
+
+}
+
+}
+
+mostrarResultadoPago();
+
+/* =========================================================
+PARÁMETROS DE ENTRADA DESDE LA HOME
+========================================================= */
+
+function aplicarParametrosIniciales(){
+
+const parametros=
+new URLSearchParams(
+window.location.search
+);
+
+const modo=
+parametros.get(
+"modo"
+);
+
+const filtro=
+parametros.get(
+"filtro"
+);
+
+if(
+modo==="mayorista"
+){
+
+cambiarModo(
+"mayorista"
+);
+
+document
+.querySelectorAll(
+".cat-chip"
+)
+.forEach(x=>
+ x.classList.toggle(
+ "activo",
+ x.dataset.chip==="mayorista"
+ )
+);
+
+}
+else if(
+filtro==="pedido"
+){
+
+filtrarChip(
+"pedido"
+);
+
+}
+else if(
+filtro==="disponible"
+){
+
+filtrarChip(
+"disponible"
+);
+
+}
+
+}
+
+setTimeout(
+aplicarParametrosIniciales,
+700
+);
+
+/* =========================================================
+ESC
+========================================================= */
+
+document.addEventListener(
+"keydown",
+e=>{
+
+if(
+e.key==="Escape"
+){
+
+cerrarMenu();
+
+cerrarCarrito();
+
+cerrarProducto();
+
+}
+
+}
+);
+
+</script>
+
+</body>
+</html>
