@@ -74,7 +74,6 @@ pointer-events:none;
 
 /* Asegura que las secciones principales queden por encima */
 .navbar,
-.header-search,
 .category-rail,
 .catalogo-page,
 .footer,
@@ -242,81 +241,11 @@ transition:.2s;
 
 .menu a:hover{color:var(--dorado-claro);}
 
-/* ================= SEARCH ================= */
-
-.header-search{
-max-width:900px;
-margin:16px auto 0;
-padding:0 20px;
-display:none;
-}
-
-.header-search-inner{
-position:relative;
-}
-
-.header-search input{
-width:100%;
-height:52px;
-background:#111;
-border:1px solid #303030;
-color:#fff;
-border-radius:999px;
-padding:0 62px 0 22px;
-outline:none;
-font-size:14px;
-transition:
-border-color .25s ease,
-box-shadow .25s ease,
-background .25s ease;
-}
-
-.header-search input::placeholder{
-color:#777;
-}
-
-.header-search input:focus{
-border-color:var(--dorado);
-background:#131313;
-box-shadow:
-0 0 0 3px rgba(200,157,56,.08),
-0 8px 30px rgba(0,0,0,.30);
-}
-
-.header-search button{
-position:absolute;
-right:5px;
-top:50%;
-transform:translateY(-50%);
-width:42px;
-height:42px;
-border-radius:50%;
-border:0;
-background:var(--dorado);
-cursor:pointer;
-color:#111;
-font-size:20px;
-font-weight:bold;
-display:flex;
-align-items:center;
-justify-content:center;
-transition:
-transform .2s ease,
-background .2s ease,
-box-shadow .2s ease;
-}
-
-.header-search button:hover{
-transform:translateY(-50%) scale(1.07);
-background:var(--dorado-claro);
-box-shadow:0 0 20px rgba(200,157,56,.28);
-}
-
 /* ================= CATEGORÍAS ================= */
 
 .category-rail{
 position:sticky;
-top:147px;
+top:96px;
 z-index:110;
 background:rgba(8,8,8,.95);
 backdrop-filter:blur(15px);
@@ -2211,29 +2140,9 @@ width:36px;
 height:36px;
 }
 
-.header-search{
-display:block;
-margin:0;
-background:#080808;
-padding:8px 12px;
-}
-
-.header-search input{
-height:46px;
-padding:0 55px 0 17px;
-font-size:13px;
-}
-
-.header-search button{
-width:38px;
-height:38px;
-right:4px;
-top:50%;
-font-size:18px;
-}
 
 .category-rail{
-top:114px;
+top:76px;
 justify-content:flex-start;
 padding:8px 10px;
 }
@@ -2597,28 +2506,6 @@ title="Carrito">
 
 </div>
 
-<div class="header-search">
-
-<div class="header-search-inner">
-
-<input
-id="buscarHeader"
-type="search"
-placeholder="¿Qué perfume estás buscando?"
-oninput="buscarDesdeHeader(this.value)">
-
-<button
-onclick="irABusqueda()"
-aria-label="Buscar">
-
-🔍
-
-</button>
-
-</div>
-
-</div>
-
 </header>
 
 <div class="category-rail">
@@ -2837,6 +2724,47 @@ A PEDIDO
 
 <div class="filtro-ayuda">
 Podés combinar categoría y disponibilidad. Los testers se muestran únicamente en el catálogo mayorista autorizado.
+</div>
+
+</div>
+
+
+<div
+id="filtroTesterGrupo"
+class="filtro-grupo"
+style="display:none;">
+
+<div class="filtro-grupo-titulo">
+PRODUCTOS MAYORISTAS
+</div>
+
+<div class="filtro-opciones">
+
+<button
+class="filtro-opcion activo"
+data-filtro-tester="todos"
+onclick="seleccionarTesterFiltro('todos')">
+TODOS
+</button>
+
+<button
+class="filtro-opcion"
+data-filtro-tester="tester"
+onclick="seleccionarTesterFiltro('tester')">
+SOLO TESTERS
+</button>
+
+<button
+class="filtro-opcion"
+data-filtro-tester="no-tester"
+onclick="seleccionarTesterFiltro('no-tester')">
+SIN TESTERS
+</button>
+
+</div>
+
+<div class="filtro-ayuda">
+Este filtro aparece únicamente después de ingresar correctamente a la lista mayorista.
 </div>
 
 </div>
@@ -3302,6 +3230,9 @@ let filtroTipo=
 let filtroStockPopup=
 "todos";
 
+let filtroTester=
+"todos";
+
 /* =========================================================
 API
 ========================================================= */
@@ -3487,6 +3418,7 @@ function activarMayoristaAutorizado(){
 
 filtroRapido="todos";
 filtroStockPopup="todos";
+filtroTester="todos";
 
 cambiarModo("mayorista");
 
@@ -3538,6 +3470,10 @@ actualizarCarrito();
 }
 
 modoActual=modo;
+
+if(modo==="particular"){
+filtroTester="todos";
+}
 
 document
 .getElementById("modoParticular")
@@ -3683,6 +3619,27 @@ modoActual==="mayorista" &&
 return false;
 }
 
+if(
+modoActual==="mayorista" &&
+accesoMayoristaAutorizado
+){
+
+if(
+filtroTester==="tester" &&
+!esTester(producto)
+){
+return false;
+}
+
+if(
+filtroTester==="no-tester" &&
+esTester(producto)
+){
+return false;
+}
+
+}
+
 if(texto){
 
 const nombre=
@@ -3759,6 +3716,23 @@ POPUP FILTROS
 
 function abrirFiltros(){
 
+const grupoTester=
+document.getElementById("filtroTesterGrupo");
+
+if(grupoTester){
+
+grupoTester.style.display=
+(
+modoActual==="mayorista" &&
+accesoMayoristaAutorizado
+)
+?
+"block"
+:
+"none";
+
+}
+
 sincronizarBotonesFiltro();
 
 document
@@ -3822,6 +3796,30 @@ btn.dataset.filtroStock===tipo
 
 }
 
+function seleccionarTesterFiltro(tipo){
+
+if(
+modoActual!=="mayorista" ||
+!accesoMayoristaAutorizado
+){
+return;
+}
+
+filtroTester=tipo;
+
+document
+.querySelectorAll("[data-filtro-tester]")
+.forEach(btn=>{
+
+btn.classList.toggle(
+"activo",
+btn.dataset.filtroTester===tipo
+);
+
+});
+
+}
+
 function sincronizarBotonesFiltro(){
 
 document
@@ -3842,6 +3840,17 @@ document
 btn.classList.toggle(
 "activo",
 btn.dataset.filtroStock===filtroStockPopup
+);
+
+});
+
+document
+.querySelectorAll("[data-filtro-tester]")
+.forEach(btn=>{
+
+btn.classList.toggle(
+"activo",
+btn.dataset.filtroTester===filtroTester
 );
 
 });
@@ -3885,20 +3894,14 @@ function limpiarFiltros(){
 
 filtroTipo="TODOS";
 filtroStockPopup="todos";
+filtroTester="todos";
 filtroRapido="todos";
 
 const buscar=
 document.getElementById("buscar");
 
-const buscarHeader=
-document.getElementById("buscarHeader");
-
 if(buscar){
 buscar.value="";
-}
-
-if(buscarHeader){
-buscarHeader.value="";
 }
 
 document
@@ -3964,9 +3967,23 @@ tags.push(
 }
 
 if(modoActual==="mayorista"){
+
+if(filtroTester==="tester"){
 tags.push(
-'<span class="filtro-tag">Mayorista · incluye testers</span>'
+'<span class="filtro-tag">Mayorista · Solo testers</span>'
 );
+}
+else if(filtroTester==="no-tester"){
+tags.push(
+'<span class="filtro-tag">Mayorista · Sin testers</span>'
+);
+}
+else{
+tags.push(
+'<span class="filtro-tag">Mayorista · Todos los productos</span>'
+);
+}
+
 }
 
 contenedor.innerHTML=
@@ -3980,7 +3997,11 @@ if(boton){
 boton.classList.toggle(
 "activo",
 filtroTipo!=="TODOS" ||
-filtroStockPopup!=="todos"
+filtroStockPopup!=="todos" ||
+(
+modoActual==="mayorista" &&
+filtroTester!=="todos"
+)
 );
 
 }
@@ -6307,20 +6328,7 @@ document.body.style.overflow=
 BUSCADOR HEADER
 ========================================================= */
 
-function buscarDesdeHeader(valor){
 
-const input=
-document.getElementById(
-"buscar"
-);
-
-if(
-!input
-){
-
-return;
-
-}
 
 input.value=
 valor;
@@ -6329,18 +6337,7 @@ filtrarProductos();
 
 }
 
-function irABusqueda(){
-
-document
-.getElementById(
-"catalogo"
-)
-.scrollIntoView({
-
-behavior:
-"smooth"
-
-});
+);
 
 }
 
