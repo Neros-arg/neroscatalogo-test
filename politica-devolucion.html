@@ -12,6 +12,7 @@
   --negro:#080808;
   --dorado:#c89d38;
   --dorado-claro:#e3bd63;
+  --gris:#aaa;
 }
 html{scroll-behavior:smooth}
 body{
@@ -22,6 +23,7 @@ body{
   font-family:Arial,Helvetica,sans-serif;
 }
 a{text-decoration:none}
+
 .header{
   position:sticky;
   top:0;
@@ -52,8 +54,12 @@ a{text-decoration:none}
   padding:11px 16px;
   font-size:12px;
   font-weight:800;
+  transition:.2s;
 }
-.volver:hover{border-color:var(--dorado);color:var(--dorado-claro)}
+.volver:hover{
+  border-color:var(--dorado);
+  color:var(--dorado-claro);
+}
 
 .hero{
   max-width:1050px;
@@ -74,7 +80,7 @@ a{text-decoration:none}
   margin:12px 0 16px;
 }
 .hero p{
-  max-width:760px;
+  max-width:790px;
   margin:auto;
   color:#bbb;
   font-size:15px;
@@ -93,6 +99,7 @@ a{text-decoration:none}
   border-radius:20px;
   background:rgba(10,10,10,.93);
   backdrop-filter:blur(10px);
+  box-shadow:0 20px 55px rgba(0,0,0,.28);
 }
 .bloque.destacado{
   border-color:rgba(227,189,99,.48);
@@ -115,10 +122,20 @@ a{text-decoration:none}
   font-size:14px;
   line-height:1.75;
 }
+.bloque p + p{
+  margin-top:10px;
+}
 .bloque ul{
   margin:10px 0 0 20px;
 }
-.bloque b{color:var(--dorado-claro)}
+.bloque b{
+  color:var(--dorado-claro);
+}
+.nota{
+  margin-top:14px;
+  color:#777!important;
+  font-size:11px!important;
+}
 .accion{
   display:flex;
   gap:10px;
@@ -134,21 +151,26 @@ a{text-decoration:none}
   border-radius:999px;
   font-size:11px;
   font-weight:900;
+  transition:.2s;
 }
 .btn.dorado{
   color:#111;
   background:linear-gradient(135deg,#f1c65a,#d9a72e,#f2ca62);
+}
+.btn.dorado:hover{
+  transform:translateY(-2px);
+  filter:brightness(1.08);
 }
 .btn.oscuro{
   color:#fff;
   border:1px solid #3a3a3a;
   background:#111;
 }
-.nota{
-  margin-top:14px;
-  color:#777!important;
-  font-size:11px!important;
+.btn.oscuro:hover{
+  border-color:var(--dorado);
+  color:var(--dorado-claro);
 }
+
 .footer{
   border-top:1px solid #222;
   background:#050505;
@@ -164,6 +186,7 @@ a{text-decoration:none}
   font-size:10px;
   line-height:1.6;
 }
+
 @media(max-width:600px){
   .header{height:78px}
   .header img{width:120px}
@@ -201,22 +224,29 @@ a{text-decoration:none}
 
   <section class="bloque destacado" id="arrepentimiento">
     <h2>↩️ Derecho de arrepentimiento</h2>
+
     <p>
-      Para compras realizadas a distancia o por internet, podés
-      <b>revocar la compra dentro de los 10 días corridos</b> contados
-      desde la entrega del producto o la celebración del contrato,
-      según corresponda.
+      En compras realizadas a distancia o por internet podés ejercer el
+      <b>derecho de arrepentimiento dentro de los 10 días corridos</b>
+      contados desde la entrega del producto o la celebración del contrato,
+      según corresponda conforme a la normativa vigente.
     </p>
+
     <p>
-      El ejercicio de este derecho no tiene penalidad y los gastos de
-      devolución que legalmente correspondan quedan a cargo del vendedor.
+      El ejercicio de este derecho no tiene penalidad. Cuando corresponda,
+      los gastos de devolución quedan a cargo del vendedor.
+    </p>
+
+    <p>
+      Este derecho puede tener excepciones legales según la naturaleza del
+      producto o si el bien fue efectivamente utilizado o consumido.
     </p>
 
     <div class="accion">
       <a class="btn dorado"
          href="https://wa.me/5493417830300?text=Hola%20NER%C3%93S.%20Quiero%20ejercer%20mi%20derecho%20de%20arrepentimiento%20sobre%20una%20compra."
          target="_blank">
-        SOLICITAR ARREPENTIMIENTO
+        BOTÓN DE ARREPENTIMIENTO
       </a>
 
       <a class="btn oscuro" href="catalogo.html">
@@ -226,55 +256,128 @@ a{text-decoration:none}
   </section>
 
   <section class="bloque">
-    <h2>✅ Producto con falla o defecto</h2>
+    <h2>🧴 Perfumería: fallas o defectos</h2>
+
     <p>
-      Si recibís un producto con una falla, defecto o inconveniente,
-      contactanos para que podamos revisar el caso y darte una solución.
-      Los productos cuentan con las garantías legales que correspondan.
+      Si recibís un perfume con una <b>falla o defecto</b>, por ejemplo un
+      problema de atomizador, pérdida, daño en el envase o un inconveniente
+      atribuible al producto, contactanos para revisar el caso y gestionar
+      la solución que corresponda.
     </p>
 
-    <h3>Para agilizar la gestión</h3>
+    <p>
+      Para agilizar la gestión, te podemos solicitar fotos o video del
+      producto y del inconveniente detectado.
+    </p>
+
+    <p>
+      Conservá, en lo posible, la caja, accesorios y comprobante de compra.
+      Estos elementos ayudan a identificar el producto y facilitar la gestión.
+    </p>
+  </section>
+
+  <section class="bloque">
+    <h2>📱 Electrónica, celulares, tablets y productos similares</h2>
+
+    <p>
+      Si un producto electrónico presenta una falla o defecto, el equipo
+      podrá requerir una <b>verificación técnica previa</b> para determinar
+      el origen del inconveniente y gestionar la solución correspondiente.
+    </p>
+
+    <p>
+      Según el caso, la solución podrá consistir en reparación, reemplazo,
+      cambio o la alternativa que corresponda conforme a la garantía y a la
+      normativa aplicable.
+    </p>
+
+    <p>
+      Los productos nuevos cuentan con la <b>garantía legal mínima vigente</b>.
+      Una verificación técnica no implica la pérdida ni la renuncia de los
+      derechos que correspondan al consumidor.
+    </p>
+
+    <p>
+      Si el producto requiere traslado para una gestión cubierta por garantía,
+      se procederá conforme a lo establecido por la normativa vigente.
+    </p>
+  </section>
+
+  <section class="bloque">
+    <h2>🔁 Cambios por elección del cliente</h2>
+
+    <p>
+      Fuera de los casos de arrepentimiento, falla, defecto o garantía,
+      NERÓS no garantiza cambios automáticos por
+      <b>gusto personal, preferencia de aroma, color, modelo, compatibilidad
+      u otras cuestiones de elección personal</b> una vez que el producto
+      haya sido utilizado, abierto o activado.
+    </p>
+
+    <p>
+      Si el producto se encuentra <b>nuevo, sin uso, completo y en su
+      presentación original</b>, podés consultarnos. Evaluaremos la posibilidad
+      de cambio según el tipo de producto, su estado y la disponibilidad.
+    </p>
+
+    <p>
+      Esta política comercial adicional no reemplaza ni restringe el derecho
+      de arrepentimiento, la garantía legal ni ningún otro derecho reconocido
+      al consumidor.
+    </p>
+  </section>
+
+  <section class="bloque">
+    <h2>📦 Estado del producto y documentación</h2>
+
+    <p>
+      Para facilitar cualquier gestión, recomendamos conservar:
+    </p>
+
     <ul>
-      <li>Conservá el comprobante de compra.</li>
-      <li>En lo posible, mantené el empaque y accesorios del producto.</li>
-      <li>Enviá fotos o video del inconveniente si ayudan a identificarlo.</li>
+      <li>El comprobante o constancia de compra.</li>
+      <li>El empaque original, cuando sea posible.</li>
+      <li>Accesorios, manuales y componentes incluidos.</li>
+      <li>Fotos o videos del inconveniente, si corresponde.</li>
     </ul>
-  </section>
 
-  <section class="bloque">
-    <h2>📦 Cambios comerciales</h2>
-    <p>
-      Para cambios voluntarios por otro producto, podés consultarnos dentro
-      de los <b>15 días corridos</b> desde la recepción. Evaluaremos el cambio
-      según el estado del artículo, su naturaleza y disponibilidad.
-    </p>
-    <p>
-      Esta opción comercial adicional no reemplaza ni restringe el derecho
-      de arrepentimiento, garantías u otros derechos que correspondan por ley.
-    </p>
-  </section>
-
-  <section class="bloque">
-    <h2>🧴 Estado del producto</h2>
-    <p>
-      Para solicitudes de cambio voluntario, el producto debería conservarse
-      sin uso, completo y en condiciones adecuadas, junto con sus accesorios
-      y presentación original cuando corresponda.
-    </p>
     <p class="nota">
-      Los requisitos de una gestión comercial nunca se aplicarán de forma que
-      eliminen derechos legales obligatorios del consumidor.
+      La falta de empaque original no será utilizada de forma automática para
+      desconocer derechos legales que pudieran corresponder por falla, defecto,
+      garantía o arrepentimiento.
     </p>
   </section>
 
   <section class="bloque">
-    <h2>💬 ¿Necesitás ayuda?</h2>
+    <h2>⏱️ Productos por pedido</h2>
+
     <p>
-      Escribinos con tu nombre, producto y comprobante o número de pedido.
-      Te ayudamos a revisar el caso.
+      Los productos identificados como <b>“Disponible por pedido”</b>
+      se solicitan especialmente para el cliente y tienen el plazo de entrega
+      informado en la tienda al momento de comprar.
     </p>
+
+    <p>
+      La modalidad “por pedido” no elimina los derechos que legalmente
+      correspondan al consumidor. Si se trata de un producto expresamente
+      personalizado o realizado conforme a indicaciones particulares del
+      comprador, podrán aplicar las excepciones previstas por la normativa.
+    </p>
+  </section>
+
+  <section class="bloque">
+    <h2>💬 ¿Necesitás hacer una gestión?</h2>
+
+    <p>
+      Escribinos indicando tu nombre, producto y comprobante o referencia de
+      pedido. Si existe una falla, agregá una breve descripción y, si podés,
+      fotos o video del inconveniente.
+    </p>
+
     <div class="accion">
-      <a class="btn dorado" href="https://wa.me/5493417830300" target="_blank">
+      <a class="btn dorado"
+         href="https://wa.me/5493417830300?text=Hola%20NER%C3%93S.%20Necesito%20realizar%20una%20consulta%20por%20una%20compra."
+         target="_blank">
         HABLAR CON NERÓS
       </a>
     </div>
