@@ -879,6 +879,24 @@ font-size:14px;
 font-weight:900;
 }
 
+.cuotas-card{
+margin-top:5px;
+font-size:11px;
+line-height:1.4;
+color:#d9d9d9;
+font-weight:800;
+}
+
+.cuotas-card b{
+color:#ffffff;
+font-size:12px;
+font-weight:900;
+}
+
+.cuotas-card span{
+color:var(--dorado-claro);
+}
+
 .precio-transfer-card{
 margin-top:7px;
 padding:8px 10px;
@@ -1698,6 +1716,23 @@ font-weight:800;
 margin-top:6px;
 }
 
+.producto-cuotas{
+margin-top:8px;
+font-size:12px;
+line-height:1.5;
+color:#d8d8d8;
+font-weight:800;
+}
+
+.producto-cuotas strong{
+color:#fff;
+font-size:14px;
+}
+
+.producto-cuotas b{
+color:var(--dorado-claro);
+}
+
 .producto-mayorista-niveles{
 display:grid;
 grid-template-columns:repeat(3,1fr);
@@ -2013,6 +2048,14 @@ font-size:11px;
 
 .precio-lista-card strong{
 font-size:13px;
+}
+
+.cuotas-card{
+font-size:10px;
+}
+
+.cuotas-card b{
+font-size:11px;
 }
 
 .precio-transfer-card{
@@ -3664,6 +3707,13 @@ $${Math.round(precioParticular(producto)).toLocaleString("es-AR")}
 </strong>
 </div>
 
+<div class="cuotas-card">
+💳 <span>2 cuotas sin interés</span> de
+<b>
+$${Math.round(precioParticular(producto)/2).toLocaleString("es-AR")}
+</b>
+</div>
+
 <div class="precio-transfer-card">
 Efectivo / transferencia:
 <b>
@@ -5257,6 +5307,19 @@ precios.innerHTML=`
 Precio de lista:
 $${Math.round(precioLista)
 .toLocaleString("es-AR")}
+
+</div>
+
+<div class="producto-cuotas">
+
+💳 <b>2 cuotas sin interés</b> de
+
+<strong>
+
+$${Math.round(precioLista/2)
+.toLocaleString("es-AR")}
+
+</strong>
 
 </div>
 
