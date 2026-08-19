@@ -779,6 +779,237 @@ grid-template-columns:repeat(5,1fr);
 gap:14px;
 }
 
+
+/* ================= FILTROS ================= */
+
+.filtros-busqueda-wrap{
+display:flex;
+align-items:center;
+justify-content:flex-end;
+gap:9px;
+width:min(100%,620px);
+}
+
+.filtros-busqueda-wrap .buscar-wrap{
+flex:1;
+width:auto;
+}
+
+.abrir-filtros-btn{
+height:43px;
+padding:0 16px;
+border-radius:999px;
+border:1px solid #343434;
+background:#111;
+color:#ddd;
+font-size:10px;
+font-weight:900;
+letter-spacing:.5px;
+cursor:pointer;
+display:flex;
+align-items:center;
+gap:7px;
+transition:.22s ease;
+white-space:nowrap;
+}
+
+.abrir-filtros-btn:hover,
+.abrir-filtros-btn.activo{
+border-color:var(--dorado);
+color:var(--dorado-claro);
+background:rgba(200,157,56,.08);
+}
+
+.abrir-filtros-btn span{
+font-size:14px;
+}
+
+.filtro-overlay{
+position:fixed;
+inset:0;
+z-index:6400;
+display:none;
+align-items:center;
+justify-content:center;
+padding:20px;
+background:rgba(0,0,0,.78);
+backdrop-filter:blur(8px);
+}
+
+.filtro-overlay.activo{
+display:flex;
+}
+
+.filtro-popup{
+width:min(92vw,520px);
+max-height:88vh;
+overflow-y:auto;
+padding:28px;
+border:1px solid rgba(200,157,56,.34);
+border-radius:22px;
+background:linear-gradient(145deg,rgba(20,20,20,.99),rgba(7,7,7,.99));
+box-shadow:0 30px 90px rgba(0,0,0,.62);
+}
+
+.filtro-popup-head{
+display:flex;
+align-items:flex-start;
+justify-content:space-between;
+gap:20px;
+margin-bottom:24px;
+}
+
+.filtro-popup-head small{
+display:block;
+color:var(--dorado);
+font-size:9px;
+font-weight:900;
+letter-spacing:2.4px;
+margin-bottom:6px;
+}
+
+.filtro-popup-head h3{
+font-family:Georgia,serif;
+font-size:29px;
+font-weight:400;
+}
+
+.filtro-cerrar{
+width:36px;
+height:36px;
+border-radius:50%;
+border:1px solid #333;
+background:#111;
+color:#aaa;
+font-size:21px;
+cursor:pointer;
+}
+
+.filtro-grupo{
+padding:20px 0;
+border-top:1px solid #242424;
+}
+
+.filtro-grupo:first-of-type{
+border-top:0;
+padding-top:0;
+}
+
+.filtro-grupo-titulo{
+font-size:11px;
+font-weight:900;
+letter-spacing:.6px;
+color:#ddd;
+margin-bottom:12px;
+}
+
+.filtro-opciones{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+}
+
+.filtro-opcion{
+padding:10px 13px;
+border-radius:999px;
+border:1px solid #323232;
+background:#111;
+color:#929292;
+font-size:10px;
+font-weight:800;
+cursor:pointer;
+transition:.2s ease;
+}
+
+.filtro-opcion:hover{
+border-color:#555;
+color:#ddd;
+}
+
+.filtro-opcion.activo{
+background:var(--dorado);
+border-color:var(--dorado);
+color:#111;
+}
+
+.filtro-ayuda{
+margin-top:10px;
+font-size:10px;
+line-height:1.55;
+color:#6f6f6f;
+}
+
+.filtro-acciones{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:9px;
+padding-top:20px;
+border-top:1px solid #242424;
+}
+
+.filtro-acciones button{
+height:46px;
+border-radius:11px;
+font-size:10px;
+font-weight:900;
+cursor:pointer;
+}
+
+.filtro-limpiar{
+border:1px solid #373737;
+background:#111;
+color:#aaa;
+}
+
+.filtro-aplicar{
+border:0;
+background:var(--dorado);
+color:#111;
+}
+
+.filtros-activos{
+display:flex;
+align-items:center;
+gap:7px;
+flex-wrap:wrap;
+margin:-10px 0 24px;
+min-height:1px;
+}
+
+.filtro-tag{
+display:inline-flex;
+align-items:center;
+gap:6px;
+padding:7px 10px;
+border-radius:999px;
+background:rgba(200,157,56,.10);
+border:1px solid rgba(200,157,56,.24);
+color:#d8bd78;
+font-size:9px;
+font-weight:800;
+}
+
+@media(max-width:700px){
+
+.filtros-busqueda-wrap{
+width:100%;
+}
+
+.abrir-filtros-btn{
+height:40px;
+padding:0 13px;
+}
+
+.filtro-popup{
+padding:23px 18px;
+}
+
+.filtro-popup-head h3{
+font-size:25px;
+}
+
+}
+
 /* ================= PRODUCTOS ================= */
 
 .card{
@@ -849,6 +1080,19 @@ font-weight:900;
 line-height:1.35;
 min-height:34px;
 cursor:pointer;
+}
+
+.producto-tipo-card{
+display:inline-flex;
+margin-top:6px;
+padding:4px 7px;
+border-radius:999px;
+background:#1a1a1a;
+border:1px solid #2d2d2d;
+color:#989898;
+font-size:8px;
+font-weight:900;
+letter-spacing:.55px;
 }
 
 .stock-producto{
@@ -2408,15 +2652,6 @@ A PEDIDO
 
 <button
 class="cat-chip"
-data-chip="ofertas"
-onclick="filtrarChip('ofertas')">
-
-10% OFF
-
-</button>
-
-<button
-class="cat-chip"
 data-chip="mayorista"
 onclick="solicitarAccesoMayorista()">
 
@@ -2473,6 +2708,8 @@ onclick="solicitarAccesoMayorista()">
 
 </div>
 
+<div class="filtros-busqueda-wrap">
+
 <div class="buscar-wrap">
 
 <span class="buscar-icono">
@@ -2485,6 +2722,22 @@ placeholder="Buscar perfume, marca o producto...">
 
 </div>
 
+<button
+class="abrir-filtros-btn"
+onclick="abrirFiltros()">
+
+<span>☰</span>
+FILTRAR
+
+</button>
+
+</div>
+
+</div>
+
+<div
+id="filtrosActivos"
+class="filtros-activos">
 </div>
 
 <div id="productos">
@@ -2497,6 +2750,116 @@ placeholder="Buscar perfume, marca o producto...">
 
 </main>
 
+
+
+<!-- ================= FILTROS ================= -->
+
+<div
+id="filtroOverlay"
+class="filtro-overlay"
+onclick="cerrarFiltrosPorFondo(event)">
+
+<div class="filtro-popup">
+
+<div class="filtro-popup-head">
+
+<div>
+<small>CATÁLOGO NERÓS</small>
+<h3>Filtrar productos</h3>
+</div>
+
+<button
+class="filtro-cerrar"
+onclick="cerrarFiltros()"
+aria-label="Cerrar filtros">
+×
+</button>
+
+</div>
+
+<div class="filtro-grupo">
+
+<div class="filtro-grupo-titulo">
+CATEGORÍA
+</div>
+
+<div class="filtro-opciones">
+
+<button class="filtro-opcion activo" data-filtro-tipo="TODOS" onclick="seleccionarTipoFiltro('TODOS')">
+TODOS
+</button>
+
+<button class="filtro-opcion" data-filtro-tipo="ARABE" onclick="seleccionarTipoFiltro('ARABE')">
+ÁRABES
+</button>
+
+<button class="filtro-opcion" data-filtro-tipo="DISEÑADOR" onclick="seleccionarTipoFiltro('DISEÑADOR')">
+DISEÑADOR
+</button>
+
+<button class="filtro-opcion" data-filtro-tipo="NICHO" onclick="seleccionarTipoFiltro('NICHO')">
+NICHO
+</button>
+
+<button class="filtro-opcion" data-filtro-tipo="KITS" onclick="seleccionarTipoFiltro('KITS')">
+KITS
+</button>
+
+<button class="filtro-opcion" data-filtro-tipo="CUIDADO PERSONAL" onclick="seleccionarTipoFiltro('CUIDADO PERSONAL')">
+CUIDADO PERSONAL
+</button>
+
+</div>
+
+</div>
+
+<div class="filtro-grupo">
+
+<div class="filtro-grupo-titulo">
+DISPONIBILIDAD
+</div>
+
+<div class="filtro-opciones">
+
+<button class="filtro-opcion activo" data-filtro-stock="todos" onclick="seleccionarStockFiltro('todos')">
+TODOS
+</button>
+
+<button class="filtro-opcion" data-filtro-stock="disponible" onclick="seleccionarStockFiltro('disponible')">
+STOCK INMEDIATO
+</button>
+
+<button class="filtro-opcion" data-filtro-stock="pedido" onclick="seleccionarStockFiltro('pedido')">
+A PEDIDO
+</button>
+
+</div>
+
+<div class="filtro-ayuda">
+Podés combinar categoría y disponibilidad. Los testers se muestran únicamente en el catálogo mayorista autorizado.
+</div>
+
+</div>
+
+<div class="filtro-acciones">
+
+<button
+class="filtro-limpiar"
+onclick="limpiarFiltros()">
+LIMPIAR
+</button>
+
+<button
+class="filtro-aplicar"
+onclick="aplicarFiltrosDesdePopup()">
+APLICAR FILTROS
+</button>
+
+</div>
+
+</div>
+
+</div>
 
 <!-- ================= ACCESO MAYORISTA ================= -->
 
@@ -2930,6 +3293,15 @@ let paginaActual=
 
 let productosFiltrados=[];
 
+let filtroRapido=
+"todos";
+
+let filtroTipo=
+"TODOS";
+
+let filtroStockPopup=
+"todos";
+
 /* =========================================================
 API
 ========================================================= */
@@ -2963,9 +3335,7 @@ throw new Error(
 
 perfumes=data;
 
-productosFiltrados=data;
-
-mostrarPagina();
+aplicarFiltrosCatalogo();
 
 })
 
@@ -3115,6 +3485,9 @@ abrirAccesoMayorista(
 
 function activarMayoristaAutorizado(){
 
+filtroRapido="todos";
+filtroStockPopup="todos";
+
 cambiarModo("mayorista");
 
 document
@@ -3184,11 +3557,7 @@ modo==="mayorista"
 
 paginaActual=1;
 
-productosFiltrados=[
-...perfumes
-];
-
-mostrarPagina();
+aplicarFiltrosCatalogo();
 
 }
 
@@ -3242,29 +3611,9 @@ BUSCADOR
 
 function filtrarProductos(){
 
-const texto=
-document
-.getElementById("buscar")
-.value
-.toLowerCase()
-.trim();
-
-productosFiltrados=
-
-perfumes.filter(producto=>
-
-String(
-producto.perfume ||
-""
-)
-.toLowerCase()
-.includes(texto)
-
-);
-
 paginaActual=1;
 
-mostrarPagina();
+aplicarFiltrosCatalogo();
 
 }
 
@@ -3274,6 +3623,369 @@ document
 "input",
 filtrarProductos
 );
+
+/* =========================================================
+MOTOR DE FILTROS
+========================================================= */
+
+function esTester(producto){
+
+return String(
+producto.tester ||
+"NO"
+)
+.trim()
+.toUpperCase()==="SI";
+
+}
+
+function normalizarTipoProducto(valor){
+
+return String(valor || "")
+.trim()
+.toUpperCase()
+.normalize("NFD")
+.replace(/[\u0300-\u036f]/g,"")
+.replace(/\s+/g," ");
+
+}
+
+function aplicarFiltrosCatalogo(){
+
+const input=
+document.getElementById("buscar");
+
+const texto=
+String(
+input ? input.value : ""
+)
+.toLowerCase()
+.trim();
+
+productosFiltrados=
+perfumes.filter(producto=>{
+
+/* Testers:
+   particular = ocultos
+   mayorista autorizado = visibles
+*/
+if(
+modoActual==="particular" &&
+esTester(producto)
+){
+return false;
+}
+
+if(
+modoActual==="mayorista" &&
+!accesoMayoristaAutorizado
+){
+return false;
+}
+
+if(texto){
+
+const nombre=
+String(
+producto.perfume ||
+""
+)
+.toLowerCase();
+
+if(!nombre.includes(texto)){
+return false;
+}
+
+}
+
+const tipoProducto=
+normalizarTipoProducto(
+producto.tipo
+);
+
+if(
+filtroTipo!=="TODOS" &&
+tipoProducto!==
+normalizarTipoProducto(filtroTipo)
+){
+return false;
+}
+
+const stock=
+String(
+producto.stock ||
+""
+)
+.toLowerCase()
+.trim();
+
+let disponibilidad=
+filtroRapido!=="todos"
+?
+filtroRapido
+:
+filtroStockPopup;
+
+if(
+disponibilidad==="disponible" &&
+!stock.includes("stock inmediato")
+){
+return false;
+}
+
+if(
+disponibilidad==="pedido" &&
+!stock.includes("disponible por pedido")
+){
+return false;
+}
+
+return true;
+
+});
+
+paginaActual=1;
+
+actualizarTagsFiltros();
+
+mostrarPagina();
+
+}
+
+
+/* =========================================================
+POPUP FILTROS
+========================================================= */
+
+function abrirFiltros(){
+
+sincronizarBotonesFiltro();
+
+document
+.getElementById("filtroOverlay")
+.classList
+.add("activo");
+
+}
+
+function cerrarFiltros(){
+
+document
+.getElementById("filtroOverlay")
+.classList
+.remove("activo");
+
+}
+
+function cerrarFiltrosPorFondo(event){
+
+if(
+event.target &&
+event.target.id==="filtroOverlay"
+){
+cerrarFiltros();
+}
+
+}
+
+function seleccionarTipoFiltro(tipo){
+
+filtroTipo=tipo;
+
+document
+.querySelectorAll("[data-filtro-tipo]")
+.forEach(btn=>{
+
+btn.classList.toggle(
+"activo",
+btn.dataset.filtroTipo===tipo
+);
+
+});
+
+}
+
+function seleccionarStockFiltro(tipo){
+
+filtroStockPopup=tipo;
+
+document
+.querySelectorAll("[data-filtro-stock]")
+.forEach(btn=>{
+
+btn.classList.toggle(
+"activo",
+btn.dataset.filtroStock===tipo
+);
+
+});
+
+}
+
+function sincronizarBotonesFiltro(){
+
+document
+.querySelectorAll("[data-filtro-tipo]")
+.forEach(btn=>{
+
+btn.classList.toggle(
+"activo",
+btn.dataset.filtroTipo===filtroTipo
+);
+
+});
+
+document
+.querySelectorAll("[data-filtro-stock]")
+.forEach(btn=>{
+
+btn.classList.toggle(
+"activo",
+btn.dataset.filtroStock===filtroStockPopup
+);
+
+});
+
+}
+
+function aplicarFiltrosDesdePopup(){
+
+/*
+Si el usuario eligió disponibilidad dentro del popup,
+desactivamos el chip rápido para evitar contradicciones.
+*/
+if(filtroStockPopup!=="todos"){
+
+filtroRapido="todos";
+
+document
+.querySelectorAll(".cat-chip")
+.forEach(btn=>
+btn.classList.toggle(
+"activo",
+btn.dataset.chip==="todos"
+)
+);
+
+}
+
+cerrarFiltros();
+
+aplicarFiltrosCatalogo();
+
+document
+.getElementById("catalogo")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+function limpiarFiltros(){
+
+filtroTipo="TODOS";
+filtroStockPopup="todos";
+filtroRapido="todos";
+
+const buscar=
+document.getElementById("buscar");
+
+const buscarHeader=
+document.getElementById("buscarHeader");
+
+if(buscar){
+buscar.value="";
+}
+
+if(buscarHeader){
+buscarHeader.value="";
+}
+
+document
+.querySelectorAll(".cat-chip")
+.forEach(btn=>
+btn.classList.toggle(
+"activo",
+btn.dataset.chip==="todos"
+)
+);
+
+sincronizarBotonesFiltro();
+
+cerrarFiltros();
+
+aplicarFiltrosCatalogo();
+
+}
+
+function actualizarTagsFiltros(){
+
+const contenedor=
+document.getElementById("filtrosActivos");
+
+if(!contenedor){
+return;
+}
+
+const tags=[];
+
+if(filtroTipo!=="TODOS"){
+
+const etiqueta=
+filtroTipo==="ARABE"
+?
+"ÁRABES"
+:
+filtroTipo;
+
+tags.push(
+`<span class="filtro-tag">Categoría: ${escapeHTML(etiqueta)}</span>`
+);
+
+}
+
+const disponibilidad=
+filtroRapido!=="todos"
+?
+filtroRapido
+:
+filtroStockPopup;
+
+if(disponibilidad==="disponible"){
+tags.push(
+'<span class="filtro-tag">Stock inmediato</span>'
+);
+}
+
+if(disponibilidad==="pedido"){
+tags.push(
+'<span class="filtro-tag">Disponible por pedido</span>'
+);
+}
+
+if(modoActual==="mayorista"){
+tags.push(
+'<span class="filtro-tag">Mayorista · incluye testers</span>'
+);
+}
+
+contenedor.innerHTML=
+tags.join("");
+
+const boton=
+document.querySelector(".abrir-filtros-btn");
+
+if(boton){
+
+boton.classList.toggle(
+"activo",
+filtroTipo!=="TODOS" ||
+filtroStockPopup!=="todos"
+);
+
+}
+
+}
 
 /* =========================================================
 CONVERTIR NÚMEROS
@@ -3652,6 +4364,16 @@ onclick="abrirProducto('${escapeAttr(nombre)}')">
 ${escapeHTML(nombre)}
 
 </div>
+
+${
+producto.tipo
+?
+`<div class="producto-tipo-card">${escapeHTML(
+producto.tipo==="ARABE" ? "ÁRABE" : producto.tipo
+)}</div>`
+:
+""
+}
 
 <div class="stock-producto">
 
@@ -5628,6 +6350,40 @@ CHIPS
 
 function filtrarChip(tipo){
 
+if(tipo==="mayorista"){
+
+solicitarAccesoMayorista();
+return;
+
+}
+
+if(
+modoActual!=="particular"
+){
+
+cambiarModo(
+"particular"
+);
+
+}
+
+filtroRapido=tipo;
+
+/*
+Los chips rápidos pisan únicamente la disponibilidad.
+La categoría elegida en FILTRAR se conserva.
+*/
+if(
+tipo==="disponible" ||
+tipo==="pedido"
+){
+filtroStockPopup="todos";
+}
+
+if(tipo==="todos"){
+filtroStockPopup="todos";
+}
+
 document
 .querySelectorAll(
 ".cat-chip"
@@ -5655,106 +6411,15 @@ document.getElementById(
 "buscarHeader"
 );
 
-if(
-input
-){
-
+if(input){
 input.value="";
-
 }
 
-if(
-inputHeader
-){
-
+if(inputHeader){
 inputHeader.value="";
-
 }
 
-if(
-tipo==="mayorista"
-){
-
-solicitarAccesoMayorista();
-return;
-
-}
-
-else{
-
-if(
-modoActual!=="particular"
-){
-
-cambiarModo(
-"particular"
-);
-
-}
-
-if(
-tipo==="disponible"
-){
-
-productosFiltrados=
-
-perfumes.filter(p=>{
-
-const stock=
-
-String(
-p.stock ||
-""
-)
-.toLowerCase()
-.trim();
-
-return stock.includes(
-"stock inmediato"
-);
-
-});
-
-}
-
-else if(
-tipo==="pedido"
-){
-
-productosFiltrados=
-
-perfumes.filter(p=>{
-
-const stock=
-
-String(
-p.stock ||
-""
-)
-.toLowerCase()
-.trim();
-
-return stock.includes(
-"disponible por pedido"
-);
-
-});
-
-}
-
-else{
-
-productosFiltrados=[
-...perfumes
-];
-
-}
-
-}
-
-paginaActual=1;
-
-mostrarPagina();
+aplicarFiltrosCatalogo();
 
 document
 .getElementById(
@@ -6099,6 +6764,8 @@ cerrarCarrito();
 cerrarProducto();
 
 cerrarAccesoMayorista();
+
+cerrarFiltros();
 
 }
 
