@@ -868,27 +868,34 @@ color:var(--dorado-claro);
 
 .precio-lista-card{
 margin-top:11px;
-font-size:11px;
-color:#8a8a8a;
-line-height:1.35;
+font-size:12px;
+color:#9a9a9a;
+line-height:1.4;
 }
 
 .precio-lista-card strong{
-color:#bdbdbd;
-font-weight:800;
+color:#d0d0d0;
+font-size:14px;
+font-weight:900;
 }
 
 .precio-transfer-card{
-margin-top:4px;
+margin-top:7px;
+padding:8px 10px;
+border:1px solid rgba(82,214,129,.22);
+background:rgba(82,214,129,.07);
+border-radius:9px;
 font-size:11px;
-color:#d9c17f;
-font-weight:800;
+color:#8fe3ad;
+font-weight:900;
+line-height:1.35;
 }
 
 .precio-transfer-card b{
 font-size:20px;
-color:var(--dorado-claro);
+color:#52d681;
 margin-left:5px;
+text-shadow:0 0 14px rgba(82,214,129,.14);
 }
 
 .precio-mayorista-card{
@@ -1076,6 +1083,56 @@ color:#111;
 
 .mayorista-ingresar:hover{
 background:var(--dorado-claro);
+}
+
+.mayorista-contacto{
+margin-top:18px;
+padding-top:16px;
+border-top:1px solid #242424;
+}
+
+.mayorista-contacto strong{
+display:block;
+font-size:12px;
+color:#eee;
+margin-bottom:6px;
+}
+
+.mayorista-contacto p{
+margin:0 0 12px;
+font-size:11px;
+line-height:1.55;
+color:#858585;
+}
+
+.mayorista-whatsapp{
+width:100%;
+min-height:44px;
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+background:#25D366;
+color:#fff;
+font-size:10px;
+font-weight:900;
+letter-spacing:.25px;
+text-decoration:none;
+transition:.22s ease;
+}
+
+.mayorista-whatsapp:hover{
+transform:translateY(-2px);
+filter:brightness(1.05);
+box-shadow:0 10px 24px rgba(37,211,102,.16);
+}
+
+.mayorista-whatsapp svg{
+width:18px;
+height:18px;
+fill:#fff;
+display:block;
 }
 
 /* ================= CARRITO ================= */
@@ -1950,8 +2007,17 @@ padding:9px 10px;
 
 .precio-producto{font-size:18px;}
 
+.precio-lista-card{
+font-size:11px;
+}
+
+.precio-lista-card strong{
+font-size:13px;
+}
+
 .precio-transfer-card{
 font-size:10px;
+padding:7px 8px;
 }
 
 .precio-transfer-card b{
@@ -2436,6 +2502,34 @@ class="mayorista-ingresar"
 onclick="validarClaveMayorista()">
 INGRESAR
 </button>
+
+</div>
+
+<div class="mayorista-contacto">
+
+<strong>
+¿Querés revender NERÓS o comprar por mayor?
+</strong>
+
+<p>
+Escribinos por WhatsApp. Te contamos cómo funciona la modalidad mayorista
+y, si corresponde, te damos tu clave de acceso.
+</p>
+
+<a
+class="mayorista-whatsapp"
+href="https://wa.me/5493417830300?text=Hola%20NER%C3%93S%2C%20quiero%20consultar%20por%20la%20modalidad%20mayorista%20y%20solicitar%20una%20clave%20de%20acceso."
+target="_blank"
+rel="noopener noreferrer">
+
+<svg viewBox="0 0 32 32" aria-hidden="true">
+<path d="M19.11 17.24c-.27-.14-1.61-.79-1.86-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.15-.42-2.19-1.35-.81-.72-1.36-1.61-1.52-1.88-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.27s.98 2.63 1.11 2.81c.14.18 1.92 2.93 4.65 4.11.65.28 1.16.45 1.55.58.65.21 1.25.18 1.72.11.52-.08 1.61-.66 1.84-1.29.23-.63.23-1.18.16-1.29-.07-.11-.25-.18-.52-.32z"/>
+<path d="M16.02 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.25.59 4.45 1.7 6.39L3.1 28.8l6.57-1.72a12.77 12.77 0 0 0 6.35 1.71h.01c7.05 0 12.79-5.74 12.79-12.8S23.08 3.2 16.02 3.2zm0 23.43h-.01a10.6 10.6 0 0 1-5.4-1.48l-.39-.23-3.9 1.02 1.04-3.8-.25-.39a10.62 10.62 0 1 1 8.91 4.88z"/>
+</svg>
+
+QUIERO SER MAYORISTA
+
+</a>
 
 </div>
 
