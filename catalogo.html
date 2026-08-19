@@ -2728,6 +2728,47 @@ Podés combinar categoría y disponibilidad. Los testers se muestran únicamente
 
 </div>
 
+
+<div
+id="filtroTesterGrupo"
+class="filtro-grupo"
+style="display:none;">
+
+<div class="filtro-grupo-titulo">
+PRODUCTOS MAYORISTAS
+</div>
+
+<div class="filtro-opciones">
+
+<button
+class="filtro-opcion activo"
+data-filtro-tester="todos"
+onclick="seleccionarTesterFiltro('todos')">
+TODOS
+</button>
+
+<button
+class="filtro-opcion"
+data-filtro-tester="tester"
+onclick="seleccionarTesterFiltro('tester')">
+SOLO TESTERS
+</button>
+
+<button
+class="filtro-opcion"
+data-filtro-tester="no-tester"
+onclick="seleccionarTesterFiltro('no-tester')">
+SIN TESTERS
+</button>
+
+</div>
+
+<div class="filtro-ayuda">
+Este filtro aparece únicamente después de ingresar correctamente a la lista mayorista.
+</div>
+
+</div>
+
 <div class="filtro-acciones">
 
 <button
@@ -3140,7 +3181,7 @@ CONFIG
 ========================================================= */
 
 const API=
-"https://script.google.com/macros/s/AKfycbwnmhyywNdM1WxuQPcHHDjtte7Hgjzwwq1Rl3afwB5z2XfeI_VyevkSuNL-cXq8ud7Qcg/exec";
+"https://script.google.com/macros/s/AKfycbzP91YOWgy93IUR9PoYurI3mlY23oEjn_q-tOFrbE6KNeAp66KlFTW7WXtszqgRw6qAGA/exec";
 
 const WHATSAPP=
 "5493417830300";
@@ -3187,6 +3228,9 @@ let filtroTipo=
 "TODOS";
 
 let filtroStockPopup=
+"todos";
+
+let filtroTester=
 "todos";
 
 /* =========================================================
@@ -3374,6 +3418,7 @@ function activarMayoristaAutorizado(){
 
 filtroRapido="todos";
 filtroStockPopup="todos";
+filtroTester="todos";
 
 cambiarModo("mayorista");
 
@@ -3425,6 +3470,10 @@ actualizarCarrito();
 }
 
 modoActual=modo;
+
+if(modo==="particular"){
+filtroTester="todos";
+}
 
 document
 .getElementById("modoParticular")
@@ -3570,6 +3619,27 @@ modoActual==="mayorista" &&
 return false;
 }
 
+if(
+modoActual==="mayorista" &&
+accesoMayoristaAutorizado
+){
+
+if(
+filtroTester==="tester" &&
+!esTester(producto)
+){
+return false;
+}
+
+if(
+filtroTester==="no-tester" &&
+esTester(producto)
+){
+return false;
+}
+
+}
+
 if(texto){
 
 const nombre=
@@ -3646,6 +3716,23 @@ POPUP FILTROS
 
 function abrirFiltros(){
 
+const grupoTester=
+document.getElementById("filtroTesterGrupo");
+
+if(grupoTester){
+
+grupoTester.style.display=
+(
+modoActual==="mayorista" &&
+accesoMayoristaAutorizado
+)
+?
+"block"
+:
+"none";
+
+}
+
 sincronizarBotonesFiltro();
 
 document
@@ -3709,6 +3796,30 @@ btn.dataset.filtroStock===tipo
 
 }
 
+function seleccionarTesterFiltro(tipo){
+
+if(
+modoActual!=="mayorista" ||
+!accesoMayoristaAutorizado
+){
+return;
+}
+
+filtroTester=tipo;
+
+document
+.querySelectorAll("[data-filtro-tester]")
+.forEach(btn=>{
+
+btn.classList.toggle(
+"activo",
+btn.dataset.filtroTester===tipo
+);
+
+});
+
+}
+
 function sincronizarBotonesFiltro(){
 
 document
@@ -3729,6 +3840,17 @@ document
 btn.classList.toggle(
 "activo",
 btn.dataset.filtroStock===filtroStockPopup
+);
+
+});
+
+document
+.querySelectorAll("[data-filtro-tester]")
+.forEach(btn=>{
+
+btn.classList.toggle(
+"activo",
+btn.dataset.filtroTester===filtroTester
 );
 
 });
@@ -3772,6 +3894,7 @@ function limpiarFiltros(){
 
 filtroTipo="TODOS";
 filtroStockPopup="todos";
+filtroTester="todos";
 filtroRapido="todos";
 
 const buscar=
@@ -3844,9 +3967,23 @@ tags.push(
 }
 
 if(modoActual==="mayorista"){
+
+if(filtroTester==="tester"){
 tags.push(
-'<span class="filtro-tag">Mayorista · incluye testers</span>'
+'<span class="filtro-tag">Mayorista · Solo testers</span>'
 );
+}
+else if(filtroTester==="no-tester"){
+tags.push(
+'<span class="filtro-tag">Mayorista · Sin testers</span>'
+);
+}
+else{
+tags.push(
+'<span class="filtro-tag">Mayorista · Todos los productos</span>'
+);
+}
+
 }
 
 contenedor.innerHTML=
@@ -3860,7 +3997,11 @@ if(boton){
 boton.classList.toggle(
 "activo",
 filtroTipo!=="TODOS" ||
-filtroStockPopup!=="todos"
+filtroStockPopup!=="todos" ||
+(
+modoActual==="mayorista" &&
+filtroTester!=="todos"
+)
 );
 
 }
@@ -6180,23 +6321,6 @@ document
 
 document.body.style.overflow=
 "";
-
-}
-
-/* =========================================================
-BUSCADOR HEADER
-========================================================= */
-
-
-
-input.value=
-valor;
-
-filtrarProductos();
-
-}
-
-);
 
 }
 
