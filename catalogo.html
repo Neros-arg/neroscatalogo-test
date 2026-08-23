@@ -2483,11 +2483,192 @@ height:25px;
 
 }
 
+
+
+/* =====================================================
+   NERÓS — REFINAMIENTO PREMIUM 2026
+   Capa visual compartida entre Home + Catálogo
+===================================================== */
+:root{
+  --surface:#0d0d0d;
+  --surface-2:#141414;
+  --line:rgba(255,255,255,.09);
+  --gold-glow:rgba(227,189,99,.18);
+  --ease-lux:cubic-bezier(.22,.61,.36,1);
+}
+
+::selection{background:rgba(227,189,99,.92);color:#090909}
+
+html{scroll-padding-top:130px}
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+
+body::selection{background:var(--dorado-claro);color:#090909}
+
+a,button,input{ -webkit-tap-highlight-color:transparent; }
+button:focus-visible,a:focus-visible,input:focus-visible{
+  outline:2px solid var(--dorado-claro);
+  outline-offset:3px;
+}
+
+/* Scrollbar discreta de marca */
+*{scrollbar-color:#5f4a20 #0b0b0b;scrollbar-width:thin}
+*::-webkit-scrollbar{width:10px;height:10px}
+*::-webkit-scrollbar-track{background:#0b0b0b}
+*::-webkit-scrollbar-thumb{background:linear-gradient(#7f6125,#c89d38);border:2px solid #0b0b0b;border-radius:999px}
+
+/* Línea de progreso superior */
+#nerosScrollProgress{
+  position:fixed;left:0;top:0;height:2px;width:0;z-index:99999;
+  background:linear-gradient(90deg,#8f681e,#ffe18a,#c89d38);
+  box-shadow:0 0 16px rgba(227,189,99,.55);
+  pointer-events:none;
+}
+
+/* Header premium consistente */
+.navbar{
+  box-shadow:0 10px 35px rgba(0,0,0,.18);
+  transition:background .3s ease,border-color .3s ease,box-shadow .3s ease;
+}
+.navbar.neros-scrolled{
+  background:rgba(4,4,4,.975);
+  border-bottom-color:rgba(200,157,56,.20);
+  box-shadow:0 14px 42px rgba(0,0,0,.42);
+}
+.nav-icon{
+  position:relative;
+  overflow:hidden;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035);
+}
+.nav-icon::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;
+  background:radial-gradient(circle at 50% 20%,rgba(255,255,255,.08),transparent 62%);
+  opacity:0;transition:opacity .25s ease;pointer-events:none;
+}
+.nav-icon:hover::after{opacity:1}
+
+.logo-nav img{filter:drop-shadow(0 8px 18px rgba(0,0,0,.34))}
+
+/* Interacciones menos genéricas */
+.hero-btn,.importamos-btn,.cta a,.card button,.modo,.cat-chip,.abrir-filtros-btn{
+  position:relative;
+  overflow:hidden;
+}
+.hero-btn.principal::before,.importamos-btn.principal::before,.cta a::before,.card button::before{
+  content:"";position:absolute;top:-140%;left:-40%;width:24%;height:380%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.34),transparent);
+  transform:rotate(22deg);transition:left .65s var(--ease-lux);pointer-events:none;
+}
+.hero-btn.principal:hover::before,.importamos-btn.principal:hover::before,.cta a:hover::before,.card button:hover::before{left:125%}
+
+/* Botón volver arriba */
+#nerosBackTop{
+  position:fixed;right:18px;bottom:86px;z-index:880;
+  width:44px;height:44px;border-radius:50%;border:1px solid rgba(227,189,99,.28);
+  background:rgba(10,10,10,.88);backdrop-filter:blur(10px);color:var(--dorado-claro);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  opacity:0;visibility:hidden;transform:translateY(10px);
+  transition:.25s ease;box-shadow:0 12px 30px rgba(0,0,0,.35);
+}
+#nerosBackTop.visible{opacity:1;visibility:visible;transform:translateY(0)}
+#nerosBackTop:hover{border-color:var(--dorado-claro);transform:translateY(-3px)}
+
+/* Reveal suave para bloques principales */
+.neros-reveal{opacity:0;transform:translateY(24px);transition:opacity .72s var(--ease-lux),transform .72s var(--ease-lux)}
+.neros-reveal.neros-visible{opacity:1;transform:none}
+
+@media(max-width:700px){
+  html{scroll-padding-top:105px}
+  #nerosBackTop{width:40px;height:40px;right:14px;bottom:78px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .neros-reveal{opacity:1!important;transform:none!important}
+}
+
+
+/* CATÁLOGO — mismo lenguaje visual que la Home */
+.navbar-contenido{height:96px}
+.catalogo-page{position:relative}
+.catalogo-page::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;
+  background:radial-gradient(circle at 50% 4%,rgba(227,189,99,.065),transparent 26%);
+}
+
+.catalogo-cabeza{margin-bottom:34px}
+.catalogo-cabeza small{display:inline-flex;align-items:center;gap:11px;color:var(--dorado-claro)}
+.catalogo-cabeza small::before,.catalogo-cabeza small::after{content:"";width:26px;height:1px;background:linear-gradient(90deg,transparent,var(--dorado))}
+.catalogo-cabeza small::after{transform:scaleX(-1)}
+.catalogo-cabeza h2{text-wrap:balance;letter-spacing:-.8px}
+.catalogo-cabeza p{font-size:13px;color:#9b9b9b}
+
+.neros-catalog-trust{
+  max-width:1600px;margin:0 auto;padding:15px 24px 0;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:8px;
+}
+.neros-trust-item{
+  min-height:42px;padding:9px 12px;border:1px solid rgba(255,255,255,.075);
+  border-radius:12px;background:rgba(12,12,12,.74);backdrop-filter:blur(10px);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  color:#aaa;font-size:10px;font-weight:800;letter-spacing:.2px;text-align:center;
+}
+.neros-trust-item b{color:var(--dorado-claro)}
+
+.controles{
+  padding:10px;border:1px solid rgba(255,255,255,.07);border-radius:18px;
+  background:rgba(10,10,10,.70);backdrop-filter:blur(12px);
+}
+.buscar-wrap input{height:43px;transition:border-color .2s ease,box-shadow .2s ease,background .2s ease}
+.buscar-wrap input:focus{border-color:rgba(227,189,99,.55);box-shadow:0 0 0 4px rgba(200,157,56,.07);background:#0d0d0d}
+
+.card{
+  background:linear-gradient(180deg,#131313 0%,#0d0d0d 100%);
+  border-color:rgba(255,255,255,.085);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.025),0 12px 28px rgba(0,0,0,.18);
+}
+.card::after{
+  content:"";position:absolute;left:12px;right:12px;top:0;height:1px;z-index:4;
+  background:linear-gradient(90deg,transparent,rgba(227,189,99,.32),transparent);opacity:.45;
+}
+.card:hover{transform:translateY(-7px);border-color:rgba(227,189,99,.46);box-shadow:0 24px 55px rgba(0,0,0,.40),0 0 25px rgba(200,157,56,.05)}
+.imagen-producto{background:radial-gradient(circle at 50% 42%,#fff 0%,#f5f3ef 56%,#e8e5df 100%)}
+.imagen-producto::after{
+  content:"";position:absolute;inset:auto 0 0;height:24%;pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,.035));
+}
+.imagen-producto img{position:relative;z-index:1}
+.card-info{padding:15px 15px 16px}
+.nombre-producto{font-size:12.5px;letter-spacing:.05px}
+.producto-tipo-card{background:rgba(255,255,255,.035);border-color:rgba(255,255,255,.08)}
+.precio-transfer-card{box-shadow:inset 0 1px 0 rgba(255,255,255,.02)}
+.card button{min-height:39px;transition:transform .2s ease,filter .2s ease,box-shadow .2s ease}
+.card button:hover:not(:disabled){transform:translateY(-1px);filter:brightness(1.08);box-shadow:0 9px 22px rgba(200,157,56,.16)}
+
+.cat-chip,.modo,.abrir-filtros-btn{transition:transform .2s ease,border-color .2s ease,color .2s ease,background .2s ease}
+.cat-chip:hover,.modo:hover,.abrir-filtros-btn:hover{transform:translateY(-1px)}
+.cat-chip.activo,.modo.activo{box-shadow:0 8px 20px rgba(200,157,56,.12)}
+
+.producto-modal-contenido{border-color:rgba(227,189,99,.18);box-shadow:0 34px 110px rgba(0,0,0,.72),0 0 55px rgba(200,157,56,.05)}
+.producto-foto-grande{background:radial-gradient(circle at center,#28241b 0,#151515 43%,#0b0b0b 78%)}
+.modal-contenido{box-shadow:-26px 0 70px rgba(0,0,0,.45)}
+
+@media(max-width:900px){
+  .neros-catalog-trust{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:700px){
+  .neros-catalog-trust{padding:10px 12px 0;gap:6px}
+  .neros-trust-item{font-size:9px;padding:8px;min-height:38px}
+  .catalogo{padding-top:38px}
+  .controles{padding:8px;border-radius:15px}
+  .card:hover{transform:none}
+}
+
 </style>
 
 </head>
 
 <body>
+<div id="nerosScrollProgress" aria-hidden="true"></div>
 
 <div class="promo-strip">
 
@@ -2722,6 +2903,13 @@ MAYORISTA
 
 </button>
 
+</div>
+
+<div class="neros-catalog-trust" aria-label="Beneficios de compra">
+  <div class="neros-trust-item">✦ <span><b>10% OFF</b> transferencia</span></div>
+  <div class="neros-trust-item">✓ <span>Productos seleccionados y verificados</span></div>
+  <div class="neros-trust-item">🚚 <span>Envíos a todo el país</span></div>
+  <div class="neros-trust-item">💬 <span>Asesoramiento por WhatsApp</span></div>
 </div>
 
 <main class="catalogo-page">
@@ -7088,5 +7276,47 @@ actualizarParallaxFondo();
 
 </script>
 
+<button id="nerosBackTop" type="button" aria-label="Volver arriba" title="Volver arriba">↑</button>
+<script>
+
+/* =====================================================
+   NERÓS — microinteracciones compartidas
+===================================================== */
+(function(){
+  const progress=document.getElementById('nerosScrollProgress');
+  const backTop=document.getElementById('nerosBackTop');
+  const navbar=document.querySelector('.navbar');
+
+  function syncNerosChrome(){
+    const y=window.scrollY || document.documentElement.scrollTop || 0;
+    const max=Math.max(1,document.documentElement.scrollHeight-window.innerHeight);
+    if(progress) progress.style.width=Math.min(100,(y/max)*100)+'%';
+    if(backTop) backTop.classList.toggle('visible',y>520);
+    if(navbar) navbar.classList.toggle('neros-scrolled',y>18);
+  }
+
+  window.addEventListener('scroll',syncNerosChrome,{passive:true});
+  window.addEventListener('resize',syncNerosChrome,{passive:true});
+  syncNerosChrome();
+
+  if(backTop){
+    backTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+  }
+
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    const candidates=document.querySelectorAll('.seccion, .importamos-box, .beneficios-neros, .cta, .catalogo-cabeza, .controles');
+    candidates.forEach(el=>el.classList.add('neros-reveal'));
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('neros-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    },{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+    candidates.forEach(el=>io.observe(el));
+  }
+})();
+</script>
 </body>
 </html>
