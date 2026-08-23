@@ -1908,10 +1908,279 @@ REFINAMIENTO VISUAL — FONDO + TARJETAS
 @media(prefers-reduced-motion:reduce){
   .explora-fondo-general{animation:none;}
 }
+
+
+/* =====================================================
+   NERÓS — REFINAMIENTO PREMIUM 2026
+   Capa visual compartida entre Home + Catálogo
+===================================================== */
+:root{
+  --surface:#0d0d0d;
+  --surface-2:#141414;
+  --line:rgba(255,255,255,.09);
+  --gold-glow:rgba(227,189,99,.18);
+  --ease-lux:cubic-bezier(.22,.61,.36,1);
+}
+
+::selection{background:rgba(227,189,99,.92);color:#090909}
+
+html{scroll-padding-top:130px}
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+
+body::selection{background:var(--dorado-claro);color:#090909}
+
+a,button,input{ -webkit-tap-highlight-color:transparent; }
+button:focus-visible,a:focus-visible,input:focus-visible{
+  outline:2px solid var(--dorado-claro);
+  outline-offset:3px;
+}
+
+/* Scrollbar discreta de marca */
+*{scrollbar-color:#5f4a20 #0b0b0b;scrollbar-width:thin}
+*::-webkit-scrollbar{width:10px;height:10px}
+*::-webkit-scrollbar-track{background:#0b0b0b}
+*::-webkit-scrollbar-thumb{background:linear-gradient(#7f6125,#c89d38);border:2px solid #0b0b0b;border-radius:999px}
+
+/* Línea de progreso superior */
+#nerosScrollProgress{
+  position:fixed;left:0;top:0;height:2px;width:0;z-index:99999;
+  background:linear-gradient(90deg,#8f681e,#ffe18a,#c89d38);
+  box-shadow:0 0 16px rgba(227,189,99,.55);
+  pointer-events:none;
+}
+
+/* Header premium consistente */
+.navbar{
+  box-shadow:0 10px 35px rgba(0,0,0,.18);
+  transition:background .3s ease,border-color .3s ease,box-shadow .3s ease;
+}
+.navbar.neros-scrolled{
+  background:rgba(4,4,4,.975);
+  border-bottom-color:rgba(200,157,56,.20);
+  box-shadow:0 14px 42px rgba(0,0,0,.42);
+}
+.nav-icon{
+  position:relative;
+  overflow:hidden;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035);
+}
+.nav-icon::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;
+  background:radial-gradient(circle at 50% 20%,rgba(255,255,255,.08),transparent 62%);
+  opacity:0;transition:opacity .25s ease;pointer-events:none;
+}
+.nav-icon:hover::after{opacity:1}
+
+.logo-nav img{filter:drop-shadow(0 8px 18px rgba(0,0,0,.34))}
+
+/* Interacciones menos genéricas */
+.hero-btn,.importamos-btn,.cta a,.card button,.modo,.cat-chip,.abrir-filtros-btn{
+  position:relative;
+  overflow:hidden;
+}
+.hero-btn.principal::before,.importamos-btn.principal::before,.cta a::before,.card button::before{
+  content:"";position:absolute;top:-140%;left:-40%;width:24%;height:380%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.34),transparent);
+  transform:rotate(22deg);transition:left .65s var(--ease-lux);pointer-events:none;
+}
+.hero-btn.principal:hover::before,.importamos-btn.principal:hover::before,.cta a:hover::before,.card button:hover::before{left:125%}
+
+/* Botón volver arriba */
+#nerosBackTop{
+  position:fixed;right:18px;bottom:86px;z-index:880;
+  width:44px;height:44px;border-radius:50%;border:1px solid rgba(227,189,99,.28);
+  background:rgba(10,10,10,.88);backdrop-filter:blur(10px);color:var(--dorado-claro);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  opacity:0;visibility:hidden;transform:translateY(10px);
+  transition:.25s ease;box-shadow:0 12px 30px rgba(0,0,0,.35);
+}
+#nerosBackTop.visible{opacity:1;visibility:visible;transform:translateY(0)}
+#nerosBackTop:hover{border-color:var(--dorado-claro);transform:translateY(-3px)}
+
+/* Reveal suave para bloques principales */
+.neros-reveal{opacity:0;transform:translateY(24px);transition:opacity .72s var(--ease-lux),transform .72s var(--ease-lux)}
+.neros-reveal.neros-visible{opacity:1;transform:none}
+
+@media(max-width:700px){
+  html{scroll-padding-top:105px}
+  #nerosBackTop{width:40px;height:40px;right:14px;bottom:78px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .neros-reveal{opacity:1!important;transform:none!important}
+}
+
+
+/* HOME — navegación y jerarquía */
+.menu{
+  display:flex;justify-content:flex-end;align-items:center;gap:24px;
+}
+.menu a{
+  color:#aaa;font-size:11px;font-weight:800;letter-spacing:.7px;
+  transition:color .22s ease,transform .22s ease;
+}
+.menu a:hover{color:var(--dorado-claro);transform:translateY(-1px)}
+
+.navbar-contenido{height:96px;padding:0 24px}
+.logo-nav img{width:220px;max-height:82px;transform:scale(1.22)}
+.logo-nav:hover img{transform:scale(1.27)}
+
+.hero{min-height:calc(100vh - 130px)}
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 42%,rgba(227,189,99,.07),transparent 35%),
+    linear-gradient(90deg,rgba(0,0,0,.10),transparent 25%,transparent 75%,rgba(0,0,0,.10));
+}
+.hero-contenido{z-index:3}
+.hero-mini{position:relative;display:inline-flex;align-items:center;gap:12px}
+.hero-mini::before,.hero-mini::after{content:"";width:28px;height:1px;background:linear-gradient(90deg,transparent,var(--dorado))}
+.hero-mini::after{transform:scaleX(-1)}
+.hero h1{text-wrap:balance}
+.hero p{text-wrap:pretty;border:1px solid rgba(255,255,255,.05);box-shadow:0 12px 40px rgba(0,0,0,.18)}
+
+.explora-fondo-general{background-size:cover}
+.seccion-head h2,.importamos-inner h2,.pedido-main h3,.cta h2,.beneficios-head h2{text-wrap:balance}
+
+.quick-card,.pago-card,.beneficio-card,.condicion,.importamos-inner,.pedido-box,.cta{
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 16px 50px rgba(0,0,0,.22);
+}
+.quick-card::before,.beneficio-card::before{
+  content:"";position:absolute;left:18px;right:18px;top:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(227,189,99,.34),transparent);
+  opacity:.55;
+}
+.quick-card h3,.beneficio-card h3{letter-spacing:-.25px}
+
+@media(max-width:900px){.menu{display:none}}
+@media(max-width:700px){
+  .navbar-contenido{height:82px;padding:0 14px}
+  .logo-nav img{width:165px;max-height:68px;transform:scale(1.22)}
+  .hero{min-height:calc(100svh - 112px)}
+  .hero-mini::before,.hero-mini::after{width:18px}
+}
+
+
+
+/* =====================================================
+NERÓS 2.0 — RETAIL EDITORIAL REDESIGN
+===================================================== */
+:root{
+  --paper:#f5f1e8;
+  --paper-2:#fbfaf6;
+  --ink:#141414;
+  --muted:#6f6a61;
+  --line:#ded8cd;
+  --champagne:#b99753;
+  --champagne-dark:#8a6b31;
+  --black:#0c0c0c;
+}
+
+body{background:var(--paper);color:var(--ink)}
+
+/* Header: mantiene lujo, pero más retail y legible */
+.navbar{background:rgba(10,10,10,.96);border-bottom:1px solid rgba(255,255,255,.09);box-shadow:0 8px 26px rgba(0,0,0,.16)}
+.navbar-contenido{max-width:1540px;height:88px;padding:0 34px}
+.logo-nav img{width:205px;transform:scale(1.2)}
+.logo-nav:hover img{transform:scale(1.24)}
+.menu{gap:30px}
+.menu a{font-size:11px;letter-spacing:1.4px;color:#f1eee8;position:relative;padding:34px 0}
+.menu a::after{content:"";position:absolute;left:0;right:100%;bottom:22px;height:1px;background:#d5b66f;transition:.25s}
+.menu a:hover{color:#fff}.menu a:hover::after{right:0}
+.nav-icon{background:transparent;border-color:#3b3b3b}
+
+/* Hero menos 'gaming', más campaña de perfumería */
+.hero{min-height:76vh;background:#111}
+.hero::after{background:linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.08) 42%,rgba(0,0,0,.48) 100%)}
+.hero-contenido{max-width:1280px;padding:92px 44px 112px}
+.hero-contenido::before{width:min(850px,88%);height:64%;background:radial-gradient(ellipse at center,rgba(0,0,0,.52),rgba(0,0,0,.18) 55%,transparent 78%)}
+.hero-mini{font-size:10px;letter-spacing:4.5px;color:#f1d58d}
+.hero h1{font-size:clamp(52px,7.4vw,104px);line-height:.91;letter-spacing:-3px;text-wrap:balance}
+.hero p{max-width:650px;font-size:17px;font-weight:450;line-height:1.7;background:transparent;padding:0;color:#f6f4ef}
+.hero-btn{border-radius:2px;min-height:52px;padding:0 29px;font-size:10px;letter-spacing:1.5px}
+.hero-btn.principal{background:#f2eee4;color:#111;border-color:#f2eee4;box-shadow:none;text-shadow:none}
+.hero-btn.principal::after{display:none}
+.hero-btn.principal:hover{background:#fff;transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.24);filter:none}
+.hero-btn.secundario{background:rgba(0,0,0,.15);border-color:rgba(255,255,255,.6)}
+.hero-dot{background:rgba(255,255,255,.5)}.hero-dot.activo{background:#fff}
+
+/* Franja editorial debajo del hero */
+.neros-editorial-strip{background:var(--paper-2);border-bottom:1px solid var(--line);border-top:1px solid rgba(0,0,0,.05)}
+.neros-editorial-strip-inner{max-width:1500px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);padding:0 24px}
+.neros-editorial-point{min-height:92px;display:flex;align-items:center;gap:14px;padding:20px 24px;border-right:1px solid var(--line)}
+.neros-editorial-point:first-child{border-left:1px solid var(--line)}
+.neros-editorial-point b{display:block;font-size:11px;letter-spacing:.7px;text-transform:uppercase;color:var(--ink)}
+.neros-editorial-point span{display:block;font-size:11px;line-height:1.45;color:var(--muted);margin-top:3px}
+.neros-editorial-icon{font-family:Georgia,serif;font-size:27px;color:var(--champagne-dark);min-width:26px;text-align:center}
+
+/* Todas las secciones posteriores pasan a claro */
+.explora-fondo-general{background:var(--paper)!important;background-image:none!important;animation:none!important;color:var(--ink)}
+.explora-fondo-general::before{display:none}
+.explora-fondo-general .explora-seccion{border-top:0;background:var(--paper)!important;padding-top:98px}
+.seccion{max-width:1500px;padding:88px 28px}
+.seccion-head{max-width:860px;margin:0 auto 46px}
+.seccion-head small{color:var(--champagne-dark);font-size:10px;letter-spacing:4px}
+.seccion-head h2{font-size:clamp(38px,4.8vw,64px);color:var(--ink);line-height:1;letter-spacing:-1.5px}
+.seccion-head p,.explora-seccion .seccion-head p{color:var(--muted);font-size:15px;text-shadow:none;max-width:680px}
+
+/* Categorías: grandes, editoriales, casi escaparates */
+.quick-grid{grid-template-columns:repeat(3,1fr);gap:18px}
+.explora-fondo-general .quick-card,.quick-card{min-height:330px;padding:35px;border:1px solid #d9d2c7;border-radius:2px;background:#fff!important;color:var(--ink);box-shadow:none;backdrop-filter:none!important;position:relative}
+.quick-card::before{position:absolute;right:24px;top:20px;font-family:Georgia,serif;font-size:48px;color:#ece6da;line-height:1}
+.quick-card:nth-child(1)::before{content:"01"}.quick-card:nth-child(2)::before{content:"02"}.quick-card:nth-child(3)::before{content:"03"}
+.quick-card::after{width:220px;height:220px;background:radial-gradient(circle,rgba(185,151,83,.10),transparent 68%);right:-70px;bottom:-70px}
+.quick-icon{width:58px;height:58px;border-radius:50%;background:#f6f1e7;border-color:#e8deca;color:var(--champagne-dark);font-size:23px}
+.quick-card h3{font-size:31px;color:var(--ink);margin-top:22px}
+.quick-card p{color:var(--muted);font-size:14px;max-width:330px}
+.quick-card a{color:var(--ink);font-size:10px;letter-spacing:1.5px;border-bottom:1px solid #b99a5d;padding-bottom:4px}
+.explora-fondo-general .quick-card:hover,.quick-card:hover{transform:translateY(-7px);border-color:#b99a5d;box-shadow:0 18px 44px rgba(48,40,29,.10)}
+
+/* Importación: gran bloque negro para cortar el layout */
+.importamos-box{max-width:1500px;padding:10px 28px 90px}
+.explora-fondo-general .importamos-inner,.importamos-inner{min-height:470px;padding:70px 7%;border-radius:2px;border:0;background:linear-gradient(110deg,#0e0e0e 0%,#171511 62%,#4b3a20 150%)!important;color:#fff;box-shadow:none!important;display:flex;flex-direction:column;justify-content:center}
+.importamos-inner::before{content:"NERÓS IMPORTS";position:absolute;right:4%;bottom:-3%;font-family:Georgia,serif;font-size:clamp(64px,10vw,150px);color:rgba(255,255,255,.035);white-space:nowrap;pointer-events:none}
+.importamos-kicker{color:#e3c77d}.importamos-inner h2{font-size:clamp(42px,5vw,70px);max-width:820px}.importamos-inner h2 span{color:#e3c77d}.importamos-inner p{color:#d0ccc4;max-width:700px}.importamos-categorias span{background:rgba(255,255,255,.05);border-color:#38352e;color:#ddd;border-radius:2px}.importamos-btn{border-radius:2px}.importamos-btn.principal{background:#f3efe6}.importamos-btn.secundario{background:transparent;color:#fff;border-color:#777}
+
+/* Pedido y medios de pago: más limpio */
+.pedido-box{border:1px solid var(--line);border-radius:2px;background:#fff!important;box-shadow:none!important;padding:0;overflow:hidden}
+.pedido-main{padding:52px}.pedido-main .badge{border-radius:2px;background:#f5efe1;border-color:#e4d5b6;color:#81652f}.pedido-main h3{font-size:46px;color:var(--ink)}.pedido-main p{color:var(--muted)}.pedido-main a{border-radius:2px;background:var(--ink);color:#fff}
+.pedido-condiciones{padding:22px;background:#f8f5ee}.condicion{background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:20px}.condicion:last-child{border-bottom:0}.condicion strong{color:var(--ink)}.condicion p{color:var(--muted)}
+.pagos-grid{gap:14px}.pago-card{background:#fff!important;border-color:var(--line);border-radius:2px;color:var(--ink);box-shadow:none!important;min-height:175px}.pago-card small{color:var(--muted)}
+
+/* Beneficios ahora se comportan como prensa/editorial */
+.beneficios-neros{max-width:1500px;padding:0 28px;margin-bottom:90px}.beneficios-inner{background:#ebe4d7;border:0;border-radius:2px;box-shadow:none;padding:54px 36px}.beneficios-head small{color:#8a6b31}.beneficios-head h2{color:var(--ink)}.beneficio-card{background:transparent;border:0;border-right:1px solid #d1c6b4;border-radius:0;color:var(--ink);min-height:220px;box-shadow:none!important}.beneficio-card:last-child{border-right:0}.beneficio-card:hover{transform:none;border-color:#d1c6b4;box-shadow:none}.beneficio-card p{color:#6f685e}.beneficio-card b{color:#725725}.beneficio-card h3{color:var(--ink)}
+
+/* CTA final casi 'magazine ad' */
+.explora-fondo-general .cta,.cta{max-width:1444px;background:#111!important;border:0;border-radius:2px;color:#fff;margin:0 auto 80px;padding:70px 30px;box-shadow:none!important}.cta h2{font-size:clamp(42px,5.5vw,72px)}.cta p{color:#c7c2ba}.cta a{border-radius:2px;background:#f3efe6;color:#111}
+
+/* Footer */
+.explora-fondo-general .footer,.footer{background:#0b0b0b!important;color:#fff;border-top:0}.footer-nav a{color:#d8d5cf}.footer-bottom{border-top-color:#262626;color:#777}.footer-legal-note{color:#777}
+
+@media(max-width:900px){
+ .navbar-contenido{height:82px;padding:0 18px}.menu{display:none}
+ .hero{min-height:680px}.hero-contenido{padding:72px 22px 100px}.hero h1{font-size:58px}
+ .neros-editorial-strip-inner{grid-template-columns:1fr 1fr}.neros-editorial-point:nth-child(3){border-left:1px solid var(--line)}
+ .quick-grid{grid-template-columns:1fr}.quick-card{min-height:260px}
+ .beneficios-grid{grid-template-columns:1fr 1fr}.beneficio-card:nth-child(2){border-right:0}
+}
+@media(max-width:600px){
+ .hero{min-height:calc(100vh - 112px)}.hero h1{font-size:47px}.hero p{font-size:14px}.hero-btn{border-radius:2px}
+ .neros-editorial-strip-inner{grid-template-columns:1fr;padding:0 14px}.neros-editorial-point{border-right:0!important;border-left:0!important;border-bottom:1px solid var(--line);min-height:76px;padding:14px 4px}.neros-editorial-point:last-child{border-bottom:0}
+ .seccion,.explora-fondo-general .explora-seccion{padding:65px 14px}.seccion-head{margin-bottom:34px}.seccion-head h2{font-size:39px}
+ .quick-card{padding:27px 24px;min-height:245px}.quick-card h3{font-size:28px}
+ .importamos-box{padding:0 14px 65px}.importamos-inner{padding:50px 26px;min-height:500px}.importamos-inner h2{font-size:40px}
+ .pedido-main{padding:34px 24px}.pedido-main h3{font-size:36px}.pedido-condiciones{padding:10px 18px}
+ .pagos-grid{grid-template-columns:1fr 1fr}.pago-card{min-height:140px}
+ .beneficios-neros{padding:0 14px}.beneficios-inner{padding:40px 16px}.beneficios-grid{grid-template-columns:1fr}.beneficio-card{border-right:0;border-bottom:1px solid #d1c6b4}.beneficio-card:last-child{border-bottom:0}
+ .cta{margin:0 14px 60px!important;padding:52px 22px!important}.cta h2{font-size:42px}
+}
+
 </style>
 </head>
 
 <body>
+<div id="nerosScrollProgress" aria-hidden="true"></div>
 
 <!-- =====================================================
 PROMO SUPERIOR
@@ -2112,7 +2381,12 @@ HEADER
       alt="NERÓS">
 
     </a>
-    <div class="nav-right-spacer" aria-hidden="true"></div>
+    <nav class="menu" aria-label="Navegación principal">
+      <a href="index.html">INICIO</a>
+      <a href="catalogo.html">PERFUMES</a>
+      <a href="catalogo.html?modo=mayorista">MAYORISTA</a>
+      <a href="https://wa.me/5493417830300" target="_blank" rel="noopener">CONTACTO</a>
+    </nav>
 
   </div>
 
@@ -2293,6 +2567,15 @@ FLASHER
 
   </div>
 
+</section>
+
+<section class="neros-editorial-strip" aria-label="Beneficios NERÓS">
+  <div class="neros-editorial-strip-inner">
+    <div class="neros-editorial-point"><div class="neros-editorial-icon">01</div><div><b>Selección curada</b><span>Árabes, diseñador, nicho y decants.</span></div></div>
+    <div class="neros-editorial-point"><div class="neros-editorial-icon">02</div><div><b>10% OFF</b><span>Efectivo o transferencia.</span></div></div>
+    <div class="neros-editorial-point"><div class="neros-editorial-icon">03</div><div><b>Envíos</b><span>Rosario y todo el país.</span></div></div>
+    <div class="neros-editorial-point"><div class="neros-editorial-icon">04</div><div><b>Te asesoramos</b><span>Encontrá un aroma que vaya con vos.</span></div></div>
+  </div>
 </section>
 
 <!-- =====================================================
@@ -3086,5 +3369,47 @@ document.addEventListener(
 
 </script>
 
+<button id="nerosBackTop" type="button" aria-label="Volver arriba" title="Volver arriba">↑</button>
+<script>
+
+/* =====================================================
+   NERÓS — microinteracciones compartidas
+===================================================== */
+(function(){
+  const progress=document.getElementById('nerosScrollProgress');
+  const backTop=document.getElementById('nerosBackTop');
+  const navbar=document.querySelector('.navbar');
+
+  function syncNerosChrome(){
+    const y=window.scrollY || document.documentElement.scrollTop || 0;
+    const max=Math.max(1,document.documentElement.scrollHeight-window.innerHeight);
+    if(progress) progress.style.width=Math.min(100,(y/max)*100)+'%';
+    if(backTop) backTop.classList.toggle('visible',y>520);
+    if(navbar) navbar.classList.toggle('neros-scrolled',y>18);
+  }
+
+  window.addEventListener('scroll',syncNerosChrome,{passive:true});
+  window.addEventListener('resize',syncNerosChrome,{passive:true});
+  syncNerosChrome();
+
+  if(backTop){
+    backTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+  }
+
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    const candidates=document.querySelectorAll('.seccion, .importamos-box, .beneficios-neros, .cta, .catalogo-cabeza, .controles');
+    candidates.forEach(el=>el.classList.add('neros-reveal'));
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('neros-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    },{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+    candidates.forEach(el=>io.observe(el));
+  }
+})();
+</script>
 </body>
 </html>
