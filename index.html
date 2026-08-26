@@ -1983,6 +1983,184 @@ REFINAMIENTO VISUAL — FONDO + TARJETAS
 @media(prefers-reduced-motion:reduce){
   .explora-fondo-general{animation:none;}
 }
+
+
+/* =====================================================
+HERO FINAL — CONTRASTE, BOTONES Y RESPONSIVE
+===================================================== */
+.hero{
+  height:auto;
+  min-height:clamp(600px,calc(100svh - 138px),820px);
+  position:relative;
+  overflow:hidden;
+  background:#080808;
+  isolation:isolate;
+}
+
+.hero::after{
+  background:linear-gradient(180deg,rgba(0,0,0,.02) 0%,rgba(0,0,0,.08) 55%,rgba(8,8,8,.72) 100%);
+  z-index:2;
+}
+
+.hero-slide{
+  z-index:1;
+  min-height:100%;
+}
+
+.hero-slide.activo{z-index:3;}
+
+.hero-slide:nth-child(1){
+  background-image:linear-gradient(90deg,rgba(0,0,0,.20),rgba(0,0,0,.08),rgba(0,0,0,.20)),url("fondo-tusello.png.png");
+}
+.hero-slide:nth-child(2){
+  background-image:linear-gradient(90deg,rgba(0,0,0,.22),rgba(0,0,0,.10),rgba(0,0,0,.22)),url("fondo-descuento.png.png");
+}
+.hero-slide:nth-child(3){
+  background-image:linear-gradient(90deg,rgba(0,0,0,.24),rgba(0,0,0,.12),rgba(0,0,0,.24)),url("fondo-imports.png.png");
+}
+
+.hero-contenido{
+  z-index:20;
+  width:min(1080px,calc(100% - 36px));
+  min-height:clamp(600px,calc(100svh - 138px),820px);
+  padding:56px 24px 96px;
+}
+
+.hero-contenido::before{
+  width:min(980px,96%);
+  height:82%;
+  background:radial-gradient(ellipse at center,rgba(0,0,0,.50) 0%,rgba(0,0,0,.28) 45%,rgba(0,0,0,0) 76%);
+  filter:blur(4px);
+}
+
+.hero-mini{
+  color:#f1c75f;
+  text-shadow:0 2px 10px #000,0 0 22px rgba(0,0,0,.95);
+}
+
+.hero h1{
+  color:#fff;
+  text-shadow:0 5px 28px #000,0 2px 8px #000,0 0 2px rgba(255,255,255,.15);
+}
+
+.hero p{
+  color:#f5f5f5;
+  background:rgba(0,0,0,.42);
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 10px 30px rgba(0,0,0,.22);
+  backdrop-filter:blur(5px);
+  -webkit-backdrop-filter:blur(5px);
+}
+
+.hero-botones{
+  z-index:60;
+  margin-top:4px;
+  padding:11px;
+  background:rgba(5,5,5,.82);
+  border:1px solid rgba(227,189,99,.24);
+  box-shadow:0 18px 50px rgba(0,0,0,.58),0 0 36px rgba(200,157,56,.14);
+}
+
+.hero-btn{
+  z-index:70;
+  min-height:56px;
+  padding:0 30px;
+  font-size:11px;
+  letter-spacing:1px;
+}
+
+.hero-btn.principal{
+  background:linear-gradient(135deg,#fff0a8 0%,#e6b63d 35%,#c99520 66%,#ffe27d 100%);
+  border:1px solid #ffe699;
+  color:#070707;
+  box-shadow:0 10px 28px rgba(0,0,0,.55),0 0 32px rgba(227,189,99,.52),inset 0 1px 0 rgba(255,255,255,.65);
+}
+
+.hero-btn.secundario{
+  background:#101010;
+  border:1px solid rgba(255,255,255,.42);
+  color:#fff;
+  box-shadow:0 8px 24px rgba(0,0,0,.38);
+}
+
+.hero-dots{z-index:80;bottom:22px;}
+.hero-dot{background:#aaa;box-shadow:0 2px 8px #000;}
+.hero-dot.activo{background:#e3bd63;}
+
+/* El bloque siguiente arranca limpio y nunca invade el hero */
+.explora-fondo-general{
+  position:relative;
+  z-index:5;
+}
+
+@media (min-width:701px) and (max-height:820px){
+  .hero{min-height:560px;height:auto;}
+  .hero-contenido{
+    min-height:560px;
+    padding:34px 24px 74px;
+  }
+  .hero h1{
+    font-size:clamp(40px,5vw,62px);
+    margin-bottom:15px;
+  }
+  .hero p{
+    font-size:14px;
+    line-height:1.45;
+    margin-bottom:16px;
+  }
+  .hero-btn{min-height:48px;padding:0 22px;}
+  .hero-dots{bottom:14px;}
+}
+
+@media(max-width:700px){
+  .hero{
+    min-height:620px;
+    height:auto;
+  }
+  .hero-slide{
+    background-position:center center;
+  }
+  .hero-contenido{
+    min-height:620px;
+    width:calc(100% - 18px);
+    padding:34px 10px 78px;
+  }
+  .hero-contenido::before{
+    width:110%;
+    height:92%;
+    background:radial-gradient(ellipse at center,rgba(0,0,0,.68) 0%,rgba(0,0,0,.42) 52%,rgba(0,0,0,0) 82%);
+  }
+  .hero h1{
+    font-size:clamp(34px,10.5vw,47px);
+    line-height:1.02;
+    margin-bottom:16px;
+  }
+  .hero p{
+    max-width:100%;
+    font-size:13px;
+    line-height:1.48;
+    margin-bottom:18px;
+    padding:9px 11px;
+  }
+  .hero-botones{
+    width:min(100%,370px);
+    border-radius:20px;
+    padding:8px;
+  }
+  .hero-btn{
+    width:100%;
+    min-height:49px;
+    font-size:10px;
+  }
+  .hero-dots{bottom:14px;}
+}
+
+@media(max-width:390px){
+  .hero,.hero-contenido{min-height:600px;}
+  .hero-contenido{padding-top:28px;padding-bottom:70px;}
+  .hero h1{font-size:34px;}
+  .hero p{font-size:12px;}
+}
 </style>
 </head>
 
