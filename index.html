@@ -269,10 +269,14 @@ HERO / FLASHER
 ===================================================== */
 
 .hero{
-  min-height:calc(100vh - 108px);
+  /* 34px promo + 104px navbar = 138px.
+     svh evita recortes por barras del navegador y clamp limita el alto en monitores bajos. */
+  height:clamp(590px,calc(100svh - 138px),860px);
+  min-height:0;
   position:relative;
   overflow:hidden;
   background:#080808;
+  isolation:isolate;
 }
 
 /* Overlay general para lectura y profundidad */
@@ -379,15 +383,22 @@ CONTENIDO
 
 .hero-contenido{
   position:relative;
-  z-index:10;
+  z-index:30;
 
-  width:100%;
+  width:min(1120px,calc(100% - 32px));
   max-width:1120px;
 
   margin:auto;
-  padding:80px 28px 105px;
+  padding:clamp(38px,7vh,72px) 28px clamp(88px,11vh,112px);
 
   text-align:center;
+
+  /* Mantiene el bloque visible y por encima del carrusel/fondo */
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:100%;
 }
 
 /* halo detrás de TODO el bloque de texto */
@@ -488,13 +499,26 @@ BOTONES
 
 .hero-botones{
   position:relative;
-  z-index:20;
+  z-index:80;
   isolation:isolate;
   display:flex;
   justify-content:center;
+  align-items:center;
 
   gap:12px;
   flex-wrap:wrap;
+
+  /* Placa que separa visualmente los CTA del fondo y del contenido siguiente */
+  width:fit-content;
+  max-width:100%;
+  margin:2px auto 0;
+  padding:10px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:999px;
+  background:rgba(4,4,4,.68);
+  -webkit-backdrop-filter:blur(12px);
+  backdrop-filter:blur(12px);
+  box-shadow:0 18px 48px rgba(0,0,0,.52),0 0 28px rgba(200,157,56,.08);
 }
 
 .hero-btn{
@@ -502,17 +526,18 @@ BOTONES
   align-items:center;
   justify-content:center;
 
-  min-height:50px;
-  padding:0 25px;
+  min-height:54px;
+  padding:0 29px;
 
   border-radius:999px;
 
   font-size:11px;
-  font-weight:900;
-  letter-spacing:.8px;
+  font-weight:950;
+  letter-spacing:.9px;
+  white-space:nowrap;
 
   position:relative;
-  z-index:20;
+  z-index:90;
 
   transition:
     transform .25s,
@@ -527,7 +552,7 @@ BOTONES
   background:linear-gradient(135deg,#ffe18a 0%,#e0ac2f 42%,#f6c94f 72%,#fff0aa 100%);
   color:#090909;
   border:1px solid #ffe59a;
-  box-shadow:0 12px 34px rgba(0,0,0,.50),0 0 30px rgba(232,184,62,.42),0 0 8px rgba(255,226,138,.38),inset 0 1px 0 rgba(255,255,255,.55);
+  box-shadow:0 14px 38px rgba(0,0,0,.62),0 0 38px rgba(232,184,62,.56),0 0 12px rgba(255,226,138,.42),inset 0 1px 0 rgba(255,255,255,.62);
   text-shadow:0 1px 0 rgba(255,255,255,.35);
   position:relative;
   overflow:hidden;
@@ -576,12 +601,12 @@ DOTS
 .hero-dots{
   position:absolute;
 
-  bottom:28px;
+  bottom:18px;
   left:50%;
 
   transform:translateX(-50%);
 
-  z-index:5;
+  z-index:70;
 
   display:flex;
   gap:7px;
@@ -616,36 +641,107 @@ HERO MOBILE
 
 @media(max-width:700px){
 
+  .hero{
+    height:clamp(570px,calc(100svh - 112px),760px);
+    min-height:0;
+  }
+
   .hero-slide{
     background-position:center center;
   }
 
   .hero-contenido{
-    padding:
-      56px 20px 92px;
+    width:calc(100% - 20px);
+    padding:34px 12px 76px;
+    justify-content:center;
   }
 
   .hero-contenido::before{
-    width:96%;
-    height:78%;
+    width:100%;
+    height:86%;
+    background:radial-gradient(ellipse at center,rgba(0,0,0,.72) 0%,rgba(0,0,0,.48) 48%,rgba(0,0,0,0) 80%);
+  }
+
+  .hero-mini{
+    margin-bottom:12px;
+    font-size:9px;
+    letter-spacing:3px;
   }
 
   .hero h1{
-    font-size:46px;
-    letter-spacing:-1.4px;
+    font-size:clamp(35px,11vw,48px);
+    line-height:1;
+    letter-spacing:-1.2px;
+    margin-bottom:17px;
   }
 
   .hero p{
-    max-width:94%;
-    font-size:15px;
-    line-height:1.55;
+    max-width:96%;
+    font-size:13px;
+    line-height:1.48;
     padding:8px 10px;
+    margin-bottom:20px;
+  }
+
+  .hero-botones{
+    width:min(100%,390px);
+    padding:8px;
+    gap:8px;
+    border-radius:22px;
   }
 
   .hero-btn{
     width:100%;
+    min-height:48px;
+    padding:0 16px;
+    font-size:10px;
   }
 
+  .hero-dots{
+    bottom:13px;
+  }
+
+}
+
+
+/* Monitores de poca altura (ej. 1366x768 / 19 pulgadas) */
+@media (min-width:701px) and (max-height:820px){
+  .hero{
+    height:calc(100svh - 138px);
+    min-height:540px;
+  }
+
+  .hero-contenido{
+    padding:28px 28px 72px;
+  }
+
+  .hero-mini{
+    margin-bottom:10px;
+    font-size:9px;
+  }
+
+  .hero h1{
+    font-size:clamp(42px,5.2vw,64px);
+    line-height:.98;
+    margin-bottom:16px;
+  }
+
+  .hero p{
+    max-width:650px;
+    font-size:14px;
+    line-height:1.48;
+    margin-bottom:18px;
+    padding:7px 12px;
+  }
+
+  .hero-btn{
+    min-height:48px;
+    padding:0 22px;
+  }
+
+  .hero-botones{
+    padding:8px;
+  }
 }
 
 /* =====================================================
@@ -1732,29 +1828,8 @@ RESPONSIVE
     height:36px;
   }
 
-  .hero{
-    min-height:
-      calc(100vh - 112px);
-  }
-
-  .hero-contenido{
-    padding:
-      56px 20px 92px;
-    text-align:center;
-  }
-
-  .hero h1{
-    font-size:46px;
-    letter-spacing:-1.4px;
-  }
-
-  .hero p{
-    font-size:13px;
-  }
-
-  .hero-btn{
-    width:100%;
-  }
+  /* Hero ya se adapta en el bloque HERO MOBILE de arriba.
+     Evitamos pisar sus alturas/paddings acá. */
 
   .seccion{
     padding:55px 12px;
