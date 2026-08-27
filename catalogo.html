@@ -2798,6 +2798,204 @@ FICHA PRODUCTO — REDISEÑO COMPACTO / MONITORES 19"
     grid-template-columns:1fr;
   }
 }
+
+/* =====================================================
+FICHA PRODUCTO — AJUSTE FINAL DE LEGIBILIDAD 19"
+Mantiene el diseño compacto, pero evita textos demasiado chicos.
+===================================================== */
+
+@media (min-width:701px) and (max-height:900px){
+
+  /* Un poco más de aire en la columna derecha */
+  .producto-ficha{
+    grid-template-columns:minmax(0,1.08fr) minmax(470px,.92fr);
+  }
+
+  .producto-detalle{
+    padding:25px 32px 32px;
+  }
+
+  /* Encabezado */
+  .producto-miga{
+    font-size:10px;
+    line-height:1.35;
+    letter-spacing:1.35px;
+    margin-bottom:9px;
+  }
+
+  .producto-detalle h2{
+    font-size:clamp(31px,2.75vw,41px);
+    line-height:1.02;
+    margin-right:42px;
+  }
+
+  /* Badges */
+  .producto-meta-line{
+    margin-top:11px;
+    gap:8px;
+  }
+
+  .producto-stock-detalle,
+  .producto-genero-badge{
+    min-height:27px;
+    padding:6px 10px;
+    font-size:9.5px;
+    line-height:1.2;
+    letter-spacing:.25px;
+  }
+
+  /* Notas olfativas */
+  .producto-extra{
+    margin-top:12px;
+    padding:13px 13px;
+    border-radius:13px;
+  }
+
+  .producto-extra-titulo{
+    margin-bottom:10px;
+    font-size:10px;
+    line-height:1.25;
+    letter-spacing:1.15px;
+  }
+
+  .producto-notas-grid{
+    gap:8px;
+  }
+
+  .nota-bloque{
+    min-height:118px;
+    padding:11px 10px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+
+  .nota-bloque span{
+    margin-bottom:9px;
+    font-size:9.5px;
+    line-height:1.2;
+    letter-spacing:1.05px;
+  }
+
+  .nota-bloque p,
+  .nota-simple{
+    font-size:10.8px;
+    line-height:1.5;
+    color:#dedede;
+  }
+
+  .producto-extra-contenido{
+    font-size:11px;
+    line-height:1.62;
+  }
+
+  /* Precios */
+  .producto-precios{
+    margin-top:14px;
+    padding:14px 0;
+  }
+
+  .producto-precio-lista{
+    font-size:12px;
+    line-height:1.4;
+  }
+
+  .producto-cuotas{
+    margin-top:6px;
+    font-size:12px;
+    line-height:1.45;
+  }
+
+  .producto-cuotas strong{
+    font-size:13px;
+  }
+
+  .producto-precio-principal{
+    margin-top:5px;
+    font-size:31px;
+    line-height:1.05;
+  }
+
+  .producto-ahorro{
+    margin-top:6px;
+    font-size:10.5px;
+    line-height:1.35;
+  }
+
+  /* Disponible por pedido */
+  .pedido-detalle-aviso{
+    margin-top:13px !important;
+    padding:12px 13px !important;
+    font-size:10.5px !important;
+    line-height:1.52 !important;
+  }
+
+  .pedido-detalle-aviso strong{
+    font-size:10.5px;
+  }
+
+  /* Cajas inferiores */
+  .producto-info-mini{
+    margin-top:12px;
+    gap:7px;
+  }
+
+  .producto-info-mini div{
+    padding:10px 11px;
+    min-height:62px;
+  }
+
+  .producto-info-mini small{
+    margin-bottom:6px;
+    font-size:9px;
+    line-height:1.25;
+    letter-spacing:.65px;
+  }
+
+  .producto-info-mini strong{
+    font-size:11px;
+    line-height:1.45;
+  }
+
+  /* Cantidad + agregar */
+  .producto-compra{
+    margin-top:14px;
+  }
+
+  .producto-cantidad span{
+    font-size:14px;
+  }
+
+  .producto-agregar{
+    font-size:11px;
+  }
+
+  .producto-ayuda{
+    margin-top:15px;
+    padding-top:14px;
+    font-size:10.5px;
+    line-height:1.55;
+  }
+}
+
+/* En escritorio normal también damos un piso de lectura más cómodo */
+@media (min-width:901px) and (min-height:901px){
+  .nota-bloque p,
+  .nota-simple{
+    font-size:11px;
+  }
+
+  .nota-bloque span,
+  .producto-extra-titulo{
+    font-size:9.5px;
+  }
+
+  .producto-stock-detalle,
+  .producto-genero-badge{
+    font-size:9.5px;
+  }
+}
+
 </style>
 
 </head>
