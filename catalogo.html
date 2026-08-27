@@ -6907,7 +6907,7 @@ const lineas=
 carrito.map(item=>{
 
 const precio=
-precioItemCarrito(item);
+obtenerPrecioItem(item,totalUnidades());
 
 const subtotal=
 precio *
@@ -6922,7 +6922,7 @@ return `• ${item.perfume} x${item.cantidad} — $${Math.round(subtotal).toLoca
 
 const incluyePedido=
 carrito.some(item=>
-esDisponiblePedido(item)
+productoPorPedido(item)
 );
 
 let medioPago="";
