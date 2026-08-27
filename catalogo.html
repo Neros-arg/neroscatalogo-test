@@ -4455,6 +4455,28 @@ CARRITO — BENEFICIO TRANSFERENCIA / EFECTIVO DESTACADO
   .nota-bloque:nth-child(3) span::before{content:"🌲" !important;font-size:13px !important;}
 }
 
+
+/* Los emojis ahora se generan en el HTML/JS, no mediante pseudo-elementos */
+.nota-bloque span::before{
+  content:none !important;
+  display:none !important;
+}
+
+.nota-emoji{
+  display:inline-block;
+  flex:0 0 auto;
+  margin-right:2px;
+  font-size:15px;
+  line-height:1;
+  font-weight:400;
+}
+
+@media (max-width:700px){
+  .nota-emoji{
+    font-size:14px;
+  }
+}
+
 </style>
 
 </head>
@@ -8270,11 +8292,28 @@ if(!bloques.length){
 return `<div class="nota-simple">${escapeHTML(limpio)}</div>`;
 }
 
-return `<div class="producto-notas-grid">${bloques.map(b=>`
+return `<div class="producto-notas-grid">${bloques.map(b=>{
+const emoji=
+b.titulo==="SALIDA"
+?
+"🍋"
+:
+b.titulo==="CORAZÓN"
+?
+"🌸"
+:
+b.titulo==="FONDO"
+?
+"🌲"
+:
+"";
+
+return `
 <div class="nota-bloque">
-<span>${escapeHTML(b.titulo)}</span>
+<span><b class="nota-emoji">${emoji}</b>${escapeHTML(b.titulo)}</span>
 <p>${escapeHTML(b.contenido).replace(/,\s*/g," · ")}</p>
-</div>`).join("")}
+</div>`;
+}).join("")}
 </div>`;
 }
 
