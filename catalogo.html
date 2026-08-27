@@ -6894,242 +6894,100 @@ WHATSAPP
 
 function enviarPedidoWhatsApp(){
 
-const total=
-totalUnidades();
-
 if(
-total===0
+!carrito.length
 ){
-
+alert("Tu carrito está vacío.");
 return;
-
-}
-
-if(
-
-modoActual==="mayorista"
-
-&&
-
-total<
-MINIMO_MAYORISTA
-
-){
-
-alert(
-
-`El pedido mayorista mínimo es de ${MINIMO_MAYORISTA} unidades.`
-
-);
-
-return;
-
 }
 
 let totalPedido=0;
 
-let mensaje="";
-
-const contienePedido=
-carrito.some(
-item=>productoPorPedido(item)
-);
-
-if(
-modoActual==="mayorista"
-){
-
-mensaje=
-
-`Hola NERÓS 👋✨
-
-Quiero realizar un pedido MAYORISTA:
-
-📦 Cantidad total: ${total} unidades
-
-━━━━━━━━━━━━━━━
-DETALLE DEL PEDIDO
-━━━━━━━━━━━━━━━
-`;
-
-}
-
-else{
-
-let medioPago="";
-
-if(
-formaPago==="transferencia"
-){
-
-medioPago=
-"Transferencia / Efectivo (10% OFF)";
-
-}
-
-else if(
-formaPago==="debito"
-){
-
-medioPago=
-"Débito (precio de lista)";
-
-}
-
-else{
-
-medioPago=
-"Crédito / Mercado Pago (precio de lista)";
-
-}
-
-mensaje=
-
-`Hola NERÓS 👋✨
-
-Quiero finalizar esta compra:
-
-📦 Cantidad total: ${total} unidades
-
-💳 Medio de pago:
-${medioPago}
-
-━━━━━━━━━━━━━━━
-DETALLE DEL PEDIDO
-━━━━━━━━━━━━━━━
-`;
-
-}
-
-if(
-modoActual!=="mayorista"
-&&
-contienePedido
-){
-
-mensaje+=`
-
-📦 ESTE PEDIDO INCLUYE PRODUCTOS POR PEDIDO
-Entrega estimada: 10 días hábiles.
-
-${
-formaPago==="credito"
-?
-"💳 Tarjeta / Mercado Pago: se abona el total al realizar la compra."
-:
-"🏦 Transferencia / Efectivo: 50% al confirmar el pedido + 50% cuando llega."
-}
-
-`;
-
-}
-
-carrito.forEach(item=>{
+const lineas=
+carrito.map(item=>{
 
 const precio=
-
-obtenerPrecioItem(
-item,
-total
-);
+precioItemCarrito(item);
 
 const subtotal=
-
 precio *
 item.cantidad;
 
 totalPedido+=
 subtotal;
 
-mensaje+=`
-
-🧴 ${item.perfume}
-
-Cantidad:
-${item.cantidad}
-
-Precio unitario:
-$${Math.round(precio)
-.toLocaleString("es-AR")}
-
-Subtotal:
-$${Math.round(subtotal)
-.toLocaleString("es-AR")}
-`;
+return `• ${item.perfume} x${item.cantidad} — $${Math.round(subtotal).toLocaleString("es-AR")}`;
 
 });
+
+const incluyePedido=
+carrito.some(item=>
+esDisponiblePedido(item)
+);
+
+let medioPago="";
 
 if(
 modoActual==="mayorista"
 ){
+medioPago=
+"Mayorista · Transferencia / Efectivo";
+}
+else if(
+formaPago==="transferencia"
+){
+medioPago=
+"Transferencia / Efectivo — 10% OFF aplicado";
+}
+else if(
+formaPago==="debito"
+){
+medioPago=
+"Débito — precio de lista";
+}
+else{
+medioPago=
+"Crédito / Mercado Pago — precio de lista";
+}
 
-let nivel=
-"10+";
+let mensaje=
+`Hola NERÓS 👋 Quiero finalizar mi compra.
+
+🛒 Pedido:
+${lineas.join("\n")}
+
+💳 ${medioPago}
+💰 Total: $${Math.round(totalPedido).toLocaleString("es-AR")}`;
 
 if(
-total>=30
+incluyePedido
 ){
+mensaje+=`
 
-nivel=
-"30+";
+📦 El pedido incluye productos por pedido.
+Entrega estimada: 10 días hábiles.`;
 
+if(
+modoActual==="particular" &&
+formaPago==="transferencia"
+){
+mensaje+=`
+Reserva: 50% ahora + 50% cuando llega.`;
 }
-
-else if(
-total>=20
-){
-
-nivel=
-"20+";
-
 }
 
 mensaje+=`
 
-━━━━━━━━━━━━━━━
+Quiero confirmar disponibilidad y coordinar entrega o envío. Gracias.`;
 
-📊 Nivel mayorista:
-${nivel}
-
-📦 Total de unidades:
-${total}
-
-💰 TOTAL DEL PEDIDO:
-$${Math.round(totalPedido).toLocaleString("es-AR")}
-
-━━━━━━━━━━━━━━━
-
-Quiero confirmar disponibilidad y coordinar el pedido.
-
-Gracias 🙌
-`;
-
-}
-
-else{
-
-mensaje+=`
-
-━━━━━━━━━━━━━━━
-
-📦 Total de unidades:
-${total}
-
-💰 TOTAL:
-$${Math.round(totalPedido).toLocaleString("es-AR")}
-
-━━━━━━━━━━━━━━━
-
-Quiero confirmar disponibilidad y coordinar entrega o envío.
-
-Gracias 🙌
-`;
-
-}
+const telefono=
+"5493417830300";
 
 const url=
-
-`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(mensaje)}`;
+"https://wa.me/" +
+telefono +
+"?text=" +
+encodeURIComponent(mensaje);
 
 window.open(
 url,
