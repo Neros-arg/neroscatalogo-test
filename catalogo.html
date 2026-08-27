@@ -4,7 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <title>Catálogo NERÓS | Perfumes, Fragancias y Decants</title>
 
@@ -3208,6 +3208,779 @@ CARRITO — BENEFICIO TRANSFERENCIA / EFECTIVO DESTACADO
 
   .resumen-total.transferencia span:last-child{
     font-size:28px;
+  }
+}
+
+
+/* =========================================================
+   NERÓS — OPTIMIZACIÓN MOBILE FINAL
+   iPhone / Android · 320px–700px
+   ========================================================= */
+
+@media (max-width:700px){
+
+  html{
+    -webkit-text-size-adjust:100%;
+    text-size-adjust:100%;
+    scroll-padding-top:118px;
+  }
+
+  body{
+    padding-bottom:calc(72px + env(safe-area-inset-bottom));
+    overscroll-behavior-y:none;
+  }
+
+  /* Fondo más liviano para evitar tirones al scrollear en iPhone */
+  body::before{
+    inset:0;
+    transform:none !important;
+    will-change:auto;
+    background-position:center top;
+  }
+
+  button,
+  a,
+  input{
+    touch-action:manipulation;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  /* ---------- CABECERA ---------- */
+
+  .promo-strip{
+    height:27px;
+  }
+
+  .promo-track{
+    font-size:8px;
+    gap:34px;
+    white-space:nowrap;
+  }
+
+  .navbar-contenido{
+    height:66px;
+    padding-left:max(10px,env(safe-area-inset-left));
+    padding-right:max(10px,env(safe-area-inset-right));
+  }
+
+  .logo-nav img{
+    width:138px;
+    max-height:54px;
+    transform:scale(1.06);
+  }
+
+  .logo-nav:hover img{
+    transform:scale(1.06);
+  }
+
+  .nav-icon{
+    width:40px;
+    height:40px;
+    min-width:40px;
+  }
+
+  .category-rail{
+    top:66px;
+    gap:7px;
+    padding:7px 10px 8px;
+    overflow-x:auto;
+    overscroll-behavior-x:contain;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    scroll-snap-type:x proximity;
+  }
+
+  .category-rail::-webkit-scrollbar{
+    display:none;
+  }
+
+  .cat-chip{
+    flex:0 0 auto;
+    min-height:36px;
+    padding:0 13px;
+    scroll-snap-align:start;
+  }
+
+  /* ---------- CATÁLOGO ---------- */
+
+  .catalogo{
+    padding:28px 9px calc(108px + env(safe-area-inset-bottom));
+  }
+
+  .controles{
+    gap:9px;
+    margin-bottom:17px;
+  }
+
+  .modos{
+    gap:6px;
+    margin:0 -1px;
+  }
+
+  .modo{
+    min-height:40px;
+    padding:0 14px;
+  }
+
+  .filtros-busqueda-wrap{
+    gap:7px;
+  }
+
+  .buscar-wrap input{
+    height:46px;
+    min-height:46px;
+    font-size:16px; /* evita zoom automático en iOS */
+    border-radius:12px;
+  }
+
+  .abrir-filtros-btn{
+    height:46px;
+    min-width:46px;
+    border-radius:12px;
+  }
+
+  .filtros-activos{
+    gap:6px;
+    margin:-2px 0 16px;
+  }
+
+  .filtro-tag{
+    padding:6px 9px;
+    font-size:8px;
+  }
+
+  #productos{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+  }
+
+  .card{
+    border-radius:13px;
+  }
+
+  .imagen-producto{
+    aspect-ratio:1/1;
+  }
+
+  .card-info{
+    padding:10px 9px 11px;
+  }
+
+  .nombre-producto{
+    min-height:0;
+    font-size:11.5px;
+    line-height:1.3;
+    overflow-wrap:anywhere;
+  }
+
+  .producto-tipo-card{
+    margin-top:5px;
+    padding:4px 6px;
+    font-size:7px;
+  }
+
+  .badge-stock{
+    left:7px;
+    top:7px;
+    padding:6px 8px;
+    font-size:8px;
+  }
+
+  .stock-producto{
+    margin-top:6px;
+    font-size:9px;
+    line-height:1.35;
+  }
+
+  .pedido-card-aviso{
+    margin-top:7px;
+    padding:7px 8px;
+    font-size:8.5px;
+    line-height:1.35;
+  }
+
+  .precio-producto{
+    margin-top:9px;
+    font-size:17px;
+    letter-spacing:-.25px;
+  }
+
+  .precio-lista-card{
+    margin-top:7px;
+    font-size:9px;
+    line-height:1.35;
+  }
+
+  .precio-lista-card strong{
+    font-size:11px;
+  }
+
+  .cuotas-card{
+    margin-top:5px;
+    font-size:9px;
+    line-height:1.35;
+  }
+
+  .cuotas-card b{
+    font-size:10px;
+  }
+
+  .precio-transfer-card{
+    margin-top:7px;
+    padding:7px;
+    border-radius:9px;
+    font-size:8.5px;
+  }
+
+  .precio-transfer-card b{
+    font-size:16px;
+  }
+
+  /* En pantallas touch no dejamos efectos hover "pegados" */
+  .card:hover{
+    transform:none;
+    box-shadow:none;
+  }
+
+  .card:hover .imagen-producto img{
+    transform:none;
+  }
+
+  /* ---------- FILTROS ---------- */
+
+  .filtro-popup{
+    width:100%;
+    max-width:none;
+    max-height:88svh;
+    padding:20px 15px calc(18px + env(safe-area-inset-bottom));
+    border-radius:20px 20px 0 0;
+  }
+
+  .filtro-popup-head h3{
+    font-size:24px;
+  }
+
+  .filtro-opcion{
+    min-height:42px;
+  }
+
+  .filtro-acciones{
+    position:sticky;
+    bottom:0;
+    z-index:3;
+    margin:16px -15px calc(-18px - env(safe-area-inset-bottom));
+    padding:12px 15px calc(12px + env(safe-area-inset-bottom));
+    background:rgba(10,10,10,.96);
+    backdrop-filter:blur(12px);
+  }
+
+  .filtro-acciones button{
+    min-height:48px;
+  }
+
+  /* ---------- FICHA DE PRODUCTO ---------- */
+
+  .producto-modal{
+    align-items:stretch;
+    padding:0;
+    background:#070707;
+    backdrop-filter:none;
+  }
+
+  .producto-modal-contenido{
+    width:100%;
+    height:100svh;
+    max-height:none;
+    border:0;
+    border-radius:0;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+
+  .producto-cerrar{
+    position:fixed;
+    top:calc(10px + env(safe-area-inset-top));
+    right:12px;
+    z-index:5100;
+    width:42px;
+    height:42px;
+    background:rgba(9,9,9,.90);
+    border-color:#414141;
+    box-shadow:0 6px 22px rgba(0,0,0,.35);
+  }
+
+  .producto-ficha{
+    display:block;
+    min-height:0;
+  }
+
+  .producto-foto-grande{
+    width:100%;
+    height:clamp(245px,34svh,320px);
+    min-height:245px;
+    max-height:320px;
+    padding:25px 34px 18px;
+    border-right:0;
+    border-bottom:1px solid #202020;
+  }
+
+  .producto-foto-grande img{
+    width:100%;
+    height:100%;
+    max-height:278px;
+  }
+
+  .producto-detalle{
+    display:block;
+    padding:18px 15px calc(30px + env(safe-area-inset-bottom));
+  }
+
+  .producto-miga{
+    margin-bottom:8px;
+    font-size:8px;
+    letter-spacing:1px;
+  }
+
+  .producto-detalle h2{
+    margin-right:0;
+    font-size:clamp(25px,7.2vw,31px);
+    line-height:1.04;
+  }
+
+  .producto-meta-line{
+    margin-top:10px;
+    gap:6px;
+  }
+
+  .producto-stock-detalle,
+  .producto-genero-badge{
+    min-height:28px;
+    margin-top:0;
+    padding:6px 9px;
+    font-size:8.5px;
+  }
+
+  .producto-extra{
+    margin-top:10px;
+    padding:11px 12px;
+    border-radius:11px;
+  }
+
+  .producto-extra-titulo{
+    margin-bottom:8px;
+    font-size:8px;
+  }
+
+  .producto-extra-contenido{
+    font-size:10.5px;
+    line-height:1.55;
+  }
+
+  .producto-notas-grid{
+    grid-template-columns:1fr;
+    gap:6px;
+  }
+
+  .nota-bloque{
+    padding:9px 10px;
+  }
+
+  .nota-bloque span{
+    margin-bottom:4px;
+    font-size:7.5px;
+  }
+
+  .nota-bloque p,
+  .nota-simple{
+    font-size:10px;
+    line-height:1.45;
+  }
+
+  .producto-precios{
+    margin-top:13px;
+    padding:13px 0;
+  }
+
+  .producto-precio-lista{
+    font-size:11px;
+  }
+
+  .producto-precio-principal{
+    font-size:28px;
+  }
+
+  .producto-cuotas{
+    margin-top:6px;
+    font-size:10.5px;
+  }
+
+  .producto-cuotas strong{
+    font-size:12px;
+  }
+
+  .producto-ahorro{
+    font-size:9px;
+  }
+
+  .pedido-detalle-aviso{
+    margin-top:11px !important;
+    padding:11px 12px !important;
+    font-size:9.5px !important;
+    line-height:1.45 !important;
+  }
+
+  .producto-info-mini{
+    grid-template-columns:1fr 1fr;
+    gap:6px;
+    margin-top:12px;
+  }
+
+  .producto-info-mini div{
+    padding:10px;
+  }
+
+  .producto-info-mini small{
+    font-size:7px;
+  }
+
+  .producto-info-mini strong{
+    font-size:9px;
+    line-height:1.35;
+  }
+
+  .producto-compra{
+    position:sticky;
+    bottom:0;
+    z-index:20;
+    grid-template-columns:105px minmax(0,1fr);
+    gap:8px;
+    margin:16px -15px 0;
+    padding:10px 15px calc(10px + env(safe-area-inset-bottom));
+    background:linear-gradient(180deg,rgba(9,9,9,.86),#090909 28%);
+    border-top:1px solid rgba(255,255,255,.06);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+  }
+
+  .producto-cantidad{
+    height:50px;
+    grid-template-columns:35px 1fr 35px;
+  }
+
+  .producto-cantidad button{
+    min-width:35px;
+    font-size:20px;
+  }
+
+  .producto-agregar{
+    height:50px;
+    min-height:50px;
+    font-size:10px;
+  }
+
+  .producto-ayuda{
+    margin-top:14px;
+    padding-top:13px;
+    font-size:9.5px;
+  }
+
+  /* ---------- BARRA INFERIOR DEL CARRITO ---------- */
+
+  .carrito-barra{
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+
+  .carrito-contenido{
+    min-height:62px;
+    padding:8px 10px;
+  }
+
+  .carrito-info{
+    gap:8px;
+  }
+
+  .carrito-mini-icon{
+    display:none;
+  }
+
+  .carrito-mini-copy strong{
+    max-width:44vw;
+    font-size:10.5px;
+  }
+
+  .carrito-mini-copy span{
+    font-size:8.5px;
+  }
+
+  .carrito-boton{
+    min-height:42px;
+    padding:0 13px;
+    font-size:8.5px;
+    letter-spacing:.4px;
+  }
+
+  .floating-wa{
+    right:12px;
+    bottom:calc(78px + env(safe-area-inset-bottom));
+    width:46px;
+    height:46px;
+  }
+
+  /* ---------- CARRITO FULL SCREEN ---------- */
+
+  .modal{
+    align-items:stretch;
+    justify-content:stretch;
+    background:#080808;
+    backdrop-filter:none;
+  }
+
+  .modal-contenido{
+    width:100%;
+    height:100svh;
+    max-height:none;
+    padding:0 12px calc(20px + env(safe-area-inset-bottom));
+    border:0;
+    box-shadow:none;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  .modal-header{
+    margin:0 -12px 12px;
+    padding:
+      calc(12px + env(safe-area-inset-top))
+      12px
+      12px;
+    min-height:62px;
+  }
+
+  .modal-header h2{
+    font-size:23px;
+  }
+
+  .cerrar{
+    width:40px;
+    height:40px;
+  }
+
+  .pago-selector{
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    gap:6px;
+    margin-bottom:8px;
+  }
+
+  .pago-btn{
+    position:relative;
+    min-width:0;
+    min-height:72px;
+    padding:10px 4px 8px;
+    font-size:8.5px;
+    line-height:1.2;
+    border-radius:11px;
+  }
+
+  .pago-btn small{
+    margin-top:4px;
+    font-size:6.8px;
+    line-height:1.25;
+  }
+
+  #pagoTransferencia.activo::after{
+    top:-6px;
+    right:4px;
+    padding:3px 5px;
+    font-size:5.5px;
+  }
+
+  .pago-ayuda{
+    margin-bottom:11px;
+    padding:8px 9px;
+    font-size:8.5px;
+  }
+
+  #listaCarrito{
+    gap:7px;
+  }
+
+  .item-carrito{
+    grid-template-columns:56px minmax(0,1fr) auto;
+    gap:8px;
+    padding:8px;
+    border-radius:12px;
+  }
+
+  .item-foto{
+    width:56px;
+    height:56px;
+    border-radius:10px;
+  }
+
+  .item-nombre{
+    font-size:10.5px;
+    line-height:1.25;
+  }
+
+  .item-precio{
+    margin-top:3px;
+    font-size:8.5px;
+  }
+
+  .item-subtotal{
+    margin-top:3px;
+    font-size:10px;
+  }
+
+  .item-controles{
+    grid-column:auto;
+    justify-self:auto;
+    grid-template-columns:28px 26px 28px;
+    gap:3px;
+    margin-top:0;
+    padding:3px;
+  }
+
+  .item-controles button{
+    width:28px;
+    height:30px;
+    font-size:15px;
+  }
+
+  .item-controles span{
+    min-width:26px;
+    font-size:10px;
+  }
+
+  .carrito-resumen{
+    margin-top:12px;
+    padding:13px 12px;
+    border-radius:13px;
+  }
+
+  .resumen-linea{
+    font-size:10.5px;
+    margin-bottom:6px;
+  }
+
+  .resumen-precio-lista{
+    font-size:9.5px;
+  }
+
+  .beneficio-transferencia{
+    margin-top:10px;
+    padding:12px 11px;
+  }
+
+  .beneficio-transferencia-kicker{
+    font-size:7.5px;
+  }
+
+  .beneficio-transferencia-badge{
+    font-size:7px;
+  }
+
+  .beneficio-transferencia-ahorro{
+    margin-top:9px;
+  }
+
+  .beneficio-transferencia-ahorro span{
+    font-size:9.5px;
+  }
+
+  .beneficio-transferencia-ahorro strong{
+    font-size:21px;
+  }
+
+  .beneficio-transferencia-copy{
+    margin-top:7px;
+    font-size:8px;
+  }
+
+  .resumen-total{
+    margin-top:10px;
+    padding-top:11px;
+  }
+
+  .resumen-total span:last-child,
+  .resumen-total.transferencia span:last-child{
+    font-size:25px;
+  }
+
+  .pedido-carrito-aviso,
+  .proximo-nivel{
+    margin-top:9px;
+    padding:10px;
+    font-size:9px;
+    line-height:1.4;
+  }
+
+  .enviar-whatsapp{
+    min-height:52px;
+    font-size:10px;
+    border-radius:12px;
+  }
+
+}
+
+/* Teléfonos muy angostos */
+@media (max-width:380px){
+
+  #productos{
+    gap:6px;
+  }
+
+  .card-info{
+    padding:9px 8px 10px;
+  }
+
+  .nombre-producto{
+    font-size:10.5px;
+  }
+
+  .precio-producto{
+    font-size:16px;
+  }
+
+  .pago-btn{
+    font-size:7.8px;
+  }
+
+  .pago-btn small{
+    font-size:6.2px;
+  }
+
+  .item-carrito{
+    grid-template-columns:50px minmax(0,1fr);
+  }
+
+  .item-foto{
+    width:50px;
+    height:50px;
+  }
+
+  .item-controles{
+    grid-column:1/-1;
+    justify-self:end;
+  }
+
+  .producto-info-mini{
+    grid-template-columns:1fr;
+  }
+
+}
+
+/* Sólo dispositivos que realmente tienen hover */
+@media (hover:hover) and (pointer:fine){
+  .card:hover{
+    transform:translateY(-5px);
+    border-color:rgba(200,157,56,.45);
+    box-shadow:0 20px 45px rgba(0,0,0,.35);
+  }
+
+  .card:hover .imagen-producto img{
+    transform:scale(1.055);
   }
 }
 
