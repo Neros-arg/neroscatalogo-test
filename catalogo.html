@@ -4404,57 +4404,55 @@ CARRITO — BENEFICIO TRANSFERENCIA / EFECTIVO DESTACADO
 
 
 /* =========================================================
-   NERÓS — NOTAS OLFATIVAS COMPACTAS TAMBIÉN EN WEB
+   NERÓS — NOTAS OLFATIVAS MOBILE EN FORMATO LISTA
    ========================================================= */
-@media (min-width:701px){
-
+@media (max-width:700px){
   .producto-extra{
-    padding:13px 14px !important;
+    padding:12px 13px !important;
   }
 
   .producto-extra-titulo{
-    margin-bottom:10px !important;
+    margin-bottom:8px !important;
   }
 
   .producto-notas-grid{
-    gap:8px !important;
+    display:block !important;
   }
 
   .nota-bloque{
+    padding:9px 0 !important;
+    margin:0 !important;
     min-height:0 !important;
-    padding:12px 13px !important;
-    border-radius:12px !important;
+    border:0 !important;
+    border-radius:0 !important;
+    background:transparent !important;
+    box-shadow:none !important;
+  }
+
+  .nota-bloque + .nota-bloque{
+    border-top:1px solid #292929 !important;
   }
 
   .nota-bloque span{
     display:flex !important;
     align-items:center !important;
-    gap:7px !important;
-    margin-bottom:6px !important;
+    gap:6px !important;
+    margin:0 0 5px !important;
+    font-size:10.5px !important;
+    line-height:1.25 !important;
   }
 
   .nota-bloque p{
     margin:0 !important;
-    line-height:1.45 !important;
+    padding-left:23px !important;
+    font-size:13px !important;
+    line-height:1.42 !important;
+    color:#d5d5d5 !important;
   }
 
-  .nota-bloque:nth-child(1) span::before{
-    content:"🍋";
-    font-size:14px;
-    line-height:1;
-  }
-
-  .nota-bloque:nth-child(2) span::before{
-    content:"🌸";
-    font-size:14px;
-    line-height:1;
-  }
-
-  .nota-bloque:nth-child(3) span::before{
-    content:"🌲";
-    font-size:14px;
-    line-height:1;
-  }
+  .nota-bloque:nth-child(1) span::before{content:"🍋" !important;font-size:13px !important;}
+  .nota-bloque:nth-child(2) span::before{content:"🌸" !important;font-size:13px !important;}
+  .nota-bloque:nth-child(3) span::before{content:"🌲" !important;font-size:13px !important;}
 }
 
 </style>
