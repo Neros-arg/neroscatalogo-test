@@ -2996,6 +2996,221 @@ Mantiene el diseño compacto, pero evita textos demasiado chicos.
   }
 }
 
+
+
+/* =====================================================
+CARRITO — BENEFICIO TRANSFERENCIA / EFECTIVO DESTACADO
+===================================================== */
+
+#pagoTransferencia{
+  position:relative;
+  overflow:visible;
+}
+
+#pagoTransferencia.activo{
+  border-color:#d8ad3f;
+  color:#fff7da;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(227,189,99,.20),transparent 68%),
+    linear-gradient(145deg,rgba(200,157,56,.25),rgba(74,54,8,.18));
+  box-shadow:
+    0 10px 28px rgba(200,157,56,.15),
+    inset 0 0 0 1px rgba(255,225,138,.08);
+}
+
+#pagoTransferencia.activo::after{
+  content:"MEJOR PRECIO";
+  position:absolute;
+  top:-8px;
+  right:10px;
+  padding:4px 7px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#ffe08a,#c9982e);
+  color:#121212;
+  font-size:7px;
+  line-height:1;
+  font-weight:950;
+  letter-spacing:.65px;
+  box-shadow:0 6px 16px rgba(0,0,0,.35);
+}
+
+#pagoTransferencia.activo small{
+  color:#f0c85f;
+  font-weight:900;
+}
+
+.carrito-resumen.transferencia-activa{
+  border-color:rgba(82,214,129,.30);
+  background:
+    radial-gradient(circle at 88% 20%,rgba(82,214,129,.07),transparent 30%),
+    rgba(255,255,255,.025);
+}
+
+.resumen-precio-lista{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-top:11px;
+  padding-top:12px;
+  border-top:1px solid #2c2c2c;
+  color:#898989;
+  font-size:11px;
+}
+
+.resumen-precio-lista strong{
+  color:#a8a8a8;
+  font-size:12px;
+  font-weight:800;
+  text-decoration:line-through;
+  text-decoration-thickness:1px;
+}
+
+.beneficio-transferencia{
+  position:relative;
+  overflow:hidden;
+  margin-top:12px;
+  padding:14px;
+  border:1px solid rgba(82,214,129,.38);
+  border-radius:14px;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(82,214,129,.16),transparent 38%),
+    linear-gradient(145deg,rgba(82,214,129,.10),rgba(13,24,17,.46));
+  box-shadow:
+    0 12px 28px rgba(0,0,0,.20),
+    inset 0 1px 0 rgba(255,255,255,.035);
+}
+
+.beneficio-transferencia::after{
+  content:"";
+  position:absolute;
+  width:130px;
+  height:130px;
+  border-radius:50%;
+  right:-70px;
+  bottom:-80px;
+  background:rgba(82,214,129,.055);
+  pointer-events:none;
+}
+
+.beneficio-transferencia-top{
+  position:relative;
+  z-index:1;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.beneficio-transferencia-kicker{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  color:#a9efc0;
+  font-size:9px;
+  font-weight:950;
+  letter-spacing:.85px;
+  text-transform:uppercase;
+}
+
+.beneficio-transferencia-badge{
+  flex:0 0 auto;
+  padding:5px 8px;
+  border-radius:999px;
+  background:#52d681;
+  color:#07110a;
+  font-size:8px;
+  line-height:1;
+  font-weight:950;
+  letter-spacing:.55px;
+}
+
+.beneficio-transferencia-ahorro{
+  position:relative;
+  z-index:1;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:14px;
+  margin-top:12px;
+}
+
+.beneficio-transferencia-ahorro span{
+  color:#b9b9b9;
+  font-size:11px;
+  line-height:1.35;
+}
+
+.beneficio-transferencia-ahorro strong{
+  color:#52d681;
+  font-size:24px;
+  line-height:1;
+  font-weight:950;
+  letter-spacing:-.4px;
+  text-shadow:0 0 18px rgba(82,214,129,.12);
+}
+
+.beneficio-transferencia-copy{
+  position:relative;
+  z-index:1;
+  margin-top:9px;
+  color:#9aa89e;
+  font-size:9px;
+  line-height:1.5;
+}
+
+.resumen-total.transferencia{
+  margin-top:13px;
+  padding:14px 0 0;
+  border-top:1px solid rgba(82,214,129,.24);
+}
+
+.resumen-total.transferencia > span:first-child{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+}
+
+.resumen-total-label-principal{
+  color:#fff;
+  font-size:13px;
+  font-weight:950;
+}
+
+.resumen-total-label-secundario{
+  color:#69df92;
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.55px;
+}
+
+.resumen-total.transferencia span:last-child{
+  color:#67df91;
+  font-size:31px;
+  text-shadow:0 0 20px rgba(82,214,129,.13);
+}
+
+@media(max-width:600px){
+  #pagoTransferencia.activo::after{
+    top:-7px;
+    right:6px;
+    font-size:6px;
+    padding:4px 6px;
+  }
+
+  .beneficio-transferencia{
+    padding:13px 12px;
+  }
+
+  .beneficio-transferencia-ahorro strong{
+    font-size:22px;
+  }
+
+  .resumen-total.transferencia span:last-child{
+    font-size:28px;
+  }
+}
+
 </style>
 
 </head>
@@ -3882,7 +4097,7 @@ onclick="cambiarPago('transferencia')">
 🏦 Transferencia / Efectivo
 
 <small>
-10% OFF
+10% OFF · MEJOR PRECIO
 </small>
 
 </button>
@@ -6021,6 +6236,7 @@ const total=
 totalUnidades();
 
 let totalPedido=0;
+let totalLista=0;
 
 lista.innerHTML="";
 
@@ -6038,6 +6254,15 @@ item.cantidad;
 
 totalPedido+=
 subtotal;
+
+// Total de lista sin descuento para mostrar el ahorro real
+if(
+modoActual==="particular"
+){
+totalLista+=
+precioParticular(item) *
+item.cantidad;
+}
 
 lista.innerHTML+=`
 
@@ -6232,7 +6457,7 @@ formaPago==="transferencia"
 
 ?
 
-"🏦 10% OFF aplicado por transferencia / efectivo."
+""
 
 :
 
@@ -6282,6 +6507,91 @@ formaPago==="credito"
 
 }
 
+const ahorroTransferencia=
+
+modoActual==="particular" &&
+formaPago==="transferencia"
+
+?
+
+Math.max(
+0,
+totalLista-totalPedido
+)
+
+:
+
+0;
+
+
+const bloqueBeneficioTransferencia=
+
+modoActual==="particular" &&
+formaPago==="transferencia"
+
+?
+
+`
+
+<div class="resumen-precio-lista">
+
+  <span>
+    Total de lista
+  </span>
+
+  <strong>
+    $${Math.round(totalLista).toLocaleString("es-AR")}
+  </strong>
+
+</div>
+
+<div class="beneficio-transferencia">
+
+  <div class="beneficio-transferencia-top">
+
+    <div class="beneficio-transferencia-kicker">
+      💸 BENEFICIO NERÓS
+    </div>
+
+    <div class="beneficio-transferencia-badge">
+      10% OFF
+    </div>
+
+  </div>
+
+  <div class="beneficio-transferencia-ahorro">
+
+    <span>
+      Ahorrás pagando por<br>
+      transferencia / efectivo
+    </span>
+
+    <strong>
+      - $${Math.round(ahorroTransferencia).toLocaleString("es-AR")}
+    </strong>
+
+  </div>
+
+  <div class="beneficio-transferencia-copy">
+    El descuento ya está aplicado en el total final de tu pedido.
+  </div>
+
+</div>
+
+`
+
+:
+
+"";
+
+
+resumen.classList.toggle(
+"transferencia-activa",
+modoActual==="particular" &&
+formaPago==="transferencia"
+);
+
+
 resumen.innerHTML=`
 
 <div class="resumen-linea">
@@ -6296,10 +6606,33 @@ ${total}
 
 </div>
 
-<div class="resumen-total">
+${bloqueBeneficioTransferencia}
+
+<div class="resumen-total ${modoActual==="particular" && formaPago==="transferencia" ? "transferencia" : ""}">
 
 <span>
-TOTAL
+
+  ${
+  modoActual==="particular" &&
+  formaPago==="transferencia"
+
+  ?
+
+  `
+  <span class="resumen-total-label-principal">
+    TOTAL FINAL
+  </span>
+
+  <span class="resumen-total-label-secundario">
+    CON 10% OFF APLICADO
+  </span>
+  `
+
+  :
+
+  "TOTAL"
+  }
+
 </span>
 
 <span>
