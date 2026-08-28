@@ -5530,6 +5530,69 @@ CARRITO — BENEFICIO TRANSFERENCIA / EFECTIVO DESTACADO
   }
 }
 
+
+/* =========================================================
+   NERÓS — PRECIO TRANSFERENCIA DESTACADO EN MOBILE
+   ========================================================= */
+@media (max-width:700px){
+
+  .card-minimal-precio{
+    margin-top:9px !important;
+    padding:10px 10px 9px !important;
+    border:1px solid rgba(43,208,118,.34) !important;
+    border-radius:11px !important;
+    background:
+      linear-gradient(
+        135deg,
+        rgba(20,96,55,.22),
+        rgba(8,36,22,.48)
+      ) !important;
+  }
+
+  .card-minimal-precio strong{
+    color:#43df88 !important;
+    font-size:22px !important;
+    line-height:1 !important;
+    letter-spacing:-.35px !important;
+  }
+
+  .card-minimal-precio > span{
+    display:block !important;
+    margin-top:5px !important;
+    color:#72e9a7 !important;
+    font-size:9.5px !important;
+    line-height:1.3 !important;
+    font-weight:900 !important;
+    text-transform:uppercase !important;
+    letter-spacing:.35px !important;
+  }
+
+  .card-minimal-precio > span::before{
+    content:"💸 10% OFF · " !important;
+  }
+
+  .card-minimal-cuotas{
+    margin-top:9px !important;
+    padding-top:8px !important;
+    border-top:1px solid rgba(255,255,255,.10) !important;
+    color:#bdbdbd !important;
+    font-size:9px !important;
+  }
+
+  .card-minimal-cuotas b{
+    display:inline !important;
+    margin:0 !important;
+    color:#f0d47f !important;
+    font-size:10.5px !important;
+  }
+
+  /* Mayorista no debe heredar el bloque verde de transferencia */
+  body.modo-mayorista .card-minimal-precio{
+    border-color:#292929 !important;
+    background:#111 !important;
+  }
+}
+
 </style>
 
 </head>
