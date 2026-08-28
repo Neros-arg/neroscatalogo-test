@@ -5774,6 +5774,30 @@ CARRITO — BENEFICIO TRANSFERENCIA / EFECTIVO DESTACADO
   }
 }
 
+
+/* =========================================================
+   NERÓS — CARD SIN INFORMACIÓN DUPLICADA
+   La información importante queda fija debajo de la foto.
+   ========================================================= */
+.card-hover-panel{
+  display:none !important;
+}
+
+.card-image-minimal:hover img{
+  transform:none !important;
+}
+
+.card:hover .card-hover-panel{
+  display:none !important;
+}
+
+/* En desktop mantenemos las acciones siempre visibles */
+@media (min-width:701px){
+  .card-mobile-acciones{
+    display:grid !important;
+  }
+}
+
 </style>
 
 </head>
@@ -8408,81 +8432,6 @@ SIN IMAGEN
 
 <div class="badge-stock badge-stock-minimal">
 ${escapeHTML(stock)}
-</div>
-
-<div class="card-hover-panel">
-
-<div class="card-hover-contenido">
-
-${producto.tipo ? `
-<div class="card-hover-tipo">
-${escapeHTML(producto.tipo==="ARABE" ? "ÁRABE" : producto.tipo)}
-</div>
-` : ""}
-
-${
-
-modoActual==="mayorista"
-
-?
-
-`
-<div class="card-hover-linea">
-<strong>Mayorista</strong>
-<span>Precio desde 10 unidades</span>
-</div>
-`
-
-:
-
-`
-<div class="card-hover-linea">
-<strong>💳 2 cuotas sin interés</strong>
-<span>$${Math.round(precioParticular(producto)/2).toLocaleString("es-AR")} c/u</span>
-</div>
-
-<div class="card-hover-linea">
-<strong>💸 10% OFF</strong>
-<span>Efectivo / transferencia</span>
-</div>
-`
-
-}
-
-${productoPorPedido(producto) ? `
-<div class="card-hover-linea card-hover-pedido">
-<strong>📦 Disponible por pedido</strong>
-<span>Entrega estimada: 10 días hábiles</span>
-</div>
-` : ""}
-
-<div class="card-hover-acciones">
-
-<button
-type="button"
-class="card-hover-ver"
-onclick="
-event.stopPropagation();
-abrirProducto('${escapeAttr(nombre)}')
-">
-VER DETALLES
-</button>
-
-<button
-type="button"
-class="card-hover-agregar"
-${!disponible ? "disabled" : ""}
-onclick="
-event.stopPropagation();
-agregarAlCarrito('${escapeAttr(nombre)}')
-">
-${disponible ? "＋ AGREGAR" : "SIN STOCK"}
-</button>
-
-</div>
-
-</div>
-
 </div>
 
 </div>
