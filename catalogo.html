@@ -5901,6 +5901,48 @@ CARRITO — BENEFICIO TRANSFERENCIA / EFECTIVO DESTACADO
   }
 }
 
+
+/* =========================================================
+   NERÓS — SOLO LOGO SUPERIOR: PNG TRANSPARENTE SIN RECORTE
+   ========================================================= */
+.navbar-contenido > .logo-nav{
+  height:96px !important;
+  padding:8px 0 !important;
+  overflow:visible !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+
+.navbar-contenido > .logo-nav img{
+  display:block !important;
+  width:auto !important;
+  height:auto !important;
+  max-width:205px !important;
+  max-height:68px !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  transform:none !important;
+  transform-origin:center !important;
+  margin:0 auto !important;
+}
+
+.navbar-contenido > .logo-nav:hover img{
+  transform:scale(1.02) !important;
+}
+
+/* Celular: misma lógica, solo más chico */
+@media(max-width:700px){
+  .navbar-contenido > .logo-nav{
+    padding:7px 0 !important;
+  }
+
+  .navbar-contenido > .logo-nav img{
+    max-width:150px !important;
+    max-height:54px !important;
+  }
+}
+
 </style>
 
 </head>
