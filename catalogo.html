@@ -5593,6 +5593,99 @@ CARRITO — BENEFICIO TRANSFERENCIA / EFECTIVO DESTACADO
   }
 }
 
+
+/* =========================================================
+   NERÓS — PRECIO TRANSFERENCIA DESTACADO EN PC + MOBILE
+   ========================================================= */
+
+/* Desktop / tablet con mouse */
+@media (min-width:701px){
+
+  .card-minimal-precio{
+    margin-top:10px !important;
+    padding:10px 11px 9px !important;
+    border:1px solid rgba(43,208,118,.30) !important;
+    border-radius:11px !important;
+    background:
+      linear-gradient(
+        135deg,
+        rgba(20,96,55,.18),
+        rgba(8,36,22,.34)
+      ) !important;
+  }
+
+  .card-minimal-precio strong{
+    color:#43df88 !important;
+    font-size:22px !important;
+    line-height:1 !important;
+    letter-spacing:-.35px !important;
+  }
+
+  .card-minimal-precio > span{
+    display:block !important;
+    margin-top:5px !important;
+    color:#72e9a7 !important;
+    font-size:9px !important;
+    line-height:1.3 !important;
+    font-weight:900 !important;
+    text-transform:uppercase !important;
+    letter-spacing:.35px !important;
+  }
+
+  .card-minimal-precio > span::before{
+    content:"💸 10% OFF · " !important;
+  }
+
+  .card-minimal-cuotas{
+    margin-top:8px !important;
+    padding-top:7px !important;
+    border-top:1px solid rgba(255,255,255,.09) !important;
+    color:#bdbdbd !important;
+    font-size:8.5px !important;
+  }
+
+  .card-minimal-cuotas b{
+    color:#f0d47f !important;
+    font-size:9.5px !important;
+  }
+
+  /* Mantener mayorista neutro */
+  body.modo-mayorista .card-minimal-precio{
+    border-color:#292929 !important;
+    background:#111 !important;
+  }
+
+  body.modo-mayorista .card-minimal-precio strong{
+    color:var(--dorado-claro) !important;
+  }
+
+  body.modo-mayorista .card-minimal-precio > span{
+    color:#757575 !important;
+    text-transform:none !important;
+    letter-spacing:0 !important;
+  }
+
+  body.modo-mayorista .card-minimal-precio > span::before{
+    content:none !important;
+  }
+}
+
+/* En hover, también reforzamos el beneficio de transferencia */
+@media (min-width:701px) and (hover:hover) and (pointer:fine){
+
+  .card-hover-linea strong{
+    color:#fff !important;
+  }
+
+  .card-hover-linea:nth-of-type(2) strong{
+    color:#68e6a0 !important;
+  }
+
+  .card-hover-linea:nth-of-type(2) span{
+    color:#9be9bc !important;
+  }
+}
+
 </style>
 
 </head>
