@@ -5872,74 +5872,39 @@ CARRITO — BENEFICIO TRANSFERENCIA / EFECTIVO DESTACADO
 }
 
 
-/* ===== NERÓS — LOGO CENTRAL DEL HEADER ===== */
-.navbar-contenido > .logo-nav{
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  overflow:hidden !important;
-}
-
-.navbar-contenido > .logo-nav img{
-  display:block !important;
-  width:220px !important;
-  height:auto !important;
-  max-height:76px !important;
-  object-fit:contain !important;
-  transform:none !important;
-  margin:0 auto !important;
-}
-
-.navbar-contenido > .logo-nav:hover img{
-  transform:scale(1.02) !important;
-}
-
-@media(max-width:700px){
-  .navbar-contenido > .logo-nav img{
-    width:155px !important;
-    max-height:58px !important;
-  }
-}
-
 
 /* =========================================================
-   NERÓS — SOLO LOGO SUPERIOR: PNG TRANSPARENTE SIN RECORTE
+   NERÓS — AJUSTE AISLADO DEL LOGO SUPERIOR
+   Mantiene intacta la distribución del sitio.
    ========================================================= */
-.navbar-contenido > .logo-nav{
-  height:96px !important;
-  padding:8px 0 !important;
+.logo-nav{
+  min-width:0 !important;
+  min-height:0 !important;
   overflow:visible !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
 }
 
-.navbar-contenido > .logo-nav img{
+.logo-nav img{
   display:block !important;
   width:auto !important;
   height:auto !important;
-  max-width:205px !important;
-  max-height:68px !important;
+  max-width:min(220px, 100%) !important;
+  max-height:76px !important;
   object-fit:contain !important;
   object-position:center !important;
-  transform:none !important;
-  transform-origin:center !important;
   margin:0 auto !important;
+  transform:none !important;
+  transform-origin:center center !important;
 }
 
-.navbar-contenido > .logo-nav:hover img{
-  transform:scale(1.02) !important;
+.logo-nav:hover img{
+  transform:scale(1.025) !important;
+  filter:drop-shadow(0 0 14px rgba(200,157,56,.22));
 }
 
-/* Celular: misma lógica, solo más chico */
 @media(max-width:700px){
-  .navbar-contenido > .logo-nav{
-    padding:7px 0 !important;
-  }
-
-  .navbar-contenido > .logo-nav img{
-    max-width:150px !important;
-    max-height:54px !important;
+  .logo-nav img{
+    max-width:155px !important;
+    max-height:58px !important;
   }
 }
 
@@ -6094,7 +6059,11 @@ onclick="abrirMenu()">
 href="index.html"
 class="logo-nav">
 
-<img src="nerosfrase.png" alt="NERÓS">
+<img
+src="logo%20neros.png"
+alt="NERÓS"
+onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+<span class="logo-fallback">NERÓS</span>
 
 </a>
 
