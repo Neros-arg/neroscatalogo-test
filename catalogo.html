@@ -4870,6 +4870,215 @@ CARRITO — BENEFICIO TRANSFERENCIA / EFECTIVO DESTACADO
 }
 .side-head .logo-fallback{font-size:24px;}
 
+
+/* =========================================================
+   NERÓS — DESKTOP EQUILIBRADO
+   Cards con presencia visual, sin achicarlas de más.
+   Mantiene 5 columnas en escritorio ancho y el filtro de precio.
+   ========================================================= */
+
+@media (min-width:1000px){
+
+  /* Más aire abajo para que la barra del carrito no tape las cards */
+  .catalogo{
+    padding-bottom:120px !important;
+  }
+
+  #productos{
+    grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+    gap:14px !important;
+  }
+
+  .card{
+    border-radius:14px !important;
+  }
+
+  .imagen-producto{
+    aspect-ratio:1/1 !important;
+    height:auto !important;
+    min-height:0 !important;
+  }
+
+  .imagen-producto img{
+    padding:0 !important;
+  }
+
+  .card-info{
+    padding:12px 13px 13px !important;
+  }
+
+  .nombre-producto{
+    font-size:12px !important;
+    line-height:1.28 !important;
+    min-height:31px !important;
+  }
+
+  .producto-tipo-card{
+    margin-top:6px !important;
+    padding:4px 7px !important;
+    font-size:8px !important;
+  }
+
+  .stock-producto{
+    margin-top:7px !important;
+    font-size:10px !important;
+    line-height:1.35 !important;
+  }
+
+  .pedido-card-aviso{
+    margin-top:7px !important;
+    padding:8px 9px !important;
+    font-size:9.2px !important;
+    line-height:1.36 !important;
+  }
+
+  .precio-producto{
+    margin-top:9px !important;
+    font-size:19px !important;
+  }
+
+  .precio-lista-card{
+    margin-top:8px !important;
+    font-size:10.5px !important;
+    line-height:1.35 !important;
+  }
+
+  .precio-lista-card strong{
+    font-size:12.5px !important;
+  }
+
+  .cuotas-card{
+    margin-top:4px !important;
+    font-size:10px !important;
+    line-height:1.35 !important;
+  }
+
+  .cuotas-card b{
+    font-size:11px !important;
+  }
+
+  .precio-transfer-card{
+    margin-top:7px !important;
+    padding:8px 9px !important;
+    font-size:9.8px !important;
+    line-height:1.25 !important;
+  }
+
+  .precio-transfer-card b{
+    font-size:19px !important;
+  }
+
+  .card button{
+    min-height:38px !important;
+    margin-top:8px !important;
+    padding:9px !important;
+    font-size:9.5px !important;
+  }
+}
+
+/* En monitores de escritorio más chicos, 4 columnas para no miniaturizar */
+@media (min-width:1000px) and (max-width:1180px){
+  #productos{
+    grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  }
+}
+
+/* Pantalla ancha pero baja: reducimos cabecera, NO las tarjetas */
+@media (min-width:1000px) and (max-height:820px){
+
+  .promo-strip{
+    height:24px !important;
+  }
+
+  .promo-track{
+    font-size:8.5px !important;
+  }
+
+  .navbar-contenido{
+    height:66px !important;
+  }
+
+  .logo-nav img{
+    width:185px !important;
+    max-height:58px !important;
+    transform:scale(1.08) !important;
+  }
+
+  .category-rail{
+    top:66px !important;
+    padding:7px 12px !important;
+  }
+
+  .cat-chip{
+    padding:8px 13px !important;
+    font-size:9px !important;
+  }
+
+  .catalogo{
+    padding-top:16px !important;
+    padding-left:20px !important;
+    padding-right:20px !important;
+    padding-bottom:110px !important;
+  }
+
+  .catalogo-cabeza{
+    margin-bottom:16px !important;
+  }
+
+  .controles{
+    margin-bottom:16px !important;
+  }
+
+  /* Revertimos la compactación agresiva previa */
+  .imagen-producto{
+    aspect-ratio:1/1 !important;
+    height:auto !important;
+  }
+
+  .badge-stock{
+    left:9px !important;
+    top:9px !important;
+    padding:6px 8px !important;
+    font-size:8.8px !important;
+  }
+
+  .carrito-contenido{
+    padding:8px 20px !important;
+  }
+
+  .carrito-boton{
+    min-height:38px !important;
+    font-size:9.5px !important;
+  }
+
+  .floating-wa{
+    bottom:72px !important;
+    width:46px !important;
+    height:46px !important;
+  }
+}
+
+/* Muy baja: seguimos priorizando tamaño de card, sólo afinamos header */
+@media (min-width:1000px) and (max-height:680px){
+
+  .navbar-contenido{
+    height:60px !important;
+  }
+
+  .category-rail{
+    top:60px !important;
+  }
+
+  .catalogo{
+    padding-top:12px !important;
+  }
+
+  .imagen-producto{
+    aspect-ratio:1/1 !important;
+    height:auto !important;
+  }
+}
+
 </style>
 
 </head>
