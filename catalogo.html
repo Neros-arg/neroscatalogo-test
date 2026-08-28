@@ -5873,198 +5873,58 @@ CARRITO — BENEFICIO TRANSFERENCIA / EFECTIVO DESTACADO
 
 
 /* =========================================================
-   NERÓS — HOVER DE NOTAS PREMIUM (PC)
+   NERÓS — nerosfrase.png SOLO EN EL LOGO SUPERIOR CENTRAL
    ========================================================= */
-@media (min-width:701px) and (hover:hover) and (pointer:fine){
-
-  .card-imagen-minimal::after{
-    background:
-      linear-gradient(
-        180deg,
-        rgba(5,5,5,.06) 0%,
-        rgba(5,5,5,.40) 42%,
-        rgba(5,5,5,.88) 100%
-      ) !important;
-  }
-
-  .card-notas-hover{
-    left:12px !important;
-    right:12px !important;
-    bottom:12px !important;
-    padding:14px 14px 12px !important;
-    border:1px solid rgba(215,174,74,.42) !important;
-    border-radius:14px !important;
-    background:
-      linear-gradient(
-        145deg,
-        rgba(18,18,18,.94),
-        rgba(7,7,7,.92)
-      ) !important;
-    box-shadow:
-      0 16px 35px rgba(0,0,0,.46),
-      inset 0 1px 0 rgba(255,255,255,.035) !important;
-    backdrop-filter:blur(12px) !important;
-  }
-
-  .card-notas-hover-titulo{
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    gap:7px !important;
-    margin-bottom:11px !important;
-    color:#e6c566 !important;
-    font-size:9px !important;
-    line-height:1 !important;
-    font-weight:950 !important;
-    letter-spacing:1.4px !important;
-    text-align:center !important;
-  }
-
-  .card-notas-hover-titulo::before,
-  .card-notas-hover-titulo::after{
-    content:"" !important;
-    width:24px !important;
-    height:1px !important;
-    background:linear-gradient(90deg,transparent,rgba(214,174,72,.55)) !important;
-  }
-
-  .card-notas-hover-titulo::after{
-    background:linear-gradient(90deg,rgba(214,174,72,.55),transparent) !important;
-  }
-
-  .card-notas-hover .producto-notas-grid{
-    display:grid !important;
-    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
-    gap:7px !important;
-    align-items:stretch !important;
-  }
-
-  .card-notas-hover .nota-bloque{
-    min-width:0 !important;
-    padding:9px 7px 8px !important;
-    border:1px solid rgba(255,255,255,.07) !important;
-    border-radius:10px !important;
-    background:rgba(255,255,255,.035) !important;
-    text-align:center !important;
-  }
-
-  .card-notas-hover .nota-bloque span{
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    gap:4px !important;
-    min-height:18px !important;
-    margin:0 0 5px !important;
-    color:#d8d8d8 !important;
-    font-size:7.2px !important;
-    line-height:1.05 !important;
-    font-weight:950 !important;
-    letter-spacing:.25px !important;
-    white-space:nowrap !important;
-  }
-
-  .card-notas-hover .nota-emoji{
-    display:inline-flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    margin:0 !important;
-    font-size:13px !important;
-    line-height:1 !important;
-  }
-
-  .card-notas-hover .nota-bloque p{
-    margin:0 !important;
-    color:#fff !important;
-    font-size:8.2px !important;
-    line-height:1.28 !important;
-    font-weight:760 !important;
-    text-align:center !important;
-
-    /* 3 líneas, sin el corte tan brusco de antes */
-    display:-webkit-box !important;
-    -webkit-line-clamp:3 !important;
-    -webkit-box-orient:vertical !important;
-    overflow:hidden !important;
-  }
-
-  .card-notas-hover .nota-simple{
-    padding:9px 10px !important;
-    border:1px solid rgba(255,255,255,.07) !important;
-    border-radius:10px !important;
-    background:rgba(255,255,255,.035) !important;
-    color:#f5f5f5 !important;
-    font-size:8.5px !important;
-    line-height:1.38 !important;
-    text-align:center !important;
-  }
-
-  .card-notas-hover-ayuda{
-    margin-top:10px !important;
-    padding-top:8px !important;
-    border-top:1px solid rgba(255,255,255,.08) !important;
-    color:#838383 !important;
-    font-size:7px !important;
-    line-height:1 !important;
-    text-align:center !important;
-    letter-spacing:.2px !important;
-  }
-
-  .card-imagen-minimal:hover img{
-    transform:scale(1.025) !important;
-    filter:brightness(.56) saturate(.92) !important;
-  }
+.navbar-contenido > .logo-nav{
+  width:auto !important;
+  min-width:0 !important;
+  height:96px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  overflow:visible !important;
 }
 
-/* Un poco más respirado en monitores grandes */
-@media (min-width:1350px) and (hover:hover) and (pointer:fine){
-  .card-notas-hover{
-    left:14px !important;
-    right:14px !important;
-    bottom:14px !important;
-    padding:15px !important;
-  }
-
-  .card-notas-hover .nota-bloque p{
-    font-size:8.7px !important;
-  }
-}
-
-
-/* =========================================================
-   NERÓS — LOGO CENTRAL nerosfrase.png
-   ========================================================= */
-.logo-nav img{
-  width:210px !important;
+.navbar-contenido > .logo-nav img{
+  display:block !important;
+  width:auto !important;
   height:auto !important;
-  max-height:76px !important;
+  max-width:225px !important;
+  max-height:72px !important;
   object-fit:contain !important;
   transform:none !important;
-  filter:drop-shadow(0 2px 8px rgba(200,157,56,.10));
+  margin:0 auto !important;
 }
 
-.logo-nav:hover img{
+.navbar-contenido > .logo-nav:hover img{
   transform:scale(1.025) !important;
-  filter:drop-shadow(0 3px 12px rgba(200,157,56,.20));
+  filter:drop-shadow(0 0 12px rgba(200,157,56,.18)) !important;
 }
 
+/* Tablet */
 @media (max-width:900px){
-  .logo-nav img{
-    width:175px !important;
+  .navbar-contenido > .logo-nav img{
+    max-width:190px !important;
     max-height:62px !important;
   }
 }
 
+/* Celular */
 @media (max-width:700px){
-  .logo-nav img{
-    width:150px !important;
-    max-height:52px !important;
+  .navbar-contenido > .logo-nav{
+    height:72px !important;
+  }
+
+  .navbar-contenido > .logo-nav img{
+    max-width:155px !important;
+    max-height:48px !important;
   }
 }
 
 @media (max-width:420px){
-  .logo-nav img{
-    width:138px !important;
-    max-height:48px !important;
+  .navbar-contenido > .logo-nav img{
+    max-width:140px !important;
+    max-height:44px !important;
   }
 }
 
@@ -6105,8 +5965,10 @@ class="side-menu">
 <div class="side-head">
 
 <img
-src="nerosfrase.png"
-alt="NERÓS">
+src="logo%20neros.png"
+alt="NERÓS"
+onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+<span class="logo-fallback">NERÓS</span>
 
 <button
 class="side-close"
@@ -6213,16 +6075,8 @@ onclick="abrirMenu()">
 
 </div>
 
-<a
-href="index.html"
-class="logo-nav">
-
-<img
-src="logo%20neros.png"
-alt="NERÓS"
-onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-<span class="logo-fallback">NERÓS</span>
-
+<a href="index.html" class="logo-nav" aria-label="Ir al inicio">
+<img src="nerosfrase.png" alt="NERÓS">
 </a>
 
 <nav class="menu">
