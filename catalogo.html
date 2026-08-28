@@ -4477,6 +4477,399 @@ CARRITO — BENEFICIO TRANSFERENCIA / EFECTIVO DESTACADO
   }
 }
 
+
+/* =========================================================
+   NERÓS — DESKTOP COMPACTO + FILTRO DE PRECIO
+   ========================================================= */
+
+/* ---------- FILTRO DE PRECIO ---------- */
+.filtro-precio-wrap{
+  padding:3px 1px 0;
+}
+
+.filtro-precio-cabecera{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:13px;
+}
+
+.filtro-precio-cabecera small{
+  display:block;
+  color:#777;
+  font-size:9px;
+  line-height:1.35;
+  margin-bottom:3px;
+}
+
+.filtro-precio-valor{
+  color:var(--dorado-claro);
+  font-size:18px;
+  font-weight:950;
+  white-space:nowrap;
+}
+
+.filtro-precio-rango{
+  width:100%;
+  height:6px;
+  appearance:none;
+  -webkit-appearance:none;
+  border-radius:999px;
+  outline:none;
+  cursor:pointer;
+  background:
+    linear-gradient(
+      90deg,
+      var(--dorado) 0%,
+      var(--dorado) var(--precio-progreso,100%),
+      #303030 var(--precio-progreso,100%),
+      #303030 100%
+    );
+}
+
+.filtro-precio-rango::-webkit-slider-thumb{
+  appearance:none;
+  -webkit-appearance:none;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  border:3px solid #111;
+  background:var(--dorado-claro);
+  box-shadow:
+    0 0 0 1px rgba(227,189,99,.45),
+    0 5px 15px rgba(0,0,0,.38);
+}
+
+.filtro-precio-rango::-moz-range-thumb{
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  border:3px solid #111;
+  background:var(--dorado-claro);
+  box-shadow:
+    0 0 0 1px rgba(227,189,99,.45),
+    0 5px 15px rgba(0,0,0,.38);
+}
+
+.filtro-precio-extremos{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:9px;
+  color:#707070;
+  font-size:9px;
+  font-weight:750;
+}
+
+.filtro-precio-ayuda{
+  margin-top:11px;
+  font-size:9.5px;
+  line-height:1.5;
+  color:#777;
+}
+
+/* ---------- DESKTOP GENERAL ---------- */
+@media (min-width:1000px){
+
+  .catalogo{
+    padding-top:24px;
+  }
+
+  #productos{
+    gap:12px;
+  }
+
+  .card-info{
+    padding:11px 12px 12px;
+  }
+
+  .nombre-producto{
+    font-size:12px;
+    line-height:1.28;
+    min-height:31px;
+  }
+
+  .pedido-card-aviso{
+    padding:8px 9px;
+    font-size:9.5px;
+    line-height:1.35;
+  }
+
+  .precio-lista-card{
+    margin-top:8px;
+  }
+
+  .cuotas-card{
+    margin-top:4px;
+  }
+
+  .precio-transfer-card{
+    margin-top:6px;
+  }
+
+  .card button{
+    margin-top:9px;
+  }
+}
+
+/* Pantallas anchas con poca altura */
+@media (min-width:1000px) and (max-height:820px){
+
+  .promo-strip{
+    height:25px;
+  }
+
+  .promo-track{
+    font-size:8px;
+  }
+
+  .navbar-contenido{
+    height:70px;
+    padding:0 20px;
+  }
+
+  .logo-nav img{
+    width:185px;
+    max-height:58px;
+    transform:scale(1.08);
+  }
+
+  .logo-nav:hover img{
+    transform:scale(1.11);
+  }
+
+  .menu{
+    gap:20px;
+  }
+
+  .menu a{
+    font-size:10px;
+  }
+
+  .category-rail{
+    top:70px;
+    padding:7px 12px;
+  }
+
+  .cat-chip{
+    padding:8px 13px;
+    font-size:9px;
+  }
+
+  .catalogo{
+    padding:12px 22px 76px;
+  }
+
+  .catalogo-cabeza{
+    margin-bottom:17px;
+  }
+
+  .controles{
+    margin-bottom:16px;
+  }
+
+  #productos{
+    gap:11px;
+  }
+
+  .imagen-producto{
+    aspect-ratio:auto;
+    height:145px;
+  }
+
+  .imagen-producto img{
+    padding:3px 5px;
+  }
+
+  .badge-stock{
+    left:8px;
+    top:8px;
+    padding:6px 8px;
+    font-size:8.5px;
+  }
+
+  .card-info{
+    padding:9px 11px 10px;
+  }
+
+  .nombre-producto{
+    font-size:11px;
+    line-height:1.22;
+    min-height:27px;
+  }
+
+  .producto-tipo-card{
+    margin-top:4px;
+    padding:3px 6px;
+    font-size:7px;
+  }
+
+  .stock-producto{
+    margin-top:5px;
+    font-size:9px;
+    line-height:1.3;
+  }
+
+  .pedido-card-aviso{
+    margin-top:6px;
+    padding:7px 8px;
+    font-size:8.6px;
+    line-height:1.32;
+  }
+
+  .precio-producto{
+    margin-top:7px;
+    font-size:17px;
+  }
+
+  .precio-lista-card{
+    margin-top:7px;
+    font-size:9.5px;
+    line-height:1.25;
+  }
+
+  .precio-lista-card strong{
+    font-size:11.5px;
+  }
+
+  .cuotas-card{
+    margin-top:3px;
+    font-size:9px;
+    line-height:1.25;
+  }
+
+  .cuotas-card b{
+    font-size:10px;
+  }
+
+  .precio-transfer-card{
+    margin-top:5px;
+    padding:6px 8px;
+    font-size:8.8px;
+    line-height:1.2;
+  }
+
+  .precio-transfer-card b{
+    font-size:17px;
+  }
+
+  .card button{
+    min-height:36px;
+    margin-top:7px;
+    padding:8px;
+    font-size:9px;
+  }
+
+  .carrito-contenido{
+    padding:7px 20px;
+  }
+
+  .carrito-mini-icon{
+    width:32px;
+    height:32px;
+  }
+
+  .carrito-mini-copy strong{
+    font-size:10px;
+  }
+
+  .carrito-mini-copy span{
+    font-size:8px;
+  }
+
+  .carrito-boton{
+    min-height:36px;
+    padding:0 17px;
+    font-size:9px;
+  }
+
+  .floating-wa{
+    bottom:67px;
+    width:44px;
+    height:44px;
+  }
+}
+
+@media (min-width:1000px) and (max-height:680px){
+
+  .navbar-contenido{
+    height:62px;
+  }
+
+  .category-rail{
+    top:62px;
+    padding:6px 12px;
+  }
+
+  .catalogo{
+    padding-top:9px;
+  }
+
+  .imagen-producto{
+    height:132px;
+  }
+
+  .card-info{
+    padding:8px 10px 9px;
+  }
+
+  .nombre-producto{
+    font-size:10.5px;
+    min-height:25px;
+  }
+
+  .pedido-card-aviso{
+    padding:6px 7px;
+    font-size:8.2px;
+  }
+
+  .precio-lista-card{
+    margin-top:5px;
+  }
+
+  .precio-transfer-card{
+    padding:5px 7px;
+  }
+
+  .precio-transfer-card b{
+    font-size:16px;
+  }
+
+  .card button{
+    min-height:34px;
+    margin-top:6px;
+  }
+}
+
+@media (max-width:700px){
+  .filtro-precio-valor{
+    font-size:20px;
+  }
+
+  .filtro-precio-rango::-webkit-slider-thumb{
+    width:25px;
+    height:25px;
+  }
+
+  .filtro-precio-extremos,
+  .filtro-precio-ayuda{
+    font-size:10px;
+  }
+}
+
+/* Fallback visual si el PNG del logo no carga */
+.logo-fallback{
+  display:none;
+  font-family:Georgia,serif;
+  color:#fff;
+  font-size:30px;
+  line-height:1;
+  letter-spacing:2px;
+  text-decoration:none;
+}
+.side-head .logo-fallback{font-size:24px;}
+
 </style>
 
 </head>
@@ -4515,7 +4908,9 @@ class="side-menu">
 
 <img
 src="logo%20neros.png"
-alt="NERÓS">
+alt="NERÓS"
+onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+<span class="logo-fallback">NERÓS</span>
 
 <button
 class="side-close"
@@ -4628,7 +5023,9 @@ class="logo-nav">
 
 <img
 src="logo%20neros.png"
-alt="NERÓS">
+alt="NERÓS"
+onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+<span class="logo-fallback">NERÓS</span>
 
 </a>
 
@@ -4964,6 +5361,47 @@ SIN TESTERS
 <div class="filtro-ayuda">
 Este filtro aparece únicamente después de ingresar correctamente a la lista mayorista.
 </div>
+
+</div>
+
+
+<div class="filtro-grupo" id="filtroPrecioGrupo">
+
+  <div class="filtro-grupo-titulo">
+    PRECIO MÁXIMO
+  </div>
+
+  <div class="filtro-precio-wrap">
+
+    <div class="filtro-precio-cabecera">
+      <div>
+        <small>Mostrando productos de hasta</small>
+        <div id="filtroPrecioValor" class="filtro-precio-valor">
+          SIN LÍMITE
+        </div>
+      </div>
+    </div>
+
+    <input
+      id="filtroPrecioRange"
+      class="filtro-precio-rango"
+      type="range"
+      min="0"
+      max="100000"
+      step="1000"
+      value="100000"
+      oninput="cambiarFiltroPrecio(this.value)">
+
+    <div class="filtro-precio-extremos">
+      <span>$0</span>
+      <span id="filtroPrecioMaxEtiqueta">$100.000</span>
+    </div>
+
+    <div id="filtroPrecioAyuda" class="filtro-precio-ayuda">
+      En particular se toma el precio con 10% OFF por transferencia / efectivo.
+    </div>
+
+  </div>
 
 </div>
 
@@ -5511,6 +5949,9 @@ let filtroStockPopup=
 let filtroTester=
 "todos";
 
+let filtroPrecioMax=null;
+let precioMaximoCatalogo=0;
+
 /* =========================================================
 API
 ========================================================= */
@@ -5544,6 +5985,8 @@ throw new Error(
 
 perfumes=data;
 
+calcularPrecioMaximoCatalogo();
+actualizarFiltroPrecioUI();
 aplicarFiltrosCatalogo();
 
 })
@@ -5816,6 +6259,9 @@ actualizarCarrito();
 
 modoActual=modo;
 
+/* Cada modo maneja una escala de precios diferente */
+filtroPrecioMax=null;
+
 if(modo==="particular"){
 filtroTester="todos";
 }
@@ -6025,6 +6471,176 @@ producto,
 
 }
 
+
+function precioProductoParaFiltro(producto){
+
+if(modoActual==="mayorista"){
+
+const mayorista10=
+precioMayorista(producto,10);
+
+return mayorista10>0
+?
+mayorista10
+:
+0;
+
+}
+
+return precioParticular(producto)*0.90;
+
+}
+
+function calcularPrecioMaximoCatalogo(){
+
+let maximo=0;
+
+perfumes.forEach(producto=>{
+
+if(
+modoActual==="particular" &&
+esTester(producto)
+){
+return;
+}
+
+if(
+modoActual==="mayorista" &&
+!accesoMayoristaAutorizado
+){
+return;
+}
+
+const precio=
+precioProductoParaFiltro(producto);
+
+if(precio>maximo){
+maximo=precio;
+}
+
+});
+
+if(maximo<=0){
+maximo=100000;
+}
+
+/* Redondeamos hacia arriba de a $5.000 para que la barra quede prolija */
+precioMaximoCatalogo=
+Math.ceil(maximo/5000)*5000;
+
+return precioMaximoCatalogo;
+
+}
+
+function actualizarFiltroPrecioUI(){
+
+const range=
+document.getElementById("filtroPrecioRange");
+
+const valor=
+document.getElementById("filtroPrecioValor");
+
+const maxEtiqueta=
+document.getElementById("filtroPrecioMaxEtiqueta");
+
+const ayuda=
+document.getElementById("filtroPrecioAyuda");
+
+if(!range || !valor || !maxEtiqueta){
+return;
+}
+
+const maximo=
+calcularPrecioMaximoCatalogo();
+
+range.max=
+String(maximo);
+
+range.step=
+maximo>=300000
+?
+"5000"
+:
+"1000";
+
+let valorActual=
+filtroPrecioMax===null
+?
+maximo
+:
+Math.min(filtroPrecioMax,maximo);
+
+if(
+filtroPrecioMax!==null &&
+filtroPrecioMax>=maximo
+){
+filtroPrecioMax=null;
+valorActual=maximo;
+}
+
+range.value=
+String(valorActual);
+
+const porcentaje=
+maximo>0
+?
+(valorActual/maximo)*100
+:
+100;
+
+range.style.setProperty(
+"--precio-progreso",
+porcentaje+"%"
+);
+
+valor.textContent=
+filtroPrecioMax===null
+?
+"SIN LÍMITE"
+:
+"HASTA $"+
+Math.round(valorActual).toLocaleString("es-AR");
+
+maxEtiqueta.textContent=
+"$"+
+Math.round(maximo).toLocaleString("es-AR");
+
+if(ayuda){
+
+ayuda.textContent=
+modoActual==="mayorista"
+?
+"En mayorista se toma como referencia el precio del nivel 10+ unidades."
+:
+"En particular se toma el precio con 10% OFF por transferencia / efectivo.";
+
+}
+
+}
+
+function cambiarFiltroPrecio(valor){
+
+const maximo=
+precioMaximoCatalogo ||
+calcularPrecioMaximoCatalogo();
+
+const numero=
+Number(valor);
+
+if(
+!Number.isFinite(numero) ||
+numero>=maximo
+){
+filtroPrecioMax=null;
+}
+else{
+filtroPrecioMax=numero;
+}
+
+actualizarFiltroPrecioUI();
+
+}
+
 function aplicarFiltrosCatalogo(){
 
 const input=
@@ -6146,6 +6762,21 @@ disponibilidad==="pedido" &&
 return false;
 }
 
+
+if(filtroPrecioMax!==null){
+
+const precioFiltro=
+precioProductoParaFiltro(producto);
+
+if(
+precioFiltro<=0 ||
+precioFiltro>filtroPrecioMax
+){
+return false;
+}
+
+}
+
 return true;
 
 });
@@ -6183,6 +6814,7 @@ accesoMayoristaAutorizado
 }
 
 sincronizarBotonesFiltro();
+actualizarFiltroPrecioUI();
 
 document
 .getElementById("filtroOverlay")
@@ -6374,6 +7006,7 @@ filtroGenero="TODOS";
 filtroStockPopup="todos";
 filtroTester="todos";
 filtroRapido="todos";
+filtroPrecioMax=null;
 
 const buscar=
 document.getElementById("buscar");
@@ -6464,6 +7097,14 @@ tags.push(
 );
 }
 
+if(filtroPrecioMax!==null){
+
+tags.push(
+`<span class="filtro-tag">Hasta $${Math.round(filtroPrecioMax).toLocaleString("es-AR")}</span>`
+);
+
+}
+
 if(modoActual==="mayorista"){
 
 if(filtroTester==="tester"){
@@ -6497,6 +7138,7 @@ boton.classList.toggle(
 filtroTipo!=="TODOS" ||
 filtroGenero!=="TODOS" ||
 filtroStockPopup!=="todos" ||
+filtroPrecioMax!==null ||
 (
 modoActual==="mayorista" &&
 filtroTester!=="todos"
