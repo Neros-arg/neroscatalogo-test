@@ -5493,6 +5493,43 @@ CARRITO — BENEFICIO TRANSFERENCIA / EFECTIVO DESTACADO
   }
 }
 
+
+/* =========================================================
+   NERÓS — CUOTAS EN CARD MINIMALISTA
+   ========================================================= */
+.card-minimal-cuotas{
+  margin-top:7px;
+  color:#a6a6a6;
+  font-size:8.5px;
+  line-height:1.35;
+  font-weight:750;
+}
+
+.card-minimal-cuotas b{
+  color:#e8e8e8;
+  font-size:9px;
+  font-weight:950;
+}
+
+@media (max-width:700px){
+  .card-minimal-cuotas{
+    display:block !important;
+    margin-top:7px !important;
+    padding-top:7px !important;
+    border-top:1px solid #242424 !important;
+    color:#c7c7c7 !important;
+    font-size:9.5px !important;
+    line-height:1.35 !important;
+  }
+
+  .card-minimal-cuotas b{
+    display:block !important;
+    margin-top:2px !important;
+    color:var(--dorado-claro) !important;
+    font-size:11px !important;
+  }
+}
+
 </style>
 
 </head>
@@ -8246,6 +8283,11 @@ precio>0
 $${Math.round(precioParticular(producto)*0.90).toLocaleString("es-AR")}
 </strong>
 <span>efectivo / transferencia</span>
+
+<div class="card-minimal-cuotas">
+💳 2 cuotas sin interés de
+<b>$${Math.round(precioParticular(producto)/2).toLocaleString("es-AR")}</b>
+</div>
 `
 
 }
