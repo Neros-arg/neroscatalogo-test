@@ -5872,59 +5872,31 @@ CARRITO — BENEFICIO TRANSFERENCIA / EFECTIVO DESTACADO
 }
 
 
-/* =========================================================
-   NERÓS — nerosfrase.png SOLO EN EL LOGO SUPERIOR CENTRAL
-   ========================================================= */
-.navbar-contenido > .logo-nav{
-  width:auto !important;
-  min-width:0 !important;
-  height:96px !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  overflow:visible !important;
+/* ===== SOLO CORRECCIÓN DE LA IMAGEN DEL LOGO CENTRAL ===== */
+.logo-nav{
+  overflow:hidden !important;
 }
 
-.navbar-contenido > .logo-nav img{
-  display:block !important;
-  width:auto !important;
-  height:auto !important;
-  max-width:225px !important;
-  max-height:72px !important;
+.logo-nav img{
+  width:220px !important;
+  max-width:100% !important;
+  height:76px !important;
+  max-height:76px !important;
   object-fit:contain !important;
+  object-position:center !important;
   transform:none !important;
-  margin:0 auto !important;
+  margin:0 !important;
 }
 
-.navbar-contenido > .logo-nav:hover img{
-  transform:scale(1.025) !important;
-  filter:drop-shadow(0 0 12px rgba(200,157,56,.18)) !important;
+.logo-nav:hover img{
+  transform:none !important;
 }
 
-/* Tablet */
-@media (max-width:900px){
-  .navbar-contenido > .logo-nav img{
-    max-width:190px !important;
-    max-height:62px !important;
-  }
-}
-
-/* Celular */
-@media (max-width:700px){
-  .navbar-contenido > .logo-nav{
-    height:72px !important;
-  }
-
-  .navbar-contenido > .logo-nav img{
-    max-width:155px !important;
-    max-height:48px !important;
-  }
-}
-
-@media (max-width:420px){
-  .navbar-contenido > .logo-nav img{
-    max-width:140px !important;
-    max-height:44px !important;
+@media(max-width:700px){
+  .logo-nav img{
+    width:155px !important;
+    height:58px !important;
+    max-height:58px !important;
   }
 }
 
@@ -6075,8 +6047,16 @@ onclick="abrirMenu()">
 
 </div>
 
-<a href="index.html" class="logo-nav" aria-label="Ir al inicio">
-<img src="nerosfrase.png" alt="NERÓS">
+<a
+href="index.html"
+class="logo-nav">
+
+<img
+src="logo%20neros.png"
+alt="NERÓS"
+onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+<span class="logo-fallback">NERÓS</span>
+
 </a>
 
 <nav class="menu">
