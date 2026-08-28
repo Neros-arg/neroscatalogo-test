@@ -5686,6 +5686,94 @@ CARRITO — BENEFICIO TRANSFERENCIA / EFECTIVO DESTACADO
   }
 }
 
+
+/* =========================================================
+   NERÓS — ACCIONES VISIBLES EN LA CARD
+   ========================================================= */
+
+.card-mobile-acciones{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+  margin-top:10px;
+}
+
+.card-mobile-acciones button{
+  width:100%;
+  min-height:38px;
+  margin:0 !important;
+  border-radius:9px !important;
+  font-size:8.7px !important;
+  font-weight:950 !important;
+  cursor:pointer;
+}
+
+.card-mobile-ver{
+  display:block !important;
+  border:1px solid #343434 !important;
+  background:#141414 !important;
+  color:#ededed !important;
+}
+
+.card-mobile-agregar{
+  display:block !important;
+  border:0 !important;
+  background:var(--dorado) !important;
+  color:#111 !important;
+}
+
+.card-mobile-agregar:disabled{
+  opacity:.35 !important;
+  cursor:not-allowed !important;
+}
+
+@media (min-width:701px){
+
+  .card-mobile-acciones{
+    grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+    margin-top:10px;
+  }
+
+  .card-mobile-acciones button{
+    min-height:36px;
+    font-size:8px !important;
+  }
+
+  .card-mobile-ver{
+    border-color:#333 !important;
+    background:#121212 !important;
+  }
+
+  .card-mobile-agregar{
+    box-shadow:0 6px 16px rgba(200,157,56,.13);
+  }
+}
+
+@media (max-width:700px){
+
+  .card-mobile-acciones{
+    grid-template-columns:1fr 1fr !important;
+    gap:6px !important;
+    margin-top:9px !important;
+  }
+
+  .card-mobile-acciones button{
+    min-height:40px !important;
+    font-size:8.5px !important;
+    padding:7px 5px !important;
+  }
+
+  .card-mobile-ver{
+    color:var(--dorado-claro) !important;
+    border-color:rgba(200,157,56,.30) !important;
+    background:rgba(200,157,56,.07) !important;
+  }
+
+  .card-mobile-agregar{
+    background:linear-gradient(135deg,#ddb13f,#c99a2e) !important;
+  }
+}
+
 </style>
 
 </head>
@@ -8450,6 +8538,8 @@ $${Math.round(precioParticular(producto)*0.90).toLocaleString("es-AR")}
 
 </div>
 
+<div class="card-mobile-acciones">
+
 <button
 type="button"
 class="card-mobile-ver"
@@ -8457,8 +8547,21 @@ onclick="
 event.stopPropagation();
 abrirProducto('${escapeAttr(nombre)}')
 ">
-VER PERFUME
+VER DETALLES
 </button>
+
+<button
+type="button"
+class="card-mobile-agregar"
+${!disponible ? "disabled" : ""}
+onclick="
+event.stopPropagation();
+agregarAlCarrito('${escapeAttr(nombre)}')
+">
+${disponible ? "＋ CARRITO" : "SIN STOCK"}
+</button>
+
+</div>
 
 </div>
 
