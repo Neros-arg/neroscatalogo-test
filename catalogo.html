@@ -6029,6 +6029,45 @@ CARRITO — BENEFICIO TRANSFERENCIA / EFECTIVO DESTACADO
   }
 }
 
+
+/* =========================================================
+   NERÓS — LOGO CENTRAL nerosfrase.png
+   ========================================================= */
+.logo-nav img{
+  width:210px !important;
+  height:auto !important;
+  max-height:76px !important;
+  object-fit:contain !important;
+  transform:none !important;
+  filter:drop-shadow(0 2px 8px rgba(200,157,56,.10));
+}
+
+.logo-nav:hover img{
+  transform:scale(1.025) !important;
+  filter:drop-shadow(0 3px 12px rgba(200,157,56,.20));
+}
+
+@media (max-width:900px){
+  .logo-nav img{
+    width:175px !important;
+    max-height:62px !important;
+  }
+}
+
+@media (max-width:700px){
+  .logo-nav img{
+    width:150px !important;
+    max-height:52px !important;
+  }
+}
+
+@media (max-width:420px){
+  .logo-nav img{
+    width:138px !important;
+    max-height:48px !important;
+  }
+}
+
 </style>
 
 </head>
@@ -6066,10 +6105,8 @@ class="side-menu">
 <div class="side-head">
 
 <img
-src="logo%20neros.png"
-alt="NERÓS"
-onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-<span class="logo-fallback">NERÓS</span>
+src="nerosfrase.png"
+alt="NERÓS">
 
 <button
 class="side-close"
