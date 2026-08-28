@@ -5079,6 +5079,342 @@ CARRITO — BENEFICIO TRANSFERENCIA / EFECTIVO DESTACADO
   }
 }
 
+
+/* =========================================================
+   NERÓS — CATÁLOGO MINIMALISTA RESPONSIVE
+   Foto + nombre + precio. Más información al hover en desktop.
+   En touch, tocar la card abre la ficha completa.
+   ========================================================= */
+
+#productos{
+  align-items:start;
+}
+
+.card{
+  background:#0d0d0d !important;
+  border:1px solid #242424 !important;
+  border-radius:16px !important;
+  overflow:hidden !important;
+  cursor:pointer;
+  box-shadow:none;
+}
+
+.card:hover{
+  border-color:rgba(200,157,56,.48) !important;
+  box-shadow:0 18px 42px rgba(0,0,0,.32) !important;
+}
+
+.card-imagen-minimal{
+  position:relative;
+  aspect-ratio:1/1 !important;
+  height:auto !important;
+  background:#f6f6f6;
+}
+
+.sin-imagen-minimal{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#777;
+  font-size:11px;
+}
+
+.badge-stock-minimal{
+  max-width:calc(100% - 18px);
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  font-size:8.5px !important;
+  padding:6px 8px !important;
+}
+
+/* Overlay de información para mouse */
+.card-hover-panel{
+  position:absolute;
+  inset:0;
+  z-index:3;
+  display:flex;
+  align-items:flex-end;
+  padding:12px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(5,5,5,.03) 18%,
+      rgba(5,5,5,.45) 48%,
+      rgba(5,5,5,.96) 100%
+    );
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(8px);
+  transition:
+    opacity .24s ease,
+    visibility .24s ease,
+    transform .24s ease;
+}
+
+.card:hover .card-hover-panel{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+}
+
+.card-hover-contenido{
+  width:100%;
+}
+
+.card-hover-tipo{
+  display:inline-flex;
+  margin-bottom:8px;
+  padding:5px 8px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(0,0,0,.48);
+  color:#e2e2e2;
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.65px;
+}
+
+.card-hover-linea{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:8px;
+  padding:6px 0;
+  border-top:1px solid rgba(255,255,255,.10);
+}
+
+.card-hover-linea strong{
+  color:#fff;
+  font-size:9.5px;
+  line-height:1.25;
+}
+
+.card-hover-linea span{
+  color:#bbb;
+  font-size:8.5px;
+  line-height:1.3;
+  text-align:right;
+}
+
+.card-hover-pedido strong{
+  color:var(--dorado-claro);
+}
+
+.card-hover-acciones{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:6px;
+  margin-top:9px;
+}
+
+.card-hover-acciones button{
+  min-height:34px;
+  margin:0 !important;
+  border-radius:9px;
+  font-size:8px !important;
+  font-weight:950;
+  cursor:pointer;
+}
+
+.card-hover-ver{
+  border:1px solid rgba(255,255,255,.24) !important;
+  background:rgba(12,12,12,.82) !important;
+  color:#fff !important;
+}
+
+.card-hover-agregar{
+  border:0 !important;
+  background:var(--dorado) !important;
+  color:#111 !important;
+}
+
+.card-info-minimal{
+  padding:13px 14px 14px !important;
+}
+
+.card-minimal-meta{
+  min-height:12px;
+  margin-bottom:6px;
+  color:#696969;
+  font-size:7.5px;
+  font-weight:900;
+  letter-spacing:1.1px;
+}
+
+.nombre-producto-minimal{
+  min-height:0 !important;
+  margin:0 !important;
+  font-size:12.5px !important;
+  line-height:1.3 !important;
+  color:#f7f7f7;
+}
+
+.card-minimal-precio{
+  margin-top:11px;
+}
+
+.card-minimal-precio strong{
+  display:block;
+  color:var(--dorado-claro);
+  font-size:21px;
+  line-height:1.05;
+  font-weight:950;
+  letter-spacing:-.3px;
+}
+
+.card-minimal-precio span{
+  display:block;
+  margin-top:5px;
+  color:#757575;
+  font-size:8.5px;
+  font-weight:750;
+}
+
+.card-mobile-ver{
+  display:none;
+}
+
+/* Desktop ancho: 5 columnas con cards con buena presencia */
+@media (min-width:1181px){
+  #productos{
+    grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+    gap:14px !important;
+  }
+}
+
+/* Notebook/monitor angosto: preferimos 4 cards grandes antes que 5 mini */
+@media (min-width:701px) and (max-width:1180px){
+  #productos{
+    grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+    gap:13px !important;
+  }
+}
+
+/* Monitores bajos: compactamos el chrome, no el producto */
+@media (min-width:701px) and (max-height:800px){
+  .catalogo{
+    padding-top:15px !important;
+    padding-bottom:105px !important;
+  }
+
+  .catalogo-cabeza{
+    margin-bottom:15px !important;
+  }
+
+  .controles{
+    margin-bottom:15px !important;
+  }
+
+  .card-info-minimal{
+    padding:10px 12px 11px !important;
+  }
+
+  .nombre-producto-minimal{
+    font-size:11.5px !important;
+  }
+
+  .card-minimal-precio{
+    margin-top:8px;
+  }
+
+  .card-minimal-precio strong{
+    font-size:19px;
+  }
+}
+
+/* Touch: nada depende del hover */
+@media (max-width:700px){
+
+  #productos{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:9px !important;
+  }
+
+  .card{
+    border-radius:14px !important;
+  }
+
+  .card-hover-panel{
+    display:none !important;
+  }
+
+  .badge-stock-minimal{
+    font-size:8px !important;
+    max-width:calc(100% - 12px);
+    left:6px !important;
+    top:6px !important;
+  }
+
+  .card-info-minimal{
+    padding:10px 9px 11px !important;
+  }
+
+  .card-minimal-meta{
+    margin-bottom:5px;
+    font-size:7.5px;
+  }
+
+  .nombre-producto-minimal{
+    font-size:12.5px !important;
+    line-height:1.28 !important;
+  }
+
+  .card-minimal-precio{
+    margin-top:8px;
+  }
+
+  .card-minimal-precio strong{
+    font-size:19px;
+  }
+
+  .card-minimal-precio span{
+    margin-top:4px;
+    font-size:8px;
+  }
+
+  .card-mobile-ver{
+    display:block !important;
+    width:100%;
+    min-height:39px !important;
+    margin-top:9px !important;
+    padding:8px !important;
+    border:1px solid rgba(200,157,56,.38) !important;
+    border-radius:9px !important;
+    background:rgba(200,157,56,.08) !important;
+    color:var(--dorado-claro) !important;
+    font-size:9px !important;
+    font-weight:950 !important;
+  }
+
+  .card:hover{
+    transform:none !important;
+  }
+}
+
+/* Pantallas muy angostas */
+@media (max-width:360px){
+  #productos{
+    gap:7px !important;
+  }
+
+  .nombre-producto-minimal{
+    font-size:11.5px !important;
+  }
+
+  .card-minimal-precio strong{
+    font-size:18px;
+  }
+}
+
+/* Sólo mostramos hover real donde existe mouse/trackpad */
+@media (hover:none), (pointer:coarse){
+  .card-hover-panel{
+    display:none !important;
+  }
+}
+
 </style>
 
 </head>
@@ -7684,7 +8020,7 @@ card.className=
 card.innerHTML=`
 
 <div
-class="imagen-producto"
+class="imagen-producto card-imagen-minimal"
 onclick="abrirProducto('${escapeAttr(nombre)}')">
 
 ${
@@ -7704,73 +8040,26 @@ onerror="this.style.display='none';">
 :
 
 `
-<div style="
-height:100%;
-display:flex;
-align-items:center;
-justify-content:center;
-color:#777;
-font-size:11px;
-">
+<div class="sin-imagen-minimal">
 SIN IMAGEN
 </div>
 `
 
 }
 
-<div class="badge-stock">
-
+<div class="badge-stock badge-stock-minimal">
 ${escapeHTML(stock)}
-
 </div>
 
+<div class="card-hover-panel">
+
+<div class="card-hover-contenido">
+
+${producto.tipo ? `
+<div class="card-hover-tipo">
+${escapeHTML(producto.tipo==="ARABE" ? "ÁRABE" : producto.tipo)}
 </div>
-
-<div class="card-info">
-
-<div
-class="nombre-producto"
-onclick="abrirProducto('${escapeAttr(nombre)}')">
-
-${escapeHTML(nombre)}
-
-</div>
-
-${
-producto.tipo
-?
-`<div class="producto-tipo-card">${escapeHTML(
-producto.tipo==="ARABE" ? "ÁRABE" : producto.tipo
-)}</div>`
-:
-""
-}
-
-<div class="stock-producto">
-
-${
-
-modoActual==="mayorista"
-
-?
-
-"Precio mayorista desde 10 unidades"
-
-:
-
-"10% OFF efectivo / transferencia"
-
-}
-
-</div>
-
-${
-productoPorPedido(producto)
-?
-`<div class="pedido-card-aviso">📦 Disponible por pedido · Entrega estimada: 10 días hábiles</div>`
-:
-""
-}
+` : ""}
 
 ${
 
@@ -7779,7 +8068,88 @@ modoActual==="mayorista"
 ?
 
 `
-<div class="precio-mayorista-card">
+<div class="card-hover-linea">
+<strong>Mayorista</strong>
+<span>Precio desde 10 unidades</span>
+</div>
+`
+
+:
+
+`
+<div class="card-hover-linea">
+<strong>💳 2 cuotas sin interés</strong>
+<span>$${Math.round(precioParticular(producto)/2).toLocaleString("es-AR")} c/u</span>
+</div>
+
+<div class="card-hover-linea">
+<strong>💸 10% OFF</strong>
+<span>Efectivo / transferencia</span>
+</div>
+`
+
+}
+
+${productoPorPedido(producto) ? `
+<div class="card-hover-linea card-hover-pedido">
+<strong>📦 Disponible por pedido</strong>
+<span>Entrega estimada: 10 días hábiles</span>
+</div>
+` : ""}
+
+<div class="card-hover-acciones">
+
+<button
+type="button"
+class="card-hover-ver"
+onclick="
+event.stopPropagation();
+abrirProducto('${escapeAttr(nombre)}')
+">
+VER DETALLES
+</button>
+
+<button
+type="button"
+class="card-hover-agregar"
+${!disponible ? "disabled" : ""}
+onclick="
+event.stopPropagation();
+agregarAlCarrito('${escapeAttr(nombre)}')
+">
+${disponible ? "＋ AGREGAR" : "SIN STOCK"}
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div
+class="card-info card-info-minimal"
+onclick="abrirProducto('${escapeAttr(nombre)}')">
+
+<div class="card-minimal-meta">
+${producto.tipo ? escapeHTML(producto.tipo==="ARABE" ? "ÁRABE" : producto.tipo) : "NERÓS"}
+</div>
+
+<div class="nombre-producto nombre-producto-minimal">
+${escapeHTML(nombre)}
+</div>
+
+<div class="card-minimal-precio">
+
+${
+
+modoActual==="mayorista"
+
+?
+
+`
+<strong>
 ${
 precio>0
 ?
@@ -7787,57 +8157,31 @@ precio>0
 :
 "Consultar"
 }
-</div>
+</strong>
+<span>desde 10 unidades</span>
 `
 
 :
 
 `
-<div class="precio-lista-card">
-Precio de lista:
 <strong>
-$${Math.round(precioParticular(producto)).toLocaleString("es-AR")}
-</strong>
-</div>
-
-<div class="cuotas-card">
-💳 <span>2 cuotas sin interés</span> de
-<b>
-$${Math.round(precioParticular(producto)/2).toLocaleString("es-AR")}
-</b>
-</div>
-
-<div class="precio-transfer-card">
-Efectivo / transferencia:
-<b>
 $${Math.round(precioParticular(producto)*0.90).toLocaleString("es-AR")}
-</b>
-</div>
+</strong>
+<span>efectivo / transferencia</span>
 `
 
 }
+
+</div>
 
 <button
-${!disponible ? "disabled" : ""}
+type="button"
+class="card-mobile-ver"
 onclick="
 event.stopPropagation();
-agregarAlCarrito('${escapeAttr(nombre)}')
+abrirProducto('${escapeAttr(nombre)}')
 ">
-
-${
-
-disponible
-
-?
-
-"AGREGAR AL CARRITO"
-
-:
-
-"SIN STOCK"
-
-}
-
+VER PERFUME
 </button>
 
 </div>
