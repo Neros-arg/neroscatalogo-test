@@ -1,547 +1,1006 @@
-// ============================================================
-// MOTOR DE FILTROS
-// ============================================================
+/* =========================================================
+MOTOR DE FILTROS
+========================================================= */
 
-let filtroCategoria = "todos";
-let filtroDisponibilidad = "todos";
-let filtroTester = "todos";
+function esTester(producto){
 
-let precioMaximoFiltro = Infinity;
+return String(
+producto.tester ||
+"NO"
+)
+.trim()
+.toUpperCase()==="SI";
 
+}
 
-// ============================================================
-// POPUP FILTROS
-// ============================================================
+function normalizarTipoProducto(valor){
 
-function abrirFiltros() {
+return String(valor || "")
+.trim()
+.toUpperCase()
+.normalize("NFD")
+.replace(/[\u0300-\u036f]/g,"")
+.replace(/\s+/g," ");
 
-  const popup =
-    document.getElementById("popupFiltros");
+}
 
-  if (popup) {
-    popup.classList.add("activo");
-  }
+function normalizarGenero(valor){
+
+const genero=
+String(valor || "")
+.trim()
+.toUpperCase()
+.normalize("NFD")
+.replace(/[\u0300-\u036f]/g,"")
+.replace(/\s+/g," ");
+
+const equivalencias={
+MASCULINO:"MASCULINO",
+HOMBRE:"MASCULINO",
+H:"MASCULINO",
+MALE:"MASCULINO",
+FEMENINO:"FEMENINO",
+MUJER:"FEMENINO",
+F:"FEMENINO",
+FEMALE:"FEMENINO",
+UNISEX:"UNISEX",
+UNISEXUAL:"UNISEX"
+};
+
+return equivalencias[genero] || genero;
+
+}
+
+function valorCampoProducto(producto,nombres){
+
+for(const nombre of nombres){
+
+if(
+Object.prototype.hasOwnProperty.call(producto,nombre) &&
+producto[nombre]!==null &&
+producto[nombre]!==undefined
+){
+
+const valor=String(producto[nombre]).trim();
+
+if(valor){
+return valor;
+}
+
+}
+
+}
+
+return "";
+
+}
+
+function generoProducto(producto){
+
+return normalizarGenero(
+valorCampoProducto(
+producto,
+["genero","género","Genero","Género","GENERO","GÉNERO"]
+)
+);
+
+}
+
+function notasProducto(producto){
+
+return valorCampoProducto(
+producto,
+[
+"notasOlfativas",
+"notas_olfativas",
+"notas olfativas",
+"Notas olfativas",
+"NOTAS OLFATIVAS",
+"notas"
+]
+);
+
+}
+
+function descripcionProducto(producto){
+
+return valorCampoProducto(
+producto,
+[
+"descripcion",
+"descripción",
+"Descripcion",
+"Descripción",
+"DESCRIPCION",
+"DESCRIPCIÓN"
+]
+);
+
 }
 
 
-function cerrarFiltros() {
+function precioProductoParaFiltro(producto){
 
-  const popup =
-    document.getElementById("popupFiltros");
+if(modoActual==="mayorista"){
 
-  if (popup) {
-    popup.classList.remove("activo");
-  }
+const mayorista10=
+precioMayorista(producto,10);
+
+return mayorista10>0
+?
+mayorista10
+:
+0;
+
+}
+
+return precioParticular(producto)*0.90;
+
+}
+
+function calcularPrecioMaximoCatalogo(){
+
+let maximo=0;
+
+perfumes.forEach(producto=>{
+
+if(
+modoActual==="particular" &&
+esTester(producto)
+){
+return;
+}
+
+if(
+modoActual==="mayorista" &&
+!accesoMayoristaAutorizado
+){
+return;
+}
+
+const precio=
+precioProductoParaFiltro(producto);
+
+if(precio>maximo){
+maximo=precio;
+}
+
+});
+
+if(maximo<=0){
+maximo=100000;
+}
+
+/* Redondeamos hacia arriba de a $5.000 para que la barra quede prolija */
+precioMaximoCatalogo=
+Math.ceil(maximo/5000)*5000;
+
+return precioMaximoCatalogo;
+
+}
+
+function actualizarFiltroPrecioUI(){
+
+const range=
+document.getElementById("filtroPrecioRange");
+
+const valor=
+document.getElementById("filtroPrecioValor");
+
+const maxEtiqueta=
+document.getElementById("filtroPrecioMaxEtiqueta");
+
+const ayuda=
+document.getElementById("filtroPrecioAyuda");
+
+if(!range || !valor || !maxEtiqueta){
+return;
+}
+
+const maximo=
+calcularPrecioMaximoCatalogo();
+
+range.max=
+String(maximo);
+
+range.step=
+maximo>=300000
+?
+"5000"
+:
+"1000";
+
+let valorActual=
+filtroPrecioMax===null
+?
+maximo
+:
+Math.min(filtroPrecioMax,maximo);
+
+if(
+filtroPrecioMax!==null &&
+filtroPrecioMax>=maximo
+){
+filtroPrecioMax=null;
+valorActual=maximo;
+}
+
+range.value=
+String(valorActual);
+
+const porcentaje=
+maximo>0
+?
+(valorActual/maximo)*100
+:
+100;
+
+range.style.setProperty(
+"--precio-progreso",
+porcentaje+"%"
+);
+
+valor.textContent=
+filtroPrecioMax===null
+?
+"SIN LÍMITE"
+:
+"HASTA $"+
+Math.round(valorActual).toLocaleString("es-AR");
+
+maxEtiqueta.textContent=
+"$"+
+Math.round(maximo).toLocaleString("es-AR");
+
+if(ayuda){
+
+ayuda.textContent=
+modoActual==="mayorista"
+?
+"En mayorista se toma como referencia el precio del nivel 10+ unidades."
+:
+"En particular se toma el precio con 10% OFF por transferencia / efectivo.";
+
+}
+
+}
+
+function cambiarFiltroPrecio(valor){
+
+const maximo=
+precioMaximoCatalogo ||
+calcularPrecioMaximoCatalogo();
+
+const numero=
+Number(valor);
+
+if(
+!Number.isFinite(numero) ||
+numero>=maximo
+){
+filtroPrecioMax=null;
+}
+else{
+filtroPrecioMax=numero;
+}
+
+actualizarFiltroPrecioUI();
+
+}
+
+function aplicarFiltrosCatalogo(){
+
+const input=
+document.getElementById("buscar");
+
+const texto=
+String(
+input ? input.value : ""
+)
+.toLowerCase()
+.trim();
+
+productosFiltrados=
+perfumes.filter(producto=>{
+
+/* Testers:
+   particular = ocultos
+   mayorista autorizado = visibles
+*/
+if(
+modoActual==="particular" &&
+esTester(producto)
+){
+return false;
+}
+
+if(
+modoActual==="mayorista" &&
+!accesoMayoristaAutorizado
+){
+return false;
+}
+
+if(
+modoActual==="mayorista" &&
+accesoMayoristaAutorizado
+){
+
+if(
+filtroTester==="tester" &&
+!esTester(producto)
+){
+return false;
+}
+
+if(
+filtroTester==="no-tester" &&
+esTester(producto)
+){
+return false;
+}
+
+}
+
+if(texto){
+
+const nombre=
+String(
+producto.perfume ||
+""
+)
+.toLowerCase();
+
+if(!nombre.includes(texto)){
+return false;
+}
+
+}
+
+const tipoProducto=
+normalizarTipoProducto(
+producto.tipo
+);
+
+if(
+filtroTipo!=="TODOS" &&
+tipoProducto!==
+normalizarTipoProducto(filtroTipo)
+){
+return false;
+}
+
+const genero=
+generoProducto(producto);
+
+if(
+filtroGenero!=="TODOS" &&
+genero!==filtroGenero
+){
+return false;
+}
+
+const stock=
+String(
+producto.stock ||
+""
+)
+.toLowerCase()
+.trim();
+
+let disponibilidad=
+filtroRapido!=="todos"
+?
+filtroRapido
+:
+filtroStockPopup;
+
+if(
+disponibilidad==="disponible" &&
+!stock.includes("stock inmediato")
+){
+return false;
+}
+
+if(
+disponibilidad==="pedido" &&
+!stock.includes("disponible por pedido")
+){
+return false;
 }
 
 
-// ============================================================
-// CONVERTIR NÚMEROS
-// ============================================================
+if(filtroPrecioMax!==null){
 
-function numeroSeguro(valor) {
+const precioFiltro=
+precioProductoParaFiltro(producto);
 
-  if (typeof valor === "number") {
-    return valor;
-  }
-
-  if (!valor) return 0;
-
-  const limpio =
-    String(valor)
-      .replace(/\$/g, "")
-      .replace(/\./g, "")
-      .replace(/,/g, ".")
-      .replace(/[^\d.-]/g, "");
-
-  const numero =
-    Number(limpio);
-
-  return Number.isFinite(numero)
-    ? numero
-    : 0;
+if(
+precioFiltro<=0 ||
+precioFiltro>filtroPrecioMax
+){
+return false;
 }
 
-
-// ============================================================
-// PRECIO PARTICULAR
-// ============================================================
-
-function precioParticular(producto) {
-
-  return numeroSeguro(
-    producto?.Precio
-  );
 }
 
+return true;
 
-// ============================================================
-// PRECIO MAYORISTA
-// ============================================================
+});
 
-function precioMayorista(producto) {
+paginaActual=1;
 
-  const precio =
-    precioParticular(producto);
+actualizarTagsFiltros();
 
-  const unidades =
-    typeof totalUnidadesCarrito === "function"
-      ? totalUnidadesCarrito()
-      : 0;
+mostrarPagina();
 
-  let porcentaje = 1;
+}
+/* =========================================================
+POPUP FILTROS
+========================================================= */
 
-  if (unidades >= 30) {
-    porcentaje = 0.80;
-  } else if (unidades >= 20) {
-    porcentaje = 0.85;
-  } else if (unidades >= 10) {
-    porcentaje = 0.90;
-  }
+function abrirFiltros(){
 
-  const resultado =
-    precio * porcentaje;
+const grupoTester=
+document.getElementById("filtroTesterGrupo");
 
-  return Math.round(resultado / 100) * 100;
+if(grupoTester){
+
+grupoTester.style.display=
+(
+modoActual==="mayorista" &&
+accesoMayoristaAutorizado
+)
+?
+"block"
+:
+"none";
+
 }
 
+sincronizarBotonesFiltro();
+actualizarFiltroPrecioUI();
 
-// ============================================================
-// PRECIO FINAL
-// ============================================================
+document
+.getElementById("filtroOverlay")
+.classList
+.add("activo");
 
-function precioFinal(producto) {
-
-  if (
-    modoMayorista &&
-    typeof totalUnidadesCarrito === "function" &&
-    totalUnidadesCarrito() >= 10
-  ) {
-    return precioMayorista(producto);
-  }
-
-  return precioParticular(producto);
 }
 
+function cerrarFiltros(){
 
-// ============================================================
-// STOCK
-// ============================================================
+document
+.getElementById("filtroOverlay")
+.classList
+.remove("activo");
 
-function normalizarStock(stock) {
-
-  const valor =
-    String(stock || "")
-      .trim()
-      .toLowerCase();
-
-  if (
-    valor === "disponible" ||
-    valor === "stock" ||
-    valor === "si" ||
-    valor === "sí" ||
-    valor.includes("stock")
-  ) {
-    return "stock inmediato";
-  }
-
-  return "disponible por pedido";
 }
 
+function cerrarFiltrosPorFondo(event){
 
-// ============================================================
-// APLICAR FILTROS
-// ============================================================
-
-function aplicarFiltrosCatalogo() {
-
-  const buscador =
-    document.getElementById("buscador");
-
-  const texto =
-    buscador
-      ? buscador.value.trim().toLowerCase()
-      : "";
-
-  productosFiltrados =
-    productos.filter(producto => {
-
-      const nombre =
-        String(producto.Perfume || "")
-          .toLowerCase();
-
-      const categoria =
-        String(producto.Tipo || "")
-          .toLowerCase()
-          .trim();
-
-      const stock =
-        normalizarStock(producto.Stock);
-
-      const esTester =
-        String(producto.Tester || "")
-          .toUpperCase() === "SI";
-
-      // ----------------------------
-      // BUSCADOR
-      // ----------------------------
-
-      if (
-        texto &&
-        !nombre.includes(texto)
-      ) {
-        return false;
-      }
-
-      // ----------------------------
-      // CHIPS
-      // ----------------------------
-
-      if (modoCatalogo === "disponibles") {
-
-        if (stock !== "stock inmediato") {
-          return false;
-        }
-
-      }
-
-      if (modoCatalogo === "a-pedido") {
-
-        if (stock !== "disponible por pedido") {
-          return false;
-        }
-
-      }
-
-      if (modoCatalogo === "mayorista") {
-
-        if (!modoMayorista) {
-          return false;
-        }
-
-      }
-
-      // ----------------------------
-      // CATEGORÍA
-      // ----------------------------
-
-      if (
-        filtroCategoria !== "todos" &&
-        categoria !== filtroCategoria
-      ) {
-        return false;
-      }
-
-      // ----------------------------
-      // DISPONIBILIDAD
-      // ----------------------------
-
-      if (
-        filtroDisponibilidad === "stock" &&
-        stock !== "stock inmediato"
-      ) {
-        return false;
-      }
-
-      if (
-        filtroDisponibilidad === "pedido" &&
-        stock !== "disponible por pedido"
-      ) {
-        return false;
-      }
-
-      // ----------------------------
-      // TESTER
-      // ----------------------------
-
-      if (
-        filtroTester === "tester" &&
-        !esTester
-      ) {
-        return false;
-      }
-
-      if (
-        filtroTester === "sin-tester" &&
-        esTester
-      ) {
-        return false;
-      }
-
-      // ----------------------------
-      // PRECIO
-      // ----------------------------
-
-      const precio =
-        precioParticular(producto);
-
-      if (
-        Number.isFinite(precioMaximoFiltro) &&
-        precio > precioMaximoFiltro
-      ) {
-        return false;
-      }
-
-      // ----------------------------
-
-      return true;
-
-    });
-
-  paginaActual = 1;
-
-  mostrarProductos();
-
-  actualizarContadoresFiltros();
+if(
+event.target &&
+event.target.id==="filtroOverlay"
+){
+cerrarFiltros();
 }
 
-
-// ============================================================
-// CAMBIAR CATEGORÍA
-// ============================================================
-
-function cambiarCategoria(valor) {
-
-  filtroCategoria =
-    String(valor || "todos")
-      .toLowerCase()
-      .trim();
-
-  paginaActual = 1;
-
-  aplicarFiltrosCatalogo();
 }
 
+function seleccionarTipoFiltro(tipo){
 
-// ============================================================
-// CAMBIAR DISPONIBILIDAD
-// ============================================================
+filtroTipo=tipo;
 
-function cambiarDisponibilidad(valor) {
+document
+.querySelectorAll("[data-filtro-tipo]")
+.forEach(btn=>{
 
-  filtroDisponibilidad =
-    valor || "todos";
+btn.classList.toggle(
+"activo",
+btn.dataset.filtroTipo===tipo
+);
 
-  paginaActual = 1;
+});
 
-  aplicarFiltrosCatalogo();
 }
 
+function seleccionarGeneroFiltro(genero){
 
-// ============================================================
-// CAMBIAR TESTER
-// ============================================================
+filtroGenero=genero;
 
-function cambiarTester(valor) {
+document
+.querySelectorAll("[data-filtro-genero]")
+.forEach(btn=>{
 
-  filtroTester =
-    valor || "todos";
+btn.classList.toggle(
+"activo",
+btn.dataset.filtroGenero===genero
+);
 
-  paginaActual = 1;
+});
 
-  aplicarFiltrosCatalogo();
 }
 
+function seleccionarStockFiltro(tipo){
 
-// ============================================================
-// ACTUALIZAR CONTADORES
-// ============================================================
+filtroStockPopup=tipo;
 
-function actualizarContadoresFiltros() {
+document
+.querySelectorAll("[data-filtro-stock]")
+.forEach(btn=>{
 
-  const contador =
-    document.getElementById("contadorProductos");
+btn.classList.toggle(
+"activo",
+btn.dataset.filtroStock===tipo
+);
 
-  if (!contador) return;
+});
 
-  contador.textContent =
-    `${productosFiltrados.length} productos`;
 }
 
+function seleccionarTesterFiltro(tipo){
 
-// ============================================================
-// FORMATEAR PRECIO
-// ============================================================
-
-function formatearPrecio(valor) {
-
-  const numero =
-    numeroSeguro(valor);
-
-  return numero.toLocaleString(
-    "es-AR",
-    {
-      style: "currency",
-      currency: "ARS",
-      maximumFractionDigits: 0
-    }
-  );
+if(
+modoActual!=="mayorista" ||
+!accesoMayoristaAutorizado
+){
+return;
 }
 
+filtroTester=tipo;
 
-// ============================================================
-// INICIALIZAR SLIDER
-// ============================================================
+document
+.querySelectorAll("[data-filtro-tester]")
+.forEach(btn=>{
 
-function inicializarFiltroPrecio() {
+btn.classList.toggle(
+"activo",
+btn.dataset.filtroTester===tipo
+);
 
-  const slider =
-    document.getElementById("sliderPrecio");
+});
 
-  if (!slider || !productos.length) {
-    return;
-  }
-
-  const precios =
-    productos.map(p =>
-      precioParticular(p)
-    );
-
-  const max =
-    Math.max(...precios);
-
-  let maxRedondeado;
-
-  if (max >= 300000) {
-    maxRedondeado =
-      Math.ceil(max / 5000) * 5000;
-  } else {
-    maxRedondeado =
-      Math.ceil(max / 1000) * 1000;
-  }
-
-  slider.min = 0;
-  slider.max = maxRedondeado;
-  slider.value = maxRedondeado;
-
-  precioMaximoFiltro =
-    maxRedondeado;
-
-  const display =
-    document.getElementById("precioHasta");
-
-  if (display) {
-    display.textContent =
-      formatearPrecio(maxRedondeado);
-  }
-
-  slider.addEventListener(
-    "input",
-    () => {
-
-      precioMaximoFiltro =
-        Number(slider.value);
-
-      const texto =
-        document.getElementById("precioHasta");
-
-      if (texto) {
-        texto.textContent =
-          formatearPrecio(
-            precioMaximoFiltro
-          );
-      }
-
-      aplicarFiltrosCatalogo();
-    }
-  );
 }
 
+function sincronizarBotonesFiltro(){
 
-// ============================================================
-// RESET FILTROS
-// ============================================================
+document
+.querySelectorAll("[data-filtro-tipo]")
+.forEach(btn=>{
 
-function resetearFiltros() {
+btn.classList.toggle(
+"activo",
+btn.dataset.filtroTipo===filtroTipo
+);
 
-  filtroCategoria = "todos";
-  filtroDisponibilidad = "todos";
-  filtroTester = "todos";
+});
 
-  modoCatalogo = "todos";
+document
+.querySelectorAll("[data-filtro-genero]")
+.forEach(btn=>{
 
-  const buscador =
-    document.getElementById("buscador");
+btn.classList.toggle(
+"activo",
+btn.dataset.filtroGenero===filtroGenero
+);
 
-  if (buscador) {
-    buscador.value = "";
-  }
+});
 
-  const slider =
-    document.getElementById("sliderPrecio");
+document
+.querySelectorAll("[data-filtro-stock]")
+.forEach(btn=>{
 
-  if (slider) {
+btn.classList.toggle(
+"activo",
+btn.dataset.filtroStock===filtroStockPopup
+);
 
-    slider.value =
-      slider.max;
+});
 
-    precioMaximoFiltro =
-      Number(slider.max);
+document
+.querySelectorAll("[data-filtro-tester]")
+.forEach(btn=>{
 
-    const display =
-      document.getElementById("precioHasta");
+btn.classList.toggle(
+"activo",
+btn.dataset.filtroTester===filtroTester
+);
 
-    if (display) {
-      display.textContent =
-        formatearPrecio(
-          Number(slider.max)
-        );
-    }
-  }
+});
 
-  document
-    .querySelectorAll(".chip")
-    .forEach(chip =>
-      chip.classList.remove("activo")
-    );
-
-  const todos =
-    document.querySelector(
-      '.chip[data-modo="todos"]'
-    );
-
-  if (todos) {
-    todos.classList.add("activo");
-  }
-
-  aplicarFiltrosCatalogo();
 }
 
+function aplicarFiltrosDesdePopup(){
 
-// ============================================================
-// ETIQUETA DE FILTRO DE PRECIO
-// ============================================================
+/*
+Si el usuario eligió disponibilidad dentro del popup,
+desactivamos el chip rápido para evitar contradicciones.
+*/
+if(filtroStockPopup!=="todos"){
 
-function mostrarFiltroPrecioActivo() {
+filtroRapido="todos";
 
-  const contenedor =
-    document.getElementById("filtroPrecioActivo");
+document
+.querySelectorAll(".cat-chip")
+.forEach(btn=>
+btn.classList.toggle(
+"activo",
+btn.dataset.chip==="todos"
+)
+);
 
-  if (!contenedor) return;
+}
 
-  const slider =
-    document.getElementById("sliderPrecio");
+cerrarFiltros();
 
-  if (!slider) return;
+aplicarFiltrosCatalogo();
 
-  if (
-    Number(slider.value) <
-    Number(slider.max)
-  ) {
+document
+.getElementById("catalogo")
+.scrollIntoView({
+behavior:"smooth"
+});
 
-    contenedor.textContent =
-      `Hasta ${formatearPrecio(
-        Number(slider.value)
-      )}`;
+}
 
-    contenedor.classList.add("activo");
+function limpiarFiltros(){
 
-  } else {
+filtroTipo="TODOS";
+filtroGenero="TODOS";
+filtroStockPopup="todos";
+filtroTester="todos";
+filtroRapido="todos";
+filtroPrecioMax=null;
 
-    contenedor.textContent = "";
+const buscar=
+document.getElementById("buscar");
 
-    contenedor.classList.remove(
-      "activo"
-    );
-  }
+if(buscar){
+buscar.value="";
+}
+
+document
+.querySelectorAll(".cat-chip")
+.forEach(btn=>
+btn.classList.toggle(
+"activo",
+btn.dataset.chip==="todos"
+)
+);
+
+sincronizarBotonesFiltro();
+
+cerrarFiltros();
+
+aplicarFiltrosCatalogo();
+
+}
+
+function actualizarTagsFiltros(){
+
+const contenedor=
+document.getElementById("filtrosActivos");
+
+if(!contenedor){
+return;
+}
+
+const tags=[];
+
+if(filtroTipo!=="TODOS"){
+
+const etiqueta=
+filtroTipo==="ARABE"
+?
+"ÁRABES"
+:
+filtroTipo;
+
+tags.push(
+`<span class="filtro-tag">Categoría: ${escapeHTML(etiqueta)}</span>`
+);
+
+}
+
+if(filtroGenero!=="TODOS"){
+
+let etiquetaGenero=filtroGenero;
+
+if(filtroGenero==="MASCULINO"){
+etiquetaGenero="Masculino";
+}
+else if(filtroGenero==="FEMENINO"){
+etiquetaGenero="Femenino";
+}
+else if(filtroGenero==="UNISEX"){
+etiquetaGenero="Unisex";
+}
+
+tags.push(
+`<span class="filtro-tag">Género: ${escapeHTML(etiquetaGenero)}</span>`
+);
+
+}
+
+const disponibilidad=
+filtroRapido!=="todos"
+?
+filtroRapido
+:
+filtroStockPopup;
+
+if(disponibilidad==="disponible"){
+tags.push(
+'<span class="filtro-tag">Stock inmediato</span>'
+);
+}
+
+if(disponibilidad==="pedido"){
+tags.push(
+'<span class="filtro-tag">Disponible por pedido</span>'
+);
+}
+
+if(filtroPrecioMax!==null){
+
+tags.push(
+`<span class="filtro-tag">Hasta $${Math.round(filtroPrecioMax).toLocaleString("es-AR")}</span>`
+);
+
+}
+
+if(modoActual==="mayorista"){
+
+if(filtroTester==="tester"){
+tags.push(
+'<span class="filtro-tag">Mayorista · Solo testers</span>'
+);
+}
+else if(filtroTester==="no-tester"){
+tags.push(
+'<span class="filtro-tag">Mayorista · Sin testers</span>'
+);
+}
+else{
+tags.push(
+'<span class="filtro-tag">Mayorista · Todos los productos</span>'
+);
+}
+
+}
+
+contenedor.innerHTML=
+tags.join("");
+
+const boton=
+document.querySelector(".abrir-filtros-btn");
+
+if(boton){
+
+boton.classList.toggle(
+"activo",
+filtroTipo!=="TODOS" ||
+filtroGenero!=="TODOS" ||
+filtroStockPopup!=="todos" ||
+filtroPrecioMax!==null ||
+(
+modoActual==="mayorista" &&
+filtroTester!=="todos"
+)
+);
+
+}
+
+}
+/* =========================================================
+CONVERTIR NÚMEROS
+========================================================= */
+
+function numeroSeguro(valor){
+
+if(
+valor===null ||
+valor===undefined ||
+valor===""
+){
+
+return 0;
+
+}
+
+if(
+typeof valor==="number"
+){
+
+return Number.isFinite(valor)
+?
+valor
+:
+0;
+
+}
+
+let texto=
+
+String(valor)
+.trim()
+.replace(/ARS/gi,"")
+.replace(/\$/g,"")
+.replace(/\s/g,"");
+
+if(
+texto.includes(".") &&
+texto.includes(",")
+){
+
+texto=
+texto
+.replace(/\./g,"")
+.replace(",",".");
+
+}
+
+else if(
+texto.includes(",")
+){
+
+texto=
+texto.replace(",", ".");
+
+}
+
+else if(
+/^\d{1,3}(\.\d{3})+$/
+.test(texto)
+){
+
+texto=
+texto.replace(/\./g,"");
+
+}
+
+const numero=
+Number(texto);
+
+return Number.isFinite(numero)
+?
+numero
+:
+0;
+
+}
+/* =========================================================
+PRECIO PARTICULAR
+========================================================= */
+
+function precioParticular(producto){
+
+return numeroSeguro(
+producto.precio
+);
+
+}
+/* =========================================================
+PRECIO MAYORISTA
+========================================================= */
+
+function precioMayorista(
+producto,
+cantidadTotal
+){
+
+let precio=0;
+
+if(
+cantidadTotal>=30
+){
+
+precio=
+numeroSeguro(
+producto.precioMayorista30
+);
+
+}
+
+else if(
+cantidadTotal>=20
+){
+
+precio=
+numeroSeguro(
+producto.precioMayorista20
+);
+
+}
+
+else if(
+cantidadTotal>=10
+){
+
+precio=
+numeroSeguro(
+producto.precioMayorista10
+);
+
+}
+
+return precio;
+
+}
+/* =========================================================
+PRECIO FINAL
+========================================================= */
+
+function obtenerPrecioItem(
+item,
+cantidadTotal
+){
+
+if(
+modoActual==="mayorista"
+){
+
+return precioMayorista(
+item,
+cantidadTotal
+);
+
+}
+
+let precio=
+precioParticular(item);
+
+if(
+formaPago==="transferencia"
+){
+
+precio*=0.90;
+
+}
+
+return precio;
+
+}
+/* =========================================================
+STOCK
+========================================================= */
+
+function stockDisponible(producto){
+
+const stock=
+
+String(
+producto.stock ||
+""
+)
+.toLowerCase();
+
+return !(
+
+stock.includes(
+"sin stock"
+)
+
+||
+
+stock.includes(
+"agotado"
+)
+
+);
+
+}
+
+function productoPorPedido(producto){
+
+return String(
+producto.stock ||
+""
+)
+.toLowerCase()
+.includes(
+"pedido"
+);
+
 }
