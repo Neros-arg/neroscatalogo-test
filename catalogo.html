@@ -12,9 +12,101 @@
 
 <link rel="stylesheet" href="css/catalogo.css">
 
+
+<style>
+/* ================= LOADER NERÓS ================= */
+.neros-loader { display:none; }
+.neros-loader-content { display:none; }
+
+/* Pantalla de carga */
+.neros-loader{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#050505;
+  opacity:1;
+  visibility:visible;
+  transition:opacity .6s ease, visibility .6s ease;
+}
+
+.neros-loader.oculto{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+.neros-loader-content{
+  width:min(280px,72vw);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.neros-loader-logo{
+  width:min(190px,55vw);
+  height:auto;
+  object-fit:contain;
+  animation:nerosLoaderPulse 1.8s ease-in-out infinite;
+}
+
+.neros-loader-line{
+  width:100%;
+  height:1px;
+  margin-top:28px;
+  overflow:hidden;
+  background:rgba(212,175,55,.16);
+}
+
+.neros-loader-line span{
+  display:block;
+  width:38%;
+  height:100%;
+  background:linear-gradient(90deg,transparent,#d4af37,transparent);
+  animation:nerosLoaderLine 1.25s ease-in-out infinite;
+}
+
+.neros-loader-text{
+  margin-top:16px;
+  font-size:10px;
+  letter-spacing:3px;
+  color:rgba(255,255,255,.58);
+  text-align:center;
+  animation:nerosLoaderText 1.8s ease-in-out infinite;
+}
+
+@keyframes nerosLoaderPulse{
+  0%,100%{opacity:.62;transform:scale(.98);}
+  50%{opacity:1;transform:scale(1);}
+}
+
+@keyframes nerosLoaderLine{
+  0%{transform:translateX(-140%);}
+  100%{transform:translateX(370%);}
+}
+
+@keyframes nerosLoaderText{
+  0%,100%{opacity:.4;}
+  50%{opacity:.85;}
+}
+</style>
+
 </head>
 
 <body>
+
+<!-- ================= LOADER NERÓS ================= -->
+<div id="nerosLoader" class="neros-loader">
+  <div class="neros-loader-content">
+    <img src="logo%20neros.png" alt="NERÓS" class="neros-loader-logo">
+    <div class="neros-loader-line"><span></span></div>
+    <div class="neros-loader-text">CARGANDO CATÁLOGO</div>
+  </div>
+</div>
+
 
 <div class="promo-strip">
 
@@ -1030,6 +1122,23 @@ Rosario, Santa Fe · Argentina
 <script src="js/catalogo.js" defer></script>
 <script src="js/filtros.js" defer></script>
 <script src="js/carrito.js" defer></script>
+
+
+<script>
+/* ================= OCULTAR LOADER AL TERMINAR LA CARGA ================= */
+window.addEventListener("load", function(){
+  const loader = document.getElementById("nerosLoader");
+  if(!loader) return;
+
+  setTimeout(function(){
+    loader.classList.add("oculto");
+
+    setTimeout(function(){
+      loader.remove();
+    }, 650);
+  }, 250);
+});
+</script>
 
 </body>
 </html>
