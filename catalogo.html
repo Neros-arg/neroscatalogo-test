@@ -5871,64 +5871,6 @@ CARRITO — BENEFICIO TRANSFERENCIA / EFECTIVO DESTACADO
   .card-notas-hover{display:none!important;}
 }
 
-
-
-/* =========================================================
-   NERÓS — LOADING CENTRADO (AGREGADO)
-   ========================================================= */
-#neros-loading{
-  display:none;
-  width:100%;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  margin:18px 0 24px;
-  pointer-events:none;
-}
-#neros-loading.visible{display:flex;}
-.nloading-box{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:9px;
-}
-.nloading-logo{
-  font-family:Georgia,serif;
-  font-size:18px;
-  font-weight:700;
-  letter-spacing:5px;
-  color:#d8bd78;
-  text-shadow:0 0 18px rgba(216,189,120,.22);
-  animation:nerosLoadingPulse 1.6s ease-in-out infinite;
-}
-.nloading-spinner{
-  width:26px;
-  height:26px;
-  border:2px solid rgba(216,189,120,.18);
-  border-top-color:#d8bd78;
-  border-right-color:#d8bd78;
-  border-radius:50%;
-  animation:nerosLoadingSpin .7s linear infinite;
-}
-.nloading-text{
-  font-size:9px;
-  letter-spacing:2.2px;
-  text-transform:uppercase;
-  color:#888;
-}
-@keyframes nerosLoadingSpin{to{transform:rotate(360deg);}}
-@keyframes nerosLoadingPulse{
-  0%,100%{opacity:.55;transform:scale(.98);}
-  50%{opacity:1;transform:scale(1);}
-}
-
-/* iPad / tablet: solo espaciado, sin tocar la lógica existente */
-@media (min-width:701px) and (max-width:1180px){
-  .catalogo{padding-left:18px;padding-right:18px;}
-  #productos{gap:12px;}
-}
-
 </style>
 
 </head>
@@ -6219,14 +6161,6 @@ onclick="solicitarAccesoMayorista()">
 
 </button>
 
-</div>
-
-<div id="neros-loading" aria-live="polite" aria-label="Cargando catálogo">
-  <div class="nloading-box">
-    <div class="nloading-logo">NERÓS</div>
-    <div class="nloading-spinner"></div>
-    <div class="nloading-text">Cargando catálogo...</div>
-  </div>
 </div>
 
 <div class="filtros-busqueda-wrap">
@@ -7020,21 +6954,6 @@ let filtroPrecioMax=null;
 let precioMaximoCatalogo=0;
 
 /* =========================================================
-   LOADING INICIAL — AGREGADO, SIN CAMBIAR LA API
-   ========================================================= */
-const loadingNeros=document.getElementById("neros-loading");
-
-function mostrarLoadingNeros(){
-  if(loadingNeros) loadingNeros.classList.add("visible");
-}
-
-function ocultarLoadingNeros(){
-  if(loadingNeros) loadingNeros.classList.remove("visible");
-}
-
-mostrarLoadingNeros();
-
-/* =========================================================
 API
 ========================================================= */
 
@@ -7070,14 +6989,12 @@ perfumes=data;
 calcularPrecioMaximoCatalogo();
 actualizarFiltroPrecioUI();
 aplicarFiltrosCatalogo();
-ocultarLoadingNeros();
 
 })
 
 .catch(error=>{
 
 console.error(error);
-ocultarLoadingNeros();
 
 document
 .getElementById("productos")
