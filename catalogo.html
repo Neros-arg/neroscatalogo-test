@@ -94,6 +94,17 @@
 }
 </style>
 
+
+<style>
+/* PAGO — mejoras de legibilidad y responsive */
+.pago-selector{gap:12px;}
+.pago-btn{min-height:74px;padding:14px 16px;font-size:16px;line-height:1.25;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;-webkit-tap-highlight-color:transparent;}
+.pago-btn small{display:block;font-size:13px;line-height:1.2;font-weight:700;letter-spacing:.3px;}
+.pago-ayuda{font-size:14px;line-height:1.45;}
+@media (min-width:768px) and (max-width:1180px){.pago-selector{gap:14px}.pago-btn{min-height:82px;padding:16px 14px;font-size:17px}.pago-btn small{font-size:14px}.pago-ayuda{font-size:15px}}
+@media (max-width:767px){.pago-selector{display:grid;grid-template-columns:1fr;gap:10px}.pago-btn{width:100%;min-height:68px;padding:12px 14px;font-size:16px}.pago-btn small{font-size:13px}.pago-ayuda{margin-top:10px;font-size:14px;padding:0 4px}}
+@media (max-width:380px){.pago-btn{min-height:64px;padding:10px 12px;font-size:15px}.pago-btn small{font-size:12px}}
+</style>
 </head>
 
 <body>
@@ -1059,7 +1070,7 @@ onclick="cambiarPago('credito')">
 📱 Crédito / Mercado Pago
 
 <small>
-Precio de lista
+2 CUOTAS SIN INTERÉS
 </small>
 
 </button>
@@ -1123,6 +1134,25 @@ Rosario, Santa Fe · Argentina
 <script src="js/filtros.js" defer></script>
 <script src="js/carrito.js" defer></script>
 
+<script>
+/* PAGO — texto dinámico, sin modificar la lógica original */
+window.addEventListener("DOMContentLoaded", function(){
+  if(typeof window.cambiarPago !== "function") return;
+  const original = window.cambiarPago;
+  const mensajes = {
+    transferencia: "🏦 <strong>Transferencia / efectivo:</strong> 10% OFF · mejor precio.",
+    debito: "💳 <strong>Débito:</strong> precio de lista.",
+    credito: "✨ <strong>Mercado Pago:</strong> 2 cuotas sin interés a precio de lista."
+  };
+  window.cambiarPago = function(tipo){
+    original(tipo);
+    const ayuda = document.getElementById("pagoAyuda");
+    if(ayuda && mensajes[tipo]) ayuda.innerHTML = mensajes[tipo];
+  };
+  const ayuda = document.getElementById("pagoAyuda");
+  if(ayuda) ayuda.innerHTML = mensajes.transferencia;
+});
+</script>
 
 <script>
 /* ================= LOADER NERÓS — ESPERAR PRODUCTOS + IMÁGENES ================= */
