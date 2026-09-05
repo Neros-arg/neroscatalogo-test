@@ -12,7 +12,6 @@
 
 <link rel="stylesheet" href="css/catalogo.css">
 
-
 <style>
 /* ================= LOADER NERÓS ================= */
 .neros-loader { display:none; }
@@ -94,153 +93,12 @@
 }
 </style>
 
-
-<style>
-/* =========================================================
-   AJUSTE NERÓS — PAGOS + RESPONSIVE TABLET / IPAD / CELULAR
-   ========================================================= */
-
-.pago-selector{
-  gap:10px !important;
-}
-
-.pago-btn{
-  min-height:66px !important;
-  padding:12px 10px !important;
-  font-size:clamp(12px,1.35vw,15px) !important;
-  line-height:1.25 !important;
-  font-weight:700 !important;
-  display:flex !important;
-  flex-direction:column !important;
-  align-items:center !important;
-  justify-content:center !important;
-  text-align:center !important;
-  gap:5px !important;
-}
-
-.pago-btn small{
-  display:block !important;
-  font-size:clamp(10px,1.1vw,12px) !important;
-  line-height:1.2 !important;
-  letter-spacing:.15px !important;
-  font-weight:700 !important;
-  opacity:1 !important;
-}
-
-#pagoTransferencia small{
-  color:#d4af37 !important;
-}
-
-#pagoCredito small{
-  color:#d4af37 !important;
-}
-
-.pago-ayuda{
-  min-height:48px !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  text-align:center !important;
-  padding:10px 14px !important;
-  font-size:clamp(11px,1.25vw,14px) !important;
-  line-height:1.35 !important;
-}
-
-.pago-ayuda strong{
-  font-weight:800 !important;
-}
-
-/* iPad / tablets */
-@media (min-width:601px) and (max-width:1024px){
-  .modal-contenido{
-    width:min(94vw,720px) !important;
-    max-height:92vh !important;
-  }
-
-  .pago-selector{
-    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
-  }
-
-  .pago-btn{
-    min-height:72px !important;
-    font-size:14px !important;
-  }
-
-  .pago-btn small{
-    font-size:11px !important;
-  }
-
-  .pago-ayuda{
-    font-size:13px !important;
-  }
-}
-
-/* Celulares */
-@media (max-width:600px){
-  .modal-contenido{
-    width:calc(100vw - 16px) !important;
-    max-width:none !important;
-    max-height:94vh !important;
-    border-radius:18px !important;
-  }
-
-  .modal-header h2,
-  #tituloCarrito{
-    font-size:20px !important;
-  }
-
-  .pago-selector{
-    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-    gap:8px !important;
-  }
-
-  .pago-btn{
-    min-height:70px !important;
-    padding:10px 7px !important;
-    font-size:13px !important;
-  }
-
-  .pago-btn small{
-    font-size:10px !important;
-  }
-
-  #pagoCredito{
-    grid-column:1 / -1 !important;
-  }
-
-  .pago-ayuda{
-    min-height:54px !important;
-    padding:9px 10px !important;
-    font-size:12px !important;
-  }
-}
-
-/* Celulares chicos */
-@media (max-width:380px){
-  .pago-selector{
-    grid-template-columns:1fr !important;
-  }
-
-  #pagoCredito{
-    grid-column:auto !important;
-  }
-
-  .pago-btn{
-    min-height:62px !important;
-    font-size:12px !important;
-  }
-
-  .pago-btn small{
-    font-size:10px !important;
-  }
-}
-</style>
-
 </head>
 
 <body>
 
 <!-- ================= LOADER NERÓS ================= -->
+
 <div id="nerosLoader" class="neros-loader">
   <div class="neros-loader-content">
     <img src="logo%20neros.png" alt="NERÓS" class="neros-loader-logo">
@@ -248,7 +106,6 @@
     <div class="neros-loader-text">CARGANDO CATÁLOGO</div>
   </div>
 </div>
-
 
 <div class="promo-strip">
 
@@ -697,7 +554,6 @@ Podés combinar categoría y disponibilidad. Los testers se muestran únicamente
 
 </div>
 
-
 <div
 id="filtroTesterGrupo"
 class="filtro-grupo"
@@ -738,7 +594,6 @@ Este filtro aparece únicamente después de ingresar correctamente a la lista ma
 
 </div>
 
-
 <div class="filtro-grupo" id="filtroPrecioGrupo">
 
   <div class="filtro-grupo-titulo">
@@ -747,33 +602,33 @@ Este filtro aparece únicamente después de ingresar correctamente a la lista ma
 
   <div class="filtro-precio-wrap">
 
-    <div class="filtro-precio-cabecera">
-      <div>
-        <small>Mostrando productos de hasta</small>
-        <div id="filtroPrecioValor" class="filtro-precio-valor">
-          SIN LÍMITE
-        </div>
-      </div>
+<div class="filtro-precio-cabecera">
+  <div>
+    <small>Mostrando productos de hasta</small>
+    <div id="filtroPrecioValor" class="filtro-precio-valor">
+      SIN LÍMITE
     </div>
+  </div>
+</div>
 
-    <input
-      id="filtroPrecioRange"
-      class="filtro-precio-rango"
-      type="range"
-      min="0"
-      max="100000"
-      step="1000"
-      value="100000"
-      oninput="cambiarFiltroPrecio(this.value)">
+<input
+  id="filtroPrecioRange"
+  class="filtro-precio-rango"
+  type="range"
+  min="0"
+  max="100000"
+  step="1000"
+  value="100000"
+  oninput="cambiarFiltroPrecio(this.value)">
 
-    <div class="filtro-precio-extremos">
-      <span>$0</span>
-      <span id="filtroPrecioMaxEtiqueta">$100.000</span>
-    </div>
+<div class="filtro-precio-extremos">
+  <span>$0</span>
+  <span id="filtroPrecioMaxEtiqueta">$100.000</span>
+</div>
 
-    <div id="filtroPrecioAyuda" class="filtro-precio-ayuda">
-      En particular se toma el precio con 10% OFF por transferencia / efectivo.
-    </div>
+<div id="filtroPrecioAyuda" class="filtro-precio-ayuda">
+  En particular se toma el precio con 10% OFF por transferencia / efectivo.
+</div>
 
   </div>
 
@@ -877,7 +732,6 @@ QUIERO SER MAYORISTA
 
 </div>
 
-
 <!-- ================= MAYORISTA DESBLOQUEADO ================= -->
 
 <div
@@ -922,7 +776,6 @@ VER TESTERS
 </div>
 
 </div>
-
 
 <!-- ================= FICHA DINÁMICA ================= -->
 
@@ -1201,7 +1054,7 @@ onclick="cambiarPago('credito')">
 📱 Crédito / Mercado Pago
 
 <small>
-2 CUOTAS SIN INTERÉS
+Precio de lista
 </small>
 
 </button>
@@ -1212,7 +1065,8 @@ onclick="cambiarPago('credito')">
 id="pagoAyuda"
 class="pago-ayuda">
 
-🏦 <strong>Transferencia / efectivo:</strong> 10% OFF · mejor precio.
+Elegí cómo querés abonar.
+La opción seleccionada se enviará junto con tu pedido.
 
 </div>
 
@@ -1261,9 +1115,10 @@ Rosario, Santa Fe · Argentina
 </footer>
 
 <script src="js/catalogo.js" defer></script>
-<script src="js/filtros.js" defer></script>
-<script src="js/carrito.js" defer></script>
 
+<script src="js/filtros.js" defer></script>
+
+<script src="js/carrito.js" defer></script>
 
 <script>
 /* ================= LOADER NERÓS — ESPERAR PRODUCTOS + IMÁGENES ================= */
@@ -1366,47 +1221,6 @@ Rosario, Santa Fe · Argentina
     ocultarLoader();
   }, 20000);
 
-})();
-</script>
-
-
-<script>
-/* =========================================================
-   NERÓS — MENSAJE DINÁMICO SEGÚN FORMA DE PAGO
-   ========================================================= */
-(function(){
-  function actualizarAyudaPago(tipo){
-    const ayuda=document.getElementById('pagoAyuda');
-    if(!ayuda) return;
-
-    if(tipo==='transferencia'){
-      ayuda.innerHTML='🏦 <strong>Transferencia / efectivo:</strong>&nbsp; 10% OFF · mejor precio.';
-    }
-    else if(tipo==='debito'){
-      ayuda.innerHTML='💳 <strong>Débito:</strong>&nbsp; abonás el precio de lista en un solo pago.';
-    }
-    else if(tipo==='credito'){
-      ayuda.innerHTML='✨ <strong>Crédito / Mercado Pago:</strong>&nbsp; 2 cuotas sin interés.';
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded',function(){
-    const transferencia=document.getElementById('pagoTransferencia');
-    const debito=document.getElementById('pagoDebito');
-    const credito=document.getElementById('pagoCredito');
-
-    if(transferencia) transferencia.addEventListener('click',function(){
-      actualizarAyudaPago('transferencia');
-    });
-
-    if(debito) debito.addEventListener('click',function(){
-      actualizarAyudaPago('debito');
-    });
-
-    if(credito) credito.addEventListener('click',function(){
-      actualizarAyudaPago('credito');
-    });
-  });
 })();
 </script>
 
