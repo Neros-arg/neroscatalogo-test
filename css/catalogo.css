@@ -31,7 +31,7 @@ position:fixed;
 inset:-6%;
 z-index:-3;
 
-background-image:url("fondo-catalogo.png");
+background-image:url("../fondo-catalogo.png");
 background-size:cover;
 background-position:center center;
 background-repeat:no-repeat;
@@ -5856,4 +5856,3 @@ CARRITO — BENEFICIO TRANSFERENCIA / EFECTIVO DESTACADO
 @media (max-width:700px){
   .card-notas-hover{display:none!important;}
 }
-
