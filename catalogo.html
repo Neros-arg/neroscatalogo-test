@@ -12,6 +12,7 @@
 
 <link rel="stylesheet" href="css/catalogo.css">
 
+
 <style>
 /* ================= LOADER NERÓS ================= */
 .neros-loader { display:none; }
@@ -98,7 +99,6 @@
 <body>
 
 <!-- ================= LOADER NERÓS ================= -->
-
 <div id="nerosLoader" class="neros-loader">
   <div class="neros-loader-content">
     <img src="logo%20neros.png" alt="NERÓS" class="neros-loader-logo">
@@ -106,6 +106,7 @@
     <div class="neros-loader-text">CARGANDO CATÁLOGO</div>
   </div>
 </div>
+
 
 <div class="promo-strip">
 
@@ -554,6 +555,7 @@ Podés combinar categoría y disponibilidad. Los testers se muestran únicamente
 
 </div>
 
+
 <div
 id="filtroTesterGrupo"
 class="filtro-grupo"
@@ -594,6 +596,7 @@ Este filtro aparece únicamente después de ingresar correctamente a la lista ma
 
 </div>
 
+
 <div class="filtro-grupo" id="filtroPrecioGrupo">
 
   <div class="filtro-grupo-titulo">
@@ -602,33 +605,33 @@ Este filtro aparece únicamente después de ingresar correctamente a la lista ma
 
   <div class="filtro-precio-wrap">
 
-<div class="filtro-precio-cabecera">
-  <div>
-    <small>Mostrando productos de hasta</small>
-    <div id="filtroPrecioValor" class="filtro-precio-valor">
-      SIN LÍMITE
+    <div class="filtro-precio-cabecera">
+      <div>
+        <small>Mostrando productos de hasta</small>
+        <div id="filtroPrecioValor" class="filtro-precio-valor">
+          SIN LÍMITE
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-<input
-  id="filtroPrecioRange"
-  class="filtro-precio-rango"
-  type="range"
-  min="0"
-  max="100000"
-  step="1000"
-  value="100000"
-  oninput="cambiarFiltroPrecio(this.value)">
+    <input
+      id="filtroPrecioRange"
+      class="filtro-precio-rango"
+      type="range"
+      min="0"
+      max="100000"
+      step="1000"
+      value="100000"
+      oninput="cambiarFiltroPrecio(this.value)">
 
-<div class="filtro-precio-extremos">
-  <span>$0</span>
-  <span id="filtroPrecioMaxEtiqueta">$100.000</span>
-</div>
+    <div class="filtro-precio-extremos">
+      <span>$0</span>
+      <span id="filtroPrecioMaxEtiqueta">$100.000</span>
+    </div>
 
-<div id="filtroPrecioAyuda" class="filtro-precio-ayuda">
-  En particular se toma el precio con 10% OFF por transferencia / efectivo.
-</div>
+    <div id="filtroPrecioAyuda" class="filtro-precio-ayuda">
+      En particular se toma el precio con 10% OFF por transferencia / efectivo.
+    </div>
 
   </div>
 
@@ -732,6 +735,7 @@ QUIERO SER MAYORISTA
 
 </div>
 
+
 <!-- ================= MAYORISTA DESBLOQUEADO ================= -->
 
 <div
@@ -776,6 +780,7 @@ VER TESTERS
 </div>
 
 </div>
+
 
 <!-- ================= FICHA DINÁMICA ================= -->
 
@@ -1115,10 +1120,9 @@ Rosario, Santa Fe · Argentina
 </footer>
 
 <script src="js/catalogo.js" defer></script>
-
 <script src="js/filtros.js" defer></script>
-
 <script src="js/carrito.js" defer></script>
+
 
 <script>
 /* ================= LOADER NERÓS — ESPERAR PRODUCTOS + IMÁGENES ================= */
