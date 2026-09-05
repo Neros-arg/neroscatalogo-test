@@ -96,14 +96,26 @@
 
 
 <style>
-/* PAGO — mejoras de legibilidad y responsive */
-.pago-selector{gap:12px;}
-.pago-btn{min-height:74px;padding:14px 16px;font-size:16px;line-height:1.25;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;-webkit-tap-highlight-color:transparent;}
-.pago-btn small{display:block;font-size:13px;line-height:1.2;font-weight:700;letter-spacing:.3px;}
-.pago-ayuda{font-size:14px;line-height:1.45;}
-@media (min-width:768px) and (max-width:1180px){.pago-selector{gap:14px}.pago-btn{min-height:82px;padding:16px 14px;font-size:17px}.pago-btn small{font-size:14px}.pago-ayuda{font-size:15px}}
-@media (max-width:767px){.pago-selector{display:grid;grid-template-columns:1fr;gap:10px}.pago-btn{width:100%;min-height:68px;padding:12px 14px;font-size:16px}.pago-btn small{font-size:13px}.pago-ayuda{margin-top:10px;font-size:14px;padding:0 4px}}
-@media (max-width:380px){.pago-btn{min-height:64px;padding:10px 12px;font-size:15px}.pago-btn small{font-size:12px}}
+/* NERÓS — pago responsive: solo estilos, sin tocar la lógica */
+.pago-btn{min-height:78px !important;padding:12px 10px !important;font-size:13px !important;line-height:1.25 !important;}
+.pago-btn small{font-size:10px !important;line-height:1.25 !important;font-weight:700 !important;margin-top:7px !important;}
+.pago-ayuda{font-size:11px !important;line-height:1.45 !important;padding:11px 14px !important;min-height:44px !important;}
+@media (min-width:769px) and (max-width:1180px){
+  .pago-btn{min-height:82px !important;padding:13px 9px !important;font-size:14px !important;}
+  .pago-btn small{font-size:10.5px !important;}
+  .pago-ayuda{font-size:11.5px !important;}
+}
+@media (max-width:768px){
+  .pago-selector{gap:8px !important;width:100% !important;}
+  .pago-btn{min-height:76px !important;padding:10px 6px !important;font-size:12px !important;border-radius:14px !important;}
+  .pago-btn small{font-size:9.5px !important;margin-top:6px !important;}
+  .pago-ayuda{font-size:10.5px !important;padding:10px 12px !important;}
+}
+@media (max-width:390px){
+  .pago-selector{gap:6px !important;}
+  .pago-btn{min-height:72px !important;padding:9px 4px !important;font-size:10.8px !important;}
+  .pago-btn small{font-size:8.7px !important;margin-top:5px !important;}
+}
 </style>
 </head>
 
@@ -1134,25 +1146,6 @@ Rosario, Santa Fe · Argentina
 <script src="js/filtros.js" defer></script>
 <script src="js/carrito.js" defer></script>
 
-<script>
-/* PAGO — texto dinámico, sin modificar la lógica original */
-window.addEventListener("DOMContentLoaded", function(){
-  if(typeof window.cambiarPago !== "function") return;
-  const original = window.cambiarPago;
-  const mensajes = {
-    transferencia: "🏦 <strong>Transferencia / efectivo:</strong> 10% OFF · mejor precio.",
-    debito: "💳 <strong>Débito:</strong> precio de lista.",
-    credito: "✨ <strong>Mercado Pago:</strong> 2 cuotas sin interés a precio de lista."
-  };
-  window.cambiarPago = function(tipo){
-    original(tipo);
-    const ayuda = document.getElementById("pagoAyuda");
-    if(ayuda && mensajes[tipo]) ayuda.innerHTML = mensajes[tipo];
-  };
-  const ayuda = document.getElementById("pagoAyuda");
-  if(ayuda) ayuda.innerHTML = mensajes.transferencia;
-});
-</script>
 
 <script>
 /* ================= LOADER NERÓS — ESPERAR PRODUCTOS + IMÁGENES ================= */
