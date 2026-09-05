@@ -7,28 +7,33 @@ function agregarAlCarrito(nombre){
 const producto=
 buscarProducto(nombre);
 
-if(!producto){
-return;
-}
-
 if(
-!stockDisponible(producto)
+!producto
 ){
+
 return;
+
 }
 
 const existente=
+
 carrito.find(
+
 item=>
+
 item.perfume===
-producto.perfume
+nombre
+
 );
 
-if(existente){
+if(
+existente
+){
 
-existente.cantidad+=1;
+existente.cantidad++;
 
 }
+
 else{
 
 carrito.push({
@@ -43,11 +48,7 @@ cantidad:1
 
 actualizarCarrito();
 
-abrirCarrito();
-
 }
-
-
 /* =========================================================
 CAMBIAR CANTIDAD
 ========================================================= */
@@ -58,88 +59,96 @@ cambio
 ){
 
 const item=
+
 carrito.find(
+
 producto=>
+
 producto.perfume===
 nombre
+
 );
 
-if(!item){
+if(
+!item
+){
+
 return;
+
 }
 
-item.cantidad+=cambio;
+item.cantidad+=
+cambio;
 
 if(
 item.cantidad<=0
 ){
 
 carrito=
+
 carrito.filter(
+
 producto=>
+
 producto.perfume!==
 nombre
+
 );
 
 }
 
 actualizarCarrito();
 
+renderCarrito();
+
 }
-
-
 /* =========================================================
 TOTAL UNIDADES
 ========================================================= */
 
-function totalUnidadesCarrito(){
+function totalUnidades(){
 
 return carrito.reduce(
 
 (total,item)=>
-total+
-Number(
-item.cantidad||0
-),
+
+total +
+item.cantidad,
 
 0
 
 );
 
 }
-
-
 /* =========================================================
 ACTUALIZAR CARRITO
 ========================================================= */
 
 function actualizarCarrito(){
 
-const cantidad=
-totalUnidadesCarrito();
+const total=totalUnidades();
+const barra=document.getElementById("carritoBarra");
+const info=document.getElementById("carritoInfo");
 
-const contador=
-document.getElementById(
-"cartCount"
-);
+barra.classList.toggle("activo",total>0);
 
-if(contador){
-
-contador.textContent=
-cantidad;
-
-contador.classList.toggle(
-"visible",
-cantidad>0
-);
-
+let totalVista=0;
+if(total>0){
+carrito.forEach(item=>{
+const precio=obtenerPrecioItem(item,total);
+totalVista+=precio*item.cantidad;
+});
 }
 
-renderCarrito();
+info.innerHTML=`
+<div class="carrito-mini-icon">🛒</div>
+<div class="carrito-mini-copy">
+<strong>${total} ${total===1 ? "unidad" : "unidades"} en tu pedido</strong>
+<span>${total>0 ? `Total actual · <b>$${Math.round(totalVista).toLocaleString("es-AR")}</b>` : "Tu carrito está vacío"}</span>
+</div>
+`;
 
 }
-
-
 /* =========================================================
 ABRIR CARRITO
 ========================================================= */
@@ -148,7 +157,7 @@ function abrirCarrito(){
 
 document
 .getElementById(
-"carritoOverlay"
+"modalCarrito"
 )
 .classList
 .add(
@@ -158,11 +167,51 @@ document
 document.body.style.overflow=
 "hidden";
 
+document
+.getElementById(
+"pagoSelector"
+)
+.classList
+.toggle(
+"activo",
+modoActual==="particular"
+);
+
+document
+.getElementById(
+"pagoAyuda"
+)
+.style.display=
+
+modoActual==="particular"
+
+?
+
+"block"
+
+:
+
+"none";
+
+document
+.getElementById(
+"tituloCarrito"
+)
+.innerHTML=
+
+modoActual==="mayorista"
+
+?
+
+"📦 Pedido mayorista"
+
+:
+
+"🛒 Tu pedido";
+
 renderCarrito();
 
 }
-
-
 /* =========================================================
 CERRAR CARRITO
 ========================================================= */
@@ -171,270 +220,124 @@ function cerrarCarrito(){
 
 document
 .getElementById(
-"carritoOverlay"
+"modalCarrito"
 )
 .classList
 .remove(
 "activo"
 );
 
-document.body.style.overflow=
-"";
+document.body.style.overflow="";
 
 }
-
-
-/* =========================================================
-CERRAR CARRITO POR FONDO
-========================================================= */
-
-function cerrarCarritoPorFondo(event){
-
-if(
-event.target &&
-event.target.id===
-"carritoOverlay"
-){
-
-cerrarCarrito();
-
-}
-
-}
-
-
 /* =========================================================
 RENDER CARRITO
 ========================================================= */
 
 function renderCarrito(){
 
-const contenedor=
+const lista=
 document.getElementById(
-"carritoItems"
+"listaCarrito"
 );
 
-const totalElement=
+const resumen=
 document.getElementById(
-"carritoTotal"
+"resumenCarrito"
 );
 
-const subtotalElement=
+const boton=
 document.getElementById(
-"carritoSubtotal"
-);
-
-const descuentoElement=
-document.getElementById(
-"carritoDescuento"
+"btnFinalizar"
 );
 
 if(
-!contenedor
+carrito.length===0
 ){
 
-return;
+lista.innerHTML=`
 
-}
+<div style="
+padding:30px;
+text-align:center;
+color:#888;
+">
 
-
-if(
-!carrito.length
-){
-
-contenedor.innerHTML=`
-
-<div class="carrito-vacio">
-
-<div class="carrito-vacio-icon">
-🛍️
-</div>
-
-<h3>
-Tu carrito está vacío
-</h3>
-
-<p>
-Agregá productos para comenzar tu compra.
-</p>
+Tu pedido está vacío.
 
 </div>
 
 `;
 
-if(totalElement){
+resumen.innerHTML="";
 
-totalElement.textContent=
-"$0";
-
-}
-
-if(subtotalElement){
-
-subtotalElement.textContent=
-"$0";
-
-}
-
-if(descuentoElement){
-
-descuentoElement.textContent=
-"$0";
-
-}
+boton.disabled=true;
 
 return;
 
 }
 
+const total=
+totalUnidades();
 
-const unidades=
-totalUnidadesCarrito();
+let totalPedido=0;
+let totalLista=0;
 
-let subtotal=0;
+lista.innerHTML="";
 
 carrito.forEach(item=>{
 
 const precio=
-
-modoActual==="mayorista"
-
-?
-
-precioMayorista(
+obtenerPrecioItem(
 item,
-unidades
-)
-
-:
-
-precioParticular(
-item
+total
 );
 
-subtotal+=
-precio*
+const subtotal=
+precio *
 item.cantidad;
 
-});
+totalPedido+=
+subtotal;
 
-
-let descuento=0;
-
-let total=subtotal;
-
-
-/* =========================================================
-DESCUENTO PARTICULAR
-========================================================= */
-
+// Total de lista sin descuento para mostrar el ahorro real
 if(
-modoActual==="particular" &&
-formaPago==="transferencia"
+modoActual==="particular"
 ){
-
-descuento=
-subtotal*0.10;
-
-total=
-subtotal-descuento;
-
-}
-
-
-/* =========================================================
-RENDER ITEMS
-========================================================= */
-
-contenedor.innerHTML="";
-
-carrito.forEach(item=>{
-
-const precio=
-
-modoActual==="mayorista"
-
-?
-
-precioMayorista(
-item,
-unidades
-)
-
-:
-
-precioParticular(
-item
-);
-
-const subtotalItem=
-precio*
+totalLista+=
+precioParticular(item) *
 item.cantidad;
-
-const itemHTML=
-document.createElement(
-"div"
-);
-
-itemHTML.className=
-"carrito-item";
-
-itemHTML.innerHTML=`
-
-<div class="carrito-item-imagen">
-
-${
-item.foto
-
-?
-
-`
-<img
-src="${escapeAttr(item.foto)}"
-alt="${escapeAttr(item.perfume)}"
-loading="lazy"
-onerror="this.style.display='none';"
->
-`
-
-:
-
-`
-<div class="carrito-sin-imagen">
-NERÓS
-</div>
-`
-
 }
 
+lista.innerHTML+=`
+
+<div class="item-carrito">
+
+<div class="item-foto">
+${(item.foto || item.imagen)
+? `<img src="${escapeAttr(item.foto || item.imagen)}" alt="${escapeAttr(item.perfume)}">`
+: `<div class="item-foto-placeholder">🧴</div>`}
 </div>
 
+<div class="item-main">
 
-<div class="carrito-item-info">
+<div class="item-nombre">
+${escapeHTML(item.perfume)}
+</div>
 
-<div class="carrito-item-nombre">
+<div class="item-precio">
+$${Math.round(precio).toLocaleString("es-AR")} por unidad
+</div>
 
-${escapeHTML(
-item.perfume
-)}
+<div class="item-subtotal">
+Subtotal · $${Math.round(subtotal).toLocaleString("es-AR")}
+</div>
 
 </div>
 
-<div class="carrito-item-precio">
-
-$${Math.round(
-precio
-).toLocaleString(
-"es-AR"
-)}
-
-</div>
-
-
-<div class="carrito-item-cantidad">
+<div class="item-controles">
 
 <button
-type="button"
 onclick="
 cambiarCantidad(
 '${escapeAttr(item.perfume)}',
@@ -446,16 +349,11 @@ cambiarCantidad(
 
 </button>
 
-
 <span>
-
 ${item.cantidad}
-
 </span>
 
-
 <button
-type="button"
 onclick="
 cambiarCantidad(
 '${escapeAttr(item.perfume)}',
@@ -471,134 +369,390 @@ cambiarCantidad(
 
 </div>
 
-
-<div class="carrito-item-subtotal">
-
-$${Math.round(
-subtotalItem
-).toLocaleString(
-"es-AR"
-)}
-
-</div>
-
 `;
-
-contenedor.appendChild(
-itemHTML
-);
 
 });
 
-
-/* =========================================================
-TOTALES
-========================================================= */
-
-if(subtotalElement){
-
-subtotalElement.textContent=
-"$"+
-Math.round(
-subtotal
-)
-.toLocaleString(
-"es-AR"
-);
-
-}
-
-if(descuentoElement){
-
-descuentoElement.textContent=
-descuento>0
-
-?
-
-"-$"+
-Math.round(
-descuento
-)
-.toLocaleString(
-"es-AR"
-)
-
-:
-
-"$0";
-
-}
-
-if(totalElement){
-
-totalElement.textContent=
-"$"+
-Math.round(
-total
-)
-.toLocaleString(
-"es-AR"
-);
-
-}
-
-
-/* =========================================================
-MAYORISTA — NIVELES
-========================================================= */
-
-const mayoristaInfo=
-document.getElementById(
-"carritoMayoristaInfo"
-);
-
-if(
-mayoristaInfo
-){
+let mensajeExtra="";
 
 if(
 modoActual==="mayorista"
 ){
 
-let nivel="10+";
+if(
+total<10
+){
 
-if(unidades>=30){
-nivel="30+";
-}
-else if(unidades>=20){
-nivel="20+";
-}
+mensajeExtra=`
 
-mayoristaInfo.innerHTML=`
+<div class="proximo-nivel">
 
-<div class="carrito-mayorista-info">
-
-<span>
-MAYORISTA
-</span>
+⚠️ Te faltan
 
 <strong>
-${unidades} unidades
+${10-total}
 </strong>
 
-<small>
-Precio aplicado: nivel ${nivel}
-</small>
+unidades para alcanzar
+el mínimo mayorista.
 
 </div>
 
 `;
 
 }
+
+else if(
+total<20
+){
+
+mensajeExtra=`
+
+<div class="proximo-nivel">
+
+📦 Precio mayorista
+
+<strong>
+10+
+</strong>
+
+activado.
+
+<br>
+
+Te faltan
+
+<strong>
+${20-total}
+</strong>
+
+unidades para precio 20+.
+
+</div>
+
+`;
+
+}
+
+else if(
+total<30
+){
+
+mensajeExtra=`
+
+<div class="proximo-nivel">
+
+🔥 Precio mayorista
+
+<strong>
+20+
+</strong>
+
+activado.
+
+<br>
+
+Te faltan
+
+<strong>
+${30-total}
+</strong>
+
+unidades para precio 30+.
+
+</div>
+
+`;
+
+}
+
 else{
 
-mayoristaInfo.innerHTML="";
+mensajeExtra=`
+
+<div class="proximo-nivel">
+
+🔥
+
+<strong>
+Mejor precio mayorista desbloqueado.
+</strong>
+
+<br>
+
+Nivel 30+ unidades.
+
+</div>
+
+`;
 
 }
 
 }
 
+else{
 
+mensajeExtra=`
+
+${
+
+formaPago==="transferencia"
+
+?
+
+""
+
+:
+
+`
+
+<div class="proximo-nivel">
+
+${
+
+formaPago==="debito"
+
+?
+
+"💳 Débito seleccionado · pedido calculado a precio de lista."
+
+:
+
+"📱 Crédito / Mercado Pago seleccionado · pedido calculado a precio de lista."
+
+}
+
+</div>
+
+`
+
+}
+
+`;
+
+}
+
+const contienePedido=
+carrito.some(
+item=>productoPorPedido(item)
+);
+
+if(
+modoActual!=="mayorista"
+&&
+contienePedido
+){
+
+mensajeExtra+=`
+<div class="pedido-carrito-aviso">
+<strong>📦 Tu carrito incluye productos por pedido.</strong>
+<br>Entrega estimada: 10 días hábiles.
+<br><br>
+${
+formaPago==="credito"
+?
+"💳 Tarjeta / Mercado Pago: abonás el total al realizar la compra."
+:
+"🏦 Transferencia / efectivo: abonás 50% para confirmar el pedido y 50% cuando llega."
+}
+</div>
+`;
+
+}
+
+const ahorroTransferencia=
+
+modoActual==="particular" &&
+formaPago==="transferencia"
+
+?
+
+Math.max(
+0,
+totalLista-totalPedido
+)
+
+:
+
+0;
+
+
+const bloqueBeneficioTransferencia=
+
+modoActual==="particular" &&
+formaPago==="transferencia"
+
+?
+
+`
+
+<div class="resumen-precio-lista">
+
+  <span>
+    Total de lista
+  </span>
+
+  <strong>
+    $${Math.round(totalLista).toLocaleString("es-AR")}
+  </strong>
+
+</div>
+
+<div class="beneficio-transferencia">
+
+  <div class="beneficio-transferencia-top">
+
+    <div class="beneficio-transferencia-kicker">
+      💸 BENEFICIO NERÓS
+    </div>
+
+    <div class="beneficio-transferencia-badge">
+      10% OFF
+    </div>
+
+  </div>
+
+  <div class="beneficio-transferencia-ahorro">
+
+    <span>
+      Ahorrás pagando por<br>
+      transferencia / efectivo
+    </span>
+
+    <strong>
+      - $${Math.round(ahorroTransferencia).toLocaleString("es-AR")}
+    </strong>
+
+  </div>
+
+  <div class="beneficio-transferencia-copy">
+    El descuento ya está aplicado en el total final de tu pedido.
+  </div>
+
+</div>
+
+`
+
+:
+
+"";
+
+
+resumen.classList.toggle(
+"transferencia-activa",
+modoActual==="particular" &&
+formaPago==="transferencia"
+);
+
+
+resumen.innerHTML=`
+
+<div class="resumen-linea">
+
+<span>
+Unidades
+</span>
+
+<strong>
+${total}
+</strong>
+
+</div>
+
+${bloqueBeneficioTransferencia}
+
+<div class="resumen-total ${modoActual==="particular" && formaPago==="transferencia" ? "transferencia" : ""}">
+
+<span>
+
+  ${
+  modoActual==="particular" &&
+  formaPago==="transferencia"
+
+  ?
+
+  `
+  <span class="resumen-total-label-principal">
+    TOTAL FINAL
+  </span>
+
+  <span class="resumen-total-label-secundario">
+    CON 10% OFF APLICADO
+  </span>
+  `
+
+  :
+
+  "TOTAL"
+  }
+
+</span>
+
+<span>
+
+$${Math.round(totalPedido)
+.toLocaleString("es-AR")}
+
+</span>
+
+</div>
+
+${mensajeExtra}
+
+`;
+
+if(
+modoActual==="particular"
+){
+
+boton.classList.remove(
+"mercadopago",
+"cargando"
+);
+
+if(
+formaPago==="credito"
+){
+
+boton.classList.add(
+"mercadopago"
+);
+
+boton.innerHTML=
+"💳 PAGAR AHORA CON MERCADO PAGO";
+
+}
+else{
+
+boton.innerHTML=
+`<img src="wsplogo.png" alt="WhatsApp" class="wa-inline"> FINALIZAR COMPRA POR WHATSAPP`;
+
+}
+
+}
+
+else{
+
+boton.classList.remove(
+"mercadopago",
+"cargando"
+);
+
+boton.innerHTML=
+`<img src="wsplogo.png" alt="WhatsApp" class="wa-inline"> ENVIAR PEDIDO MAYORISTA POR WHATSAPP`;
+
+}
+
+boton.disabled=
+
+modoActual==="mayorista"
+
+&&
+
+total<
+MINIMO_MAYORISTA;
+
+}
 /* =========================================================
 FINALIZAR COMPRA
 ========================================================= */
@@ -606,155 +760,90 @@ FINALIZAR COMPRA
 function finalizarCompra(){
 
 if(
-!carrito.length
+carrito.length===0
 ){
-
-alert(
-"Tu carrito está vacío."
-);
 
 return;
 
 }
 
-
 if(
-modoActual==="mayorista"
-){
-
-if(
-totalUnidadesCarrito()<
-MINIMO_MAYORISTA
-){
-
-alert(
-`El pedido mayorista mínimo es de ${MINIMO_MAYORISTA} unidades.`
-);
-
-return;
-
-}
-
-}
-
-
-if(
-formaPago==="debito" ||
+modoActual==="particular" &&
 formaPago==="credito"
 ){
 
-pagarConMercadoPago();
+pagarMercadoPago();
 
 return;
 
 }
-
-
-/* =========================================================
-WHATSAPP
-========================================================= */
 
 enviarPedidoWhatsApp();
 
 }
-
-
 /* =========================================================
 PAGAR CON MERCADO PAGO
 ========================================================= */
 
-async function pagarConMercadoPago(){
+async function pagarMercadoPago(){
 
 if(
-!carrito.length
+modoActual!=="particular"
 ){
 
 alert(
-"Tu carrito está vacío."
+"El pago online está disponible para compras particulares."
 );
 
 return;
 
 }
 
-const unidades=
-totalUnidadesCarrito();
-
 if(
-modoActual==="mayorista" &&
-unidades<MINIMO_MAYORISTA
+carrito.length===0
 ){
-
-alert(
-`El pedido mayorista mínimo es de ${MINIMO_MAYORISTA} unidades.`
-);
 
 return;
 
 }
-
-
-const items=
-carrito.map(item=>{
-
-const precio=
-
-modoActual==="mayorista"
-
-?
-
-precioMayorista(
-item,
-unidades
-)
-
-:
-
-precioParticular(
-item
-);
-
-return{
-
-title:
-item.perfume,
-
-quantity:
-Number(
-item.cantidad
-),
-
-unit_price:
-Math.round(precio)
-
-};
-
-});
-
 
 const boton=
 document.getElementById(
-"btnMercadoPago"
+"btnFinalizar"
 );
 
-if(boton){
+const textoOriginal=
+boton.innerHTML;
+
+try{
 
 boton.disabled=true;
 
-boton.textContent=
-"PROCESANDO...";
+boton.classList.add(
+"cargando"
+);
 
-}
+boton.innerHTML=
+"⏳ GENERANDO CHECKOUT...";
 
+const items=
+carrito.map(item=>({
 
-try{
+perfume:
+item.perfume,
+
+cantidad:
+item.cantidad
+
+}));
 
 const respuesta=
 await fetch(
 API,
 {
 
-method:"POST",
+method:
+"POST",
 
 headers:{
 "Content-Type":
@@ -765,70 +854,53 @@ body:
 JSON.stringify({
 
 accion:
-"crear_preferencia",
+"crearPago",
 
 items:
-items,
-
-modo:
-modoActual,
-
-formaPago:
-formaPago,
-
-unidades:
-unidades
+items
 
 })
 
 }
 );
 
-
 if(
 !respuesta.ok
 ){
 
 throw new Error(
-"HTTP "+
+"Error HTTP "+
 respuesta.status
 );
 
 }
 
-
-const data=
+const datos=
 await respuesta.json();
 
-
 if(
-data.init_point
+datos.error
 ){
-
-window.location.href=
-data.init_point;
-
-return;
-
-}
-
-
-if(
-data.url
-){
-
-window.location.href=
-data.url;
-
-return;
-
-}
-
 
 throw new Error(
-"No se recibió una URL de Mercado Pago."
+datos.mensaje ||
+"No se pudo crear el pago."
 );
 
+}
+
+if(
+!datos.checkoutUrl
+){
+
+throw new Error(
+"Mercado Pago no devolvió una URL de pago."
+);
+
+}
+
+window.location.href=
+datos.checkoutUrl;
 
 }
 catch(error){
@@ -839,193 +911,127 @@ error
 );
 
 alert(
-"No pudimos iniciar el pago con Mercado Pago. Probá nuevamente o finalizá tu compra por WhatsApp."
+"No pudimos abrir Mercado Pago.\n\n"+
+error.message+
+"\n\nPodés intentar nuevamente o finalizar por WhatsApp."
 );
-
-if(boton){
 
 boton.disabled=false;
 
-boton.textContent=
-"PAGAR CON MERCADO PAGO";
+boton.classList.remove(
+"cargando"
+);
+
+boton.innerHTML=
+textoOriginal;
 
 }
 
 }
-
-}
-
-
 /* =========================================================
 WHATSAPP
 ========================================================= */
 
-function generarMensajePedido(){
+function enviarPedidoWhatsApp(){
 
-const unidades=
-totalUnidadesCarrito();
+if(
+!carrito.length
+){
+alert("Tu carrito está vacío.");
+return;
+}
 
-let mensaje=
-"Hola NERÓS 👋\n\n";
+let totalPedido=0;
+
+const lineas=
+carrito.map(item=>{
+
+const precio=
+obtenerPrecioItem(item,totalUnidades());
+
+const subtotal=
+precio *
+item.cantidad;
+
+totalPedido+=
+subtotal;
+
+return `• ${item.perfume} x${item.cantidad} — $${Math.round(subtotal).toLocaleString("es-AR")}`;
+
+});
+
+const incluyePedido=
+carrito.some(item=>
+productoPorPedido(item)
+);
+
+let medioPago="";
 
 if(
 modoActual==="mayorista"
 ){
-
-mensaje+=
-"Quiero realizar un pedido MAYORISTA.\n\n";
-
+medioPago=
+"Mayorista · Transferencia / Efectivo";
+}
+else if(
+formaPago==="transferencia"
+){
+medioPago=
+"Transferencia / Efectivo — 10% OFF aplicado";
+}
+else if(
+formaPago==="debito"
+){
+medioPago=
+"Débito — precio de lista";
 }
 else{
-
-mensaje+=
-"Quiero realizar una compra.\n\n";
-
+medioPago=
+"Crédito / Mercado Pago — precio de lista";
 }
 
-mensaje+=
-"Productos:\n";
+let mensaje=
+`Hola NERÓS 👋 Quiero finalizar mi compra.
 
+🛒 Pedido:
+${lineas.join("\n")}
 
-carrito.forEach(item=>{
+💳 ${medioPago}
+💰 Total: $${Math.round(totalPedido).toLocaleString("es-AR")}`;
 
-const precio=
+if(
+incluyePedido
+){
+mensaje+=`
 
-modoActual==="mayorista"
-
-?
-
-precioMayorista(
-item,
-unidades
-)
-
-:
-
-precioParticular(
-item
-);
-
-const subtotal=
-precio*
-item.cantidad;
-
-mensaje+=
-`• ${item.perfume} x${item.cantidad} — $${Math.round(subtotal).toLocaleString("es-AR")}\n`;
-
-});
-
-
-let subtotal=0;
-
-carrito.forEach(item=>{
-
-const precio=
-
-modoActual==="mayorista"
-
-?
-
-precioMayorista(
-item,
-unidades
-)
-
-:
-
-precioParticular(
-item
-);
-
-subtotal+=
-precio*
-item.cantidad;
-
-});
-
-
-let descuento=0;
+📦 El pedido incluye productos por pedido.
+Entrega estimada: 10 días hábiles.`;
 
 if(
 modoActual==="particular" &&
 formaPago==="transferencia"
 ){
-
-descuento=
-subtotal*0.10;
-
+mensaje+=`
+Reserva: 50% ahora + 50% cuando llega.`;
+}
 }
 
+mensaje+=`
 
-const total=
-subtotal-
-descuento;
+Quiero confirmar disponibilidad y coordinar entrega o envío. Gracias.`;
 
+const telefono=
+"5493417830300";
 
-mensaje+=
-"\n";
-
-mensaje+=
-`Subtotal: $${Math.round(subtotal).toLocaleString("es-AR")}\n`;
-
-
-if(
-descuento>0
-){
-
-mensaje+=
-`10% OFF transferencia / efectivo: -$${Math.round(descuento).toLocaleString("es-AR")}\n`;
-
-}
-
-
-mensaje+=
-`TOTAL: $${Math.round(total).toLocaleString("es-AR")}\n\n`;
-
-
-if(
-modoActual==="mayorista"
-){
-
-mensaje+=
-`Cantidad total: ${unidades} unidades\n\n`;
-
-}
-
-
-mensaje+=
-"Quedo atento para coordinar la compra. 👍";
-
-
-return mensaje;
-
-}
-
-
-function enviarPedidoWhatsApp(){
-
-const mensaje=
-generarMensajePedido();
-
+const url=
+"https://wa.me/" +
+telefono +
+"?text=" +
+encodeURIComponent(mensaje);
 
 window.open(
-
-"https://wa.me/"+
-WHATSAPP+
-"?text="+
-encodeURIComponent(
-mensaje
-),
-
+url,
 "_blank"
-
 );
 
 }
-
-
-/* =========================================================
-INICIALIZAR CARRITO
-========================================================= */
-
-actualizarCarrito();
