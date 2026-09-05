@@ -1125,19 +1125,107 @@ Rosario, Santa Fe · Argentina
 
 
 <script>
-/* ================= OCULTAR LOADER AL TERMINAR LA CARGA ================= */
-window.addEventListener("load", function(){
-  const loader = document.getElementById("nerosLoader");
-  if(!loader) return;
+/* ================= LOADER NERÓS — ESPERAR PRODUCTOS + IMÁGENES ================= */
+(function(){
 
-  setTimeout(function(){
+  let loaderOcultado = false;
+  let observador = null;
+
+  function ocultarLoader(){
+    if(loaderOcultado) return;
+
+    const loader = document.getElementById("nerosLoader");
+    if(!loader) return;
+
+    loaderOcultado = true;
+
+    if(observador){
+      observador.disconnect();
+      observador = null;
+    }
+
     loader.classList.add("oculto");
 
     setTimeout(function(){
-      loader.remove();
+      if(loader && loader.parentNode){
+        loader.remove();
+      }
     }, 650);
-  }, 250);
-});
+  }
+
+  function esperarImagenes(){
+    const contenedor = document.getElementById("productos");
+
+    if(!contenedor){
+      setTimeout(esperarImagenes, 100);
+      return;
+    }
+
+    const imagenes = Array.from(contenedor.querySelectorAll("img"));
+
+    /* Todavía no llegaron los productos */
+    if(imagenes.length === 0){
+      setTimeout(esperarImagenes, 100);
+      return;
+    }
+
+    /* Esperamos a que todas las imágenes terminen */
+    const pendientes = imagenes.filter(function(img){
+      return !img.complete;
+    });
+
+    if(pendientes.length === 0){
+      ocultarLoader();
+      return;
+    }
+
+    let restantes = pendientes.length;
+
+    function imagenTerminada(){
+      restantes--;
+
+      if(restantes <= 0){
+        ocultarLoader();
+      }
+    }
+
+    pendientes.forEach(function(img){
+      img.addEventListener("load", imagenTerminada, {once:true});
+      img.addEventListener("error", imagenTerminada, {once:true});
+    });
+  }
+
+  /* Observamos cuándo el catálogo empieza a insertar las tarjetas */
+  window.addEventListener("DOMContentLoaded", function(){
+
+    const contenedor = document.getElementById("productos");
+
+    if(contenedor){
+      observador = new MutationObserver(function(){
+        if(contenedor.querySelector("img")){
+          esperarImagenes();
+        }
+      });
+
+      observador.observe(contenedor, {
+        childList:true,
+        subtree:true
+      });
+    }
+
+    esperarImagenes();
+  });
+
+  /*
+    Seguro adicional: si algún recurso externo queda colgado,
+    no dejamos al usuario atrapado eternamente en el loader.
+    20 segundos es solo un límite de seguridad.
+  */
+  setTimeout(function(){
+    ocultarLoader();
+  }, 20000);
+
+})();
 </script>
 
 </body>
